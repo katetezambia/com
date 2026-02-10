@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT Skills Training - Katete District | Flexible Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2a5caa;
+            --secondary: #ff6b35;
+            --accent: #00a8cc;
+            --light: #f8f9fa;
+            --dark: #2d3436;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --dark-blue: #1a3a7a;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Navigation */
+        .main-header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--dark-blue) 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 25px 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            box-shadow: var(--shadow-hover);
+            border-radius: 0 0 8px 8px;
+            z-index: 1001;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 15px 20px;
+            display: block;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--light);
+            color: var(--primary);
+            padding-left: 25px;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: slideDown 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            animation: slideUp 1s ease 0.3s both;
+        }
+
+        .hero-tagline {
+            background: rgba(255, 107, 53, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 1.2rem;
+            margin: 20px auto;
+            max-width: 800px;
+            animation: fadeIn 1s ease 0.6s both;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .schedule-card {
+            background: linear-gradient(135deg, var(--light) 0%, #e8f4fc 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .schedule-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time-highlight {
+            background: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .flexible-note {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d4e7fa 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            border-left: 5px solid var(--accent);
+        }
+
+        /* Training Modes */
+        .modes-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .mode-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: var(--light);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .mode-card:hover {
+            background: white;
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .mode-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Organizational Training */
+        .org-training {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .org-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Modal for Schedule Details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.5s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-hover);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-link {
+                padding: 15px;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                background: rgba(255, 255, 255, 0.1);
+                margin-left: 20px;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+
+            .hero-section {
+                padding: 40px 20px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .schedule-section,
+            .modes-section {
+                padding: 20px;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--dark-blue);
+        }
+
+        /* Quick Access Buttons */
+        .quick-access {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quick-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>ICT Skills Training</h1>
+                    <span>Katete District | Flexible Learning</span>
+                </div>
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <div class="nav-item">
+                    <a href="#home" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+                <div class="nav-item dropdown" id="coursesDropdown">
+                    <a href="#courses" class="nav-link">
+                        <i class="fas fa-graduation-cap"></i> Courses
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#course1">Introduction to Computers</a>
+                        <a href="#course2">Microsoft Office</a>
+                        <a href="#course3">Computer Programming</a>
+                        <a href="#course4">Secretarial Services</a>
+                        <a href="#course5">Digital Entrepreneurship</a>
+                        <a href="#course6">ICT for Farmers</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#schedule" class="nav-link">
+                        <i class="fas fa-calendar-alt"></i> Schedule
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#modes" class="nav-link">
+                        <i class="fas fa-chalkboard-teacher"></i> Learning Modes
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#org" class="nav-link">
+                        <i class="fas fa-building"></i> Organizational
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#contact" class="nav-link">
+                        <i class="fas fa-phone-alt"></i> Contact
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <h1 class="hero-title">🎯 ICT SKILLS TRAINING PROGRAMMES</h1>
+            <div class="hero-subtitle">NOW OPEN FOR ENROLLMENT IN KATETE DISTRICT</div>
+            <div class="hero-tagline">
+                <i class="fas fa-graduation-cap"></i> Gain Practical Computer & Digital Skills – Affordable | Flexible | Certified
+            </div>
+            <button class="enroll-button" onclick="scrollToSection('contact')">
+                <i class="fas fa-user-plus"></i> ENROLL NOW
+            </button>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="schedule-section">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i> FLEXIBLE TRAINING SCHEDULE
+            </h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
+                We understand your commitments! Choose your preferred time slots:
+            </p>
+
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <h3><i class="fas fa-calendar-day"></i> Weekdays (Mon-Fri)</h3>
+                    <p><strong>Evening Sessions:</strong></p>
+                    <div class="time-highlight">16:30hrs - 18:00hrs</div>
+                    <p style="margin-top: 15px;">Perfect for students and employed individuals</p>
+                </div>
+
+                <div class="schedule-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Saturday</h3>
+                    <p><strong>Full Day Sessions:</strong></p>
+                    <div class="time-highlight">08:00hrs - 17:00hrs</div>
+                    <p style="margin-top: 15px;">Ideal for weekend learning</p>
+                </div>
+
+                <div class="schedule-card">
+                    <h3><i class="fas fa-sun"></i> Sunday</h3>
+                    <p><strong>Day Sessions:</strong></p>
+                    <div class="time-highlight">10:00hrs - 17:00hrs</div>
+                    <p style="margin-top: 15px;">For those with weekend commitments</p>
+                </div>
+            </div>
+
+            <div class="flexible-note">
+                <h3><i class="fas fa-user-clock"></i> Ultra-Flexible Option</h3>
+                <p><strong>Create Your Own Schedule!</strong></p>
+                <p>Are you employed or running a business? We understand you can't leave when customers need you or your boss needs you.</p>
+                <p style="margin-top: 10px; color: var(--secondary); font-weight: bold;">
+                    <i class="fas fa-check-circle"></i> You can create your own schedule within these timings and beyond!
+                </p>
+                <button class="view-details-btn" onclick="showScheduleModal()">
+                    <i class="fas fa-info-circle"></i> View Flexible Schedule Details
+                </button>
+            </div>
+        </section>
+
+        <!-- Learning Modes Section -->
+        <section id="modes" class="modes-section">
+            <h2 class="section-title">
+                <i class="fas fa-chalkboard-teacher"></i> MODES OF LEARNING
+            </h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
+                Choose the learning style that works best for you:
+            </p>
+
+            <div class="modes-grid">
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Group Classes</h3>
+                    <p>Interactive sessions with fellow learners</p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>One-on-One</h3>
+                    <p>Personalized attention and pace</p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-laptop-house"></i>
+                    </div>
+                    <h3>Remote Support</h3>
+                    <p>Online guidance and assistance</p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-business-time"></i>
+                    </div>
+                    <h3>Work-Integrated</h3>
+                    <p>Learn while working on real tasks</p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Project-Based</h3>
+                    <p>Learn by doing actual projects</p>
+                </div>
+
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Blended Learning</h3>
+                    <p>Mix of online and in-person</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organizational Training -->
+        <section id="org" class="org-training">
+            <h2 style="font-size: 2.2rem; margin-bottom: 20px;">
+                <i class="fas fa-building"></i> ORGANIZATIONAL TRAINING & CAPACITY BUILDING
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                We offer customized training programs for entire organizations, institutions, or schools. Enhance your team's digital skills!
+            </p>
+
+            <div class="org-grid">
+                <div class="org-item">
+                    <i class="fas fa-school fa-2x"></i>
+                    <h3>Schools</h3>
+                    <p>Teacher & student training</p>
+                </div>
+                <div class="org-item">
+                    <i class="fas fa-hospital fa-2x"></i>
+                    <h3>Institutions</h3>
+                    <p>Government & private</p>
+                </div>
+                <div class="org-item">
+                    <i class="fas fa-industry fa-2x"></i>
+                    <h3>Businesses</h3>
+                    <p>Staff capacity building</p>
+                </div>
+                <div class="org-item">
+                    <i class="fas fa-hands-helping fa-2x"></i>
+                    <h3>NGOs</h3>
+                    <p>Digital transformation</p>
+                </div>
+            </div>
+
+            <button class="enroll-button" style="margin-top: 30px;" onclick="showOrgModal()">
+                <i class="fas fa-file-contract"></i> Request Organizational Proposal
+            </button>
+        </section>
+
+        <!-- Quick Access Buttons -->
+        <div class="quick-access">
+            <button class="quick-btn" onclick="scrollToTop()" title="Back to Top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            <button class="quick-btn" onclick="showScheduleModal()" title="View Schedule">
+                <i class="fas fa-calendar"></i>
+            </button>
+            <button class="quick-btn" onclick="scrollToSection('contact')" title="Contact Us">
+                <i class="fas fa-phone"></i>
+            </button>
+            <button class="quick-btn" onclick="showWhatsApp()" title="WhatsApp Us">
+                <i class="fab fa-whatsapp"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2><i class="fas fa-calendar-alt"></i> Flexible Schedule Details</h2>
+            <div style="margin: 20px 0;">
+                <h3>Standard Hours:</h3>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Weekdays:</strong> 16:30 - 18:00 hrs</li>
+                    <li><strong>Saturday:</strong> 08:00 - 17:00 hrs</li>
+                    <li><strong>Sunday:</strong> 10:00 - 17:00 hrs</li>
+                </ul>
+            </div>
+            <div style="background: #e8f4fc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3><i class="fas fa-user-clock"></i> Custom Schedule Feature</h3>
+                <p>For employed individuals and business owners:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Mix and match sessions across days</li>
+                    <li>Choose specific time slots that work for you</li>
+                    <li>Combine weekend and evening sessions</li>
+                    <li>Reschedule missed sessions</li>
+                    <li>Accelerated options available</li>
+                </ul>
+                <p style="color: var(--secondary); font-weight: bold; margin-top: 10px;">
+                    <i class="fas fa-lightbulb"></i> Don't leave your business when you most need customers!
+                </p>
+            </div>
+            <button class="enroll-button" onclick="closeModal('scheduleModal'); scrollToSection('contact');">
+                <i class="fas fa-calendar-check"></i> Book Your Custom Schedule
+            </button>
+        </div>
+    </div>
+
+    <!-- Organizational Modal -->
+    <div id="orgModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('orgModal')">&times;</span>
+            <h2><i class="fas fa-building"></i> Organizational Training Request</h2>
+            <div style="margin: 20px 0;">
+                <h3>Our Services Include:</h3>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Customized curriculum development</li>
+                    <li>Bulk enrollment discounts</li>
+                    <li>On-site training facilities</li>
+                    <li>Progress tracking and reporting</li>
+                    <li>Certification for all participants</li>
+                    <li>Post-training support</li>
+                </ul>
+            </div>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>Request a Proposal:</h3>
+                <div id="proposalForm" style="margin-top: 15px;">
+                    <input type="text" placeholder="Organization Name" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="email" placeholder="Contact Email" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="tel" placeholder="Phone Number" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;">
+                    <textarea placeholder="Training Requirements" rows="4" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                    <button class="enroll-button" onclick="submitProposal()">
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        const coursesDropdown = document.getElementById('coursesDropdown');
+
+        // Toggle Mobile Menu
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Toggle Dropdown on Mobile
+        coursesDropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                coursesDropdown.classList.toggle('active');
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container') && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                coursesDropdown.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Modal Functions
+        function showScheduleModal() {
+            document.getElementById('scheduleModal').style.display = 'flex';
+        }
+
+        function showOrgModal() {
+            document.getElementById('orgModal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Quick Access Functions
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function showWhatsApp() {
+            const phone = '260976620788';
+            const message = 'Hello! I am interested in the ICT Skills Training Programme. Please provide more information.';
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Form Submission
+        function submitProposal() {
+            const form = document.getElementById('proposalForm');
+            const inputs = form.querySelectorAll('input, textarea');
+            let isValid = true;
+
+            // Simple validation
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#ddd';
+                }
+            });
+
+            if (isValid) {
+                alert('Thank you! Your proposal request has been submitted. We will contact you within 24 hours.');
+                closeModal('orgModal');
+                // In a real implementation, you would send this data to a server
+                inputs.forEach(input => input.value = '');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+
+        // Sticky header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+            }
+        });
+
+        // Initialize with current year
+        document.addEventListener('DOMContentLoaded', () => {
+            const year = new Date().getFullYear();
+            // You can use this for copyright or other dynamic content
+        });
+    </script>
+
+    <!-- Include your existing course cards and other sections here -->
+    <!-- The original course cards, target audience, benefits, contact sections would go here -->
+    <!-- I've focused on the new features you requested, but you can integrate the original content below -->
+
+</body>
+</html>

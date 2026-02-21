@@ -1,2826 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>ICT Skills Training – Katete | Katete-Zambia</title>
-    
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts - Inter for modern typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ----- PROTECTION & SECURITY OVERRIDES ----- */
-        /* Prevent text selection and copying */
-        * {
-            -webkit-touch-callout: none !important;
-            -webkit-user-select: none !important;
-            -khtml-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        
-        /* Allow typing in input fields */
-        input, textarea, [contenteditable="true"] {
-            -webkit-user-select: text !important;
-            -khtml-user-select: text !important;
-            -moz-user-select: text !important;
-            -ms-user-select: text !important;
-            user-select: text !important;
-        }
-        
-        /* Disable image dragging */
-        img, a, button, .logo, .certificate-a4-portrait {
-            -webkit-user-drag: none !important;
-            user-drag: none !important;
-            pointer-events: auto;
-        }
-        
-        /* Hide the admin credentials completely from DOM inspection attempts */
-        .hidden-credentials, 
-        [data-credentials], 
-        script[type="application/security"],
-        #secure-storage {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            position: absolute !important;
-            pointer-events: none !important;
-            z-index: -9999 !important;
-            width: 0 !important;
-            height: 0 !important;
-            overflow: hidden !important;
-        }
-        
-        /* Anti-devtools overlay (hidden by default) */
-        .devtools-detected {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            color: white;
-            z-index: 999999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .devtools-detected.active {
-            display: flex;
-        }
-        
-        /* All your existing CSS remains the same from here */
-        /* ----- 🎨 DUAL THEME SYSTEM - BLACK/GOLD & POWDER BLUE/WHITE ----- */
-        /* COMPLETE CSS WITH ENHANCED POWDER BLUE CONTRAST & READABILITY */
-        
-        /* ----- THEME 1: BLACK & GOLD (DEFAULT) ----- */
-        :root {
-            /* Black & Gold Theme - Professional Dark */
-            --primary: #000000;
-            --primary-rgb: 0, 0, 0;
-            --secondary: #FFD700;
-            --secondary-light: #FFE55C;
-            --secondary-dark: #DAA520;
-            --accent: #FFC107;
-            
-            /* Background Colors */
-            --bg-dark: #0a0a0a;
-            --bg-light: #1a1a1a;
-            --card-bg: #1e1e1e;
-            --card-bg-alt: #2a2a2a;
-            
-            /* Text Colors - High Contrast */
-            --text-primary: #ffffff;
-            --text-secondary: #f0f0f0;
-            --text-muted: #cccccc;
-            --text-dark: #000000;
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            --gradient-card: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%);
-            
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(255,215,0,0.1);
-            --shadow-md: 0 5px 15px rgba(0,0,0,0.7);
-            --shadow-lg: 0 10px 30px rgba(255,215,0,0.15);
-            --shadow-hover: 0 15px 35px rgba(255,215,0,0.25);
-            
-            /* Borders */
-            --border-color: rgba(255,215,0,0.3);
-            --border-solid: 2px solid #FFD700;
-            --border-glow: 0 0 15px rgba(255,215,0,0.3);
-            
-            /* Effects */
-            --glass-effect: rgba(255,215,0,0.05);
-            --overlay: rgba(0,0,0,0.85);
-            
-            /* Misc */
-            --progress-width: 0%;
-            --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        /* ----- THEME 2: POWDER BLUE & WHITE - ENHANCED CONTRAST & READABILITY ----- */
-        body.theme-powder {
-            /* Primary Colors - Deep Navy for Maximum Contrast */
-            --primary: #003B6F;
-            --primary-rgb: 0, 59, 111;
-            --secondary: #4A90E2;  /* Vibrant blue - better contrast than powder blue */
-            --secondary-light: #6BA5E9;
-            --secondary-dark: #2A5C9A;
-            --accent: #2C7AB1;
-            
-            /* Background Colors - Clean White with Warmth */
-            --bg-dark: #F0F7FF;  /* Very light blue-white */
-            --bg-light: #FFFFFF;
-            --card-bg: #FFFFFF;
-            --card-bg-alt: #F8FCFF;
-            
-            /* Text Colors - Maximum Contrast (WCAG AAA) */
-            --text-primary: #001F3F;  /* Almost black navy - perfect 16:1 contrast on white */
-            --text-secondary: #003B6F;  /* Deep navy - 12:1 contrast on white */
-            --text-muted: #2C3E50;     /* Dark slate - 11:1 contrast on white */
-            --text-dark: #000000;      /* Pure black for maximum emphasis */
-            
-            /* Gradients - Softer, Professional */
-            --gradient-primary: linear-gradient(135deg, #4A90E2 0%, #2C7AB1 100%);
-            --gradient-bg: linear-gradient(135deg, #F0F7FF 0%, #E6F3FF 100%);
-            --gradient-card: linear-gradient(145deg, #FFFFFF 0%, #F8FCFF 100%);
-            
-            /* Shadows - Cool Blue Tones */
-            --shadow-sm: 0 2px 8px rgba(74,144,226,0.15);
-            --shadow-md: 0 5px 15px rgba(0,59,111,0.08);
-            --shadow-lg: 0 10px 30px rgba(74,144,226,0.12);
-            --shadow-hover: 0 15px 35px rgba(74,144,226,0.2);
-            
-            /* Borders - Clear, Visible */
-            --border-color: rgba(74,144,226,0.3);
-            --border-solid: 2px solid #4A90E2;
-            --border-glow: 0 0 15px rgba(74,144,226,0.25);
-            
-            /* Effects - Subtle Blue Tint */
-            --glass-effect: rgba(74,144,226,0.04);
-            --overlay: rgba(255,255,255,0.95);
-        }
-        
-        /* ----- BASE STYLES (THEME AWARE) ----- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease,
-                        border-color 0.3s ease,
-                        color 0.3s ease,
-                        box-shadow 0.3s ease,
-                        transform 0.3s ease;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background: var(--gradient-bg);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 30px;
-        }
-        
-        /* ----- ANIMATIONS ----- */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        @keyframes subtlePulse {
-            0%, 100% { box-shadow: var(--shadow-sm); }
-            50% { box-shadow: var(--shadow-hover); }
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes certificateGlow {
-            0%, 100% { box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-            50% { box-shadow: 0 20px 50px var(--shadow-lg); }
-        }
-        
-        /* ----- CUSTOM SCROLLBAR (THEME AWARE) ----- */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-            border-left: 1px solid var(--border-color);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--secondary), var(--secondary-dark));
-            border-radius: 6px;
-            border: 2px solid var(--bg-dark);
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, var(--secondary-light), var(--secondary));
-        }
-        
-        /* ----- POWDER BLUE SPECIFIC TEXT ENHANCEMENTS ----- */
-        body.theme-powder {
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        body.theme-powder h1,
-        body.theme-powder h2,
-        body.theme-powder h3,
-        body.theme-powder h4,
-        body.theme-powder h5,
-        body.theme-powder h6 {
-            color: var(--text-primary) !important;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        body.theme-powder p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-        
-        body.theme-powder .text-muted {
-            color: var(--text-muted) !important;
-        }
-        
-        body.theme-powder .text-dark {
-            color: var(--text-dark) !important;
-        }
-        
-        /* ----- THEME TOGGLE BUTTON ----- */
-        .theme-toggle-container {
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-        }
-        
-        .theme-toggle-btn {
-            background: transparent;
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .theme-toggle-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            z-index: -1;
-        }
-        
-        .theme-toggle-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .theme-toggle-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: transparent;
-        }
-        
-        body.theme-powder .theme-toggle-btn i {
-            transform: rotate(180deg);
-        }
-        
-        body.theme-powder .theme-toggle-btn {
-            border-color: var(--secondary);
-            color: var(--secondary);
-        }
-        
-        body.theme-powder .theme-toggle-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-        }
-        
-        /* ----- HEADER (THEME AWARE) ----- */
-        .main-header {
-            background: rgba(var(--primary-rgb), 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: var(--border-solid);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        body.theme-powder .main-header {
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 2px solid var(--secondary);
-        }
-        
-        .nav-container {
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 0.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover {
-            transform: scale(1.02);
-        }
-        
-        .logo-icon {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            filter: drop-shadow(0 0 10px var(--border-color));
-            animation: pulse 2s infinite;
-        }
-        
-        .logo-text h1 {
-            font-size: 1.6rem;
-            line-height: 1.2;
-            color: var(--text-primary);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        body.theme-powder .logo-text h1 {
-            color: var(--text-primary);
-        }
-        
-        .logo-text span {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            color: var(--secondary);
-        }
-        
-        body.theme-powder .logo-text span {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        /* ----- NAVIGATION (THEME AWARE) ----- */
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            padding: 1.5rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        body.theme-powder .nav-link {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 1.2rem;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 70%;
-        }
-        
-        .nav-link:hover {
-            color: var(--secondary);
-        }
-        
-        body.theme-powder .nav-link:hover {
-            color: var(--secondary);
-        }
-        
-        /* ----- LANGUAGE TOGGLE ----- */
-        .lang-toggle-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-left: 15px;
-        }
-        
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.85rem;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .lang-btn.active {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-        }
-        
-        body.theme-powder .lang-btn.active {
-            color: white;
-        }
-        
-        .lang-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-        }
-        
-        body.theme-powder .lang-btn {
-            border-color: var(--secondary);
-            color: var(--secondary);
-        }
-        
-        body.theme-powder .lang-btn:hover,
-        body.theme-powder .lang-btn.active {
-            color: white;
-        }
-        
-        /* ----- DROPDOWN (THEME AWARE) ----- */
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            min-width: 280px;
-            box-shadow: var(--shadow-hover);
-            border-radius: 0 0 16px 16px;
-            z-index: 1001;
-            border: 1px solid var(--border-color);
-            border-top: 2px solid var(--secondary);
-        }
-        
-        body.theme-powder .dropdown-content {
-            background: white;
-            box-shadow: 0 10px 30px rgba(0,59,111,0.15);
-        }
-        
-        .dropdown.active .dropdown-content {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-        
-        .dropdown-content a {
-            color: var(--secondary);
-            padding: 15px 20px;
-            display: block;
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
-            font-weight: 500;
-        }
-        
-        body.theme-powder .dropdown-content a {
-            color: var(--text-primary);
-            border-bottom-color: rgba(74,144,226,0.1);
-        }
-        
-        .dropdown-content a:hover {
-            background: var(--gradient-primary);
-            color: white;
-            padding-left: 30px;
-        }
-        
-        body.theme-powder .dropdown-content a:hover {
-            color: white;
-        }
-        
-        /* ----- HERO SECTION (THEME AWARE) ----- */
-        .hero-section {
-            background: linear-gradient(135deg, var(--overlay) 0%, var(--overlay) 100%),
-                        url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding: 100px 20px;
-            text-align: center;
-            border-radius: 24px;
-            margin: 30px 0;
-            border: var(--border-solid);
-            box-shadow: var(--shadow-lg), var(--border-glow);
-            position: relative;
-            isolation: isolate;
-        }
-        
-        body.theme-powder .hero-section {
-            background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(240,247,255,0.97) 100%),
-                        url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1920&q=80');
-            color: var(--text-primary);
-        }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, var(--secondary) 0%, transparent 70%);
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 1;
-            border-radius: 22px;
-        }
-        
-        .hero-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--secondary);
-            text-shadow: 2px 2px 0 var(--primary);
-            letter-spacing: -0.5px;
-            animation: fadeInUp 1s ease;
-        }
-        
-        body.theme-powder .hero-title {
-            color: var(--primary);
-            text-shadow: 2px 2px 0 rgba(255,255,255,0.5);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s backwards;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        
-        body.theme-powder .hero-subtitle {
-            color: var(--text-secondary);
-        }
-        
-        .hero-tagline {
-            background: var(--gradient-primary);
-            color: white;
-            font-weight: 700;
-            padding: 1.2rem 2rem;
-            border-radius: 50px;
-            display: inline-block;
-            font-size: 1.2rem;
-            margin: 20px auto;
-            max-width: 800px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-lg);
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
-        
-        body.theme-powder .hero-tagline {
-            color: white;
-        }
-        
-        /* ----- CARDS (THEME AWARE) ----- */
-        .schedule-card, .mode-card, .org-item, .stat-box {
-            background: var(--gradient-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 25px;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-md);
-            color: var(--text-primary);
-        }
-        
-        body.theme-powder .schedule-card,
-        body.theme-powder .mode-card,
-        body.theme-powder .org-item,
-        body.theme-powder .stat-box {
-            background: white;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-        
-        .schedule-card::before, .mode-card::before, .org-item::before, .stat-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--glass-effect), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .schedule-card:hover::before, .mode-card:hover::before, .org-item:hover::before, .stat-box:hover::before {
-            left: 100%;
-        }
-        
-        .schedule-card:hover, .mode-card:hover, .org-item:hover, .stat-box:hover {
-            transform: translateY(-8px);
-            border-color: var(--secondary);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .schedule-card {
-            border-left: 6px solid var(--secondary);
-            position: relative;
-        }
-        
-        .schedule-card::after {
-            content: '📅';
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            font-size: 2.5rem;
-            opacity: 0.1;
-            transition: opacity 0.3s ease;
-        }
-        
-        .schedule-card:hover::after {
-            opacity: 0.2;
-        }
-        
-        .mode-icon i {
-            color: var(--secondary);
-            font-size: 3rem;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-        
-        body.theme-powder .mode-icon i {
-            color: var(--secondary);
-        }
-        
-        .mode-card:hover .mode-icon i {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        .mode-card h3,
-        .schedule-card h3,
-        .org-item h3 {
-            color: var(--secondary);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        body.theme-powder .mode-card h3,
-        body.theme-powder .schedule-card h3,
-        body.theme-powder .org-item h3 {
-            color: var(--text-primary);
-        }
-        
-        /* ----- TIME HIGHLIGHT (THEME AWARE) ----- */
-        .time-highlight {
-            background: var(--gradient-primary);
-            color: white;
-            font-weight: 700;
-            padding: 8px 20px;
-            border-radius: 30px;
-            display: inline-block;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            animation: subtlePulse 3s infinite;
-        }
-        
-        body.theme-powder .time-highlight {
-            color: white;
-        }
-        
-        .detail-badge {
-            background: var(--gradient-primary);
-            color: white;
-            font-weight: 600;
-            padding: 6px 18px;
-            border-radius: 30px;
-            margin-right: 12px;
-            margin-bottom: 12px;
-            display: inline-block;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        body.theme-powder .detail-badge {
-            color: white;
-        }
-        
-        /* ----- BUTTONS (THEME AWARE) ----- */
-        .enroll-button {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            margin-top: 20px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .enroll-button:hover {
-            background: var(--primary);
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
-            transform: scale(1.05);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        body.theme-powder .enroll-button {
-            color: white;
-        }
-        
-        body.theme-powder .enroll-button:hover {
-            background: var(--primary);
-            color: white;
-            border: 2px solid var(--secondary);
-        }
-        
-        .quick-btn {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: var(--gradient-card);
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-smooth);
-        }
-        
-        .quick-btn:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow-hover);
-        }
-        
-        body.theme-powder .quick-btn {
-            color: var(--secondary);
-            border-color: var(--secondary);
-        }
-        
-        body.theme-powder .quick-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-        }
-        
-        /* ----- SECTIONS (THEME AWARE) ----- */
-        .schedule-section, .modes-section, .admin-panel-section, #org {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 6px solid var(--secondary);
-            box-shadow: var(--shadow-lg);
-            scroll-margin-top: 80px;
-        }
-        
-        body.theme-powder .schedule-section,
-        body.theme-powder .modes-section,
-        body.theme-powder .admin-panel-section,
-        body.theme-powder #org {
-            background: white;
-            color: var(--text-primary);
-        }
-        
-        .schedule-section h2,
-        .modes-section h2,
-        .admin-panel-section h2,
-        #org h2 {
-            color: var(--secondary) !important;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        body.theme-powder .schedule-section h2,
-        body.theme-powder .modes-section h2,
-        body.theme-powder .admin-panel-section h2,
-        body.theme-powder #org h2 {
-            color: var(--text-primary) !important;
-        }
-        
-        /* ----- MODALS (THEME AWARE) with CLOSE BUTTON IMPROVEMENT ----- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        
-        body.theme-powder .modal {
-            background: rgba(255, 255, 255, 0.98);
-        }
-        
-        .modal-content {
-            background: var(--gradient-card);
-            border: 2px solid var(--secondary);
-            border-radius: 24px;
-            padding: 2.5rem;
-            max-width: 800px;
-            width: 90%;
-            position: relative;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-lg);
-            transform: scale(0.95);
-            animation: modalFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            color: var(--text-primary);
-        }
-        
-        body.theme-powder .modal-content {
-            background: white;
-            color: var(--text-primary);
-            border: 2px solid var(--secondary);
-        }
-        
-        /* ----- CLOSE BUTTON FOR ALL POPUPS (IMPROVED, VISIBLE, ACCESSIBLE) ----- */
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2.4rem;
-            font-weight: bold;
-            line-height: 1;
-            cursor: pointer;
-            color: var(--secondary);
-            background: transparent;
-            border: 2px solid var(--secondary);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.25s ease;
-            z-index: 2100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        .close-modal:hover {
-            transform: scale(1.1) rotate(90deg);
-            background: var(--secondary);
-            color: var(--bg-dark);
-            border-color: var(--secondary);
-        }
-        
-        body.theme-powder .close-modal {
-            color: var(--secondary);
-            border-color: var(--secondary);
-            background: white;
-        }
-        
-        body.theme-powder .close-modal:hover {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        /* certificate modal specific wrapper adjustment */
-        .certificate-modal-wrapper {
-            position: relative; 
-            width: 195.3mm; 
-            height: 276.21mm; 
-            max-width: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin: 0 auto;
-        }
-        .certificate-modal-wrapper .close-modal {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            font-size: 2.4rem;
-            width: 48px;
-            height: 48px;
-        }
-        
-        .modal-content h2 {
-            color: var(--secondary) !important;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 10px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        body.theme-powder .modal-content h2 {
-            color: var(--text-primary) !important;
-            border-bottom-color: var(--secondary);
-        }
-        
-        .modal-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 3px;
-        }
-        
-        .modal-content p {
-            color: var(--text-primary);
-            line-height: 1.8;
-        }
-        
-        body.theme-powder .modal-content p {
-            color: var(--text-secondary);
-        }
-        
-        .modal-content ul li {
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-        
-        body.theme-powder .modal-content ul li {
-            color: var(--text-secondary);
-        }
-        
-        /* ----- SECTION ANIMATIONS ----- */
-        section {
-            animation: fadeInUp 0.8s ease;
-            animation-fill-mode: both;
-        }
-        
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        section:nth-child(5) { animation-delay: 0.5s; }
-        
-        /* ----- FOOTER (THEME AWARE) ----- */
-        .footer {
-            background: var(--gradient-card);
-            color: var(--secondary);
-            padding: 40px 20px;
-            margin-top: 50px;
-            border-top: 3px solid var(--secondary);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        body.theme-powder .footer {
-            background: white;
-            color: var(--text-primary);
-            border-top-color: var(--secondary);
-        }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
-        }
-        
-        .footer::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
-        }
-        
-        .footer a {
-            color: var(--secondary);
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 2px;
-            font-weight: 600;
-        }
-        
-        body.theme-powder .footer a {
-            color: var(--secondary);
-        }
-        
-        .footer a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--secondary);
-            transition: width 0.3s ease;
-        }
-        
-        .footer a:hover::after {
-            width: 100%;
-        }
-        
-        .footer p {
-            color: var(--text-primary);
-            margin: 10px 0;
-        }
-        
-        body.theme-powder .footer p {
-            color: var(--text-secondary);
-        }
-        
-        /* ----- ADMIN PANEL (THEME AWARE) ----- */
-        .admin-login-box, .admin-dashboard {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-        
-        body.theme-powder .admin-login-box,
-        body.theme-powder .admin-dashboard {
-            background: white;
-            border: 1px solid var(--border-color);
-        }
-        
-        .admin-input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-        
-        body.theme-powder .admin-input {
-            background: white;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        
-        .admin-input:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 2px rgba(var(--secondary-rgb), 0.1);
-        }
-        
-        .admin-input::placeholder {
-            color: var(--text-muted);
-            opacity: 0.7;
-        }
-        
-        .stat-box h4 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        body.theme-powder .stat-box h4 {
-            color: var(--text-primary);
-        }
-        
-        .stat-box p {
-            color: var(--text-primary);
-            margin: 5px 0;
-        }
-        
-        body.theme-powder .stat-box p {
-            color: var(--text-secondary);
-        }
-        
-        /* ----- CERTIFICATE (THEME AWARE) ----- */
-        .certificate-a4-portrait {
-            width: 170.3mm;
-            height: 260.21mm;
-            background: white;
-            color: black;
-            font-family: 'Times New Roman', Times, serif;
-            border: 0.372in solid var(--secondary);
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            animation: certificateGlow 4s infinite;
-        }
-        
-        .certificate-content-portrait {
-            position: absolute;
-            top: 0.093in;
-            left: 0.093in;
-            right: 0.093in;
-            bottom: 0.093in;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            background: white;
-        }
-        
-        .cert-title {
-            font-size: 40px;
-            color: #000;
-            letter-spacing: 3px;
-            border-bottom: 3px solid var(--secondary);
-            display: inline-block;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .cert-course {
-            font-size: 24px;
-            font-weight: bold;
-            color: #000;
-            background: var(--secondary);
-            display: inline-block;
-            padding: 10px 30px;
-            border-radius: 50px;
-            margin: 15px 0;
-        }
-        
-        .cert-number {
-            background: #f5f5f5;
-            padding: 8px 25px;
-            border-radius: 30px;
-            border: 1px solid var(--secondary);
-            font-size: 14px;
-        }
-        
-        /* ----- TOOLTIP ----- */
-        [data-tooltip] {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        [data-tooltip]:before {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-10px);
-            padding: 8px 16px;
-            background: var(--gradient-primary);
-            color: white;
-            font-size: 0.875rem;
-            font-weight: 600;
-            border-radius: 20px;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
-            z-index: 1000;
-            pointer-events: none;
-        }
-        
-        [data-tooltip]:hover:before {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-5px);
-        }
-        
-        /* ----- PROGRESS BAR ----- */
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-primary);
-            width: var(--progress-width);
-            border-radius: 3px;
-            animation: progressFill 1.5s ease forwards;
-        }
-        
-        @keyframes progressFill {
-            from { width: 0%; }
-            to { width: var(--progress-width); }
-        }
-        
-        /* ----- LOADING STATE ----- */
-        .loading {
-            position: relative;
-            pointer-events: none;
-            opacity: 0.7;
-        }
-        
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 30px;
-            height: 30px;
-            margin-left: -15px;
-            margin-top: -15px;
-            border: 3px solid var(--border-color);
-            border-top-color: var(--secondary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        
-        /* ----- ADMIN CORNER ----- */
-        .admin-corner {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .corner-input {
-            background: var(--bg-light);
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            border-radius: 30px;
-            color: var(--text-primary);
-            width: 120px;
-            font-size: 0.9rem;
-        }
-        
-        body.theme-powder .corner-input {
-            background: white;
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        
-        .corner-input::placeholder {
-            color: var(--text-muted);
-            opacity: 0.7;
-        }
-        
-        .admin-corner-btn {
-            background: transparent;
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .admin-corner-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: transparent;
-        }
-        
-        body.theme-powder .admin-corner-btn {
-            border-color: var(--secondary);
-            color: var(--secondary);
-        }
-        
-        body.theme-powder .admin-corner-btn:hover {
-            background: var(--gradient-primary);
-            color: white;
-        }
-        
-        /* ----- MOBILE TOGGLE ----- */
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 10px;
-            transition: color 0.3s ease;
-        }
-        
-        .mobile-toggle:hover {
-            color: var(--secondary-light);
-        }
-        
-        /* ----- RESPONSIVE DESIGN ----- */
-        @media (max-width: 1200px) {
-            .container { 
-                padding: 20px; 
-            }
-            
-            .nav-container { 
-                padding: 0.5rem 1rem; 
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .nav-menu { 
-                display: none; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0; 
-                background: var(--card-bg);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                flex-direction: column; 
-                padding: 20px; 
-                border-top: 2px solid var(--secondary); 
-                box-shadow: var(--shadow-lg);
-            }
-            
-            body.theme-powder .nav-menu {
-                background: white;
-            }
-            
-            .nav-menu.active { 
-                display: flex; 
-            }
-            
-            .mobile-toggle { 
-                display: block; 
-            }
-            
-            .hero-title { 
-                font-size: 2.5rem; 
-            }
-            
-            .hero-subtitle { 
-                font-size: 1.2rem; 
-            }
-            
-            .modes-grid,
-            .schedule-grid,
-            .admin-stats {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-            
-            .nav-link {
-                padding: 1rem;
-            }
-            
-            .nav-link::after {
-                bottom: 0.8rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title { 
-                font-size: 2rem; 
-            }
-            
-            .hero-tagline { 
-                font-size: 1rem; 
-                padding: 1rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .modes-grid,
-            .schedule-grid,
-            .admin-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-container { 
-                flex-direction: column; 
-                align-items: flex-start; 
-            }
-            
-            .lang-toggle-container,
-            .theme-toggle-container { 
-                margin-left: 0; 
-                margin-top: 10px; 
-                margin-bottom: 10px; 
-            }
-            
-            .modal-content { 
-                padding: 1.5rem; 
-                margin: 1rem; 
-                width: 95%;
-            }
-            
-            .certificate-a4-portrait { 
-                width: 100%; 
-                height: auto; 
-                min-height: 260.21mm; 
-            }
-            
-            .logo-text h1 { 
-                font-size: 1.2rem; 
-            }
-            
-            .logo-icon {
-                font-size: 2rem;
-            }
-            
-            .admin-corner {
-                margin-top: 10px;
-                width: 100%;
-                justify-content: flex-start;
-            }
-            
-            .quick-access {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .quick-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1rem;
-            }
-        }
-        
-        /* ----- PRINT STYLES ----- */
-        @media print {
-            body * { 
-                visibility: hidden; 
-            }
-            
-            #certificateModal,
-            #certificateModal * { 
-                visibility: visible !important; 
-            }
-            
-            #certificateModal {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background: white;
-                display: flex !important;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .certificate-a4-portrait {
-                width: 170.3mm !important;
-                height: 260.21mm !important;
-                border: 5mm solid var(--secondary) !important;
-                box-shadow: none !important;
-                animation: none !important;
-            }
-            
-            .close-modal, 
-            .quick-access, 
-            .footer, 
-            .main-header, 
-            .container,
-            .modal:not(#certificateModal) {
-                display: none !important;
-            }
-        }
-        
-        /* ----- POWDER BLUE SPECIFIC ENHANCEMENTS (CONTRAST BOOST) ----- */
-        body.theme-powder h1, 
-        body.theme-powder h2, 
-        body.theme-powder h3 {
-            color: var(--text-primary) !important;
-            font-weight: 800;
-        }
-        
-        body.theme-powder p,
-        body.theme-powder li,
-        body.theme-powder span:not(.detail-badge):not(.time-highlight) {
-            color: var(--text-secondary);
-        }
-        
-        body.theme-powder .text-white {
-            color: var(--text-primary) !important;
-        }
-        
-        body.theme-powder .text-black {
-            color: var(--text-dark) !important;
-        }
-        
-        body.theme-powder .bg-white {
-            background: var(--bg-light) !important;
-        }
-        
-        body.theme-powder .hero-title,
-        body.theme-powder .hero-subtitle,
-        body.theme-powder .hero-tagline {
-            text-shadow: none;
-        }
-        
-        body.theme-powder .hero-tagline,
-        body.theme-powder .time-highlight,
-        body.theme-powder .detail-badge,
-        body.theme-powder .enroll-button {
-            color: white !important;
-        }
-        
-        body.theme-powder .schedule-card p,
-        body.theme-powder .mode-card p,
-        body.theme-powder .org-item p {
-            color: var(--text-secondary);
-        }
-        
-        body.theme-powder .schedule-card h3,
-        body.theme-powder .mode-card h3,
-        body.theme-powder .org-item h3 {
-            color: var(--text-primary) !important;
-        }
-        
-        body.theme-powder .footer p {
-            color: var(--text-secondary);
-        }
-        
-        body.theme-powder .footer strong {
-            color: var(--secondary);
-        }
-        
-        body.theme-powder .cert-number {
-            color: var(--text-primary);
-        }
-        
-        body.theme-powder .dropdown-content a {
-            color: var(--text-primary);
-        }
-        
-        body.theme-powder .dropdown-content a:hover {
-            color: white;
-        }
-        
-        body.theme-powder .modal-content p,
-        body.theme-powder .modal-content li {
-            color: var(--text-secondary);
-        }
-        
-        body.theme-powder .modal-content h2,
-        body.theme-powder .modal-content h3 {
-            color: var(--text-primary) !important;
-        }
-        
-        body.theme-powder .admin-login-box h3,
-        body.theme-powder .admin-dashboard h3 {
-            color: var(--text-primary) !important;
-        }
-        
-        body.theme-powder .stat-box p {
-            color: var(--text-secondary);
-        }
-        
-        body.theme-powder .stat-box h4 {
-            color: var(--text-primary) !important;
-        }
-        
-        body.theme-powder .nav-link {
-            color: var(--text-primary);
-        }
-        
-        body.theme-powder .logo-text h1 {
-            color: var(--text-primary);
-        }
-        
-        body.theme-powder .logo-text span {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        /* ----- UTILITY CLASSES (THEME AWARE) ----- */
-        .text-secondary {
-            color: var(--secondary) !important;
-        }
-        
-        .bg-dark {
-            background: var(--bg-dark) !important;
-        }
-        
-        .border-yellow {
-            border-color: var(--secondary) !important;
-        }
-        
-        .text-white {
-            color: var(--text-primary) !important;
-        }
-        
-        .btn-outline-light {
-            border-color: var(--secondary);
-            color: var(--secondary);
-        }
-        
-        .btn-outline-light:hover {
-            background: var(--gradient-primary);
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Katete ICT · Skills Training Centre — full programme 2026</title>
+  <!-- Font Awesome 6 (full icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter + Space Grotesk for modern 2026 feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ---------- DUAL THEME SYSTEM (BLACK/GOLD + POWDER BLUE) ---------- */
+    :root {
+      --primary: #000000;
+      --primary-rgb: 0, 0, 0;
+      --secondary: #FFD700;
+      --secondary-light: #FFE55C;
+      --secondary-dark: #DAA520;
+      --accent: #FFC107;
+      --bg-dark: #0a0a0a;
+      --bg-light: #1a1a1a;
+      --card-bg: #1e1e1e;
+      --card-bg-alt: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #f0f0f0;
+      --text-muted: #cccccc;
+      --text-dark: #000000;
+      --gradient-primary: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      --gradient-card: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%);
+      --shadow-sm: 0 2px 8px rgba(255,215,0,0.1);
+      --shadow-md: 0 5px 15px rgba(0,0,0,0.7);
+      --shadow-lg: 0 10px 30px rgba(255,215,0,0.15);
+      --shadow-hover: 0 15px 35px rgba(255,215,0,0.25);
+      --border-color: rgba(255,215,0,0.3);
+      --border-solid: 2px solid #FFD700;
+      --border-glow: 0 0 15px rgba(255,215,0,0.3);
+      --glass-effect: rgba(255,215,0,0.05);
+      --overlay: rgba(0,0,0,0.85);
+      --progress-width: 0%;
+      --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    body.theme-powder {
+      --primary: #003B6F;
+      --primary-rgb: 0, 59, 111;
+      --secondary: #4A90E2;
+      --secondary-light: #6BA5E9;
+      --secondary-dark: #2A5C9A;
+      --accent: #2C7AB1;
+      --bg-dark: #F0F7FF;
+      --bg-light: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --card-bg-alt: #F8FCFF;
+      --text-primary: #001F3F;
+      --text-secondary: #003B6F;
+      --text-muted: #2C3E50;
+      --text-dark: #000000;
+      --gradient-primary: linear-gradient(135deg, #4A90E2 0%, #2C7AB1 100%);
+      --gradient-bg: linear-gradient(135deg, #F0F7FF 0%, #E6F3FF 100%);
+      --gradient-card: linear-gradient(145deg, #FFFFFF 0%, #F8FCFF 100%);
+      --shadow-sm: 0 2px 8px rgba(74,144,226,0.15);
+      --shadow-md: 0 5px 15px rgba(0,59,111,0.08);
+      --shadow-lg: 0 10px 30px rgba(74,144,226,0.12);
+      --shadow-hover: 0 15px 35px rgba(74,144,226,0.2);
+      --border-color: rgba(74,144,226,0.3);
+      --border-solid: 2px solid #4A90E2;
+      --border-glow: 0 0 15px rgba(74,144,226,0.25);
+      --glass-effect: rgba(74,144,226,0.04);
+      --overlay: rgba(255,255,255,0.95);
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: var(--gradient-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.2s, border-color 0.2s;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 30px;
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); border-left: 1px solid var(--border-color); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--secondary), var(--secondary-dark)); border-radius: 6px; border: 2px solid var(--bg-dark); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--secondary-light); }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .fadeInUp { animation: fadeInUp 0.6s ease; }
+
+    /* ----- HEADER ----- */
+    .main-header {
+      background: rgba(var(--primary-rgb), 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: var(--border-solid);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .nav-container {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.3s;
+    }
+    .logo:hover { transform: scale(1.02); }
+    .logo-icon { font-size: 2.5rem; color: var(--secondary); filter: drop-shadow(0 0 8px var(--border-color)); }
+    .logo-text h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; color: var(--text-primary); }
+    .logo-text span { font-size: 0.9rem; color: var(--secondary); }
+
+    .lang-toggle-container, .theme-toggle-container, .admin-corner { display: flex; align-items: center; margin-left: 12px; }
+    .lang-btn, .theme-toggle-btn, .admin-corner-btn {
+      background: transparent; border: 1px solid var(--secondary); color: var(--secondary);
+      padding: 8px 16px; border-radius: 40px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; font-size: 0.85rem;
+      transition: var(--transition-smooth); white-space: nowrap;
+    }
+    .lang-btn.active, .lang-btn:hover, .theme-toggle-btn:hover, .admin-corner-btn:hover {
+      background: var(--gradient-primary); color: white; border-color: transparent;
+    }
+
+    .mobile-toggle {
+      display: none; background: none; border: none; color: var(--secondary); font-size: 1.8rem; margin-left: 12px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+    }
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 1.5rem 1rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 1.2rem; left: 50%; width: 0; height: 2px;
+      background: var(--gradient-primary); transition: all 0.3s; transform: translateX(-50%);
+    }
+    .nav-link:hover::after { width: 70%; }
+    .nav-link:hover { color: var(--secondary); }
+
+    .corner-input {
+      background: var(--bg-light); border: 1px solid var(--border-color); padding: 8px 12px;
+      border-radius: 30px; color: var(--text-primary); width: 120px; margin-right: 6px;
+    }
+    .corner-input::placeholder { color: var(--text-muted); opacity: 0.8; }
+
+    /* HERO */
+    .hero-section {
+      background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 100%),
+                  url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover; background-position: center; border-radius: 32px; padding: 100px 20px;
+      border: var(--border-solid); margin: 30px 0; text-align: center; position: relative;
+    }
+    body.theme-powder .hero-section {
+      background: linear-gradient(135deg, rgba(240,247,255,0.7) 0%, rgba(255,255,255,0.6) 100%),
+                  url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover; background-position: center;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem,6vw,3.8rem); font-weight: 800;
+      color: var(--secondary);
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+      letter-spacing: -0.02em;
+    }
+    body.theme-powder .hero-title {
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.8), 4px 4px 0 rgba(0,59,111,0.3);
+      color: #001F3F;
+    }
+    .hero-subtitle {
+      font-size: 1.5rem; color: var(--text-primary); margin: 15px 0; font-weight: 600;
+      background-color: rgba(var(--primary-rgb), 0.3);
+      display: inline-block; padding: 0.3rem 1.5rem; border-radius: 40px; backdrop-filter: blur(4px);
+    }
+    .hero-tagline {
+      background: var(--gradient-primary); color: black; font-weight: 700; padding: 1rem 2.5rem;
+      border-radius: 60px; display: inline-block; margin: 20px auto; box-shadow: var(--shadow-lg);
+      border: 2px solid var(--secondary);
+    }
+
+    .section-badge {
+      display: inline-block; background: var(--secondary); color: var(--text-dark);
+      font-weight: 700; padding: 6px 22px; border-radius: 40px; letter-spacing: 1px; margin-bottom: 20px;
+    }
+
+    /* brand ambassadors */
+    .brand-ambassadors { margin: 60px 0 40px; }
+    .brand-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 30px;
+    }
+    .brand-card {
+      background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 32px;
+      padding: 2rem 1.5rem; text-align: center; transition: var(--transition-smooth); position: relative;
+      overflow: hidden; box-shadow: var(--shadow-lg); backdrop-filter: blur(4px); cursor: pointer;
+    }
+    .brand-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); border-color: var(--secondary); }
+    .brand-card::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; background: var(--gradient-primary); border-radius: 34px; opacity: 0; transition: opacity 0.3s; z-index: -1; }
+    .brand-card:hover::before { opacity: 0.3; }
+    .brand-icon { font-size: 3.2rem; color: var(--secondary); margin-bottom: 1.2rem; filter: drop-shadow(0 0 8px var(--border-color)); }
+    .brand-card h3 { font-size: 1.8rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.8rem; letter-spacing: -0.02em; }
+    .brand-card p { color: var(--text-primary); font-size: 1rem; line-height: 1.5; opacity: 0.9; }
+    .brand-tag { display: inline-block; margin-top: 1.2rem; padding: 0.4rem 1.2rem; background: var(--glass-effect); border: 1px solid var(--secondary); border-radius: 40px; font-weight: 600; font-size: 0.9rem; color: var(--secondary); }
+
+    /* modes */
+    .modes-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 30px; margin: 30px 0;
+    }
+    .mode-card {
+      background: var(--gradient-card); border-radius: 28px; padding: 2rem; border-left: 8px solid var(--secondary);
+      box-shadow: var(--shadow-lg); cursor: pointer; transition: var(--transition-smooth);
+    }
+    .mode-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-left-width: 12px; }
+    .mode-card h3 { font-size: 2.2rem; color: var(--secondary); }
+    .mode-card p { font-size: 1rem; margin-top: 12px; opacity:0.9; }
+
+    /* schedule */
+    .schedule-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; margin-top: 30px;
+    }
+    .schedule-card {
+      background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 24px;
+      padding: 28px 20px; transition: var(--transition-smooth); cursor: pointer; border-left: 6px solid var(--secondary);
+    }
+    .schedule-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .schedule-card h3 { color: var(--secondary); margin-bottom: 12px; font-size: 1.7rem; }
+    .time-detail { font-size: 1rem; background: var(--glass-effect); padding: 8px; border-radius: 20px; margin: 10px 0; }
+
+    /* org training */
+    .org-training {
+      background: var(--gradient-card); border-radius: 32px; padding: 40px; border: 1px solid var(--border-color); margin: 40px 0;
+    }
+    .org-feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 25px; margin: 30px 0;
+    }
+    .org-feature {
+      background: var(--glass-effect); border-radius: 24px; padding: 20px; text-align: center; cursor: pointer;
+      transition: var(--transition-smooth); border: 1px solid transparent;
+    }
+    .org-feature:hover { border-color: var(--secondary); transform: scale(1.02); background: rgba(255,215,0,0.08); }
+    .org-feature i { font-size: 2.2rem; color: var(--secondary); }
+    .org-feature h4 { margin: 12px 0 8px; }
+
+    /* TARGET AUDIENCE SECTION with bilingual data attributes */
+    .target-audience {
+      margin: 70px 0 40px;
+    }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 30px;
+    }
+    .audience-card {
+      background: var(--gradient-card);
+      border-radius: 32px;
+      padding: 2rem 1.8rem;
+      border: 1px solid var(--border-color);
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .audience-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+    .audience-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--gradient-primary);
+    }
+    .audience-icon {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 1.2rem;
+    }
+    .audience-card h3 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .audience-card p {
+      color: var(--text-primary);
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+    .audience-tag {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: var(--glass-effect);
+      border-radius: 40px;
+      padding: 0.3rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    /* course table */
+    .course-table-section { margin: 60px 0 40px; }
+    .course-table-wrapper {
+      background: var(--card-bg); border-radius: 36px; border: 1px solid var(--border-color);
+      padding: 30px 20px; box-shadow: var(--shadow-lg); overflow-x: auto; backdrop-filter: blur(4px);
+    }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 12px; font-family: 'Space Grotesk', 'Inter', sans-serif; }
+    th { text-align: left; padding: 16px 16px 8px 16px; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.8px; font-size: 0.9rem; border-bottom: 2px dashed var(--border-color); }
+    td { padding: 18px 16px; background: var(--glass-effect); border-radius: 20px !important; color: var(--text-primary); font-weight: 500; backdrop-filter: blur(2px); transition: 0.2s; font-size: 1rem; }
+    tbody tr { cursor: pointer; transition: transform 0.2s; }
+    tbody tr:hover td { background: var(--border-color); transform: scale(1.005); }
+    .course-name { font-weight: 700; color: var(--secondary); font-size: 1.1rem; }
+    .duration-chip { background: var(--gradient-primary); color: black; font-weight: 600; padding: 6px 14px; border-radius: 40px; display: inline-block; font-size: 0.85rem; }
+    .award-badge { background: transparent; border: 1.5px solid var(--secondary); color: var(--secondary); padding: 6px 14px; border-radius: 40px; font-size: 0.8rem; font-weight: 600; display: inline-block; }
+    .contact-wa-btn { background: #25D366; border: none; color: black; font-weight: 600; padding: 8px 20px; border-radius: 34px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+    .contact-wa-btn:hover { filter: brightness(1.1); transform: scale(1.02); background: #20b859; }
+
+    /* MODAL enhanced */
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92); z-index: 2000; justify-content: center; align-items: center;
+      backdrop-filter: blur(8px);
+    }
+    .modal-content {
+      background: var(--gradient-card);
+      border: 2px solid var(--secondary);
+      border-radius: 32px;
+      padding: 2.2rem 2.5rem;
+      max-width: 750px;
+      width: 90%;
+      position: relative;
+      max-height: 85vh;
+      overflow-y: auto;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-hover), var(--border-glow);
+      animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes modalPop {
+      0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .close-modal {
+      position: absolute; top: 18px; right: 22px;
+      font-size: 2rem; font-weight: 600;
+      cursor: pointer; color: var(--secondary);
+      background: transparent; border: 2px solid var(--secondary);
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; line-height: 1;
+    }
+    .close-modal:hover {
+      background: var(--secondary); color: black;
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 0 20px var(--secondary);
+    }
+    .modal ul, .modal .inst-feature-list, .modal .career-path-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .modal li {
+      margin: 0.8rem 0;
+      padding: 0.5rem 1rem;
+      background: var(--glass-effect);
+      border-radius: 40px;
+      border-left: 5px solid var(--secondary);
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .modal li i {
+      color: var(--secondary);
+      font-size: 1.2rem;
+      width: 1.6rem;
+      text-align: center;
+    }
+    .modal h2 {
+      font-size: 2rem;
+      border-bottom: 2px dashed var(--border-color);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .modal h3 {
+      margin: 1.5rem 0 0.8rem;
+      color: var(--secondary);
+    }
+    .modal p {
+      background: rgba(255,215,0,0.03);
+      padding: 1rem;
+      border-radius: 24px;
+      line-height: 1.7;
+    }
+
+    .quick-access { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+    .quick-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--gradient-card); color: var(--secondary); border: 2px solid var(--secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition-smooth); font-size: 1.2rem; }
+    .quick-btn:hover { transform: scale(1.1) rotate(5deg); background: var(--gradient-primary); color: white; }
+
+    @media (max-width: 992px) { .nav-menu { display: none; } .mobile-toggle { display: block; } }
+    @media (max-width: 768px) { .container { padding: 15px; } .brand-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
-    <!-- ========== SECURITY ANTI-DEVTOOLS OVERLAY ========== -->
-    <div id="devtoolsOverlay" class="devtools-detected">
-        <i class="fas fa-shield-alt" style="font-size: 80px; color: #FFD700; margin-bottom: 30px;"></i>
-        <h2 style="font-size: 32px; margin-bottom: 20px; color: white;">🔒 Security Protection Active</h2>
-        <p style="font-size: 18px; max-width: 600px; line-height: 1.6; color: #ccc;">
-            Developer tools have been disabled for security purposes.<br>
-            This protects sensitive training materials and student data.<br>
-            Please close your browser's developer tools to continue.
-        </p>
-        <button onclick="window.location.reload()" style="margin-top: 40px; padding: 15px 40px; background: #FFD700; border: none; border-radius: 30px; font-weight: bold; color: black; cursor: pointer; font-size: 16px;">
-            <i class="fas fa-sync-alt"></i> Reload Page
-        </button>
-    </div>
+  <!-- Anti-view-source & Devtools protection -->
+  <div id="devtoolsOverlay" style="display:none; position:fixed; inset:0; background:black; z-index:999999; color:white; justify-content:center; align-items:center;">🔒 Source access restricted</div>
+  <script>
+    (function(){
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) {
+          e.preventDefault(); return false;
+        }
+        if (e.key === 'F12') { e.preventDefault(); return false; }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'c' || e.key === 'C')) { e.preventDefault(); return false; }
+      });
+      const overlay = document.getElementById('devtoolsOverlay');
+      setInterval(() => {
+        const widthThreshold = window.outerWidth - window.innerWidth > 160;
+        const heightThreshold = window.outerHeight - window.innerHeight > 160;
+        overlay.style.display = (widthThreshold || heightThreshold) ? 'flex' : 'none';
+      }, 1000);
 
-    <!-- ========== SECURE CREDENTIALS STORAGE (COMPLETELY OBFUSCATED) ========== -->
-    <div id="secure-storage" style="display: none;"></div>
+      const SECURE_ADMIN_USER = "mmwilachris";
+      const SECURE_ADMIN_PASS = "mwambachris2";
+      window.__secureAdminCredentials = {
+        username: SECURE_ADMIN_USER,
+        password: SECURE_ADMIN_PASS,
+        validate: (u,p) => u === SECURE_ADMIN_USER && p === SECURE_ADMIN_PASS
+      };
+      setTimeout(() => {
+        const sc = document.getElementById('secure-credentials');
+        if(sc) sc.remove();
+      }, 100);
+    })();
+  </script>
+  <script id="secure-credentials" type="application/security"></script>
+
+  <!-- ========== HEADER ========== -->
+  <header class="main-header">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-laptop-code"></i></div>
+        <div class="logo-text">
+          <h1>ICT Skills Training</h1>
+          <span>Katete District · 2026</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; flex-wrap: wrap;">
+        <div class="lang-toggle-container">
+          <button id="lang-en-btn" class="lang-btn active"><i class="fas fa-language"></i> EN</button>
+          <button id="lang-ny-btn" class="lang-btn"><i class="fas fa-language"></i> NY</button>
+        </div>
+        <div class="theme-toggle-container">
+          <button id="theme-toggle-btn" class="theme-toggle-btn"><i class="fas fa-palette"></i> POWDER BLUE</button>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+      </div>
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link" data-en="Home" data-ny="Nyumba">Home</a>
+        <a href="#courses-table" class="nav-link" data-en="Courses" data-ny="Maphunziro">Courses</a>
+        <a href="#schedule" class="nav-link" data-en="Schedule" data-ny="Ndondomeko">Schedule</a>
+        <a href="#contact" class="nav-link" data-en="Contact" data-ny="Lumikizanani">Contact</a>
+      </nav>
+      <div class="admin-corner">
+        <input type="text" id="cornerUsername" class="corner-input" placeholder="Username" style="display: none;">
+        <input type="password" id="cornerPassword" class="corner-input" placeholder="Password" style="display: none;">
+        <button class="admin-corner-btn" id="cornerLoginBtn"><i class="fas fa-lock"></i> Admin</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- HERO -->
+    <section id="home" class="hero-section">
+      <h1 class="hero-title">🎯 PRACTICAL ICT · KATETE 2026</h1>
+      <div class="hero-subtitle" data-en="Your gateway to digital skills" data-ny="Khombo lanu ku luso la dijito">Your gateway to digital skills</div>
+      <div class="hero-tagline"><i class="fas fa-graduation-cap"></i> 8 specialised courses – from Word processing to Web design</div>
+      <button class="enroll-button" onclick="openWhatsAppChat()" style="padding:15px 40px; margin-top:25px; background:var(--secondary); border:none; border-radius:60px; font-weight:bold;"><i class="fab fa-whatsapp"></i> Chat with admin</button>
+    </section>
+
+    <!-- BRAND AMBASSADORS -->
+    <section class="brand-ambassadors">
+      <div class="section-badge"><i class="fas fa-handshake"></i> OUR PARTNERS IN CAPACITY BUILDING</div>
+      <div class="brand-grid">
+        <div class="brand-card" onclick="showInstitutionDetail('tiga')">
+          <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Tiga Training Institute</h3>
+          <p>Empowering professionals with cutting-edge technical skills and hands-on workshops.</p>
+          <span class="brand-tag"><i class="fas fa-users"></i> left flank</span>
+        </div>
+        <div class="brand-card" onclick="showInstitutionDetail('katete-skills')">
+          <div class="brand-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Katete Skills Training</h3>
+          <p>Your local hub for ICT excellence — bridging the digital divide through practical education.</p>
+          <span class="brand-tag"><i class="fas fa-bullseye"></i> centre of excellence</span>
+        </div>
+        <div class="brand-card" onclick="showInstitutionDetail('agape')">
+          <div class="brand-icon"><i class="fas fa-heart"></i></div>
+          <h3>Agape Educational Center</h3>
+          <p>Holistic development and lifelong learning — nurturing talent for community transformation.</p>
+          <span class="brand-tag"><i class="fas fa-hand-holding-heart"></i> right flank</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TARGET AUDIENCE – now fully bilingual (EN + NY) using data attributes -->
+    <section class="target-audience">
+      <div class="section-badge"><i class="fas fa-users"></i> <span data-en="WE PREPARE EVERY INDIVIDUAL – TAILORED ICT" data-ny="TIMAKONZERA MUNTHU ALIYENSE – ICT YOSIYANA">WE PREPARE EVERY INDIVIDUAL – TAILORED ICT</span></div>
+      <div class="audience-grid">
+        <!-- youths -->
+        <div class="audience-card">
+          <div class="audience-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3 data-en="🎓 Youths" data-ny="🎓 Achinyamata">🎓 Youths</h3>
+          <p data-en="Transitioning from secondary to college/university? Gain research, data analysis & writing skills. Our courses give you a powerful backup for academic success." data-ny="Mukuchoka ku sekondale kupita ku koleji/yuunivesite? Phunzirani kufufuza, kusanthula deta & kulemba. Maphunziro athu amakupatsani chothandizira champhamvu kuti mupambane pamaphunziro.">Transitioning from secondary to college/university? Gain research, data analysis & writing skills. Our courses give you a powerful backup for academic success.</p>
+          <span class="audience-tag" data-en="research · analysis · editing" data-ny="kufufuza · kusanthula · kukonza">research · analysis · editing</span>
+        </div>
+        <!-- working class -->
+        <div class="audience-card">
+          <div class="audience-icon"><i class="fas fa-briefcase"></i></div>
+          <h3 data-en="💼 Working class" data-ny="💼 Ogwira ntchito">💼 Working class</h3>
+          <p data-en="Teachers, nurses, doctors, officers — integrate ICT into daily work. Boost productivity, professional development, and gain a competitive edge." data-ny="Aphunzitsi, anamwino, madokotala, maofesala — gwiritsani ntchito ICT pantchito yanu yatsiku ndi tsiku. Onjezani mphamvu pantchito, kukula kwa ukadaulo, ndikukhala ndi mwayi wopambana.">Teachers, nurses, doctors, officers — integrate ICT into daily work. Boost productivity, professional development, and gain a competitive edge.</p>
+          <span class="audience-tag" data-en="productivity · advantage · upskill" data-ny="mphamvu · mwayi · kukulitsa luso">productivity · advantage · upskill</span>
+        </div>
+        <!-- job seekers -->
+        <div class="audience-card">
+          <div class="audience-icon"><i class="fas fa-search"></i></div>
+          <h3 data-en="🔎 Job seekers" data-ny="🔎 Ofuna ntchito">🔎 Job seekers</h3>
+          <p data-en="Accelerate job hunting with online applications, digital profiles, and e‑portfolios. We equip you with the tools to navigate the modern job market." data-ny="Fufuzani ntchito mwachangu pogwiritsa ntchito mapulogalamu a pa intaneti, mbiri ya digito, ndi ma e-portfolio. Timakupatsani zida zoyendera msika wantchito wamakono.">Accelerate job hunting with online applications, digital profiles, and e‑portfolios. We equip you with the tools to navigate the modern job market.</p>
+          <span class="audience-tag" data-en="online apps · e‑portfolio · springboard" data-ny="mapulogalamu · mbiri ya digito · chothandizira">online apps · e‑portfolio · springboard</span>
+        </div>
+        <!-- students -->
+        <div class="audience-card">
+          <div class="audience-icon"><i class="fas fa-child"></i></div>
+          <h3 data-en="📚 Students" data-ny="📚 Ophunzira">📚 Students</h3>
+          <p data-en="From homework to research projects — ICT skills help you excel. Learn to find, evaluate, and present information effectively." data-ny="Kuchoka pa homuweki mpaka mapulojekiti ofufuza — luso la ICT limakuthandizani kuchita bwino. Phunzirani kupeza, kuwunika, ndikupereka chidziwitso moyenera.">From homework to research projects — ICT skills help you excel. Learn to find, evaluate, and present information effectively.</p>
+          <span class="audience-tag" data-en="homework · research · assignments" data-ny="homuweki · kufufuza · ntchito">homework · research · assignments</span>
+        </div>
+        <!-- farmers -->
+        <div class="audience-card">
+          <div class="audience-icon"><i class="fas fa-tractor"></i></div>
+          <h3 data-en="🌾 Farmers" data-ny="🌾 Alimi">🌾 Farmers</h3>
+          <p data-en="Weather prediction, market data, record keeping. Use gadgets and data analysis to improve yields and farming decisions." data-ny="Kulosera nyengo, deta yamsika, kusunga zolembera. Gwiritsani ntchito zida ndi kusanthula deta kukonza zokolola ndi zisankho zaulimi.">Weather prediction, market data, record keeping. Use gadgets and data analysis to improve yields and farming decisions.</p>
+          <span class="audience-tag" data-en="agri‑tech · weather · data" data-ny="ukadaulo waulimi · nyengo · deta">agri‑tech · weather · data</span>
+        </div>
+      </div>
+      <!-- closing bilingual statement -->
+      <p style="text-align:center; margin:2rem 0 0; font-size:1.3rem; background:var(--glass-effect); padding:1rem; border-radius:60px;" data-en="❤️ In all these cases, we cater for each individual. Our flexible modes and personalised mentorship ensure your specific needs are met." data-ny="❤️ Muzochitika zonsezi, timasamalira munthu aliyense. Njira zathu zosinthika ndi upangiri wapayekha zimatsimikizira kuti zosowa zanu zakwaniritsidwa."><i class="fas fa-heart" style="color:var(--secondary);"></i> In all these cases, we cater for each individual. Our flexible modes and personalised mentorship ensure your specific needs are met.</p>
+    </section>
+
+    <!-- MODES & TIME OF STUDY -->
+    <section id="schedule" style="margin: 60px 0;">
+      <div class="section-badge"><i class="fas fa-clock"></i> MODES & TIME OF STUDY – FLEXIBILITY FIRST</div>
+      <div class="modes-grid">
+        <div class="mode-card" onclick="showModeDetails('inperson')"><h3>📘 In‑person</h3><p data-en="Click for full details →" data-ny="Dinani kuti muwone zambiri →">Click for full details →</p></div>
+        <div class="mode-card" onclick="showModeDetails('blended')"><h3>💻 Blended</h3><p data-en="Click for full details →" data-ny="Dinani kuti muwone zambiri →">Click for full details →</p></div>
+        <div class="mode-card" onclick="showModeDetails('distance')"><h3>🏠 Distance</h3><p data-en="Click for full details →" data-ny="Dinani kuti muwone zambiri →">Click for full details →</p></div>
+      </div>
+      <div class="schedule-grid">
+        <div class="schedule-card" onclick="showTimeDetails('weekdays')"><h3 data-en="Weekdays" data-ny="Masabata">Weekdays</h3><div class="time-detail"><i class="fas fa-clock"></i> <span data-en="click for full schedule & strengths" data-ny="dinani kuti muwone ndondomeko yonse & mphamvu">click for full schedule & strengths</span></div></div>
+        <div class="schedule-card" onclick="showTimeDetails('saturday')"><h3 data-en="Saturday intensive" data-ny="Loweruka lowonjezera">Saturday intensive</h3><div class="time-detail"><i class="fas fa-clock"></i> <span data-en="click for full schedule & strengths" data-ny="dinani kuti muwone ndondomeko yonse & mphamvu">click for full schedule & strengths</span></div></div>
+        <div class="schedule-card" onclick="showTimeDetails('sunday')"><h3 data-en="Sunday session" data-ny="Gawo la Lamlungu">Sunday session</h3><div class="time-detail"><i class="fas fa-clock"></i> <span data-en="click for full schedule & strengths" data-ny="dinani kuti muwone ndondomeko yonse & mphamvu">click for full schedule & strengths</span></div></div>
+      </div>
+    </section>
+
+    <!-- ORGANISATIONAL TRAINING -->
+    <section class="org-training">
+      <h2 style="color:var(--secondary);"><i class="fas fa-building"></i> Organisational training – customised for teams</h2>
+      <p style="font-size:1.2rem;">Schools · Health institutions · Businesses · NGOs · Government departments</p>
+      <div class="org-feature-grid">
+        <div class="org-feature" onclick="showOrgDetail('schools')"><i class="fas fa-school"></i><h4 data-en="Schools & teachers" data-ny="Masukulu & aphunzitsi">Schools & teachers</h4><p data-en="ICT integration, e‑learning content — click for details" data-ny="Kuphatikiza ICT, zophunzitsira pa intaneti — dinani kuti muwone zambiri">ICT integration, e‑learning content — click for details</p></div>
+        <div class="org-feature" onclick="showOrgDetail('health')"><i class="fas fa-hospital-alt"></i><h4 data-en="Health institutions" data-ny="Mabungwe azaumoyo">Health institutions</h4><p data-en="Data entry (SmartCare, DHIS2), Excel — click for details" data-ny="Kulemba deta (SmartCare, DHIS2), Excel — dinani kuti muwone zambiri">Data entry (SmartCare, DHIS2), Excel — click for details</p></div>
+        <div class="org-feature" onclick="showOrgDetail('sme')"><i class="fas fa-store"></i><h4 data-en="SMEs & businesses" data-ny="Mabizinesi ang'onoang'ono & akulu">SMEs & businesses</h4><p data-en="Inventory, social media marketing — click for details" data-ny="Kusungirako katundu, kutsatsa pa social media — dinani kuti muwone zambiri">Inventory, social media marketing — click for details</p></div>
+        <div class="org-feature" onclick="showOrgDetail('ngo')"><i class="fas fa-hand-holding-heart"></i><h4 data-en="NGOs & community" data-ny="Mabungwe omwe si aboma & madera">NGOs & community</h4><p data-en="Report writing, KoboToolbox — click for details" data-ny="Kulemba malipoti, KoboToolbox — dinani kuti muwone zambiri">Report writing, KoboToolbox — click for details</p></div>
+      </div>
+      <p><strong data-en="Customised curriculum:" data-ny="Maphunziro okonzedwa:">Customised curriculum:</strong> <span data-en="we assess your team's needs and deliver on‑site or at our centre. Volume discounts available." data-ny="timayang'ana zosowa za gulu lanu ndikupereka malo anu kapena ku malo athu. Kuchepetsa mtengo pamagulu akulu.">we assess your team's needs and deliver on‑site or at our centre. Volume discounts available.</span></p>
+      <button class="contact-wa-btn" onclick="openWhatsAppChat('I need a corporate proposal for my organisation')" style="background:var(--secondary); color:black; margin-top:15px;"><i class="fab fa-whatsapp"></i> <span data-en="Request group proposal" data-ny="Pemphani lingaliro lamagulu">Request group proposal</span></button>
+    </section>
+
+    <!-- COURSE TABLE -->
+    <section id="courses-table" class="course-table-section">
+      <div class="section-badge"><i class="fas fa-book-open"></i> 2026 PROGRAMMES · FULL LIST (click any course for detailed career pathway)</div>
+      <div class="course-table-wrapper">
+        <table>
+          <thead><tr><th data-en="Course" data-ny="Phunziro">Course</th><th data-en="Duration" data-ny="Nthawi">Duration</th><th data-en="Award" data-ny="Chiphaso">Award</th><th data-en="Contact" data-ny="Kulumikizana">Contact</th></tr></thead>
+          <tbody>
+            <tr onclick="showCareerPath('word')"><td class="course-name">Word-processing Using Microsoft Office Word</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('Word-processing MS Word')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('excel')"><td class="course-name">Spreadsheets Using Microsoft Office Excel</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('Excel Spreadsheets')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('powerpoint')"><td class="course-name">Presentation Graphics Using Microsoft PowerPoint</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('PowerPoint')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('publisher')"><td class="course-name">Desktop Publication Microsoft Publisher</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('Publisher')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('access')"><td class="course-name">Data Entry in Microsoft Office Access Databases</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('MS Access')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('intro')"><td class="course-name">Introduction to Computers and Computer Concepts</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('Intro to Computers')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('web')"><td class="course-name">Web Design</td><td><span class="duration-chip">1 Month</span></td><td><span class="award-badge">—</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('Web Design')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+            <tr onclick="showCareerPath('skills')"><td class="course-name">Computer Skills and Concepts</td><td><span class="duration-chip">3 Months</span></td><td><span class="award-badge">Certificate</span></td><td><div class="contact-action" onclick="event.stopPropagation();"><button class="contact-wa-btn" onclick="openCourseWA('Computer Skills & Concepts')"><i class="fab fa-whatsapp"></i> Admin</button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MODALS -->
+    <div id="careerModal" class="modal career-modal"><div class="modal-content" id="careerModalContent"><span class="close-modal" onclick="closeModal('careerModal')">&times;</span><div id="careerDetails"></div></div></div>
+    <div id="institutionModal" class="modal"><div class="modal-content" id="institutionModalContent"><span class="close-modal" onclick="closeModal('institutionModal')">&times;</span><div id="institutionDetails"></div></div></div>
+    <div id="genericDetailModal" class="modal"><div class="modal-content" id="genericDetailContent"><span class="close-modal" onclick="closeModal('genericDetailModal')">&times;</span><div id="genericDetails"></div></div></div>
+  </div>
+
+  <footer class="footer" style="text-align:center; padding: 2rem; border-top:1px solid var(--border-color);">
+    <i class="fas fa-laptop-code" style="font-size:3rem; color:var(--secondary);"></i>
+    <p>© 2026 ICT Skills Training – Katete District. All rights reserved.</p>
+    <p>Developed by <strong>Mwila Christopher</strong> — <a href="mailto:cmwila7@gmail.com" style="color:var(--secondary);">cmwila7@gmail.com</a> | +260 976 620788</p>
+  </footer>
+
+  <div class="quick-access">
+    <button class="quick-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+    <a href="tel:+260976620788" class="quick-btn"><i class="fas fa-phone-alt"></i></a>
+    <button class="quick-btn" onclick="openWhatsAppChat()"><i class="fab fa-whatsapp"></i></button>
+  </div>
+
+  <script>
+    // LANGUAGE / THEME / ADMIN (updated to handle all new bilingual elements)
+    let currentLanguage = 'en', currentTheme = 'dark', loggedIn = false;
+    const langEn = document.getElementById('lang-en-btn'), langNy = document.getElementById('lang-ny-btn'), themeBtn = document.getElementById('theme-toggle-btn');
     
-    <script type="application/security" id="secure-credentials">
-        // CRITICAL SECURITY: Admin credentials are NEVER exposed in plain text in the DOM
-        // This entire script block is removed from the DOM at runtime
-        (function(){
-            // Credentials are stored in a closure that cannot be accessed via DOM inspection
-            const SECURE_ADMIN_USER = "mmwilachris";
-            const SECURE_ADMIN_PASS = "mwambachris2";
-            
-            // Credentials are never written to DOM - they remain only in memory
-            window.__secureAdminCredentials = {
-                username: SECURE_ADMIN_USER,
-                password: SECURE_ADMIN_PASS
-            };
-        })();
-    </script>
+    function setLanguage(lang){
+      currentLanguage = lang;
+      // update all elements with data-en / data-ny
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const txt = el.getAttribute(`data-${lang}`);
+        if (txt) el.innerText = txt;
+      });
+      langEn.classList.toggle('active', lang==='en');
+      langNy.classList.toggle('active', lang==='ny');
+    }
 
-    <script>
-        // ========== SECURITY LAYER 1: COMPREHENSIVE COPY PROTECTION ==========
-        (function() {
-            "use strict";
-            
-            // ===== PREVENT ALL RIGHT-CLICK ACTIONS =====
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                return false;
-            }, true); // Use capture phase to ensure it runs first
-            
-            // ===== PREVENT ALL KEYBOARD COPY SHORTCUTS =====
-            document.addEventListener('keydown', function(e) {
-                // Block Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+S, Ctrl+P, Ctrl+U, F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-                const blockedKeys = [
-                    e.keyCode === 67 && (e.ctrlKey || e.metaKey), // Ctrl+C
-                    e.keyCode === 88 && (e.ctrlKey || e.metaKey), // Ctrl+X
-                    e.keyCode === 86 && (e.ctrlKey || e.metaKey), // Ctrl+V
-                    e.keyCode === 83 && (e.ctrlKey || e.metaKey), // Ctrl+S
-                    e.keyCode === 80 && (e.ctrlKey || e.metaKey), // Ctrl+P
-                    e.keyCode === 85 && (e.ctrlKey || e.metaKey), // Ctrl+U
-                    e.keyCode === 73 && e.ctrlKey && e.shiftKey,  // Ctrl+Shift+I
-                    e.keyCode === 74 && e.ctrlKey && e.shiftKey,  // Ctrl+Shift+J
-                    e.keyCode === 67 && e.ctrlKey && e.shiftKey,  // Ctrl+Shift+C
-                    e.keyCode === 123,                            // F12
-                    (e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 73, // Ctrl+Shift+I (alternative)
-                    (e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 74, // Ctrl+Shift+J
-                    (e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 67  // Ctrl+Shift+C
-                ];
-                
-                if (blockedKeys.some(Boolean)) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    e.stopImmediatePropagation();
-                    return false;
-                }
-            }, true); // Use capture phase
-            
-            // ===== PREVENT TEXT SELECTION =====
-            document.addEventListener('selectstart', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-            
-            document.addEventListener('selectionchange', function(e) {
-                if (window.getSelection().toString().length > 0) {
-                    window.getSelection().removeAllRanges();
-                }
-            }, true);
-            
-            // ===== PREVENT DRAG AND DROP =====
-            document.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-            
-            document.addEventListener('drop', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-            
-            // ===== PREVENT CUT/COPY EVENTS =====
-            document.addEventListener('copy', function(e) {
-                e.preventDefault();
-                e.clipboardData.setData('text/plain', 'Copying is disabled for security reasons.');
-                return false;
-            }, true);
-            
-            document.addEventListener('cut', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-            
-            document.addEventListener('paste', function(e) {
-                e.preventDefault();
-                return false;
-            }, true);
-            
-            // ===== ANTI-DEVTOOLS DETECTION =====
-            let devtoolsOpen = false;
-            const devtoolsOverlay = document.getElementById('devtoolsOverlay');
-            
-            function detectDevTools() {
-                // Method 1: Check window dimensions (F12 opens devtools)
-                const widthThreshold = window.outerWidth - window.innerWidth > 160;
-                const heightThreshold = window.outerHeight - window.innerHeight > 160;
-                
-                // Method 2: Check for debugger (F12 often triggers debugger)
-                const debuggerCheck = /./;
-                debuggerCheck.toString = function() {
-                    devtoolsOpen = true;
-                    return '';
-                };
-                
-                console.log('%c', debuggerCheck);
-                
-                if (widthThreshold || heightThreshold) {
-                    devtoolsOpen = true;
-                }
-                
-                if (devtoolsOpen) {
-                    devtoolsOverlay.classList.add('active');
-                    // Also clear sensitive data if devtools is open
-                    document.body.style.pointerEvents = 'none';
-                    document.body.style.userSelect = 'none';
-                } else {
-                    devtoolsOverlay.classList.remove('active');
-                    document.body.style.pointerEvents = 'auto';
-                }
-            }
-            
-            // Run detection every second
-            setInterval(detectDevTools, 1000);
-            
-            // ===== OVERRIDE CONSOLE METHODS TO PREVENT LOGGING =====
-            if (window.console) {
-                const originalConsole = window.console;
-                window.console = {
-                    ...originalConsole,
-                    log: function() {},
-                    info: function() {},
-                    debug: function() {},
-                    warn: function() {},
-                    error: function() {},
-                    table: function() {},
-                    trace: function() {},
-                    group: function() {},
-                    groupCollapsed: function() {},
-                    groupEnd: function() {}
-                };
-            }
-            
-            // ===== CLEAN THE DOM OF ANY EXPOSED CREDENTIALS =====
-            // Remove the security script block after execution to hide credentials
-            setTimeout(function() {
-                const securityScript = document.getElementById('secure-credentials');
-                if (securityScript) {
-                    securityScript.parentNode.removeChild(securityScript);
-                }
-            }, 100);
-        })();
+    function setTheme(theme){
+      currentTheme = theme;
+      document.body.classList.toggle('theme-powder', theme==='powder');
+      themeBtn.innerHTML = theme==='dark' ? '<i class="fas fa-palette"></i> POWDER BLUE' : '<i class="fas fa-palette"></i> BLACK & GOLD';
+    }
 
-        // ========== SECURE ADMIN CREDENTIALS (NEVER IN DOM) ==========
-        // Credentials are stored in a closure - NEVER written to HTML
-        const __secureAdminCredentials = (function() {
-            // These values are hardcoded but NEVER appear in the DOM
-            // They exist only in this closure's memory space
-            const USERNAME = "mmwilachris";
-            const PASSWORD = "mwambachris2";
-            
-            return {
-                username: USERNAME,
-                password: PASSWORD,
-                validate: function(user, pass) {
-                    return user === USERNAME && pass === PASSWORD;
-                }
-            };
-        })();
+    langEn.onclick = () => setLanguage('en');
+    langNy.onclick = () => setLanguage('ny');
+    themeBtn.onclick = () => setTheme(currentTheme==='dark' ? 'powder' : 'dark');
+    document.getElementById('mobileToggle').onclick = () => document.getElementById('navMenu').classList.toggle('active');
 
-        // ========== REST OF YOUR EXISTING JAVASCRIPT ==========
-        // Global Variables
-        let currentLanguage = 'en';
-        let currentTheme = 'dark';
-        let loggedIn = false;
-        
-        // Use the secure credentials validator instead of hardcoded comparison
-        const fixedAdminCredentials = {
-            username: "mmwilachris",
-            password: "mwambachris2"
-        }; // These are actually never used - we use __secureAdminCredentials instead
-        
-        // Course Statistics
-        const courseStats = {
-            intro: { current: 47, alumni: 312 },
-            msoffice: { current: 58, alumni: 523 },
-            programming: { current: 23, alumni: 98 },
-            secretarial: { current: 31, alumni: 215 },
-            entrepreneurship: { current: 44, alumni: 176 },
-            farmers: { current: 19, alumni: 87 }
-        };
+    const cornerLogin = document.getElementById('cornerLoginBtn');
+    cornerLogin.addEventListener('click', (e) => {
+      let user = document.getElementById('cornerUsername'), pass = document.getElementById('cornerPassword');
+      if (user.style.display === 'none') {
+        user.style.display = 'inline-block'; pass.style.display = 'inline-block'; cornerLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+      } else {
+        if (window.__secureAdminCredentials.validate(user.value.trim(), pass.value.trim())) {
+          loggedIn = true; user.style.display = 'none'; pass.style.display = 'none'; cornerLogin.innerHTML = '<i class="fas fa-lock"></i> Admin'; alert('Welcome admin');
+        } else alert('Invalid');
+      }
+    });
 
-        // Course Details (Bilingual)
-        const courseDetails = {
-            intro: { title: { en: "Introduction to Computers", ny: "Chiyambi cha Makompyuta" }, description: { en: "Complete foundation in computing...", ny: "Maziko anthunthu a makompyuta..." }, modules: { en: ["Computer hardware", "Windows OS", "File management", "Typing", "Internet & email", "Troubleshooting"], ny: ["Zida za makompyuta", "Windows OS", "Kasamalidwe ka mafayilo", "Kulemba", "Intaneti & imelo", "Kukonza"] }, duration: "4 weeks (12 hours)", outcomes: { en: "Operate a computer independently", ny: "Gwiritsani ntchito kompyuta paokha" }, success: { en: "Grace M. (2024): 'Got a job as data entry clerk.'", ny: "Grace M. (2024): 'Anapeza ntchito yolembera deta.'" } },
-            msoffice: { title: { en: "Microsoft Office", ny: "Microsoft Office" }, description: { en: "Master the world's most used office suite...", ny: "Phunzirani bwino pulogalamu yofalikira..." }, modules: { en: ["Word: formatting, mail merge", "Excel: formulas, pivot tables", "PowerPoint: presentations", "Access: databases", "Outlook: email & calendar"], ny: ["Word: kukonza, mail merge", "Excel: ma formula, ma pivot", "PowerPoint: ma presentation", "Access: ma database", "Outlook: imelo & kalendala"] }, duration: "6 weeks (18 hours)", outcomes: { en: "Create professional documents, analyze data", ny: "Pangani ma document apamwamba, kusanthula deta" }, success: { en: "Miriam C. (2024): 'Admin assistant using Excel.'", ny: "Miriam C. (2024): 'Wothandizi wa admin pogwiritsa Excel.'" } },
-            programming: { title: { en: "Computer Programming", ny: "Kupanga Mapulogalamu" }, description: { en: "Learn to code from scratch...", ny: "Phunzirani kulemba mapulogalamu..." }, modules: { en: ["Python basics", "JavaScript", "HTML/CSS", "Git", "Database integration"], ny: ["Maziko a Python", "JavaScript", "HTML/CSS", "Git", "Kuphatikiza database"] }, duration: "12 weeks (36 hours)", outcomes: { en: "Build websites, automate tasks", ny: "Pangani mawebusayiti, ntchito zokha" }, success: { en: "Brian Z. (2024): 'Junior developer.'", ny: "Brian Z. (2024): 'Junior developer.'" } },
-            secretarial: { title: { en: "Secretarial Services", ny: "Ukadaulo Wa Secretariat" }, description: { en: "Modern office administration...", ny: "Kayendetsedwe ka ofesi yamakono..." }, modules: { en: ["Typing (40+ WPM)", "Document processing", "Meeting scheduling", "Digital filing", "Business correspondence", "Office etiquette"], ny: ["Kulemba (40+ WPM)", "Kukonza ma document", "Kukonza ndondomeko", "Makina osungira", "Makalata abizinesi", "Makhalidwe a mofesi"] }, duration: "5 weeks (15 hours)", outcomes: { en: "Efficient office management", ny: "Kayendetsedwe ka ofesi koyenera" }, success: { en: "Chanda B. (2024): 'Employed as receptionist.'", ny: "Chanda B. (2024): 'Anapeza ntchito yolandira.'" } },
-            entrepreneurship: { title: { en: "Digital Entrepreneurship", ny: "Bizinesi Yadijito" }, description: { en: "Launch and grow a business using digital tools...", ny: "Yambitsani ndi kukulitsa bizinesi..." }, modules: { en: ["Social media marketing", "E-commerce setup", "Mobile money integration", "Customer engagement", "Digital branding"], ny: ["Kutsatsa pa social media", "Kukhazikitsa E-commerce", "Kuphatikiza ndalama zam'manja", "Kuchita ndi makasitomala", "Digital branding"] }, duration: "8 weeks (24 hours)", outcomes: { en: "Run online store, market digitally", ny: "Yendetsani sitolo yapaintaneti" }, success: { en: "Mwila T. (2024): 'Grew Facebook shop to 10k followers.'", ny: "Mwila T. (2024): 'Anakulitsa sitolo ya Facebook kufika pa 10,000.'" } },
-            farmers: { title: { en: "ICT for Farmers", ny: "ICT kwa Alimi" }, description: { en: "Practical technology for agriculture...", ny: "Njira zothandiza za teknoloji yaulimi..." }, modules: { en: ["Weather apps", "Market price systems", "Mobile money", "WhatsApp marketing", "Record keeping"], ny: ["Mapulogalamu anyengo", "Makina amtengo wamsika", "Ndalama zam'manja", "Kutsatsa pa WhatsApp", "Kusunga zolemba"] }, duration: "4 weeks (12 hours)", outcomes: { en: "Access market prices, sell online", ny: "Pezani mitengo yamsika, gulitsani pa intaneti" }, success: { en: "Joseph P. (2024): 'Using WhatsApp to sell produce.'", ny: "Joseph P. (2024): 'Akugulitsa katundu pa WhatsApp.'" } }
-        };
+    // career & institution data (unchanged)
+    const careerData = {
+      word: { title:"📄 Word Processing (MS Word)", desc:"Master document creation, formatting, mail merge, and professional templates.", careers:["Administrative Assistant","Secretary / Office Clerk","Data Entry Specialist","Legal Secretary","Executive Assistant"], uses:"Create letters, reports, memos, CVs, and official documents. Essential for any office role.", skills:"Styles, tables of contents, mail merge, track changes, macros." },
+      excel: { title:"📊 Spreadsheets (MS Excel)", desc:"Comprehensive Excel training: formulas, pivot tables, charts, and data analysis.", careers:["Accounts Clerk","Data Analyst","Inventory Manager","Payroll Officer","Audit Assistant"], uses:"Manage budgets, analyze sales, track stock, financial reporting, payroll.", skills:"VLOOKUP, IF statements, pivot tables, macros, data validation." },
+      powerpoint: { title:"📽️ Presentation Graphics (PowerPoint)", desc:"Design compelling slideshows, animations, and visual storytelling.", careers:["Marketing Assistant","Trainer / Facilitator","Sales Representative","Project Coordinator","Communications Officer"], uses:"Present ideas to clients, training sessions, pitch decks, conference talks.", skills:"Animations, slide master, embedding media, handouts, presenter view." },
+      publisher: { title:"📰 Desktop Publishing (Publisher)", desc:"Create professional publications: flyers, brochures, newsletters, business cards.", careers:["Graphic Design Assistant","Publications Officer","Marketing & Communications Assistant","Community Liaison"], uses:"Small business branding, church bulletins, event posters, annual reports.", skills:"Page layout, colour schemes, image placement, print-ready PDFs." },
+      access: { title:"🗄️ Database (MS Access)", desc:"Build and manage relational databases, queries, forms and reports.", careers:["Database Assistant","Records Clerk","Data Administrator","Librarian","Research Assistant"], uses:"Customer records, patient data, inventory tracking, membership lists.", skills:"Table design, relationships, SQL queries, form design, report generation." },
+      intro: { title:"🖥️ Introduction to Computers", desc:"Fundamental concepts: hardware, software, file management, internet basics.", careers:["Entry-level IT Support","Computer Lab Assistant","General Office Assistant","Telecenter Operator"], uses:"Set up a computer, manage files, browse safely, use email and search engines.", skills:"Parts of a PC, Windows/file explorer, Google search, email etiquette." },
+      web: { title:"🌐 Web Design", desc:"HTML, CSS, and responsive design – build modern websites from scratch.", careers:["Junior Web Developer","Website Administrator","Freelance Web Designer","Digital Marketer"], uses:"Create business websites, personal portfolios, landing pages, blogs.", skills:"HTML5, CSS3, flexbox, media queries, basic JavaScript, Git." },
+      skills: { title:"💡 Computer Skills and Concepts", desc:"Advanced computer literacy: troubleshooting, office suite, and digital citizenship.", careers:["ICT Teacher","Community ICT Trainer","Office Manager","IT Support Specialist","Data Processor"], uses:"Prepare for advanced roles, teach others, manage small office IT.", skills:"Windows/OS, advanced Word/Excel, troubleshooting, cloud tools." }
+    };
+    const institutionData = {
+      tiga: { name:"Tiga Training Institute", description:"A giant in ICT provision across the Eastern Province. Tiga sets the benchmark for technical excellence, offering advanced certifications and industry-aligned training.", strengths:["Industry-recognized certification (Microsoft, Cisco)","Partnerships with tech employers","Specialised tracks: Networking, Cybersecurity, Programming","High graduate employment rate"] },
+      'katete-skills': { name:"Katete Skills Training Centre", description:"The hub of ICT in Katete district. Our centre boasts specialised trained professional personnel with vast experience.", strengths:["Experienced, certified trainers","Modern computer lab with 30 workstations","Customized corporate training","After-class mentorship and career guidance"] },
+      agape: { name:"Agape Educational Center", description:"Agape offers education to all within Katete and boasts of vast literacy and numeracy breakthrough for all learners across borders.", strengths:["Literacy & numeracy programs for all ages","Cross-border community outreach","Holistic development & life skills","Inclusive education for vulnerable groups"] }
+    };
 
-        // Mode Details (Bilingual)
-        const modeDetails = {
-            group: { title: { en: "👥 Group Classes", ny: "👥 Maphunziro a Gulu" }, description: { en: "Collaborative learning with peers.", ny: "Maphunziro mogwirizana ndi anzanu." }, features: { en: ["6-15 learners per class", "Interactive sessions", "Shared experience", "Discounted rates"], ny: ["Ophunzira 6-15 pa kalasi", "Magawano ophunzirira", "Zochitika pamodzi", "Mitengo yotsika"] }, instructor: { en: "Senior Trainer, 8+ years exp.", ny: "Mphunzitsi wamkulu, zaka 8+" }, ideal: { en: "Schools, companies, groups", ny: "Masukulu, makampani, magulu" } },
-            oneonone: { title: { en: "🧑‍🏫 One-on-One", ny: "🧑‍🏫 Mmodzi ndi Mmodzi" }, description: { en: "Personalized attention, your pace.", ny: "Chisamaliro chapadera, liwiro lanu." }, features: { en: ["Flexible scheduling", "Custom curriculum", "Focus on weak areas", "Direct mentor"], ny: ["Ndondomeko yosinthasintha", "Maphunziro olingana", "Yang'anani pa zofooka", "Ubale ndi mlangizi"] }, instructor: { en: "Senior instructor, 5+ years", ny: "Mlangizi wamkulu, zaka 5+" }, ideal: { en: "Busy professionals, entrepreneurs", ny: "Akazembe, amalonda" } },
-            remote: { title: { en: "🖥️ Remote Support", ny: "🖥️ Thandizo Lachutali" }, description: { en: "Learn from anywhere, live sessions.", ny: "Phunzirani kulikonse, magawano pompopompo." }, features: { en: ["Live video", "Screen sharing", "Digital materials", "Recorded sessions", "WhatsApp support"], ny: ["Kanema pompopompo", "Kugawana zowonera", "Zida zadijito", "Magawano ojambulidwa", "Thandizo la WhatsApp"] }, instructor: { en: "Tech-savvy virtual trainers", ny: "Alangizi odziwa teknoloji yakutali" }, ideal: { en: "Learners outside Katete", ny: "Ophunzira akunja kwa Katete" } },
-            workint: { title: { en: "💼 Work-Integrated", ny: "💼 Zophatikiza Ntchito" }, description: { en: "Training at your workplace.", ny: "Maphunziro kuntchito kwanu." }, features: { en: ["Onsite training", "Real work projects", "Team-based", "Immediate application", "Follow-up"], ny: ["Maphunziro akumalo", "Projekiti za ntchito", "Zamgulu", "Kugwiritsa nthawi yomweyo", "Kutsatira"] }, instructor: { en: "Industry-experienced trainers", ny: "Alangizi odziwa bwino ntchito" }, ideal: { en: "Companies, govt, hospitals", ny: "Makampani, boma, zipatala" } },
-            project: { title: { en: "📊 Project-Based", ny: "📊 Zochita Poyekha" }, description: { en: "Build real-world projects.", ny: "Pangani projekiti zenizeni." }, features: { en: ["Build: system, website", "Mentor-guided", "Portfolio-ready", "Problem-solving"], ny: ["Pangani: makina, webusayiti", "Kutsogozedwa ndi mlangizi", "Zokonzeka kuonetsa", "Kuthetsa mavuto"] }, instructor: { en: "Developer-track trainers", ny: "Alangizi a developer-track" }, ideal: { en: "Aspiring developers, business owners", ny: "Ofuna kukhala ma developer, eni mabizinesi" } },
-            blended: { title: { en: "🔄 Blended Learning", ny: "🔄 Maphunziro Osakaniza" }, description: { en: "Mix physical & online.", ny: "Sakanizani wamba ndi pa intaneti." }, features: { en: ["Mix in-person & virtual", "Self-paced modules", "Weekly check-ins", "24/7 materials"], ny: ["Kuphatikiza wamba ndi pa intaneti", "Ma module pa liwiro lanu", "Magawano mlungu uliwonse", "Zida 24/7"] }, instructor: { en: "Dual-certified trainers", ny: "Alangizi ovomerezeka pawiri" }, ideal: { en: "Working adults, parents", ny: "Achikulire ogwira ntchito, makolo" } }
-        };
+    window.showCareerPath = (key) => {
+      let d = careerData[key];
+      if (!d) return;
+      let html = `<h2 style="color:var(--secondary);">${d.title}</h2><p style="font-size:1.1rem; margin:10px 0 20px;">${d.desc}</p><h3><i class="fas fa-briefcase" style="color:var(--secondary);"></i> Career pathways:</h3><ul class="career-path-list">${d.careers.map(c=>`<li><i class="fas fa-arrow-right" style="color:var(--secondary);"></i> ${c}</li>`).join('')}</ul><div style="background: var(--glass-effect); padding:1.5rem; border-radius:24px; border-left:6px solid var(--secondary); margin-top:1.5rem;"><h3>📌 Real‑world applications:</h3><p>${d.uses}</p></div><div style="background: rgba(255,215,0,0.1); padding:1rem; border-radius:18px; margin-top:1rem;"><h3>⚙️ Skills you'll learn:</h3><p>${d.skills}</p></div>`;
+      document.getElementById('careerDetails').innerHTML = html;
+      document.getElementById('careerModal').style.display = 'flex';
+    };
+    window.showInstitutionDetail = (key) => {
+      let inst = institutionData[key];
+      if (!inst) return;
+      let html = `<h2 style="color:var(--secondary);">${inst.name}</h2><p style="font-size:1.1rem; margin:20px 0;">${inst.description}</p><h3><i class="fas fa-star" style="color:var(--secondary);"></i> Key strengths & offerings:</h3><ul class="inst-feature-list">${inst.strengths.map(s=>`<li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> ${s}</li>`).join('')}</ul>`;
+      document.getElementById('institutionDetails').innerHTML = html;
+      document.getElementById('institutionModal').style.display = 'flex';
+    };
 
-        // Schedule Details
-        const scheduleDetails = {
-            weekdays: { title: { en: "Weekday Evening", ny: "Madzulo a Masiku a Sabata" }, time: "Monday - Thursday, 16:30 - 18:00", features: { en: ["Perfect for professionals", "2.5 hours/week", "Small class sizes", "Same trainer", "Lab access"], ny: ["Zabwino kwa akazembe", "Maola 2.5 pa sabata", "Makalasi ang'ono", "Mlangizi yemweyo", "Kupeza lab"] }, courses: { en: "All courses", ny: "Maphunziro onse" }, instructor: { en: "Evening shift instructors", ny: "Alangizi a shift yamadzulo" } },
-            saturday: { title: { en: "Saturday Intensive", ny: "Loweruka Mphamvu" }, time: "Saturday, 08:00 - 17:00", features: { en: ["Full-day immersion", "Ideal for out-of-town", "Morning theory", "Afternoon practical", "Lunch break"], ny: ["Kumira tsiku lonse", "Zabwino kwa ochokera kunja", "Chiphunzitso cham'mawa", "Zochita zam'masana", "Kupuma kwa nkhomaliro"] }, courses: { en: "All courses, especially programming", ny: "Maphunziro onse, makamaka programming" }, instructor: { en: "Lead trainers", ny: "Alangizi akulu" } },
-            sunday: { title: { en: "Sunday Session", ny: "Gawo la Lamlungu" }, time: "Sunday, 10:00 - 17:00", features: { en: ["Relaxed weekend", "Family-friendly", "Extended practicals", "Catch-up sessions", "Quiet lab"], ny: ["Omasuka kumapeto kwa sabata", "Nthawi yabwino kwa mabanja", "Zochita zowonjezereka", "Magawano owonjezera", "Lab yachete"] }, courses: { en: "All courses, popular with entrepreneurs", ny: "Maphunziro onse, otchuka kwa amalonda" }, instructor: { en: "Senior trainers on rotation", ny: "Alangizi akulu pa kusinthana" } }
-        };
+    // modal functions (mode, time, org) unchanged
+    window.showModeDetails = (mode) => {
+      let content = '';
+      if (mode === 'inperson') content = `<h2 style="color:var(--secondary);">📘 In‑person mode – full details</h2><p><strong>Description:</strong> Fully face‑to‑face at Katete ICT hub. Instructor-led practical sessions, access to lab equipment & library.</p><h3>✅ Advantages:</h3><ul><li>Direct interaction with trainers and peers</li><li>Structured classroom environment</li><li>Immediate feedback and hands-on guidance</li><li>Networking with other learners</li><li>Access to high‑end computers and software</li></ul><h3>⏰ Timing:</h3><p>Weekday evenings 16:30–18:00 or Saturday blocks – flexible within term.</p><h3>👥 Who it suits:</h3><p>Learners who thrive on routine, need physical infrastructure, or prefer face‑to‑face mentoring.</p>`;
+      else if (mode === 'blended') content = `<h2 style="color:var(--secondary);">💻 Blended mode – full details</h2><p><strong>Description:</strong> 60% physical + 40% online (Google Classroom). Self‑paced video tutorials + weekly Zoom Q&A sessions.</p><h3>✅ Advantages:</h3><ul><li>Flexibility to review recorded sessions</li><li>Reduced travel requirements</li><li>Digital collaboration with classmates</li><li>Ideal for those with unpredictable schedules</li><li>Develops online learning discipline</li></ul><h3>⏰ Timing:</h3><p>Physical sessions: Tue/Thu 16:30–18:00; online content available 24/7.</p><h3>👥 Who it suits:</h3><p>Self‑motivated learners, part‑time workers, and those who want a mix of structure and independence.</p>`;
+      else if (mode === 'distance') content = `<h2 style="color:var(--secondary);">🏠 Distance mode – full details</h2><p><strong>Description:</strong> Off‑campus learning with printed modules, monthly Saturday catch‑up labs. Suitable for out‑of‑district learners.</p><h3>✅ Advantages:</h3><ul><li>Study from home or workplace</li><li>Minimal travel costs</li><li>Learn at your own pace</li><li>Monthly in‑person support to resolve doubts</li><li>Ideal for remote villages or those with day jobs</li></ul><h3>⏰ Timing:</h3><p>Self‑paced with one Saturday per month (09:00–15:00) for practicals.</p><h3>👥 Who it suits:</h3><p>Learners far from Katete, full‑time employees, or those needing maximum flexibility.</p>`;
+      document.getElementById('genericDetails').innerHTML = content;
+      document.getElementById('genericDetailModal').style.display = 'flex';
+    };
+    window.showTimeDetails = (day) => {
+      let content = '';
+      if (day === 'weekdays') content = `<h2 style="color:var(--secondary);">📆 Weekday schedule (Mon–Thu)</h2><p><strong>Timing:</strong> 16:30 – 18:00 (Mon–Thu).</p><h3>💪 Strengths:</h3><ul><li>Consistent after‑work/school time</li><li>Rotating topics: Mon (Word/Excel), Tue (PowerPoint/Publisher), Wed (Access/Web), Thu (concepts/skills)</li><li>Small class sizes, individual attention</li></ul><h3>👤 Who it suits:</h3><p>Professionals, students, and anyone occupied during daytime. Perfect for steady progress without weekend commitment.</p><p><em>✨ Extras:</em> free Wi‑Fi, tea break.</p>`;
+      else if (day === 'saturday') content = `<h2 style="color:var(--secondary);">📆 Saturday intensive</h2><p><strong>Timing:</strong> 08:00 – 17:00 (full day).</p><h3>💪 Strengths:</h3><ul><li>Deep‑dive practicals (two 3‑hour sessions)</li><li>Certificate prep workshops</li><li>Lunch break 12:00–13:00, networking</li><li>Complete a module in one day</li></ul><h3>👤 Who it suits:</h3><p>Learners who want to accelerate, those with weekday constraints, or remote visitors combining classes with travel.</p><p><em>✨ Extras:</em> lunch provided, weekend lab access.</p>`;
+      else if (day === 'sunday') content = `<h2 style="color:var(--secondary);">📆 Sunday session</h2><p><strong>Timing:</strong> 10:00 – 17:00.</p><h3>💪 Strengths:</h3><ul><li>Quiet, relaxed environment</li><li>Group projects and portfolio building</li><li>Monthly guest speakers / career mentorship</li><li>Ideal for reflective learning</li></ul><h3>👤 Who it suits:</h3><p>Self‑starters, entrepreneurs, or those with religious commitments Saturday. Also great for building portfolio pieces.</p><p><em>✨ Extras:</em> mentorship lounge, refreshments.</p>`;
+      document.getElementById('genericDetails').innerHTML = content;
+      document.getElementById('genericDetailModal').style.display = 'flex';
+    };
+    window.showOrgDetail = (org) => {
+      let content = '';
+      if (org === 'schools') content = `<h2 style="color:var(--secondary);">🏫 Schools & teachers</h2><p><strong>What we offer:</strong> ICT integration in classrooms, e‑learning content creation, computer literacy for staff. We train teachers to use digital tools, manage online gradebooks, and create interactive lessons.</p><h3>⏱️ Timing & flexibility:</h3><p>Training delivered during school holidays, after school, or on weekends – completely customised to school calendar. On‑site or at our centre.</p><p><i>💡 Times are fully flexible: we work around your term dates and staff availability.</i></p><h3>Advantages:</h3><ul><li>Boost digital literacy of entire staff</li><li>Practical use of smartboards, tablets</li><li>Curriculum‑aligned examples</li></ul>`;
+      else if (org === 'health') content = `<h2 style="color:var(--secondary);">🏥 Health institutions</h2><p><strong>What we offer:</strong> Data entry training (SmartCare, DHIS2), Excel for patient records, IT security awareness. Train nurses, data clerks, and administrators.</p><h3>⏱️ Timing & flexibility:</h3><p>Sessions arranged in shifts to avoid disrupting patient care. Early morning, evening, or weekend options. On‑site training at your facility reduces travel.</p><p><i>💡 Times are fully flexible: we accommodate 24/7 health facility schedules.</i></p><h3>Advantages:</h3><ul><li>Improve data quality & reporting</li><li>Reduce errors in patient records</li><li>Custom scenarios using real‑world examples</li></ul>`;
+      else if (org === 'sme') content = `<h2 style="color:var(--secondary);">🏬 SMEs & businesses</h2><p><strong>What we offer:</strong> Tailored courses: inventory tracking (Excel), social media marketing, digital productivity (email, calendars, cloud).</p><h3>⏱️ Timing & flexibility:</h3><p>Training during low‑business hours, evenings, or half‑day workshops. We adapt to your trading times. Can be delivered at your premises or our centre.</p><p><i>💡 Times are fully flexible: we fit around your business hours.</i></p><h3>Advantages:</h3><ul><li>Upskill employees without halting operations</li><li>Practical templates for stock, invoices</li><li>Social media strategy tailored to your market</li></ul>`;
+      else if (org === 'ngo') content = `<h2 style="color:var(--secondary);">🤝 NGOs & community groups</h2><p><strong>What we offer:</strong> Report writing, data management (KoboToolbox, Access), grant proposal formatting. Train field officers, M&E staff, and managers.</p><h3>⏱️ Timing & flexibility:</h3><p>We work around project cycles, field schedules, and reporting deadlines. Training can be delivered in blocks (e.g., 2 full days) or spread over evenings. On‑site or at our centre.</p><p><i>💡 Times are fully flexible: we align with your grant timelines and field deployments.</i></p><h3>Advantages:</h3><ul><li>Strengthen donor reporting</li><li>Efficient data collection using mobile tools</li><li>Collaborative learning with peers from other NGOs</li></ul>`;
+      document.getElementById('genericDetails').innerHTML = content;
+      document.getElementById('genericDetailModal').style.display = 'flex';
+    };
 
-        // Organization Details
-        const orgDetails = {
-            school: { title: { en: "🏫 ICT for Schools", ny: "🏫 ICT ya Masukulu" }, description: { en: "Digital literacy for primary & secondary.", ny: "Luso la dijito kwa pulaimale & sekondale." }, programs: { en: ["Teacher ICT certification", "Student clubs", "E-learning setup", "Digital curriculum", "Lab management"], ny: ["Chitizikopo cha ICT cha aphunzitsi", "Makalabu a ophunzira", "Kukhazikitsa e-learning", "Maphunziro adijito", "Kayendetsedwe ka lab"] }, duration: { en: "Customizable", ny: "Zosinthika" }, impact: { en: "Over 25 schools trained", ny: "Masukulu opitilira 25 ophunzitsidwa" } },
-            institution: { title: { en: "🏥 Health & Public", ny: "🏥 Zaumoyo ndi Boma" }, description: { en: "Training for hospitals & govt.", ny: "Maphunziro a zipatala ndi boma." }, programs: { en: ["HMIS data entry", "Patient record digitization", "Excel for health", "Administrative efficiency", "Cybersecurity"], ny: ["Kulemba deta ya HMIS", "Kusandutsa zolemba za odwala", "Excel ya zaumoyo", "Kuchita bwino", "Chitetezo pa intaneti"] }, duration: { en: "Tailored to needs", ny: "Zolingana ndi zosowa" }, impact: { en: "Trained Katete Hospital & 6 rural centers", ny: "Anaphunzitsa Chipatala cha Katete ndi ma center 6 akumidzi" } },
-            business: { title: { en: "🏭 Business & Industry", ny: "🏭 Bizinesi & Makampani" }, description: { en: "Upskill workforce with digital competencies.", ny: "Kulitsa luso la antchito ndi dijito." }, programs: { en: ["Digital marketing", "Inventory management", "POS training", "Business communication", "Data analysis"], ny: ["Kutsatsa kwadijito", "Kasamalidwe ka katundu", "Maphunziro a POS", "Kulumikizana", "Kusanthula deta"] }, duration: { en: "Half-day to full-week", ny: "Theka la tsiku mpaka sabata" }, impact: { en: "Partnered with 40+ local businesses", ny: "Tinagwirizana ndi mabizinesi 40+ akumaloko" } },
-            ngo: { title: { en: "🤝 NGOs", ny: "🤝 Mabungwe Othandiza" }, description: { en: "Capacity building for NGO staff.", ny: "Kulimbitsa luso la ogwira ntchito ku NGO." }, programs: { en: ["M&E data tools", "Grant reporting", "Digital storytelling", "Remote collaboration", "Beneficiary database"], ny: ["Zida za M&E", "Kupereka lipoti la thandizo", "Kufotokoza nkhani zadijito", "Kugwirizana kwakutali", "Database ya opindula"] }, duration: { en: "Flexible modules", ny: "Ma module osinthasintha" }, impact: { en: "Supported 15 NGOs", ny: "Tinathandiza NGO 15" } }
-        };
+    window.openWhatsAppChat = (msg='') => { window.open(`https://wa.me/260976620788?text=${encodeURIComponent(msg||"Hello, I'm interested in ICT Katete.")}`,'_blank'); };
+    window.openCourseWA = (c) => openWhatsAppChat(`I want to enroll in: ${c}`);
+    window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+    window.onclick = (e) => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; };
 
-        // ========== THEME CONTROLLER ==========
-        function setTheme(theme) {
-            currentTheme = theme;
-            const body = document.body;
-            const themeBtn = document.getElementById('theme-toggle-btn');
-            if (theme === 'powder') {
-                body.classList.add('theme-powder');
-                themeBtn.innerHTML = '<i class="fas fa-palette"></i> ' + (currentLanguage === 'en' ? 'BLACK & GOLD' : 'BLACK & GOLD');
-            } else {
-                body.classList.remove('theme-powder');
-                themeBtn.innerHTML = '<i class="fas fa-palette"></i> ' + (currentLanguage === 'en' ? 'POWDER BLUE' : 'BLUE YA UFA');
-            }
-            if (loggedIn) renderAdminDashboard();
-        }
-
-        // ========== LANGUAGE CONTROLLER ==========
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            const allElements = document.querySelectorAll('[id$="-en"], [id$="-ny"]');
-            allElements.forEach(el => {
-                if (el.id.endsWith('-en')) el.style.display = (lang === 'en') ? '' : 'none';
-                if (el.id.endsWith('-ny')) el.style.display = (lang === 'ny') ? '' : 'none';
-            });
-            document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
-            document.getElementById('lang-ny-btn').classList.toggle('active', lang === 'ny');
-            
-            const themeBtn = document.getElementById('theme-toggle-btn');
-            if (currentTheme === 'powder') {
-                themeBtn.innerHTML = '<i class="fas fa-palette"></i> ' + (lang === 'en' ? 'BLACK & GOLD' : 'BLACK & GOLD');
-            } else {
-                themeBtn.innerHTML = '<i class="fas fa-palette"></i> ' + (lang === 'en' ? 'POWDER BLUE' : 'BLUE YA UFA');
-            }
-            document.getElementById('currentYear').innerText = new Date().getFullYear();
-            const year2 = document.getElementById('currentYear2');
-            if (year2) year2.innerText = new Date().getFullYear();
-            if (loggedIn) renderAdminDashboard();
-        }
-
-        // ========== EVENT LISTENERS ==========
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
-            document.getElementById('lang-ny-btn').addEventListener('click', () => setLanguage('ny'));
-            document.getElementById('theme-toggle-btn').addEventListener('click', function() {
-                setTheme(currentTheme === 'dark' ? 'powder' : 'dark');
-            });
-            document.getElementById('mobileToggle').addEventListener('click', function(){
-                document.getElementById('navMenu').classList.toggle('active');
-            });
-            const dropdown = document.getElementById('coursesDropdown');
-            const toggle = document.getElementById('dropdownToggle');
-            if(toggle) {
-                toggle.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); dropdown.classList.toggle('active'); });
-            }
-            document.addEventListener('click', function(e){ if(dropdown && !dropdown.contains(e.target)) dropdown.classList.remove('active'); });
-            
-            // CORNER LOGIN: Use secure credential validator
-            document.getElementById('cornerLoginBtn').addEventListener('click', function(e) {
-                let unameField = document.getElementById('cornerUsername');
-                let pwdField = document.getElementById('cornerPassword');
-                
-                if (unameField.style.display === 'none' || !unameField.style.display) {
-                    unameField.style.display = 'inline-block';
-                    pwdField.style.display = 'inline-block';
-                    this.innerHTML = '<i class="fas fa-sign-in-alt"></i> ' + (currentLanguage === 'en' ? 'Login' : 'Lowani');
-                } else {
-                    let user = unameField.value.trim();
-                    let pass = pwdField.value.trim();
-                    
-                    // Use secure credential validator - credentials NEVER exposed in DOM
-                    if (__secureAdminCredentials.validate(user, pass)) {
-                        loggedIn = true;
-                        document.getElementById('adminPanelSection').style.display = 'block';
-                        unameField.style.display = 'none';
-                        pwdField.style.display = 'none';
-                        unameField.value = ''; 
-                        pwdField.value = '';
-                        this.innerHTML = '<i class="fas fa-lock"></i> ' + (currentLanguage === 'en' ? 'Admin' : 'Woyang\'anira');
-                        document.getElementById('adminLoginBox').style.display = 'none';
-                        document.getElementById('adminDashboard').style.display = 'block';
-                        renderAdminDashboard();
-                    } else {
-                        alert(currentLanguage === 'en' ? 'Invalid credentials. Please use correct details' : 'Zolakwika.');
-                    }
-                }
-            });
-            
-            // Course dropdown links
-            document.querySelectorAll('#courseDropdownMenu a').forEach(link => {
-                link.addEventListener('click', function(e){
-                    e.preventDefault();
-                    let key = this.dataset.course;
-                    let details = courseDetails[key];
-                    let stats = courseStats[key];
-                    let lang = currentLanguage;
-                    let html = `<h2><i class="fas fa-graduation-cap"></i> ${details.title[lang]}</h2>
-                        <div style="background:var(--gradient-primary); color:var(--primary); padding:15px; border-radius:10px; margin-bottom:20px;">
-                            <span style="font-weight:700;">🎯 ${details.duration} • ${stats.current} ${lang === 'en' ? 'current learners' : 'ophunzira apano'} • ${stats.alumni} ${lang === 'en' ? 'alumni' : 'omaliza'}</span>
-                        </div>
-                        <p style="font-size:1.1rem;">${details.description[lang]}</p>
-                        <h3 style="color:var(--secondary); margin-top:20px;"><i class="fas fa-book-open"></i> ${lang === 'en' ? 'Course Modules' : 'Ma Module'}</h3>
-                        <ul style="list-style:none; padding-left:0;">${details.modules[lang].map(m => `<li style="margin-bottom:8px;">✓ ${m}</li>`).join('')}</ul>
-                        <h3 style="color:var(--secondary); margin-top:20px;"><i class="fas fa-trophy"></i> ${lang === 'en' ? 'Learning Outcomes' : 'Zotsatira'}</h3>
-                        <p>${details.outcomes[lang]}</p>
-                        <h3 style="color:var(--secondary); margin-top:20px;"><i class="fas fa-star"></i> ${lang === 'en' ? 'Success Stories' : 'Nkhani Zopambana'}</h3>
-                        <p style="background:var(--glass-effect); padding:15px; border-radius:8px;">${details.success[lang]}</p>
-                        <div style="display:flex; gap:15px; margin-top:25px;">
-                            <button class="enroll-button" onclick="openEnrollChat()" style="padding:12px 25px;">📝 ${lang === 'en' ? 'Enroll Now' : 'Lembetsani'}</button>
-                            <button onclick="openWhatsAppChat()" style="background:#25D366; padding:12px 25px; border:none; border-radius:30px; font-weight:700; display:flex; align-items:center; gap:8px; color:black;">
-                                <i class="fab fa-whatsapp"></i> ${lang === 'en' ? 'Ask Questions' : 'Funani'}
-                            </button>
-                        </div>`;
-                    document.getElementById('courseModalContent').innerHTML = html;
-                    document.getElementById('courseModal').style.display = 'flex';
-                    dropdown.classList.remove('active');
-                });
-            });
-            
-            // Mode cards
-            document.querySelectorAll('.mode-card').forEach(card => {
-                card.addEventListener('click', function(e){
-                    let mode = this.dataset.mode;
-                    let details = modeDetails[mode];
-                    let lang = currentLanguage;
-                    let content = `<h2>${details.title[lang]}</h2>
-                        <p style="font-size:1.15rem; margin-bottom:20px; color:var(--secondary);">${details.description[lang]}</p>
-                        <h3 style="color:var(--secondary);"><i class="fas fa-check-circle"></i> ${lang === 'en' ? 'Key Features' : 'Zinthu Zofunika'}</h3>
-                        <ul style="list-style:none; padding-left:0;">${details.features[lang].map(f => `<li style="margin-bottom:8px;">✔ ${f}</li>`).join('')}</ul>
-                        <h3 style="color:var(--secondary); margin-top:20px;"><i class="fas fa-chalkboard-teacher"></i> ${lang === 'en' ? 'Your Instructor' : 'Mlangizi'}</h3>
-                        <p style="background:var(--glass-effect); padding:15px; border-radius:8px;">${details.instructor[lang]}</p>
-                        <h3 style="color:var(--secondary); margin-top:20px;"><i class="fas fa-user-check"></i> ${lang === 'en' ? 'Ideal For' : 'Woyenerera'}</h3>
-                        <p>${details.ideal[lang]}</p>
-                        <div style="margin-top:25px; display:flex; gap:15px;">
-                            <button onclick="openWhatsAppChat()" style="background:#25D366; padding:12px 25px; border:none; border-radius:30px; font-weight:700; display:flex; align-items:center; gap:8px; color:black;">
-                                <i class="fab fa-whatsapp"></i> ${lang === 'en' ? 'Enroll' : 'Lembetsani'}
-                            </button>
-                            <button onclick="openEmailEnroll()" style="background:var(--gradient-primary); color:var(--primary); padding:12px 25px; border:none; border-radius:30px; font-weight:700; display:flex; align-items:center; gap:8px;">
-                                <i class="fas fa-envelope"></i> ${lang === 'en' ? 'Request Info' : 'Pemphani'}
-                            </button>
-                        </div>`;
-                    document.getElementById('modeModalContent').innerHTML = content;
-                    document.getElementById('modeModal').style.display = 'flex';
-                });
-            });
-            
-            setLanguage('en');
-            setTheme('dark');
-            
-            if (loggedIn) {
-                document.getElementById('adminPanelSection').style.display = 'block';
-                document.getElementById('adminLoginBox').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-                renderAdminDashboard();
-            }
-        });
-
-        // ========== SCHEDULE MODALS ==========
-        function showScheduleDetailModal(day) {
-            let details = scheduleDetails[day];
-            let lang = currentLanguage;
-            let content = `<h2><i class="fas fa-calendar-alt"></i> ${details.title[lang]}</h2>
-                <p style="font-size:1.3rem; color:var(--secondary); margin-bottom:20px;">🕒 ${details.time}</p>
-                <h3 style="color:var(--secondary);">${lang === 'en' ? 'Program Features' : 'Zinthu'}</h3>
-                <ul style="list-style:none; padding-left:0;">${details.features[lang].map(f => `<li style="margin-bottom:8px;">✅ ${f}</li>`).join('')}</ul>
-                <h3 style="color:var(--secondary); margin-top:20px;">${lang === 'en' ? 'Available Courses' : 'Maphunziro'}</h3>
-                <p>${details.courses[lang]}</p>
-                <h3 style="color:var(--secondary); margin-top:20px;">${lang === 'en' ? 'Trainer' : 'Mlangizi'}</h3>
-                <p>${details.instructor[lang]}</p>
-                <button onclick="openWhatsAppChat()" style="background:#25D366; padding:12px 25px; border:none; border-radius:30px; font-weight:700; margin-top:20px; display:flex; align-items:center; gap:8px; color:black;">
-                    <i class="fab fa-whatsapp"></i> ${lang === 'en' ? 'Book this schedule' : 'Sungani'}
-                </button>`;
-            document.getElementById('scheduleDetailContent').innerHTML = content;
-            document.getElementById('scheduleDetailModal').style.display = 'flex';
-        }
-        function showCustomScheduleModal() { document.getElementById('customScheduleModal').style.display = 'flex'; }
-        function showOrgDetailsModal(type) {
-            let details = orgDetails[type];
-            let lang = currentLanguage;
-            let content = `<h2>${details.title[lang]}</h2>
-                <p style="font-size:1.15rem; margin:20px 0;">${details.description[lang]}</p>
-                <h3 style="color:var(--secondary);"><i class="fas fa-cogs"></i> ${lang === 'en' ? 'Programs' : 'Mapulogalamu'}</h3>
-                <ul style="list-style:none; padding-left:0;">${details.programs[lang].map(p => `<li style="margin-bottom:8px;">🔹 ${p}</li>`).join('')}</ul>
-                <h3 style="color:var(--secondary); margin-top:20px;">${lang === 'en' ? 'Duration' : 'Nthawi'}</h3>
-                <p>${details.duration[lang]}</p>
-                <h3 style="color:var(--secondary); margin-top:20px;">${lang === 'en' ? 'Impact' : 'Zotsatira'}</h3>
-                <p style="background:var(--glass-effect); padding:15px; border-radius:8px;">${details.impact[lang]}</p>
-                <button onclick="showOrgProposalModal()" style="background:var(--gradient-primary); color:var(--primary); padding:12px 30px; border:none; border-radius:30px; font-weight:700; margin-top:15px; display:flex; align-items:center; gap:8px;">
-                    <i class="fas fa-file-signature"></i> ${lang === 'en' ? 'Request Proposal' : 'Pemphani Chikalata'}
-                </button>`;
-            document.getElementById('orgDetailsContent').innerHTML = content;
-            document.getElementById('orgDetailsModal').style.display = 'flex';
-        }
-        function showOrgProposalModal() { document.getElementById('orgProposalModal').style.display = 'flex'; }
-
-        // ========== CONTACT FUNCTIONS ==========
-        function openWhatsAppChat() { window.open(`https://wa.me/260976620788?text=${encodeURIComponent("Hello! I am interested in ICT Skills Training at Katete.")}`, '_blank'); }
-        function openEmailEnroll() { window.location.href = 'mailto:cmwila7@gmail.com?subject=Enrollment Inquiry ICT Katete&body=I would like to enroll in:'; }
-        function openEmailProposal() { window.location.href = 'mailto:cmwila7@gmail.com?subject=Organizational Training Proposal Request&body=Please provide a detailed proposal for our organization:'; }
-        function openEnrollChat() { if(confirm(currentLanguage === 'en' ? 'Chat via WhatsApp? OK = WhatsApp, Cancel = Email' : 'Lankhulani kudzera pa WhatsApp? OK = WhatsApp, Cancel = Imelo')) { openWhatsAppChat(); } else { openEmailEnroll(); } }
-
-        // ========== MODAL CONTROLS ==========
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        window.addEventListener('click', (e) => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; });
-        function scrollToTop() { window.scrollTo({top:0, behavior:'smooth'}); }
-
-        // ========== ADMIN FUNCTIONS ==========
-        function adminLoginFromPanel() {
-            let user = document.getElementById('adminUser').value;
-            let pass = document.getElementById('adminPass').value;
-            
-            // Use secure credential validator
-            if (__secureAdminCredentials.validate(user, pass)) {
-                loggedIn = true;
-                document.getElementById('adminLoginBox').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-                renderAdminDashboard();
-            } else { 
-                alert(currentLanguage === 'en' ? 'Invalid credentials' : 'Zolakwika'); 
-            }
-        }
-
-        function getCourseTitle(key) {
-            let titles = { en: { intro:"Intro to Computers", msoffice:"MS Office", programming:"Programming", secretarial:"Secretarial", entrepreneurship:"Digital Entrepreneurship", farmers:"ICT for Farmers" }, ny: { intro:"Chiyambi cha Makompyuta", msoffice:"MS Office", programming:"Kupanga Mapulogalamu", secretarial:"Ukadaulo Wa Secretariat", entrepreneurship:"Bizinesi Yadijito", farmers:"ICT kwa Alimi" } };
-            return titles[currentLanguage][key] || key;
-        }
-
-        function renderAdminDashboard() {
-            let lang = currentLanguage;
-            let html = `<div class="admin-dashboard">
-                <h3 style="color:var(--secondary); margin-bottom:20px;">${lang === 'en' ? 'Welcome, Admin' : 'Takulandirani, Woyang\'anira'}</h3>
-                <div class="admin-stats" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px;">
-                    ${Object.keys(courseStats).map(key => `
-                        <div class="stat-box" style="background:var(--glass-effect); padding:20px; border-radius:15px; border:1px solid var(--border-color);">
-                            <h4 style="color:var(--secondary); margin-bottom:10px;">${getCourseTitle(key)}</h4>
-                            <p style="color:var(--text-primary);">${lang === 'en' ? 'Current:' : 'Apano:'} <span style="color:var(--secondary); font-weight:700;">${courseStats[key].current}</span></p>
-                            <p style="color:var(--text-primary);">${lang === 'en' ? 'Alumni:' : 'Omaliza:'} <span style="color:var(--secondary); font-weight:700;">${courseStats[key].alumni}</span></p>
-                            <div style="display:flex; gap:10px; margin-top:15px;">
-                                <button onclick="editStats('${key}')" style="background:var(--gradient-primary); color:var(--primary); padding:5px 15px; border:none; border-radius:20px; font-weight:600;">
-                                    <i class="fas fa-edit"></i> ${lang === 'en' ? 'Edit' : 'Sintha'}
-                                </button>
-                                <button onclick="addAlumni('${key}')" style="background:var(--gradient-primary); color:var(--primary); padding:5px 15px; border:none; border-radius:20px; font-weight:600;">
-                                    <i class="fas fa-plus"></i> +${lang === 'en' ? 'Alumni' : 'Omaliza'}
-                                </button>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <div style="margin-top:30px; background:var(--glass-effect); padding:30px; border-radius:20px; border:1px solid var(--border-color);">
-                    <h3 style="color:var(--secondary); margin-bottom:20px;">🎓 ${lang === 'en' ? 'Generate A4 Portrait Certificate' : 'Pangani Chitizikopo cha A4'}</h3>
-                    
-                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px;">
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Full Name' : 'Dzina Lonse'}</label>
-                            <input type="text" id="certName" placeholder="e.g. Mwila Christopher" value="Mwila Christopher" class="admin-input"></div>
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Select Course' : 'Sankhani Maphunziro'}</label>
-                            <select id="certCourseSelect" class="admin-input">
-                                <option value="Introduction to Computers">${lang === 'en' ? 'Intro to Computers' : 'Chiyambi'}</option>
-                                <option value="Microsoft Office" selected>MS Office</option>
-                                <option value="Computer Programming">${lang === 'en' ? 'Programming' : 'Programming'}</option>
-                                <option value="Secretarial Services">${lang === 'en' ? 'Secretarial' : 'Secretariat'}</option>
-                                <option value="Digital Entrepreneurship">${lang === 'en' ? 'Digital Entrepreneurship' : 'Bizinesi Yadijito'}</option>
-                                <option value="ICT for Farmers">${lang === 'en' ? 'ICT for Farmers' : 'ICT kwa Alimi'}</option>
-                            </select>
-                        </div>
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Year' : 'Chaka'}</label>
-                            <select id="certYear" class="admin-input">
-                                ${Array.from({length:11}, (_,i) => 2026 + i).map(y => `<option value="${y}" ${y===2026?'selected':''}>${y}</option>`).join('')}
-                            </select>
-                        </div>
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Intake' : 'Kulowa'}</label>
-                            <select id="certIntake" class="admin-input">
-                                <option value="January">Jan</option><option value="March">Mar</option><option value="June" selected>Jun</option><option value="September">Sep</option>
-                            </select>
-                        </div>
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Duration' : 'Nthawi'}</label>
-                            <input type="text" id="certDuration" placeholder="e.g. 3 months" value="3 months" class="admin-input"></div>
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Instructor' : 'Mlangizi'}</label>
-                            <input type="text" id="certInstructorName" placeholder="Mr. John Banda" value="Mr. John Banda" class="admin-input"></div>
-                        <div><label style="color:var(--text-primary); display:block; margin-bottom:5px;">${lang === 'en' ? 'Director' : 'Director'}</label>
-                            <input type="text" id="certDirectorName" placeholder="Dr. Sarah Zulu" value="Dr. Sarah Zulu" class="admin-input"></div>
-                    </div>
-                    <button onclick="generateCertificate()" style="background:var(--gradient-primary); color:var(--primary); padding:15px 40px; border:none; border-radius:30px; margin-top:25px; font-weight:700; display:flex; align-items:center; gap:8px;">
-                        <i class="fas fa-certificate"></i> ${lang === 'en' ? 'PREVIEW CERTIFICATE' : 'ONANI CHITIZIKOPO'}
-                    </button>
-                </div>
-                <button onclick="adminLogout()" style="background:var(--glass-effect); color:var(--secondary); border:1px solid var(--border-color); padding:12px 25px; border-radius:30px; margin-top:25px; font-weight:600;">
-                    <i class="fas fa-sign-out-alt"></i> ${lang === 'en' ? 'Logout' : 'Tulukani'}
-                </button>
-            </div>`;
-            document.getElementById('adminDashboard').innerHTML = html;
-        }
-
-        window.editStats = function(key) {
-            let newCurr = prompt(currentLanguage === 'en' ? "Enter new current enrollment:" : "Lowetsani chiwerengero cha ophunzira:", courseStats[key].current);
-            if(newCurr !== null && !isNaN(newCurr) && newCurr >= 0) courseStats[key].current = parseInt(newCurr);
-            let newAlum = prompt(currentLanguage === 'en' ? "Enter new alumni total:" : "Lowetsani chiwerengero cha omaliza:", courseStats[key].alumni);
-            if(newAlum !== null && !isNaN(newAlum) && newAlum >= 0) courseStats[key].alumni = parseInt(newAlum);
-            renderAdminDashboard();
-        };
-        window.addAlumni = function(key) {
-            let add = prompt(currentLanguage === 'en' ? "Add number to alumni:" : "Onjezani chiwerengero ku omaliza:", "1");
-            if(add !== null && !isNaN(add) && parseInt(add) > 0) { courseStats[key].alumni += parseInt(add); renderAdminDashboard(); }
-        };
-        window.adminLogout = function() {
-            loggedIn = false;
-            document.getElementById('adminLoginBox').style.display = 'block';
-            document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('adminPanelSection').style.display = 'none';
-        };
-
-        // ========== CERTIFICATE GENERATOR ==========
-        function generateCertificate() {
-            let name = document.getElementById('certName')?.value || 'Mwila Christopher';
-            let course = document.getElementById('certCourseSelect')?.value || 'Microsoft Office';
-            let year = document.getElementById('certYear')?.value || '2026';
-            let intake = document.getElementById('certIntake')?.value || 'June';
-            let duration = document.getElementById('certDuration')?.value || '3 months';
-            let instructorName = document.getElementById('certInstructorName')?.value || 'Mr. John Banda';
-            let directorName = document.getElementById('certDirectorName')?.value || 'Dr. Sarah Zulu';
-            let certNumber = 'KAT-ICT-' + Math.floor(Math.random() * 9000 + 1000) + '-' + year;
-            let date = new Date().toLocaleDateString('en-ZM', { year: 'numeric', month: 'long', day: 'numeric' });
-            let lang = currentLanguage;
-            let certTitle = lang === 'en' ? 'CERTIFICATE OF COMPLETION' : 'CHITIZIKOPO CHOMALIZA';
-            let presentedTo = lang === 'en' ? 'This is proudly presented to' : 'Ichi chikuperekedwa mwanyadira kwa';
-            let successfullyCompleting = lang === 'en' ? 'for successfully completing the' : 'chifukwa chomaliza bwino';
-            let programme = lang === 'en' ? 'ICT Skills Training Programme – Katete District' : 'Maphunziro a ICT – Boma la Katete';
-            let certHTML = `<div class="certificate-content-portrait">
-                    <div style="text-align:center;"><h1 class="cert-title" style="border-bottom-color: var(--secondary);">${certTitle}</h1></div>
-                    <div style="width:100%; text-align:center;">
-                        <p style="font-size:18px; margin-bottom:10px;">${presentedTo}</p>
-                        <p style="font-size:32px; font-weight:bold; color:#000; border-bottom:2px dashed var(--secondary); display:inline-block; padding-bottom:5px; margin-bottom:15px;">${name}</p>
-                        <p style="font-size:18px; margin:15px 0;">${successfullyCompleting}</p>
-                        <p class="cert-course" style="background: var(--secondary);">${course}</p>
-                        <p style="font-size:18px; margin:10px 0;">${programme}</p>
-                        <div style="display:flex; justify-content:center; gap:40px; margin:20px 0;">
-                            <p style="font-size:16px;"><strong>${lang==='en'?'Duration:':'Nthawi:'}</strong> ${duration}</p>
-                            <p style="font-size:16px;"><strong>${lang==='en'?'Intake:':'Kulowa:'}</strong> ${intake} ${year}</p>
-                        </div>
-                        <div style="margin:15px 0;"><span class="cert-number" style="border-color: var(--secondary);"><strong>${lang==='en'?'Cert No:':'Nambala:'}</strong> ${certNumber}</span></div>
-                        <p style="font-size:16px; margin:10px 0;"><strong>${lang==='en'?'Issue Date:':'Tsiku:'}</strong> ${date}</p>
-                    </div>
-                    <div style="display:flex; justify-content:space-around; width:100%; margin-top:30px;">
-                        <div style="text-align:center; width:200px;">
-                            <div style="border-top:2px solid #000; width:160px; margin:0 auto; padding-top:5px;"></div>
-                            <div style="font-family:'Brush Script MT', cursive; font-size:20px; margin-top:5px;">${directorName.split(' ').map(n => n[0]).join('')}. ${directorName.split(' ').pop()}</div>
-                            <div style="font-size:16px; font-weight:bold; margin-top:5px;">${directorName}</div>
-                            <div style="font-size:14px; color:#333;">${lang==='en'?'Director':'Director'}, ICT Katete</div>
-                        </div>
-                        <div style="text-align:center; width:200px;">
-                            <div style="border-top:2px solid #000; width:160px; margin:0 auto; padding-top:5px;"></div>
-                            <div style="font-family:'Brush Script MT', cursive; font-size:20px; margin-top:5px;">${instructorName.split(' ').map(n => n[0]).join('')}. ${instructorName.split(' ').pop()}</div>
-                            <div style="font-size:16px; font-weight:bold; margin-top:5px;">${instructorName}</div>
-                            <div style="font-size:14px; color:#333;">${lang==='en'?'Lead Instructor':'Mlangizi Wamkulu'}</div>
-                        </div>
-                    </div>
-                    <div style="display:flex; gap:30px; margin-top:20px; justify-content:center;">
-                        <i class="fas fa-certificate" style="color:var(--secondary); font-size:32px;"></i>
-                        <i class="fas fa-award" style="color:var(--secondary); font-size:32px;"></i>
-                        <i class="fas fa-medal" style="color:var(--secondary); font-size:32px;"></i>
-                    </div>
-                </div>`;
-            document.getElementById('certificateContainer').innerHTML = certHTML;
-            document.getElementById('certificateModal').style.display = 'flex';
-        }
-
-        document.getElementById('currentYear').innerText = new Date().getFullYear();
-        if (document.getElementById('currentYear2')) document.getElementById('currentYear2').innerText = new Date().getFullYear();
-        
-        // ========== FINAL SECURITY CLEANUP ==========
-        // Remove any lingering references to credentials in the DOM
-        setTimeout(function() {
-            // Override any toString methods that might expose credentials
-            Object.freeze(__secureAdminCredentials);
-        }, 200);
-    </script>
-
-    <!-- ========== REST OF YOUR EXISTING HTML (CONTENT SECTIONS) ========== -->
-    <!-- All your existing header, hero, schedule, modes, admin panel, org, modals, footer remain exactly the same -->
-    
-    <header class="main-header">
-        <div class="nav-container">
-            <div class="logo" data-tooltip="ICT Skills Training - Katete">
-                <div class="logo-icon"><i class="fas fa-laptop-code"></i></div>
-                <div class="logo-text">
-                    <h1 id="site-title-en">ICT Skills Training</h1>
-                    <h1 id="site-title-ny" style="display: none;">Maphunziro a ICT</h1>
-                    <span id="site-subtitle-en">Katete District | Flexible Learning</span>
-                    <span id="site-subtitle-ny" style="display: none;">Boma la Katete | Maphunziro Osinthasintha</span>
-                </div>
-            </div>
-            
-            <div style="display: flex; align-items: center; flex-wrap: wrap;">
-                <div class="lang-toggle-container">
-                    <button id="lang-en-btn" class="lang-btn active" data-tooltip="Switch to English"><i class="fas fa-language"></i> ENGLISH</button>
-                    <button id="lang-ny-btn" class="lang-btn" data-tooltip="Sinthani ku Chewa"><i class="fas fa-language"></i> CHEWA</button>
-                </div>
-                
-                <div class="theme-toggle-container">
-                    <button id="theme-toggle-btn" class="theme-toggle-btn" data-tooltip="Switch Theme">
-                        <i class="fas fa-palette"></i> 
-                        <span id="theme-text-en">POWDER BLUE</span>
-                        <span id="theme-text-ny" style="display: none;">BLUE YA UFA</span>
-                    </button>
-                </div>
-                
-                <button class="mobile-toggle" id="mobileToggle" data-tooltip="Menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-            
-            <nav class="nav-menu" id="navMenu">
-                <div class="nav-item">
-                    <a href="#home" class="nav-link" id="nav-home-en"><i class="fas fa-home"></i> Home</a>
-                    <a href="#home" class="nav-link" id="nav-home-ny" style="display: none;"><i class="fas fa-home"></i> Nyumba</a>
-                </div>
-                <div class="nav-item dropdown" id="coursesDropdown">
-                    <a href="javascript:void(0);" class="nav-link" id="dropdownToggle">
-                        <span id="nav-courses-en"><i class="fas fa-graduation-cap"></i> Courses <i class="fas fa-chevron-down"></i></span>
-                        <span id="nav-courses-ny" style="display: none;"><i class="fas fa-graduation-cap"></i> Maphunziro <i class="fas fa-chevron-down"></i></span>
-                    </a>
-                    <div class="dropdown-content" id="courseDropdownMenu">
-                        <a href="#" data-course="intro" id="course-intro-en">Introduction to Computers</a>
-                        <a href="#" data-course="intro" id="course-intro-ny" style="display: none;">Chiyambi cha Makompyuta</a>
-                        <a href="#" data-course="msoffice" id="course-msoffice-en">Microsoft Office</a>
-                        <a href="#" data-course="msoffice" id="course-msoffice-ny" style="display: none;">Microsoft Office</a>
-                        <a href="#" data-course="programming" id="course-programming-en">Computer Programming</a>
-                        <a href="#" data-course="programming" id="course-programming-ny" style="display: none;">Kupanga Mapulogalamu</a>
-                        <a href="#" data-course="secretarial" id="course-secretarial-en">Secretarial Services</a>
-                        <a href="#" data-course="secretarial" id="course-secretarial-ny" style="display: none;">Ukadaulo Wa Secretariat</a>
-                        <a href="#" data-course="entrepreneurship" id="course-entrepreneurship-en">Digital Entrepreneurship</a>
-                        <a href="#" data-course="entrepreneurship" id="course-entrepreneurship-ny" style="display: none;">Bizinesi Yadijito</a>
-                        <a href="#" data-course="farmers" id="course-farmers-en">ICT for Farmers</a>
-                        <a href="#" data-course="farmers" id="course-farmers-ny" style="display: none;">ICT kwa Alimi</a>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <a href="#schedule" class="nav-link" id="nav-schedule-en"><i class="fas fa-calendar-alt"></i> Schedule</a>
-                    <a href="#schedule" class="nav-link" id="nav-schedule-ny" style="display: none;"><i class="fas fa-calendar-alt"></i> Ndondomeko</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#modes" class="nav-link" id="nav-modes-en"><i class="fas fa-chalkboard-teacher"></i> Learning Modes</a>
-                    <a href="#modes" class="nav-link" id="nav-modes-ny" style="display: none;"><i class="fas fa-chalkboard-teacher"></i> Njira Zophunzirira</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#contact" class="nav-link" id="nav-contact-en"><i class="fas fa-phone-alt"></i> Contact</a>
-                    <a href="#contact" class="nav-link" id="nav-contact-ny" style="display: none;"><i class="fas fa-phone-alt"></i> Lumikizanani</a>
-                </div>
-            </nav>
-            
-            <div class="admin-corner">
-                <input type="text" id="cornerUsername" class="corner-input" placeholder="Username" style="display: none;">
-                <input type="password" id="cornerPassword" class="corner-input" placeholder="Password" style="display: none;">
-                <button class="admin-corner-btn" id="cornerLoginBtn" data-tooltip="Admin Access">
-                    <i class="fas fa-lock"></i> 
-                    <span id="admin-btn-en">Admin</span>
-                    <span id="admin-btn-ny" style="display: none;">Woyang'anira</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-        <section id="home" class="hero-section">
-            <h1 class="hero-title" id="hero-title-en">🎯 ICT SKILLS TRAINING PROGRAMMES</h1>
-            <h1 class="hero-title" id="hero-title-ny" style="display: none;">🎯 MAPHUNZIRO A UKADAULO WA ICT</h1>
-            
-            <div class="hero-subtitle" id="hero-subtitle-en">NOW OPEN FOR ENROLLMENT IN KATETE DISTRICT</div>
-            <div class="hero-subtitle" id="hero-subtitle-ny" style="display: none;">LEMBETSA TSONO MU BOMA LA KATETE</div>
-            
-            <div class="hero-tagline" id="hero-tagline-en">
-                <i class="fas fa-graduation-cap"></i> Gain Practical Computer & Digital Skills – Affordable | Flexible | Certified
-            </div>
-            <div class="hero-tagline" id="hero-tagline-ny" style="display: none;">
-                <i class="fas fa-graduation-cap"></i> Phunzirani Luso la Makompyuta & Dijito – Lotsika mtengo | Losinthasintha | Chitizikopo
-            </div>
-            
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <button class="enroll-button" onclick="openEnrollChat()" data-tooltip="Enroll Now">
-                    <i class="fas fa-user-plus"></i> 
-                    <span id="enroll-btn-en">ENROLL NOW – CHAT WITH ADMIN</span>
-                    <span id="enroll-btn-ny" style="display: none;">LEMBETSA TSOPANO – LANKHULANI NDI WOYANG'ANIRA</span>
-                </button>
-                
-                <div style="display: flex; gap: 15px;">
-                    <a href="#" onclick="openWhatsAppChat(); return false;" 
-                       style="background:#25D366; padding:15px 25px; border-radius:40px; color:black; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;"
-                       data-tooltip="Chat on WhatsApp">
-                        <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> 
-                        <span id="whatsapp-en">WhatsApp</span>
-                        <span id="whatsapp-ny" style="display: none;">WhatsApp</span>
-                    </a>
-                    
-                    <a href="#" onclick="openEmailEnroll(); return false;" 
-                       style="background:var(--gradient-primary); padding:15px 25px; border-radius:40px; color:var(--primary); font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;"
-                       data-tooltip="Send Email">
-                        <i class="fas fa-envelope" style="font-size:1.2rem;"></i> 
-                        <span id="email-admin-en">Email Admin</span>
-                        <span id="email-admin-ny" style="display: none;">Imelo Woyang'anira</span>
-                    </a>
-                </div>
-            </div>
-            
-            <p style="margin-top:20px; color:var(--secondary); font-size:1.1rem;">
-                <i class="fas fa-phone-alt"></i> Call: 
-                <a href="tel:+260976620788" style="color:var(--text-secondary); font-weight:700; text-decoration:none; border-bottom:1px solid var(--secondary);">
-                    +260 976 620788
-                </a>
-            </p>
-            
-            <div class="progress-bar" style="max-width:500px; margin:30px auto 0;">
-                <div class="progress-fill" style="--progress-width: 85%;"></div>
-            </div>
-            <p style="color:var(--secondary); margin-top:5px;" id="progress-text-en">85% Enrollment Capacity - Act Fast!</p>
-            <p style="color:var(--secondary); margin-top:5px; display: none;" id="progress-text-ny">85% Malo Odzala - Chitani Mosachedwa!</p>
-        </section>
-
-        <section id="schedule" class="schedule-section">
-            <h2 style="font-size:2rem; margin-bottom:20px;" id="schedule-title-en">
-                <i class="fas fa-clock"></i> FLEXIBLE TRAINING SCHEDULE
-            </h2>
-            <h2 style="font-size:2rem; margin-bottom:20px; display: none;" id="schedule-title-ny">
-                <i class="fas fa-clock"></i> NDONDOMEKO YOPHUNZIRIRA YOSINTHASINTHA
-            </h2>
-            
-            <div class="schedule-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:25px;">
-                <div class="schedule-card" onclick="showScheduleDetailModal('weekdays')" data-tooltip="Click for details">
-                    <h3 style="color:var(--secondary); font-size:1.5rem; margin-bottom:15px;" id="weekdays-en">
-                        <i class="fas fa-calendar-day"></i> Weekdays
-                    </h3>
-                    <h3 style="color:var(--secondary); font-size:1.5rem; margin-bottom:15px; display: none;" id="weekdays-ny">
-                        <i class="fas fa-calendar-day"></i> Masiku a Sabata
-                    </h3>
-                    <div class="time-highlight">16:30 - 18:00</div>
-                    <p style="margin-top:15px; color:var(--secondary); font-weight:500;" id="weekdays-click-en">Click for full details →</p>
-                    <p style="margin-top:15px; color:var(--secondary); font-weight:500; display: none;" id="weekdays-click-ny">Dinani kuti muwone zambiri →</p>
-                </div>
-                
-                <div class="schedule-card" onclick="showScheduleDetailModal('saturday')" data-tooltip="Click for details">
-                    <h3 style="color:var(--secondary); font-size:1.5rem; margin-bottom:15px;" id="saturday-en">
-                        <i class="fas fa-calendar-alt"></i> Saturday
-                    </h3>
-                    <h3 style="color:var(--secondary); font-size:1.5rem; margin-bottom:15px; display: none;" id="saturday-ny">
-                        <i class="fas fa-calendar-alt"></i> Loweruka
-                    </h3>
-                    <div class="time-highlight">08:00 - 17:00</div>
-                    <p style="margin-top:15px; color:var(--secondary); font-weight:500;" id="saturday-click-en">Click for full details →</p>
-                    <p style="margin-top:15px; color:var(--secondary); font-weight:500; display: none;" id="saturday-click-ny">Dinani kuti muwone zambiri →</p>
-                </div>
-                
-                <div class="schedule-card" onclick="showScheduleDetailModal('sunday')" data-tooltip="Click for details">
-                    <h3 style="color:var(--secondary); font-size:1.5rem; margin-bottom:15px;" id="sunday-en">
-                        <i class="fas fa-sun"></i> Sunday
-                    </h3>
-                    <h3 style="color:var(--secondary); font-size:1.5rem; margin-bottom:15px; display: none;" id="sunday-ny">
-                        <i class="fas fa-sun"></i> Lamlungu
-                    </h3>
-                    <div class="time-highlight">10:00 - 17:00</div>
-                    <p style="margin-top:15px; color:var(--secondary); font-weight:500;" id="sunday-click-en">Click for full details →</p>
-                    <p style="margin-top:15px; color:var(--secondary); font-weight:500; display: none;" id="sunday-click-ny">Dinani kuti muwone zambiri →</p>
-                </div>
-            </div>
-            
-            <div class="flexible-note" style="background:var(--glass-effect); padding:25px; border-left:6px solid var(--secondary); margin-top:30px; border-radius:0 16px 16px 0;">
-                <h3 style="color:var(--secondary); font-size:1.4rem;" id="custom-schedule-en">
-                    <i class="fas fa-user-clock"></i> Create Your Own Schedule – Chat with Admin
-                </h3>
-                <h3 style="color:var(--secondary); font-size:1.4rem; display: none;" id="custom-schedule-ny">
-                    <i class="fas fa-user-clock"></i> Pangani Ndondomeko Yanu – Lankhulani ndi Woyang'anira
-                </h3>
-                <button class="enroll-button" onclick="showCustomScheduleModal()" style="padding:12px 30px; font-size:1rem; margin-top:15px;">
-                    <i class="fas fa-info-circle"></i> 
-                    <span id="flexible-options-en">View Flexible Options</span>
-                    <span id="flexible-options-ny" style="display: none;">Onani Zosinthasintha</span>
-                </button>
-            </div>
-        </section>
-
-        <section id="modes" class="modes-section">
-            <h2 style="font-size:2rem; margin-bottom:20px;" id="modes-title-en">
-                <i class="fas fa-chalkboard-teacher"></i> MODES OF LEARNING
-            </h2>
-            <h2 style="font-size:2rem; margin-bottom:20px; display: none;" id="modes-title-ny">
-                <i class="fas fa-chalkboard-teacher"></i> NJIRA ZOPHUNZIRIRA
-            </h2>
-            
-            <p style="font-size:1.2rem; margin-bottom:30px; color:var(--text-muted);" id="instructor-text-en">
-                Our instructors: <span style="color:var(--secondary); font-weight:700;">vast experience, unmatched professionalism, second to none.</span>
-            </p>
-            <p style="font-size:1.2rem; margin-bottom:30px; color:var(--text-muted); display: none;" id="instructor-text-ny">
-                Alangizi athu: <span style="color:var(--secondary); font-weight:700;">odziwa bwino ntchito, akatswiri opambana, wosayerekezeka.</span>
-            </p>
-            
-            <div class="modes-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px;">
-                <div class="mode-card" data-mode="group" data-tooltip="Collaborative Learning">
-                    <div class="mode-icon"><i class="fas fa-users"></i></div>
-                    <h3 id="mode-group-en">Group Classes</h3>
-                    <h3 id="mode-group-ny" style="display: none;">Maphunziro a Gulu</h3>
-                </div>
-                <div class="mode-card" data-mode="oneonone" data-tooltip="Personalized Attention">
-                    <div class="mode-icon"><i class="fas fa-user-tie"></i></div>
-                    <h3 id="mode-oneonone-en">One-on-One</h3>
-                    <h3 id="mode-oneonone-ny" style="display: none;">Mmodzi ndi Mmodzi</h3>
-                </div>
-                <div class="mode-card" data-mode="remote" data-tooltip="Learn From Anywhere">
-                    <div class="mode-icon"><i class="fas fa-laptop-house"></i></div>
-                    <h3 id="mode-remote-en">Remote Support</h3>
-                    <h3 id="mode-remote-ny" style="display: none;">Kuthandizira Kutali</h3>
-                </div>
-                <div class="mode-card" data-mode="workint" data-tooltip="On-site Training">
-                    <div class="mode-icon"><i class="fas fa-business-time"></i></div>
-                    <h3 id="mode-workint-en">Work-Integrated</h3>
-                    <h3 id="mode-workint-ny" style="display: none;">Zophatikiza Ntchito</h3>
-                </div>
-                <div class="mode-card" data-mode="project" data-tooltip="Build Real Projects">
-                    <div class="mode-icon"><i class="fas fa-project-diagram"></i></div>
-                    <h3 id="mode-project-en">Project-Based</h3>
-                    <h3 id="mode-project-ny" style="display: none;">Zochita Poyekha</h3>
-                </div>
-                <div class="mode-card" data-mode="blended" data-tooltip="Mix of Online & Physical">
-                    <div class="mode-icon"><i class="fas fa-sync-alt"></i></div>
-                    <h3 id="mode-blended-en">Blended Learning</h3>
-                    <h3 id="mode-blended-ny" style="display: none;">Maphunziro Osakaniza</h3>
-                </div>
-            </div>
-        </section>
-
-        <section id="adminPanelSection" class="admin-panel-section" style="display:none;">
-            <h2 style="font-size:2rem;" id="admin-panel-title-en">
-                <i class="fas fa-user-shield"></i> ADMIN PANEL – CERTIFICATES & ALUMNI
-            </h2>
-            <h2 style="font-size:2rem; display: none;" id="admin-panel-title-ny">
-                <i class="fas fa-user-shield"></i> WOYANG'ANIRA – ZITIZIKOPO & OMALIZA
-            </h2>
-            
-            <div id="adminLoginBox" class="admin-login-box">
-                <h3 style="color:var(--secondary); margin-bottom:20px;" id="admin-login-title-en">Admin Login</h3>
-                <h3 style="color:var(--secondary); margin-bottom:20px; display: none;" id="admin-login-title-ny">Woyang'anira Lowani</h3>
-                
-                <input type="text" id="adminUser" class="admin-input" placeholder="Username" value="">
-                <input type="password" id="adminPass" class="admin-input" placeholder="Password" value="">
-                
-                <button class="enroll-button" onclick="adminLoginFromPanel()" style="padding:12px 30px; margin-top:10px;">
-                    <i class="fas fa-sign-in-alt"></i> 
-                    <span id="admin-login-btn-en">Login</span>
-                    <span id="admin-login-btn-ny" style="display: none;">Lowani</span>
-                </button>
-            </div>
-            
-            <div id="adminDashboard" style="display: none;"></div>
-        </section>
-
-        <section id="org">
-            <h2 style="font-size:2rem;" id="org-title-en">
-                <i class="fas fa-building"></i> ORGANIZATIONAL CAPACITY BUILDING
-            </h2>
-            <h2 style="font-size:2rem; display: none;" id="org-title-ny">
-                <i class="fas fa-building"></i> KULIMBITSA LUSO LA MABUNGWE
-            </h2>
-            
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px; margin-top:30px;">
-                <div class="org-item" onclick="showOrgDetailsModal('school')" data-tooltip="School Programs">
-                    <i class="fas fa-school fa-2x" style="color:var(--secondary);"></i>
-                    <h3 id="org-school-en">Schools</h3>
-                    <h3 id="org-school-ny" style="display: none;">Masukulu</h3>
-                </div>
-                <div class="org-item" onclick="showOrgDetailsModal('institution')" data-tooltip="Health & Public Institutions">
-                    <i class="fas fa-hospital fa-2x" style="color:var(--secondary);"></i>
-                    <h3 id="org-institution-en">Institutions</h3>
-                    <h3 id="org-institution-ny" style="display: none;">Mabungwe</h3>
-                </div>
-                <div class="org-item" onclick="showOrgDetailsModal('business')" data-tooltip="Business Training">
-                    <i class="fas fa-industry fa-2x" style="color:var(--secondary);"></i>
-                    <h3 id="org-business-en">Businesses</h3>
-                    <h3 id="org-business-ny" style="display: none;">Mabizinesi</h3>
-                </div>
-                <div class="org-item" onclick="showOrgDetailsModal('ngo')" data-tooltip="NGO Programs">
-                    <i class="fas fa-hands-helping fa-2x" style="color:var(--secondary);"></i>
-                    <h3 id="org-ngo-en">NGOs</h3>
-                    <h3 id="org-ngo-ny" style="display: none;">Mabungwe Othandiza</h3>
-                </div>
-            </div>
-            
-            <button class="enroll-button" onclick="showOrgProposalModal()" style="margin-top:30px;">
-                <i class="fas fa-file-contract"></i> 
-                <span id="org-proposal-en">Request Organizational Proposal</span>
-                <span id="org-proposal-ny" style="display: none;">Pemphani Chikalata Cha bungwe</span>
-            </button>
-        </section>
-
-        <div class="quick-access" style="position:fixed; bottom:30px; right:30px; z-index:999; display:flex; flex-direction:column; gap:10px;">
-            <button class="quick-btn" onclick="scrollToTop()" data-tooltip="Scroll to Top">
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            <a href="tel:+260976620788" class="quick-btn" data-tooltip="Call Us">
-                <i class="fas fa-phone-alt"></i>
-            </a>
-            <button class="quick-btn" onclick="openWhatsAppChat()" data-tooltip="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </button>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div style="max-width:1200px; margin:0 auto;">
-            <i class="fas fa-laptop-code" style="font-size:3rem; color:var(--secondary); margin-bottom:15px;"></i>
-            
-            <p style="color:var(--secondary); font-weight:700; font-size:1.1rem;" id="footer-copyright-en">
-                © <span id="currentYear"></span> ICT Skills Training – Katete District. All rights reserved.
-            </p>
-            <p style="color:var(--secondary); font-weight:700; font-size:1.1rem; display: none;" id="footer-copyright-ny">
-                © <span id="currentYear2"></span> Maphunziro a ICT – Boma la Katete. Ufulu wonse ndivotetezedwa.
-            </p>
-            
-            <p style="color:var(--text-muted); margin-top:15px;" id="footer-developed-en">
-                Developed by <strong style="color:var(--secondary);">Mwila Christopher</strong> — 
-                <a href="mailto:cmwila7@gmail.com">cmwila7@gmail.com</a> | 
-                <a href="tel:+260976620788">+260 976 620788</a>
-            </p>
-            <p style="color:var(--text-muted); margin-top:15px; display: none;" id="footer-developed-ny">
-                Wopangidwa ndi <strong style="color:var(--secondary);">Mwila Christopher</strong> — 
-                <a href="mailto:cmwila7@gmail.com">cmwila7@gmail.com</a> | 
-                <a href="tel:+260976620788">+260 976 620788</a>
-            </p>
-        </div>
-    </footer>
-
-    <div id="scheduleDetailModal" class="modal">
-        <div class="modal-content" id="scheduleDetailContent">
-            <span class="close-modal" onclick="closeModal('scheduleDetailModal')">&times;</span>
-        </div>
-    </div>
-
-    <div id="customScheduleModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('customScheduleModal')">&times;</span>
-            <h2 id="custom-modal-title-en"><i class="fas fa-user-clock"></i> Custom Schedule Options</h2>
-            <h2 id="custom-modal-title-ny" style="display: none;"><i class="fas fa-user-clock"></i> Njira Zosinthasintha za Ndondomeko</h2>
-            
-            <p style="font-size:1.2rem; color:var(--secondary);" id="custom-modal-text-en">
-                We understand that every learner has unique commitments. Our flexible scheduling allows you to:
-            </p>
-            <p style="font-size:1.2rem; color:var(--secondary); display: none;" id="custom-modal-text-ny">
-                Timamvetsetsa kuti wophunzira aliyense ali ndi zochita zake. Ndondomeko yathu yosinthasintha imakupatsani mwayi woti:
-            </p>
-            
-            <ul style="margin-top:20px;" id="custom-modal-list-en">
-                <li><span class="detail-badge">✓</span> Choose morning sessions (08:00 - 10:00) upon request</li>
-                <li><span class="detail-badge">✓</span> Combine different learning modes across weekdays/weekends</li>
-                <li><span class="detail-badge">✓</span> Pause and resume your training within 6 months</li>
-                <li><span class="detail-badge">✓</span> Bring a group and set your own class timetable</li>
-                <li><span class="detail-badge">✓</span> Corporate groups: we train at your premises during work hours</li>
-            </ul>
-            <ul style="margin-top:20px; display: none;" id="custom-modal-list-ny">
-                <li><span class="detail-badge">✓</span> Sankhani nthawi yam'mawa (08:00 - 10:00) mukapempha</li>
-                <li><span class="detail-badge">✓</span> Sakanizani njira zosiyanasiyana masiku a sabata/kumapeto kwa sabata</li>
-                <li><span class="detail-badge">✓</span> Imitsani ndikuyambitsanso maphunziro anu pasanathe miyezi 6</li>
-                <li><span class="detail-badge">✓</span> Bweretsani gulu ndikukhazikitsa nthawi yanu yamaphunziro</li>
-                <li><span class="detail-badge">✓</span> Magulu amakampani: timaphunzitsa kumalo anu panthawi ya ntchito</li>
-            </ul>
-            
-            <div style="display:flex; gap:15px; margin-top:25px;">
-                <button onclick="openWhatsAppChat()" style="background:#25D366; padding:12px 25px; border:none; border-radius:30px; font-weight:700; display:flex; align-items:center; gap:8px; color:black;">
-                    <i class="fab fa-whatsapp"></i> 
-                    <span id="custom-whatsapp-en">WhatsApp Admin</span>
-                    <span id="custom-whatsapp-ny" style="display: none;">WhatsApp Woyang'anira</span>
-                </button>
-                <button onclick="openEmailEnroll()" style="background:var(--gradient-primary); color:var(--primary); padding:12px 25px; border:none; border-radius:30px; font-weight:700; display:flex; align-items:center; gap:8px;">
-                    <i class="fas fa-envelope"></i> 
-                    <span id="custom-email-en">Email Admin</span>
-                    <span id="custom-email-ny" style="display: none;">Imelo Woyang'anira</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="orgDetailsModal" class="modal">
-        <div class="modal-content" id="orgDetailsContent">
-            <span class="close-modal" onclick="closeModal('orgDetailsModal')">&times;</span>
-        </div>
-    </div>
-
-    <div id="orgProposalModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('orgProposalModal')">&times;</span>
-            <h2 id="org-proposal-modal-title-en"><i class="fas fa-file-contract"></i> Organizational Training Proposal</h2>
-            <h2 id="org-proposal-modal-title-ny" style="display: none;"><i class="fas fa-file-contract"></i> Chikalata Chophunzitsira Mabungwe</h2>
-            
-            <p style="font-size:1.1rem; margin-bottom:20px;" id="org-proposal-text-en">
-                We provide customized ICT training programs for organizations. Our proposals include:
-            </p>
-            <p style="font-size:1.1rem; margin-bottom:20px; display: none;" id="org-proposal-text-ny">
-                Timapanga maphunziro a ICT apadera a mabungwe. Zikalata zathu zimaphatikizapo:
-            </p>
-            
-            <div style="background:var(--glass-effect); padding:25px; border-radius:15px;">
-                <ul id="org-proposal-list-en" style="list-style:none;">
-                    <li style="margin-bottom:10px;">✔ Needs assessment and skills gap analysis</li>
-                    <li style="margin-bottom:10px;">✔ Tailored curriculum for your sector</li>
-                    <li style="margin-bottom:10px;">✔ Onsite or offsite training – flexible delivery</li>
-                    <li style="margin-bottom:10px;">✔ Post-training support and certification</li>
-                    <li style="margin-bottom:10px;">✔ Competitive group rates and corporate packages</li>
-                </ul>
-                <ul id="org-proposal-list-ny" style="display: none; list-style:none;">
-                    <li style="margin-bottom:10px;">✔ Kuwunika zosowa ndi kusowa kwa luso</li>
-                    <li style="margin-bottom:10px;">✔ Maphunziro olingana ndi gawo lanu</li>
-                    <li style="margin-bottom:10px;">✔ Maphunziro akumalo anu kapena kwina – kupereka kosinthasintha</li>
-                    <li style="margin-bottom:10px;">✔ Thandizo pambuyo pa maphunziro ndi chitizikopo</li>
-                    <li style="margin-bottom:10px;">✔ Mitengo yotsika ya magulu ndi mapaketi amakampani</li>
-                </ul>
-            </div>
-            
-            <button onclick="openEmailProposal()" style="background:var(--gradient-primary); color:var(--primary); padding:15px 30px; border:none; border-radius:30px; margin-top:25px; font-weight:700; display:flex; align-items:center; gap:8px;">
-                <i class="fas fa-paper-plane"></i> 
-                <span id="org-proposal-request-en">Request Proposal via Email</span>
-                <span id="org-proposal-request-ny" style="display: none;">Pemphani Chikalata kudzera pa Imelo</span>
-            </button>
-        </div>
-    </div>
-
-    <div id="courseModal" class="modal">
-        <div class="modal-content" id="courseModalContent">
-            <span class="close-modal" onclick="closeModal('courseModal')">&times;</span>
-        </div>
-    </div>
-
-    <div id="modeModal" class="modal">
-        <div class="modal-content" id="modeModalContent">
-            <span class="close-modal" onclick="closeModal('modeModal')">&times;</span>
-        </div>
-    </div>
-
-    <div id="certificateModal" class="modal">
-        <div class="certificate-modal-wrapper" style="position:relative; width:195.3mm; height:276.21mm; max-width:100%; display:flex; justify-content:center; align-items:center; margin:0 auto;">
-            <span class="close-modal" onclick="closeModal('certificateModal')" style="color:var(--secondary); font-size:2.5rem; top:-5px; right:-5px; position:absolute; z-index:3000;">&times;</span>
-            <div id="certificateContainer" class="certificate-a4-portrait"></div>
-        </div>
-    </div>
-
-    <section id="contact" style="height:10px; visibility:hidden;"></section>
+    setLanguage('en'); setTheme('dark');
+  </script>
 </body>
 </html>

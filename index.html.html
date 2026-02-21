@@ -47,6 +47,7 @@
       --overlay: rgba(0,0,0,0.85);
       --progress-width: 0%;
       --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --header-bg: rgba(0, 0, 0, 0.92);
     }
 
     body.theme-powder {
@@ -76,6 +77,7 @@
       --border-glow: 0 0 15px rgba(74,144,226,0.25);
       --glass-effect: rgba(74,144,226,0.04);
       --overlay: rgba(255,255,255,0.95);
+      --header-bg: rgba(255, 255, 255, 0.92);
     }
 
     body {
@@ -103,84 +105,243 @@
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .fadeInUp { animation: fadeInUp 0.6s ease; }
 
-    /* ----- HEADER ----- */
+    /* ========== MOBILE‑OPTIMIZED HEADER (enhanced UX) ========== */
     .main-header {
-      background: rgba(var(--primary-rgb), 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: var(--header-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: var(--border-solid);
+      border-bottom: 2px solid var(--secondary);
       box-shadow: var(--shadow-lg);
     }
 
     .nav-container {
       max-width: 1500px;
       margin: 0 auto;
-      padding: 0.5rem 2rem;
+      padding: 0.5rem 1rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
+    /* Logo — compact */
     .logo {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 8px;
       transition: transform 0.3s;
+      flex: 1 1 auto;
+      min-width: 160px;
     }
     .logo:hover { transform: scale(1.02); }
-    .logo-icon { font-size: 2.5rem; color: var(--secondary); filter: drop-shadow(0 0 8px var(--border-color)); }
-    .logo-text h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; color: var(--text-primary); }
-    .logo-text span { font-size: 0.9rem; color: var(--secondary); }
-
-    .lang-toggle-container, .theme-toggle-container, .admin-corner { display: flex; align-items: center; margin-left: 12px; }
-    .lang-btn, .theme-toggle-btn, .admin-corner-btn {
-      background: transparent; border: 1px solid var(--secondary); color: var(--secondary);
-      padding: 8px 16px; border-radius: 40px; font-weight: 600; cursor: pointer;
-      display: flex; align-items: center; gap: 6px; font-size: 0.85rem;
-      transition: var(--transition-smooth); white-space: nowrap;
+    .logo-icon { 
+      font-size: 2rem; 
+      color: var(--secondary); 
+      filter: drop-shadow(0 0 6px var(--border-color));
+      line-height: 1;
     }
-    .lang-btn.active, .lang-btn:hover, .theme-toggle-btn:hover, .admin-corner-btn:hover {
-      background: var(--gradient-primary); color: white; border-color: transparent;
+    .logo-text h1 { 
+      font-size: 1.1rem;
+      font-weight: 700; 
+      letter-spacing: -0.3px; 
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .logo-text span { 
+      font-size: 0.7rem; 
+      color: var(--secondary);
+      display: block;
     }
 
-    .mobile-toggle {
-      display: none; background: none; border: none; color: var(--secondary); font-size: 1.8rem; margin-left: 12px;
-    }
-
-    .nav-menu {
+    /* right side group: lang/theme + mobile toggle */
+    .header-actions {
       display: flex;
-      gap: 30px;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
     }
+
+    .lang-toggle-container, .theme-toggle-container {
+      display: flex;
+      align-items: center;
+    }
+    .lang-btn, .theme-toggle-btn {
+      background: transparent; 
+      border: 1.5px solid var(--secondary); 
+      color: var(--secondary);
+      padding: 6px 10px;
+      border-radius: 30px; 
+      font-weight: 600; 
+      cursor: pointer;
+      display: flex; 
+      align-items: center; 
+      gap: 4px; 
+      font-size: 0.7rem;
+      transition: var(--transition-smooth); 
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .lang-btn i, .theme-toggle-btn i {
+      font-size: 0.8rem;
+    }
+    .lang-btn.active, .lang-btn:hover, .theme-toggle-btn:hover {
+      background: var(--gradient-primary); 
+      color: black; 
+      border-color: transparent;
+    }
+
+    /* Admin corner hidden on mobile, shown on desktop */
+    .admin-corner {
+      display: none;
+    }
+
+    /* Mobile toggle (hamburger) */
+    .mobile-toggle {
+      display: flex;
+      background: rgba(var(--primary-rgb), 0.5);
+      border: 1.5px solid var(--secondary);
+      color: var(--secondary);
+      font-size: 1.5rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 2px;
+      flex-shrink: 0;
+    }
+    .mobile-toggle:hover, .mobile-toggle:active {
+      background: var(--secondary);
+      color: black;
+      transform: rotate(90deg);
+    }
+
+    /* sliding navigation menu — mobile first, off‑canvas */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 280px;
+      height: 100vh;
+      background: var(--gradient-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 3px solid var(--secondary);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 1.5rem 2rem;
+      gap: 1.8rem;
+      transition: right 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 1001;
+    }
+    .nav-menu.active {
+      right: 0;
+    }
+
+    /* close button inside nav */
+    .nav-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: transparent;
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .nav-close:hover {
+      background: var(--secondary);
+      color: black;
+      transform: rotate(90deg);
+    }
+
     .nav-link {
       color: var(--text-primary);
       text-decoration: none;
-      padding: 1.5rem 1rem;
-      font-weight: 500;
-      transition: color 0.3s;
-      position: relative;
+      padding: 1rem 1.2rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-radius: 40px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid transparent;
     }
-    .nav-link::after {
-      content: ''; position: absolute; bottom: 1.2rem; left: 50%; width: 0; height: 2px;
-      background: var(--gradient-primary); transition: all 0.3s; transform: translateX(-50%);
+    .nav-link i {
+      color: var(--secondary);
+      font-size: 1.3rem;
+      width: 28px;
     }
-    .nav-link:hover::after { width: 70%; }
-    .nav-link:hover { color: var(--secondary); }
+    .nav-link:hover, .nav-link:active {
+      background: var(--glass-effect);
+      border-color: var(--secondary);
+      transform: translateX(6px);
+    }
 
-    .corner-input {
-      background: var(--bg-light); border: 1px solid var(--border-color); padding: 8px 12px;
-      border-radius: 30px; color: var(--text-primary); width: 120px; margin-right: 6px;
+    /* admin login inside drawer (mobile only) */
+    .drawer-admin {
+      margin-top: auto;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .corner-input::placeholder { color: var(--text-muted); opacity: 0.8; }
+    .drawer-admin .corner-input {
+      width: 100%;
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 40px;
+      color: var(--text-primary);
+    }
+    .drawer-admin .admin-corner-btn {
+      background: transparent;
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      padding: 12px;
+      border-radius: 40px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+    }
 
-    /* HERO */
+    /* overlay when menu open */
+    .menu-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+    }
+    .menu-overlay.active {
+      display: block;
+    }
+
+    /* ========== HERO SECTION ========== */
     .hero-section {
       background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.5) 100%),
                   url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=1920&q=80');
-      background-size: cover; background-position: center; border-radius: 32px; padding: 100px 20px;
+      background-size: cover; background-position: center; border-radius: 32px; padding: 80px 20px;
       border: var(--border-solid); margin: 30px 0; text-align: center; position: relative;
     }
     body.theme-powder .hero-section {
@@ -189,7 +350,7 @@
       background-size: cover; background-position: center;
     }
     .hero-title {
-      font-size: clamp(2.2rem,6vw,3.8rem); font-weight: 800;
+      font-size: clamp(2rem,8vw,3.8rem); font-weight: 800;
       color: var(--secondary);
       text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
       letter-spacing: -0.02em;
@@ -199,25 +360,26 @@
       color: #001F3F;
     }
     .hero-subtitle {
-      font-size: 1.5rem; color: var(--text-primary); margin: 15px 0; font-weight: 600;
+      font-size: 1.2rem; color: var(--text-primary); margin: 15px 0; font-weight: 600;
       background-color: rgba(var(--primary-rgb), 0.3);
       display: inline-block; padding: 0.3rem 1.5rem; border-radius: 40px; backdrop-filter: blur(4px);
     }
     .hero-tagline {
-      background: var(--gradient-primary); color: black; font-weight: 700; padding: 1rem 2.5rem;
+      background: var(--gradient-primary); color: black; font-weight: 700; padding: 0.8rem 1.5rem;
       border-radius: 60px; display: inline-block; margin: 20px auto; box-shadow: var(--shadow-lg);
-      border: 2px solid var(--secondary);
+      border: 2px solid var(--secondary); font-size: 0.9rem;
     }
 
     .section-badge {
       display: inline-block; background: var(--secondary); color: var(--text-dark);
       font-weight: 700; padding: 6px 22px; border-radius: 40px; letter-spacing: 1px; margin-bottom: 20px;
+      font-size: 0.8rem;
     }
 
     /* brand ambassadors */
     .brand-ambassadors { margin: 60px 0 40px; }
     .brand-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 30px;
+      display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 30px;
     }
     .brand-card {
       background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 32px;
@@ -232,115 +394,46 @@
     .brand-card p { color: var(--text-primary); font-size: 1rem; line-height: 1.5; opacity: 0.9; }
     .brand-tag { display: inline-block; margin-top: 1.2rem; padding: 0.4rem 1.2rem; background: var(--glass-effect); border: 1px solid var(--secondary); border-radius: 40px; font-weight: 600; font-size: 0.9rem; color: var(--secondary); }
 
-    /* modes */
-    .modes-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 30px; margin: 30px 0;
+    /* TARGET AUDIENCE */
+    .target-audience { margin: 70px 0 40px; }
+    .audience-grid {
+      display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 30px;
     }
-    .mode-card {
-      background: var(--gradient-card); border-radius: 28px; padding: 2rem; border-left: 8px solid var(--secondary);
-      box-shadow: var(--shadow-lg); cursor: pointer; transition: var(--transition-smooth);
+    .audience-card {
+      background: var(--gradient-card); border-radius: 32px; padding: 2rem 1.8rem;
+      border: 1px solid var(--border-color); transition: var(--transition-smooth);
+      box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
     }
-    .mode-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-left-width: 12px; }
-    .mode-card h3 { font-size: 2.2rem; color: var(--secondary); }
-    .mode-card p { font-size: 1rem; margin-top: 12px; opacity:0.9; }
+    .audience-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--secondary); }
+    .audience-card::after { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--gradient-primary); }
+    .audience-icon { font-size: 2.5rem; color: var(--secondary); margin-bottom: 1.2rem; }
+    .audience-card h3 { font-size: 1.8rem; color: var(--secondary); margin-bottom: 1rem; font-weight: 700; }
+    .audience-card p { color: var(--text-primary); font-size: 1rem; line-height: 1.6; opacity: 0.95; }
+    .audience-tag { display: inline-block; margin-top: 1.5rem; background: var(--glass-effect); border-radius: 40px; padding: 0.3rem 1.2rem; font-size: 0.85rem; font-weight: 600; color: var(--secondary); border: 1px solid var(--border-color); }
 
-    /* schedule */
-    .schedule-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; margin-top: 30px;
-    }
-    .schedule-card {
-      background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 24px;
-      padding: 28px 20px; transition: var(--transition-smooth); cursor: pointer; border-left: 6px solid var(--secondary);
-    }
+    /* modes & schedule */
+    .modes-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin: 30px 0; }
+    .mode-card { background: var(--gradient-card); border-radius: 28px; padding: 2rem; border-left: 8px solid var(--secondary); box-shadow: var(--shadow-lg); cursor: pointer; transition: var(--transition-smooth); }
+    .mode-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-left-width: 12px; }
+    .mode-card h3 { font-size: 2rem; color: var(--secondary); }
+
+    .schedule-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 30px; }
+    .schedule-card { background: var(--gradient-card); border: 1px solid var(--border-color); border-radius: 24px; padding: 28px 20px; transition: var(--transition-smooth); cursor: pointer; border-left: 6px solid var(--secondary); }
     .schedule-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
     .schedule-card h3 { color: var(--secondary); margin-bottom: 12px; font-size: 1.7rem; }
     .time-detail { font-size: 1rem; background: var(--glass-effect); padding: 8px; border-radius: 20px; margin: 10px 0; }
 
     /* org training */
-    .org-training {
-      background: var(--gradient-card); border-radius: 32px; padding: 40px; border: 1px solid var(--border-color); margin: 40px 0;
-    }
-    .org-feature-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 25px; margin: 30px 0;
-    }
-    .org-feature {
-      background: var(--glass-effect); border-radius: 24px; padding: 20px; text-align: center; cursor: pointer;
-      transition: var(--transition-smooth); border: 1px solid transparent;
-    }
+    .org-training { background: var(--gradient-card); border-radius: 32px; padding: 40px; border: 1px solid var(--border-color); margin: 40px 0; }
+    .org-feature-grid { display: grid; grid-template-columns: 1fr; gap: 25px; margin: 30px 0; }
+    .org-feature { background: var(--glass-effect); border-radius: 24px; padding: 20px; text-align: center; cursor: pointer; transition: var(--transition-smooth); border: 1px solid transparent; }
     .org-feature:hover { border-color: var(--secondary); transform: scale(1.02); background: rgba(255,215,0,0.08); }
     .org-feature i { font-size: 2.2rem; color: var(--secondary); }
-    .org-feature h4 { margin: 12px 0 8px; }
-
-    /* TARGET AUDIENCE SECTION with bilingual data attributes */
-    .target-audience {
-      margin: 70px 0 40px;
-    }
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
-      margin-top: 30px;
-    }
-    .audience-card {
-      background: var(--gradient-card);
-      border-radius: 32px;
-      padding: 2rem 1.8rem;
-      border: 1px solid var(--border-color);
-      transition: var(--transition-smooth);
-      box-shadow: var(--shadow-lg);
-      position: relative;
-      overflow: hidden;
-    }
-    .audience-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--secondary);
-    }
-    .audience-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 6px;
-      height: 100%;
-      background: var(--gradient-primary);
-    }
-    .audience-icon {
-      font-size: 2.5rem;
-      color: var(--secondary);
-      margin-bottom: 1.2rem;
-    }
-    .audience-card h3 {
-      font-size: 1.8rem;
-      color: var(--secondary);
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .audience-card p {
-      color: var(--text-primary);
-      font-size: 1rem;
-      line-height: 1.6;
-      opacity: 0.95;
-    }
-    .audience-tag {
-      display: inline-block;
-      margin-top: 1.5rem;
-      background: var(--glass-effect);
-      border-radius: 40px;
-      padding: 0.3rem 1.2rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--secondary);
-      border: 1px solid var(--border-color);
-    }
 
     /* course table */
     .course-table-section { margin: 60px 0 40px; }
-    .course-table-wrapper {
-      background: var(--card-bg); border-radius: 36px; border: 1px solid var(--border-color);
-      padding: 30px 20px; box-shadow: var(--shadow-lg); overflow-x: auto; backdrop-filter: blur(4px);
-    }
-    table { width: 100%; border-collapse: separate; border-spacing: 0 12px; font-family: 'Space Grotesk', 'Inter', sans-serif; }
+    .course-table-wrapper { background: var(--card-bg); border-radius: 36px; border: 1px solid var(--border-color); padding: 30px 20px; box-shadow: var(--shadow-lg); overflow-x: auto; backdrop-filter: blur(4px); }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 12px; min-width: 600px; }
     th { text-align: left; padding: 16px 16px 8px 16px; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.8px; font-size: 0.9rem; border-bottom: 2px dashed var(--border-color); }
     td { padding: 18px 16px; background: var(--glass-effect); border-radius: 20px !important; color: var(--text-primary); font-weight: 500; backdrop-filter: blur(2px); transition: 0.2s; font-size: 1rem; }
     tbody tr { cursor: pointer; transition: transform 0.2s; }
@@ -361,7 +454,7 @@
       background: var(--gradient-card);
       border: 2px solid var(--secondary);
       border-radius: 32px;
-      padding: 2.2rem 2.5rem;
+      padding: 2rem;
       max-width: 750px;
       width: 90%;
       position: relative;
@@ -389,54 +482,35 @@
       transform: rotate(90deg) scale(1.1);
       box-shadow: 0 0 20px var(--secondary);
     }
-    .modal ul, .modal .inst-feature-list, .modal .career-path-list {
-      list-style: none;
-      margin: 1.5rem 0;
-    }
-    .modal li {
-      margin: 0.8rem 0;
-      padding: 0.5rem 1rem;
-      background: var(--glass-effect);
-      border-radius: 40px;
-      border-left: 5px solid var(--secondary);
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-    .modal li i {
-      color: var(--secondary);
-      font-size: 1.2rem;
-      width: 1.6rem;
-      text-align: center;
-    }
-    .modal h2 {
-      font-size: 2rem;
-      border-bottom: 2px dashed var(--border-color);
-      padding-bottom: 0.8rem;
-      margin-bottom: 1.2rem;
-    }
-    .modal h3 {
-      margin: 1.5rem 0 0.8rem;
-      color: var(--secondary);
-    }
-    .modal p {
-      background: rgba(255,215,0,0.03);
-      padding: 1rem;
-      border-radius: 24px;
-      line-height: 1.7;
-    }
+    .modal ul, .modal .inst-feature-list, .modal .career-path-list { list-style: none; margin: 1.5rem 0; }
+    .modal li { margin: 0.8rem 0; padding: 0.5rem 1rem; background: var(--glass-effect); border-radius: 40px; border-left: 5px solid var(--secondary); font-size: 1.05rem; display: flex; align-items: center; gap: 0.7rem; }
+    .modal li i { color: var(--secondary); font-size: 1.2rem; width: 1.6rem; text-align: center; }
+    .modal h2 { font-size: 2rem; border-bottom: 2px dashed var(--border-color); padding-bottom: 0.8rem; margin-bottom: 1.2rem; }
+    .modal h3 { margin: 1.5rem 0 0.8rem; color: var(--secondary); }
 
     .quick-access { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
     .quick-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--gradient-card); color: var(--secondary); border: 2px solid var(--secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition-smooth); font-size: 1.2rem; }
     .quick-btn:hover { transform: scale(1.1) rotate(5deg); background: var(--gradient-primary); color: white; }
 
-    @media (max-width: 992px) { .nav-menu { display: none; } .mobile-toggle { display: block; } }
-    @media (max-width: 768px) { .container { padding: 15px; } .brand-grid { grid-template-columns: 1fr; } }
+    /* desktop breakpoint */
+    @media (min-width: 769px) {
+      .nav-menu { position: static; width: auto; height: auto; background: transparent; border-left: none; flex-direction: row; padding: 0; gap: 20px; box-shadow: none; backdrop-filter: none; }
+      .nav-close, .menu-overlay, .drawer-admin { display: none; }
+      .mobile-toggle { display: none; }
+      .admin-corner { display: flex; align-items: center; gap: 6px; }
+      .lang-btn, .theme-toggle-btn { padding: 8px 16px; font-size: 0.85rem; }
+      .logo-text h1 { font-size: 1.6rem; }
+      .logo-text span { font-size: 0.9rem; }
+      .brand-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .audience-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .modes-grid { grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); }
+      .schedule-grid { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+      .org-feature-grid { grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); }
+    }
   </style>
 </head>
 <body>
-  <!-- Anti-view-source & Devtools protection -->
+  <!-- Anti-view-source & Devtools protection (unchanged) -->
   <div id="devtoolsOverlay" style="display:none; position:fixed; inset:0; background:black; z-index:999999; color:white; justify-content:center; align-items:center;">🔒 Source access restricted</div>
   <script>
     (function(){
@@ -470,32 +544,49 @@
   </script>
   <script id="secure-credentials" type="application/security"></script>
 
-  <!-- ========== HEADER ========== -->
+  <!-- ========== MOBILE OPTIMIZED HEADER ========== -->
   <header class="main-header">
     <div class="nav-container">
+      <!-- Logo (compact) -->
       <div class="logo">
         <div class="logo-icon"><i class="fas fa-laptop-code"></i></div>
         <div class="logo-text">
-          <h1>ICT Skills Training</h1>
-          <span>Katete District · 2026</span>
+          <h1>ICT Katete 2026</h1>
+          <span>Skills for all</span>
         </div>
       </div>
-      <div style="display: flex; align-items: center; flex-wrap: wrap;">
+
+      <!-- Right side actions: lang/theme + hamburger -->
+      <div class="header-actions">
         <div class="lang-toggle-container">
-          <button id="lang-en-btn" class="lang-btn active"><i class="fas fa-language"></i> ENGLISH</button>
-          <button id="lang-ny-btn" class="lang-btn"><i class="fas fa-language"></i> NYANJA </button>
+          <button id="lang-en-btn" class="lang-btn active"><i class="fas fa-globe"></i> ENGLISH</button>
+          <button id="lang-ny-btn" class="lang-btn"><i class="fas fa-globe"></i> NYANJA</button>
         </div>
         <div class="theme-toggle-container">
-          <button id="theme-toggle-btn" class="theme-toggle-btn"><i class="fas fa-palette"></i>BLUE THEME </button>
+          <button id="theme-toggle-btn" class="theme-toggle-btn"><i class="fas fa-palette"></i></button>
         </div>
         <button class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
       </div>
+
+      <!-- sliding navigation (mobile only, enhanced UX) -->
       <nav class="nav-menu" id="navMenu">
-        <a href="#home" class="nav-link" data-en="Home" data-ny="Nyumba">Home</a>
-        <a href="#courses-table" class="nav-link" data-en="Courses" data-ny="Maphunziro">Courses</a>
-        <a href="#schedule" class="nav-link" data-en="Schedule" data-ny="Ndondomeko">Schedule</a>
-        <a href="#contact" class="nav-link" data-en="Contact" data-ny="Lumikizanani">Contact</a>
+        <div class="nav-close" id="navClose"><i class="fas fa-times"></i></div>
+        <a href="#home" class="nav-link"><i class="fas fa-home"></i> <span data-en="Home" data-ny="Nyumba">Home</span></a>
+        <a href="#courses-table" class="nav-link"><i class="fas fa-book-open"></i> <span data-en="Courses" data-ny="Maphunziro">Courses</span></a>
+        <a href="#schedule" class="nav-link"><i class="fas fa-calendar-alt"></i> <span data-en="Schedule" data-ny="Ndondomeko">Schedule</span></a>
+        <a href="#contact" class="nav-link"><i class="fas fa-phone-alt"></i> <span data-en="Contact" data-ny="Lumikizanani">Contact</span></a>
+        
+        <!-- admin drawer inside nav (mobile only) -->
+        <div class="drawer-admin">
+          <input type="text" id="drawerUsername" class="corner-input" placeholder="Username">
+          <input type="password" id="drawerPassword" class="corner-input" placeholder="Password">
+          <button class="admin-corner-btn" id="drawerLoginBtn"><i class="fas fa-lock"></i> Admin login</button>
+        </div>
       </nav>
+      <!-- Overlay for drawer -->
+      <div class="menu-overlay" id="menuOverlay"></div>
+
+      <!-- original admin corner (hidden on mobile, visible desktop) -->
       <div class="admin-corner">
         <input type="text" id="cornerUsername" class="corner-input" placeholder="Username" style="display: none;">
         <input type="password" id="cornerPassword" class="corner-input" placeholder="Password" style="display: none;">
@@ -538,39 +629,34 @@
       </div>
     </section>
 
-    <!-- TARGET AUDIENCE – now fully bilingual (EN + NY) using data attributes -->
+    <!-- TARGET AUDIENCE – fully bilingual -->
     <section class="target-audience">
       <div class="section-badge"><i class="fas fa-users"></i> <span data-en="WE PREPARE EVERY INDIVIDUAL – TAILORED ICT" data-ny="TIMAKONZERA MUNTHU ALIYENSE – ICT YOSIYANA">WE PREPARE EVERY INDIVIDUAL – TAILORED ICT</span></div>
       <div class="audience-grid">
-        <!-- youths -->
         <div class="audience-card">
           <div class="audience-icon"><i class="fas fa-graduation-cap"></i></div>
           <h3 data-en="🎓 Youths" data-ny="🎓 Achinyamata">🎓 Youths</h3>
           <p data-en="Transitioning from secondary to college/university? Gain research, data analysis & writing skills. Our courses give you a powerful backup for academic success." data-ny="Mukuchoka ku sekondale kupita ku koleji/yuunivesite? Phunzirani kufufuza, kusanthula deta & kulemba. Maphunziro athu amakupatsani chothandizira champhamvu kuti mupambane pamaphunziro.">Transitioning from secondary to college/university? Gain research, data analysis & writing skills. Our courses give you a powerful backup for academic success.</p>
           <span class="audience-tag" data-en="research · analysis · editing" data-ny="kufufuza · kusanthula · kukonza">research · analysis · editing</span>
         </div>
-        <!-- working class -->
         <div class="audience-card">
           <div class="audience-icon"><i class="fas fa-briefcase"></i></div>
           <h3 data-en="💼 Working class" data-ny="💼 Ogwira ntchito">💼 Working class</h3>
           <p data-en="Teachers, nurses, doctors, officers — integrate ICT into daily work. Boost productivity, professional development, and gain a competitive edge." data-ny="Aphunzitsi, anamwino, madokotala, maofesala — gwiritsani ntchito ICT pantchito yanu yatsiku ndi tsiku. Onjezani mphamvu pantchito, kukula kwa ukadaulo, ndikukhala ndi mwayi wopambana.">Teachers, nurses, doctors, officers — integrate ICT into daily work. Boost productivity, professional development, and gain a competitive edge.</p>
           <span class="audience-tag" data-en="productivity · advantage · upskill" data-ny="mphamvu · mwayi · kukulitsa luso">productivity · advantage · upskill</span>
         </div>
-        <!-- job seekers -->
         <div class="audience-card">
           <div class="audience-icon"><i class="fas fa-search"></i></div>
           <h3 data-en="🔎 Job seekers" data-ny="🔎 Ofuna ntchito">🔎 Job seekers</h3>
           <p data-en="Accelerate job hunting with online applications, digital profiles, and e‑portfolios. We equip you with the tools to navigate the modern job market." data-ny="Fufuzani ntchito mwachangu pogwiritsa ntchito mapulogalamu a pa intaneti, mbiri ya digito, ndi ma e-portfolio. Timakupatsani zida zoyendera msika wantchito wamakono.">Accelerate job hunting with online applications, digital profiles, and e‑portfolios. We equip you with the tools to navigate the modern job market.</p>
           <span class="audience-tag" data-en="online apps · e‑portfolio · springboard" data-ny="mapulogalamu · mbiri ya digito · chothandizira">online apps · e‑portfolio · springboard</span>
         </div>
-        <!-- students -->
         <div class="audience-card">
           <div class="audience-icon"><i class="fas fa-child"></i></div>
           <h3 data-en="📚 Students" data-ny="📚 Ophunzira">📚 Students</h3>
           <p data-en="From homework to research projects — ICT skills help you excel. Learn to find, evaluate, and present information effectively." data-ny="Kuchoka pa homuweki mpaka mapulojekiti ofufuza — luso la ICT limakuthandizani kuchita bwino. Phunzirani kupeza, kuwunika, ndikupereka chidziwitso moyenera.">From homework to research projects — ICT skills help you excel. Learn to find, evaluate, and present information effectively.</p>
           <span class="audience-tag" data-en="homework · research · assignments" data-ny="homuweki · kufufuza · ntchito">homework · research · assignments</span>
         </div>
-        <!-- farmers -->
         <div class="audience-card">
           <div class="audience-icon"><i class="fas fa-tractor"></i></div>
           <h3 data-en="🌾 Farmers" data-ny="🌾 Alimi">🌾 Farmers</h3>
@@ -578,7 +664,6 @@
           <span class="audience-tag" data-en="agri‑tech · weather · data" data-ny="ukadaulo waulimi · nyengo · deta">agri‑tech · weather · data</span>
         </div>
       </div>
-      <!-- closing bilingual statement -->
       <p style="text-align:center; margin:2rem 0 0; font-size:1.3rem; background:var(--glass-effect); padding:1rem; border-radius:60px;" data-en="❤️ In all these cases, we cater for each individual. Our flexible modes and personalised mentorship ensure your specific needs are met." data-ny="❤️ Muzochitika zonsezi, timasamalira munthu aliyense. Njira zathu zosinthika ndi upangiri wapayekha zimatsimikizira kuti zosowa zanu zakwaniritsidwa."><i class="fas fa-heart" style="color:var(--secondary);"></i> In all these cases, we cater for each individual. Our flexible modes and personalised mentorship ensure your specific needs are met.</p>
     </section>
 
@@ -650,13 +735,12 @@
   </div>
 
   <script>
-    // LANGUAGE / THEME / ADMIN (updated to handle all new bilingual elements)
+    // LANGUAGE / THEME / ADMIN (fully preserved)
     let currentLanguage = 'en', currentTheme = 'dark', loggedIn = false;
     const langEn = document.getElementById('lang-en-btn'), langNy = document.getElementById('lang-ny-btn'), themeBtn = document.getElementById('theme-toggle-btn');
     
     function setLanguage(lang){
       currentLanguage = lang;
-      // update all elements with data-en / data-ny
       document.querySelectorAll('[data-en]').forEach(el => {
         const txt = el.getAttribute(`data-${lang}`);
         if (txt) el.innerText = txt;
@@ -668,27 +752,61 @@
     function setTheme(theme){
       currentTheme = theme;
       document.body.classList.toggle('theme-powder', theme==='powder');
-      themeBtn.innerHTML = theme==='dark' ? '<i class="fas fa-palette"></i> BLUE THEME' : '<i class="fas fa-palette"></i> BLACK & GOLD THEME ';
+      themeBtn.innerHTML = theme==='dark' ? '<i class="fas fa-palette"></i>' : '<i class="fas fa-palette"></i>';
     }
 
     langEn.onclick = () => setLanguage('en');
     langNy.onclick = () => setLanguage('ny');
     themeBtn.onclick = () => setTheme(currentTheme==='dark' ? 'powder' : 'dark');
-    document.getElementById('mobileToggle').onclick = () => document.getElementById('navMenu').classList.toggle('active');
 
+    // Mobile menu controls
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navClose = document.getElementById('navClose');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    function openMenu() {
+      navMenu.classList.add('active');
+      menuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    mobileToggle.addEventListener('click', openMenu);
+    navClose.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+
+    // Admin login unified (corner + drawer)
     const cornerLogin = document.getElementById('cornerLoginBtn');
+    const drawerLogin = document.getElementById('drawerLoginBtn');
+    const cornerUser = document.getElementById('cornerUsername');
+    const cornerPass = document.getElementById('cornerPassword');
+    const drawerUser = document.getElementById('drawerUsername');
+    const drawerPass = document.getElementById('drawerPassword');
+
+    function handleAdminLogin(usernameInput, passwordInput) {
+      if (window.__secureAdminCredentials.validate(usernameInput.value.trim(), passwordInput.value.trim())) {
+        loggedIn = true;
+        alert('Welcome admin');
+        closeMenu(); // close drawer if open
+      } else alert('Invalid credentials');
+    }
+
     cornerLogin.addEventListener('click', (e) => {
-      let user = document.getElementById('cornerUsername'), pass = document.getElementById('cornerPassword');
-      if (user.style.display === 'none') {
-        user.style.display = 'inline-block'; pass.style.display = 'inline-block'; cornerLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+      if (cornerUser.style.display === 'none') {
+        cornerUser.style.display = 'inline-block'; cornerPass.style.display = 'inline-block'; cornerLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
       } else {
-        if (window.__secureAdminCredentials.validate(user.value.trim(), pass.value.trim())) {
-          loggedIn = true; user.style.display = 'none'; pass.style.display = 'none'; cornerLogin.innerHTML = '<i class="fas fa-lock"></i> Admin'; alert('Welcome admin');
-        } else alert('Invalid');
+        handleAdminLogin(cornerUser, cornerPass);
       }
     });
+    drawerLogin.addEventListener('click', () => {
+      handleAdminLogin(drawerUser, drawerPass);
+    });
 
-    // career & institution data (unchanged)
+    // career & institution data (full original)
     const careerData = {
       word: { title:"📄 Word Processing (MS Word)", desc:"Master document creation, formatting, mail merge, and professional templates.", careers:["Administrative Assistant","Secretary / Office Clerk","Data Entry Specialist","Legal Secretary","Executive Assistant"], uses:"Create letters, reports, memos, CVs, and official documents. Essential for any office role.", skills:"Styles, tables of contents, mail merge, track changes, macros." },
       excel: { title:"📊 Spreadsheets (MS Excel)", desc:"Comprehensive Excel training: formulas, pivot tables, charts, and data analysis.", careers:["Accounts Clerk","Data Analyst","Inventory Manager","Payroll Officer","Audit Assistant"], uses:"Manage budgets, analyze sales, track stock, financial reporting, payroll.", skills:"VLOOKUP, IF statements, pivot tables, macros, data validation." },
@@ -733,7 +851,7 @@
       let content = '';
       if (day === 'weekdays') content = `<h2 style="color:var(--secondary);">📆 Weekday schedule (Mon–Thu)</h2><p><strong>Timing:</strong> 16:30 – 18:00 (Mon–Thu).</p><h3>💪 Strengths:</h3><ul><li>Consistent after‑work/school time</li><li>Rotating topics: Mon (Word/Excel), Tue (PowerPoint/Publisher), Wed (Access/Web), Thu (concepts/skills)</li><li>Small class sizes, individual attention</li></ul><h3>👤 Who it suits:</h3><p>Professionals, students, and anyone occupied during daytime. Perfect for steady progress without weekend commitment.</p><p><em>✨ Extras:</em> free Wi‑Fi, tea break.</p>`;
       else if (day === 'saturday') content = `<h2 style="color:var(--secondary);">📆 Saturday intensive</h2><p><strong>Timing:</strong> 08:00 – 17:00 (full day).</p><h3>💪 Strengths:</h3><ul><li>Deep‑dive practicals (two 3‑hour sessions)</li><li>Certificate prep workshops</li><li>Lunch break 12:00–13:00, networking</li><li>Complete a module in one day</li></ul><h3>👤 Who it suits:</h3><p>Learners who want to accelerate, those with weekday constraints, or remote visitors combining classes with travel.</p><p><em>✨ Extras:</em> lunch Break, weekend lab access.</p>`;
-      else if (day === 'sunday') content = `<h2 style="color:var(--secondary);">📆 Sunday session</h2><p><strong>Timing:</strong> 10:00 – 17:00.</p><h3>💪 Strengths:</h3><ul><li>Quiet, relaxed environment</li><li>Group projects and portfolio building</li><li>Monthly guest speakers / career mentorship</li><li>Ideal for reflective learning</li></ul><h3>👤 Who it suits:</h3><p>Self‑starters, entrepreneurs, or those with religious commitments Saturday. Also great for building portfolio pieces.</p><p><em>✨ Extras:</em> mentorship lounge, refreshments.</p>`;
+      else if (day === 'sunday') content = `<h2 style="color:var(--secondary);">📆 Sunday session</h2><p><strong>Timing:</strong> 10:00 – 17:00.</p><h3>💪 Strengths:</h3><ul><li>Quiet, relaxed environment</li><li>Group projects and portfolio building</li><li>Monthly guest speakers / career mentorship</li><li>Ideal for reflective learning</li></ul><h3>👤 Who it suits:</h3><p>Self‑starters, entrepreneurs, or those with religious commitments Saturday. Also great for building portfolio pieces.</p><p><em>✨ Extras:</em> mentorship lounge, online support.</p>`;
       document.getElementById('genericDetails').innerHTML = content;
       document.getElementById('genericDetailModal').style.display = 'flex';
     };

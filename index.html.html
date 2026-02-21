@@ -430,14 +430,31 @@
     .org-feature:hover { border-color: var(--secondary); transform: scale(1.02); background: rgba(255,215,0,0.08); }
     .org-feature i { font-size: 2.2rem; color: var(--secondary); }
 
-    /* course table */
+    /* course table — with new side motion animation */
     .course-table-section { margin: 60px 0 40px; }
     .course-table-wrapper { background: var(--card-bg); border-radius: 36px; border: 1px solid var(--border-color); padding: 30px 20px; box-shadow: var(--shadow-lg); overflow-x: auto; backdrop-filter: blur(4px); }
     table { width: 100%; border-collapse: separate; border-spacing: 0 12px; min-width: 600px; }
     th { text-align: left; padding: 16px 16px 8px 16px; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.8px; font-size: 0.9rem; border-bottom: 2px dashed var(--border-color); }
     td { padding: 18px 16px; background: var(--glass-effect); border-radius: 20px !important; color: var(--text-primary); font-weight: 500; backdrop-filter: blur(2px); transition: 0.2s; font-size: 1rem; }
     tbody tr { cursor: pointer; transition: transform 0.2s; }
-    tbody tr:hover td { background: var(--border-color); transform: scale(1.005); }
+
+    /* ----- NEW: horizontal motion for table rows to indicate more content ----- */
+    @keyframes subtleSway {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+    tbody tr {
+      animation: subtleSway 3s ease-in-out 2;  /* plays twice, then stops – subtle hint */
+      animation-iteration-count: 2;
+    }
+    /* also add a gentle hover extension effect */
+    tbody tr:hover td {
+      background: var(--border-color);
+      transform: scale(1.008) translateX(6px);
+      box-shadow: -4px 4px 12px rgba(0,0,0,0.2);
+    }
     .course-name { font-weight: 700; color: var(--secondary); font-size: 1.1rem; }
     .duration-chip { background: var(--gradient-primary); color: black; font-weight: 600; padding: 6px 14px; border-radius: 40px; display: inline-block; font-size: 0.85rem; }
     .award-badge { background: transparent; border: 1.5px solid var(--secondary); color: var(--secondary); padding: 6px 14px; border-radius: 40px; font-size: 0.8rem; font-weight: 600; display: inline-block; }
@@ -696,7 +713,7 @@
       <button class="contact-wa-btn" onclick="openWhatsAppChat('I need a corporate proposal for my organisation')" style="background:var(--secondary); color:black; margin-top:15px;"><i class="fab fa-whatsapp"></i> <span data-en="Request group proposal" data-ny="Pemphani lingaliro lamagulu">Request group proposal</span></button>
     </section>
 
-    <!-- COURSE TABLE -->
+    <!-- COURSE TABLE with side‑to‑side animation on load (now implemented via CSS) -->
     <section id="courses-table" class="course-table-section">
       <div class="section-badge"><i class="fas fa-book-open"></i> 2026 PROGRAMMES · FULL LIST (click any course for detailed career pathway)</div>
       <div class="course-table-wrapper">

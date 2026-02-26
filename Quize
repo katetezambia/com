@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zambia National Science Center · Electronic Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: linear-gradient(145deg, #f0f4e8 0%, #d0e0c0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Main card – inspired by Zambian colours (green, orange, red, black) */
+        .quiz-container {
+            max-width: 850px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 40px 40px 30px 30px;
+            box-shadow: 0 30px 40px rgba(0, 40, 0, 0.25);
+            overflow: hidden;
+            border: 2px solid #198754;
+            transition: all 0.2s;
+        }
+
+        /* Header with Zambian flag motif */
+        .zambia-header {
+            background: linear-gradient(90deg, #198754 0%, #198754 33%, #de7c2d 33%, #de7c2d 66%, #ce1126 66%, #ce1126 100%);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            text-shadow: 2px 2px 0 #00000030;
+            border-bottom: 5px solid #222;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .emblem {
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #198754;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border: 3px solid #ffd966;
+        }
+
+        .title h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .title p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .flag-mini {
+            display: flex;
+            gap: 5px;
+        }
+        .flag-mini span {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+        }
+        .green { background: #198754; }
+        .orange { background: #de7c2d; }
+        .red { background: #ce1126; }
+        .black { background: #000; }
+
+        /* progress bar / score area */
+        .quiz-stats {
+            background: #f8f9fa;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            border-bottom: 2px solid #b0b0b0;
+            color: #1e3a2f;
+        }
+
+        .question-counter {
+            background: #de7c2d;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+        }
+
+        .score-badge {
+            background: #198754;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 40px;
+        }
+
+        /* main quiz area */
+        .quiz-body {
+            padding: 30px 30px 25px;
+            background: #fefef7;
+        }
+
+        .question-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #003d1f;
+            margin-bottom: 25px;
+            border-left: 12px solid #de7c2d;
+            padding-left: 20px;
+            line-height: 1.3;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+
+        .option-item {
+            background: #eef4ea;
+            border: 2px solid #b4c9a3;
+            border-radius: 60px;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0b2f1f;
+        }
+
+        .option-item:hover {
+            background: #d4e2c4;
+            border-color: #198754;
+            transform: scale(1.01);
+            box-shadow: 0 4px 8px rgba(0,80,0,0.1);
+        }
+
+        .option-item.selected {
+            background: #c7e0b0;
+            border-color: #198754;
+            border-width: 3px;
+            box-shadow: 0 0 0 3px #b3d0a0;
+        }
+
+        .option-item input[type="radio"] {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #1e5f3e;
+            border-radius: 50%;
+            margin-right: 24px;
+            position: relative;
+            cursor: pointer;
+            background: white;
+        }
+
+        .option-item input[type="radio"]:checked {
+            background: #198754;
+            border-color: #198754;
+            box-shadow: inset 0 0 0 5px white;
+        }
+
+        .option-item input[type="radio"]:focus-visible {
+            outline: 3px solid #ffb347;
+        }
+
+        /* navigation buttons */
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            border: none;
+            background: #de7c2d;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 14px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #8f4b1a;
+            transition: 0.07s linear;
+            min-width: 140px;
+            letter-spacing: 0.5px;
+            border: 2px solid #f7b26a;
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #8f4b1a;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            transform: translateY(0);
+            box-shadow: 0 4px 0 #6a3f17;
+            pointer-events: none;
+        }
+
+        .btn-secondary {
+            background: #2c5f2d;
+            box-shadow: 0 6px 0 #1a3a1a;
+            border-color: #7da06e;
+        }
+
+        .btn-restart {
+            background: #222;
+            box-shadow: 0 6px 0 #111;
+            border-color: #777;
+        }
+
+        /* results panel */
+        .results-panel {
+            background: #1e3a2f;
+            color: #f7f7d9;
+            border-radius: 40px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+            border: 4px solid #ffb347;
+        }
+
+        .results-panel h2 {
+            font-size: 2.2rem;
+            color: #ffd966;
+        }
+
+        .final-score {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 15px 0;
+            color: white;
+        }
+
+        .feedback-message {
+            font-size: 1.4rem;
+            background: #3f6655;
+            padding: 12px;
+            border-radius: 60px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 15px 25px;
+            background: #dee6d5;
+            font-weight: 500;
+            color: #1d492d;
+            border-top: 2px solid #9bb888;
+            font-size: 1rem;
+        }
+
+        .footer-note img {
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        /* responsive */
+        @media (max-width: 550px) {
+            .question-text { font-size: 1.4rem; }
+            .option-item { font-size: 1rem; padding: 12px 16px; }
+            .btn { min-width: 120px; padding: 12px 16px; }
+            .zambia-header { flex-direction: column; text-align: center; }
+            .header-logo { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- HEADER with Zambian science centre branding -->
+        <div class="zambia-header">
+            <div class="header-logo">
+                <div class="emblem">🔬🇿🇲</div>
+                <div class="title">
+                    <h1>ZAMBIA NATIONAL SCIENCE CENTER</h1>
+                    <p>electronic quiz · knowledge simulation</p>
+                </div>
+            </div>
+            <div class="flag-mini">
+                <span class="green"></span>
+                <span class="orange"></span>
+                <span class="red"></span>
+                <span class="black"></span>
+            </div>
+        </div>
+
+        <!-- progress & score -->
+        <div class="quiz-stats">
+            <span class="question-counter" id="questionCounter">Q1 / 8</span>
+            <span class="score-badge" id="scoreDisplay">⭐ 0</span>
+        </div>
+
+        <!-- dynamic quiz main area -->
+        <div class="quiz-body" id="quizBody">
+            <div id="questionArea">
+                <!-- question and options will be injected by js -->
+            </div>
+
+            <!-- navigation buttons -->
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" disabled>◀ PREVIOUS</button>
+                <button class="btn" id="nextBtn">NEXT ▶</button>
+                <button class="btn btn-restart" id="restartBtn">↻ RESTART</button>
+            </div>
+            <!-- hidden submit button appears only at last question -->
+            <div class="nav-buttons" id="submitContainer" style="display: none;">
+                <button class="btn" id="submitQuizBtn">✔ SUBMIT QUIZ</button>
+            </div>
+
+            <!-- results panel (hidden initially) -->
+            <div id="resultsPanel" class="results-panel hidden">
+                <h2>📋 YOUR SCIENCE SCORE</h2>
+                <div class="final-score" id="finalScore">0 / 8</div>
+                <div class="feedback-message" id="feedbackMsg"></div>
+                <p style="margin-top: 20px; color: #ffd966;">✪ Zambian National Science Center ✪</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            ⚡ simulating an electronic quiz · Lusaka, Zambia ⚡
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ----- comprehensive science quiz questions (Zambia infused) -----
+            const questions = [
+                {
+                    question: "Which element is extensively mined in Zambia and has the chemical symbol 'Cu'?",
+                    options: ["Cobalt", "Copper", "Carbon", "Calcium"],
+                    correct: 1
+                },
+                {
+                    question: "What vitamin does the human body produce when exposed to sunlight?",
+                    options: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
+                    correct: 2
+                },
+                {
+                    question: "The famous Victoria Falls is on which river? (scientific geography)",
+                    options: ["Congo River", "Zambezi River", "Kafue River", "Luangwa River"],
+                    correct: 1
+                },
+                {
+                    question: "Photosynthesis mainly converts light energy into which form?",
+                    options: ["Thermal energy", "Kinetic energy", "Chemical energy", "Nuclear energy"],
+                    correct: 2
+                },
+                {
+                    question: "Which gas makes up about 78% of Earth's atmosphere?",
+                    options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
+                    correct: 2
+                },
+                {
+                    question: "What is the hardest natural substance on Earth?",
+                    options: ["Iron", "Platinum", "Diamond", "Quartz"],
+                    correct: 2
+                },
+                {
+                    question: "The scientific name for the African fish eagle (national bird of Zambia) is?",
+                    options: ["Haliaeetus vocifer", "Aquila rapax", "Pandion haliaetus", "Buteo buteo"],
+                    correct: 0
+                },
+                {
+                    question: "Which of these is a renewable energy source widely encouraged in Zambia?",
+                    options: ["Solar power", "Coal", "Natural gas", "Nuclear fission"],
+                    correct: 0
+                }
+            ];
+
+            const totalQuestions = questions.length;
+            
+            // state
+            let currentQuestionIndex = 0;
+            let userAnswers = new Array(totalQuestions).fill(null);   // stores index of selected option (0-3)
+            let quizSubmitted = false;
+
+            // DOM elements
+            const questionArea = document.getElementById('questionArea');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const submitContainer = document.getElementById('submitContainer');
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+            const resultsPanel = document.getElementById('resultsPanel');
+            const questionCounter = document.getElementById('questionCounter');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const finalScoreSpan = document.getElementById('finalScore');
+            const feedbackMsg = document.getElementById('feedbackMsg');
+
+            // helper: update visible score (based on answered correct)
+            function updateScoreIndicator() {
+                let correctCount = 0;
+                for (let i = 0; i < totalQuestions; i++) {
+                    if (userAnswers[i] !== null && userAnswers[i] === questions[i].correct) {
+                        correctCount++;
+                    }
+                }
+                scoreDisplay.textContent = `⭐ ${correctCount}`;
+            }
+
+            // render current question (options + question text)
+            function renderQuestion() {
+                if (quizSubmitted) return; // no rendering if finished
+
+                const q = questions[currentQuestionIndex];
+                const savedAnswer = userAnswers[currentQuestionIndex];
+
+                // build html
+                let html = `<div class="question-text">${currentQuestionIndex+1}. ${q.question}</div>`;
+                html += `<div class="options-grid" id="optionsContainer">`;
+
+                q.options.forEach((opt, idx) => {
+                    const isSelected = (savedAnswer === idx);
+                    const selectedClass = isSelected ? 'selected' : '';
+                    html += `
+                        <div class="option-item ${selectedClass}" data-opt-index="${idx}">
+                            <input type="radio" name="questionOpt" value="${idx}" id="opt_${idx}" ${isSelected ? 'checked' : ''}>
+                            <label for="opt_${idx}" style="flex:1; cursor:pointer;">${opt}</label>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+                questionArea.innerHTML = html;
+
+                // attach click listeners to each option div (for better UX)
+                document.querySelectorAll('.option-item').forEach(div => {
+                    const radio = div.querySelector('input[type="radio"]');
+                    div.addEventListener('click', (e) => {
+                        // if already selected, do nothing (but allow uncheck? better keep radio behavior)
+                        const radioInput = div.querySelector('input[type="radio"]');
+                        if (radioInput) {
+                            radioInput.checked = true;
+                            // manually trigger change event
+                            const ev = new Event('change', { bubbles: true });
+                            radioInput.dispatchEvent(ev);
+                        }
+                    });
+                });
+
+                // add change listener on radio buttons to update userAnswers and style
+                document.querySelectorAll('input[name="questionOpt"]').forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        const selectedVal = parseInt(e.target.value);
+                        // update answer for current question
+                        userAnswers[currentQuestionIndex] = selectedVal;
+
+                        // remove selected class from all options
+                        document.querySelectorAll('.option-item').forEach(optDiv => {
+                            optDiv.classList.remove('selected');
+                        });
+                        // add selected class to parent of this radio
+                        e.target.closest('.option-item').classList.add('selected');
+
+                        // update the top score indicator
+                        updateScoreIndicator();
+                    });
+                });
+
+                // update prev/next buttons state
+                prevBtn.disabled = (currentQuestionIndex === 0);
+                if (currentQuestionIndex === totalQuestions - 1) {
+                    nextBtn.disabled = true;
+                    submitContainer.style.display = 'flex';  // show submit button
+                } else {
+                    nextBtn.disabled = false;
+                    submitContainer.style.display = 'none';
+                }
+
+                // update question counter
+                questionCounter.textContent = `Q${currentQuestionIndex+1} / ${totalQuestions}`;
+            }
+
+            // function to move to next question
+            function goToNext() {
+                if (currentQuestionIndex < totalQuestions - 1) {
+                    currentQuestionIndex++;
+                    renderQuestion();
+                }
+            }
+
+            // previous question
+            function goToPrev() {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    renderQuestion();
+                }
+            }
+
+            // calculate final results and show panel
+            function finishQuiz() {
+                // check if all questions answered? we will just grade, but show warning if some unanswered?
+                let allAnswered = userAnswers.every(idx => idx !== null);
+                if (!allAnswered) {
+                    const confirmForce = confirm("You have not answered all questions. Do you want to submit anyway?");
+                    if (!confirmForce) return;
+                }
+
+                quizSubmitted = true;
+                // hide question area, nav buttons, submit button, show results panel
+                document.getElementById('questionArea').innerHTML = ''; // clear
+                document.querySelector('.nav-buttons').style.display = 'none';
+                submitContainer.style.display = 'none';
+                resultsPanel.classList.remove('hidden');
+
+                // compute score
+                let correctCount = 0;
+                for (let i = 0; i < totalQuestions; i++) {
+                    if (userAnswers[i] !== null && userAnswers[i] === questions[i].correct) {
+                        correctCount++;
+                    }
+                }
+
+                finalScoreSpan.textContent = `${correctCount} / ${totalQuestions}`;
+                // feedback message based on performance
+                let message = "";
+                if (correctCount === totalQuestions) message = "🌟 EXCELLENT! Zambian science champion! 🌟";
+                else if (correctCount >= 6) message = "🎉 Great work! You really know your science.";
+                else if (correctCount >= 4) message = "👍 Good attempt! Visit the Science Center in Lusaka to learn more.";
+                else message = "📚 Keep exploring science. The Zambian National Science Center welcomes you!";
+
+                feedbackMsg.textContent = message;
+            }
+
+            // restart quiz (reset everything)
+            function restartQuiz() {
+                // reset state
+                currentQuestionIndex = 0;
+                userAnswers = new Array(totalQuestions).fill(null);
+                quizSubmitted = false;
+
+                // show proper containers
+                document.querySelector('.nav-buttons').style.display = 'flex';
+                submitContainer.style.display = 'none';
+                resultsPanel.classList.add('hidden');
+
+                // clear any residual html and re-render
+                renderQuestion();
+                updateScoreIndicator();
+
+                // ensure prev/next correct
+                prevBtn.disabled = true;
+                nextBtn.disabled = false;
+            }
+
+            // event listeners
+            prevBtn.addEventListener('click', goToPrev);
+            nextBtn.addEventListener('click', goToNext);
+            restartBtn.addEventListener('click', restartQuiz);
+            submitQuizBtn.addEventListener('click', finishQuiz);
+
+            // initial render
+            renderQuestion();
+            updateScoreIndicator();
+
+            // optional: if restart is used, we need to show nav buttons again. they are visible at start.
+        })();
+    </script>
+</body>
+</html>

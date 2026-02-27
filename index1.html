@@ -263,6 +263,7 @@
         .nav-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
         .reset-btn { background: #b1624d; border-bottom-color: #733a2c; }
         .submit-btn { background: #f2b441; border-bottom-color: #9e741f; color: #121212; }
+        .menu-btn { background: #4a6fa5; border-bottom-color: #2a4a7a; color: white; }
 
         .start-btn {
             background: #2ecc71; border-bottom-color: #1b7943; color: #000;
@@ -307,12 +308,267 @@
         .hidden { display: none !important; }
         .start-wrapper { text-align: center; padding: 10px 0 0; }
 
-        @media print {
-            body { background: white; padding: 0; }
-            .jets-card { max-width: 100%; background: white; box-shadow: none; padding: 15px; }
-            .track-selector, .start-wrapper, .quiz-panel, .footer-note, .print-btn, .action-row, .timer-area, .nav-btn, .badge, .user-info-bar, .category-badge { display: none; }
-            #resultsArea { display: block !important; background: white; color: black; }
-            .results-page { max-height: none; overflow: visible; }
+        /* Main Menu and Start Playing sections */
+        .main-menu {
+            display: block;
+        }
+
+        .start-playing-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 30px;
+            border: 2px solid #f3b33d;
+            margin: 20px 0;
+        }
+
+        .start-playing-section h2 {
+            color: #FFE68F;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .menu-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .menu-buttons .nav-btn {
+            min-width: 200px;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+        }
+
+        .back-to-menu {
+            background: #4a6fa5;
+            border-bottom-color: #2a4a7a;
+            color: white;
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            border-bottom: 5px solid #2a4a7a;
+        }
+
+        .back-to-menu:hover {
+            transform: translateY(2px);
+            border-bottom-width: 3px;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-icon {
+            font-size: 5rem;
+            background: #f3b33d;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 0 #9e741f;
+            flex-shrink: 0;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .welcome-card {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        .welcome-content {
+            flex: 1;
+        }
+
+        .welcome-content h2 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: #FFE68F;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .clap {
+            animation: clap 1s infinite;
+            display: inline-block;
+        }
+
+        @keyframes clap {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
+        }
+
+        .welcome-message {
+            color: #e0f0ff;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .feature-item {
+            background: #1f4569;
+            border-radius: 40px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: white;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            border: 1px solid #f3b33d;
+            white-space: nowrap;
+        }
+
+        .feature-icon {
+            font-size: 1.2rem;
+        }
+
+        .quick-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .stat-bubble {
+            background: #254b70;
+            border-radius: 50px;
+            padding: 12px 20px;
+            min-width: 100px;
+            text-align: center;
+            border: 2px solid #ffd966;
+            box-shadow: 0 5px 0 #0d2438;
+            flex: 1 1 auto;
+        }
+
+        .stat-number {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-weight: 800;
+            color: #ffd966;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .how-to-play {
+            background: #1f3f5c;
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px dashed #f3b33d;
+        }
+
+        .how-title {
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+            font-weight: 700;
+            color: #ffd966;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #2d4e70;
+            padding: 10px 15px;
+            border-radius: 50px;
+            border: 1px solid #ffd966;
+        }
+
+        .step-number {
+            background: #f3b33d;
+            color: #0a2c43;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: white;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            line-height: 1.3;
+        }
+
+        .testimonial-mini {
+            background: rgba(243, 179, 61, 0.2);
+            border-left: 5px solid #f3b33d;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .quote {
+            color: #FFE68F;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 5px;
+        }
+
+        .quote-author {
+            color: #a0c4e8;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .welcome-icon {
+            animation: bounce 2s infinite ease-in-out;
         }
 
         /* Disable track clicks after start */
@@ -320,6 +576,14 @@
             pointer-events: none;
             opacity: 0.5;
             filter: grayscale(0.6);
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .jets-card { max-width: 100%; background: white; box-shadow: none; padding: 15px; }
+            .track-selector, .start-wrapper, .quiz-panel, .footer-note, .print-btn, .action-row, .timer-area, .nav-btn, .badge, .user-info-bar, .category-badge { display: none; }
+            #resultsArea { display: block !important; background: white; color: black; }
+            .results-page { max-height: none; overflow: visible; }
         }
     </style>
 </head>
@@ -329,28 +593,109 @@
         <span class="cyber-icon">🛡️</span>
         <span>CyberSafe QUIZE · 10-Level Challenge</span>
     </h1>
-    <div class="jets-sub">
-        <span>🇿🇲 Zambian Competence Based Curriculum · Pre-school to A-level STEM</span>
-        <div class="category-badge" id="globalCategoryDisplay">Primary</div>
-    </div>
+    
+    <!-- MAIN MENU SECTION (visible by default) -->
+    <div id="mainMenu" class="main-menu">
+        <div class="hero-message">
+            <div class="challenge-banner">
+                <div class="challenge-text">
+                    <span class="highlight">🧠 10 Levels · 200+ Questions</span>
+                    <span class="separator">|</span>
+                    <span class="highlight">⏱️ 30 Seconds Per Question</span>
+                    <span class="separator">|</span>
+                    <span class="highlight">🏆 Track Your Progress</span>
+                </div>
+            </div>
+            
+            <div class="welcome-card">
+                <div class="welcome-icon">🎯</div>
+                <div class="welcome-content">
+                    <h2>Test Your Knowledge! <span class="clap">👏</span></h2>
+                    <p class="welcome-message">
+                        <strong>Welcome to the ultimate Zambian STEM challenge!</strong> From counting with Primary learners to 
+                        solving derivatives in Senior Secondary — this quiz adapts to YOUR level. Each track has 10 exciting levels 
+                        with 20 questions each. Answer before the timer runs out, collect points, and become a CyberSafe champion!
+                    </p>
+                    <div class="feature-grid">
+                        <div class="feature-item"><span class="feature-icon">📚</span><span>Mathematics</span></div>
+                        <div class="feature-item"><span class="feature-icon">🧪</span><span>Chemistry</span></div>
+                        <div class="feature-item"><span class="feature-icon">⚡</span><span>Physics</span></div>
+                        <div class="feature-item"><span class="feature-icon">🧬</span><span>Biology</span></div>
+                        <div class="feature-item"><span class="feature-icon">💻</span><span>Technology</span></div>
+                        <div class="feature-item"><span class="feature-icon">🔬</span><span>Science</span></div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="track-selector" id="trackSelector">
-        <div class="track-option selected" data-track="primary" id="trackPrimary">📘 PRIMARY (G1-7)</div>
-        <div class="track-option" data-track="junior" id="trackJunior">📗 JUNIOR SEC (F1-2)</div>
-        <div class="track-option" data-track="senior" id="trackSenior">📕 SENIOR SEC (G10-12)</div>
-    </div>
+            <div class="quick-stats">
+                <div class="stat-bubble"><div class="stat-number">500+</div><div class="stat-label">Students</div></div>
+                <div class="stat-bubble"><div class="stat-number">10</div><div class="stat-label">Levels</div></div>
+                <div class="stat-bubble"><div class="stat-number">200+</div><div class="stat-label">Questions</div></div>
+                <div class="stat-bubble"><div class="stat-number">🎓</div><div class="stat-label">G1-12</div></div>
+            </div>
 
-    <div id="startContainer" class="start-wrapper">
-        <div class="profile-area">
-            <div class="profile-field"><label>👤 Full name</label><input type="text" id="userName" value="Faith Mwila"></div>
-            <div class="profile-field"><label>🏫 School</label><input type="text" id="userSchool" value="Katete Day Secondary School"></div>
-            <div class="profile-field"><label>📍 Zone</label><input type="text" id="userZone" value="Katete Central Zone"></div>
-            <div class="profile-field"><label>🗺️ District</label><input type="text" id="userDistrict" value="Katete District"></div>
+            <div class="how-to-play">
+                <div class="how-title">📋 How to Play:</div>
+                <div class="steps">
+                    <div class="step"><span class="step-number">1</span><span class="step-text">Click "Start Playing" below</span></div>
+                    <div class="step"><span class="step-number">2</span><span class="step-text">Choose your track and enter details</span></div>
+                    <div class="step"><span class="step-number">3</span><span class="step-text">Answer 20 questions per level — 30 seconds each!</span></div>
+                    <div class="step"><span class="step-number">4</span><span class="step-text">Complete levels and return to main menu</span></div>
+                </div>
+            </div>
+
+            <div class="testimonial-mini">
+                <div class="quote">"Perfect for Zambian students — follows the competence-based curriculum!"</div>
+                <div class="quote-author">— Ministry of Education Teaching Resources</div>
+            </div>
         </div>
-        <button class="nav-btn start-btn" id="startQuizBtn">🚀 START SELECTED TRACK</button>
+
+        <div class="menu-buttons">
+            <button class="nav-btn start-btn" id="mainMenuStartBtn">▶ START PLAYING</button>
+        </div>
     </div>
 
+    <!-- START PLAYING SECTION (hidden initially) -->
+    <div id="startPlayingSection" class="hidden">
+        <button class="back-to-menu" id="backToMainMenuBtn">◀ BACK TO MAIN MENU</button>
+        
+        <div class="start-playing-section">
+            <h2>🚀 START YOUR CHALLENGE</h2>
+            
+            <div class="track-selector" id="trackSelector">
+                <div class="track-option selected" id="trackPrimary">📘 PRIMARY (G1-7)</div>
+                <div class="track-option" id="trackJunior">📗 JUNIOR SEC (G8-9)</div>
+                <div class="track-option" id="trackSenior">📕 SENIOR SEC (G10-12)</div>
+            </div>
+
+            <div class="profile-area">
+                <div class="profile-field">
+                    <label>👤 Your Name</label>
+                    <input type="text" id="userName" placeholder="e.g., Faith Mwila" value="Faith Mwila">
+                </div>
+                <div class="profile-field">
+                    <label>🏫 School</label>
+                    <input type="text" id="userSchool" placeholder="School name" value="Katete Day Secondary School">
+                </div>
+                <div class="profile-field">
+                    <label>📍 Zone</label>
+                    <input type="text" id="userZone" placeholder="Zone" value="Katete Central Zone">
+                </div>
+                <div class="profile-field">
+                    <label>🗺️ District</label>
+                    <input type="text" id="userDistrict" placeholder="District" value="Katete District">
+                </div>
+            </div>
+
+            <div class="start-wrapper">
+                <button class="nav-btn start-btn" id="startQuizBtn">▶ START QUIZ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ PANEL (hidden initially) -->
     <div class="quiz-panel hidden" id="quizPanel">
+        <button class="back-to-menu" id="quitToMainMenuBtn">◀ QUIT TO MAIN MENU</button>
         <div class="user-info-bar" id="userInfoBar">
             <span id="displayName">Faith Mwila</span>
             <span id="displaySchool">Katete Day Secondary School</span>
@@ -365,10 +710,10 @@
         <div class="action-row">
             <button class="nav-btn submit-btn" id="submitAnswerBtn">✔ SUBMIT</button>
             <button class="nav-btn submit-btn" id="nextBtn">NEXT ⏩</button>
-            <button class="nav-btn reset-btn" id="resignBtn">⚔️ RESIGN</button>
-            <div class="score-area" id="scoreDisplay">0 / 10</div>
+            <button class="nav-btn menu-btn" id="resignToMenuBtn">🏠 MAIN MENU</button>
+            <div class="score-area" id="scoreDisplay">0 / 20</div>
         </div>
-        <div style="margin-top:12px; text-align:center;">Press ENTER or SUBMIT · answers lock · 10 questions per level</div>
+        <div style="margin-top:12px; text-align:center;">Press ENTER or SUBMIT · answers lock · 20 questions per level</div>
     </div>
 
     <div id="levelCompleteArea" class="hidden"></div>
@@ -1171,12 +1516,18 @@
     let userName = 'Faith Mwila', userSchool = 'Katete Day Secondary School', userZone = 'Katete Central Zone', userDistrict = 'Katete District';
 
     // DOM elements
+    const mainMenu = document.getElementById('mainMenu');
+    const startPlayingSection = document.getElementById('startPlayingSection');
+    const mainMenuStartBtn = document.getElementById('mainMenuStartBtn');
+    const backToMainMenuBtn = document.getElementById('backToMainMenuBtn');
+    const quitToMainMenuBtn = document.getElementById('quitToMainMenuBtn');
+    const resignToMenuBtn = document.getElementById('resignToMenuBtn');
+    
     const trackPrimary = document.getElementById('trackPrimary');
     const trackJunior = document.getElementById('trackJunior');
     const trackSenior = document.getElementById('trackSenior');
     const trackSelectorDiv = document.getElementById('trackSelector');
     const globalCategoryDisplay = document.getElementById('globalCategoryDisplay');
-    const startContainer = document.getElementById('startContainer');
     const startBtn = document.getElementById('startQuizBtn');
     const userNameInput = document.getElementById('userName');
     const userSchoolInput = document.getElementById('userSchool');
@@ -1194,7 +1545,6 @@
     const resultsArea = document.getElementById('resultsArea');
     const submitAnswerBtn = document.getElementById('submitAnswerBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const resignBtn = document.getElementById('resignBtn');
     const scoreSpan = document.getElementById('scoreDisplay');
 
     const levelNames = (track) => {
@@ -1202,9 +1552,51 @@
         return Array.from({length:10}, (_,i)=>`Level ${i+1} · ${base}`);
     };
 
+    // ========== NAVIGATION FUNCTIONS ==========
+    function showMainMenu() {
+        // Hide all other sections
+        mainMenu.classList.remove('hidden');
+        startPlayingSection.classList.add('hidden');
+        quizPanel.classList.add('hidden');
+        levelCompleteArea.classList.add('hidden');
+        resultsArea.classList.add('hidden');
+        
+        // Reset quiz state
+        clearTimer();
+        quizStarted = false;
+        allLevelsDone = false;
+        locked = false;
+        
+        // Re-enable track selector
+        trackSelectorDiv.classList.remove('disabled');
+    }
+
+    function showStartPlaying() {
+        mainMenu.classList.add('hidden');
+        startPlayingSection.classList.remove('hidden');
+        quizPanel.classList.add('hidden');
+        levelCompleteArea.classList.add('hidden');
+        resultsArea.classList.add('hidden');
+        
+        // Ensure track selector is enabled
+        trackSelectorDiv.classList.remove('disabled');
+    }
+
+    function resetQuizState() {
+        clearTimer();
+        quizStarted = false;
+        allLevelsDone = false;
+        locked = false;
+        currentLevelIndex = 0;
+        currentQuestionIndex = 0;
+        levelQuestions = [];
+        userAnswers = [];
+        questionStatus = [];
+    }
+
+    // ========== TIMER FUNCTIONS ==========
     function clearTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
     
-    // ========== TIMER: on expiry → no answer (wrong) & play sound ==========
     function startTimer() { 
         clearTimer(); 
         if (!quizStarted || allLevelsDone) return; 
@@ -1216,10 +1608,8 @@
             if (timeLeft < 0) timeLeft = 0; 
             timerDisplay.innerText = `⏳ 00:${timeLeft < 10 ? '0' : ''}${timeLeft}`; 
             if (timeLeft === 0 && !locked) {
-                // Timeout: play wrong sound, mark wrong, lock, then go to next
                 createSound('wrong');
-                lockAnswer(null); // null indicates no selection → wrong answer
-                // after lock, automatically move to next question (if any)
+                lockAnswer(null);
                 setTimeout(() => {
                     if (quizStarted && !allLevelsDone) {
                         nextQuestion(); 
@@ -1237,17 +1627,12 @@
         locked = true; 
         clearTimer();
         ansArray[currentQuestionIndex] = selectedIdx;
-        // if selectedIdx === null → no answer given (timeout) → wrong
         const isCorrect = (selectedIdx !== null && selectedIdx === qList[currentQuestionIndex].answer);
         statusArray[currentQuestionIndex] = isCorrect ? 'correct' : 'wrong';
         
-        // Play sound based on correctness
         if (selectedIdx !== null) {
-            if (isCorrect) {
-                createSound('correct');
-            } else {
-                createSound('wrong');
-            }
+            if (isCorrect) createSound('correct');
+            else createSound('wrong');
         }
         
         renderQuestion(); 
@@ -1284,7 +1669,6 @@
         const q = qList[currentQuestionIndex];
         const ansArray = userAnswers[currentLevelIndex];
         levelDisplay.innerText = levelNames(currentTrack)[currentLevelIndex];
-        globalCategoryDisplay.innerText = currentTrack === 'primary' ? 'Primary' : currentTrack === 'junior' ? 'Junior Sec' : 'Senior Sec';
         
         let subjectIcon = '';
         if (q.subject === 'math') subjectIcon = '📐';
@@ -1331,7 +1715,6 @@
     function nextQuestion() { 
         if (!quizStarted || allLevelsDone) return; 
         const qList = levelQuestions[currentLevelIndex]; 
-        // Allow moving forward only if current question is locked (answered or timed out)
         if (!locked) { 
             alert('Please submit or wait for timer to lock the current question.'); 
             return; 
@@ -1350,19 +1733,25 @@
         const qList = levelQuestions[currentLevelIndex]; 
         let correct = ans.reduce((acc, val, idx) => acc + (val === qList[idx].answer ? 1 : 0), 0); 
         const total = qList.length; 
+        
         let congratsHtml = `<div class="results-page"><div class="congrats-box"><h2>🎉 ${levelNames(currentTrack)[currentLevelIndex]} COMPLETE</h2><p>${userName}</p><div class="big-score">${correct}/${total}</div>`; 
+        
         if (currentLevelIndex === 9) {
             congratsHtml += `<button class="print-btn" id="showFinalResultsBtn">📋 FINAL RESULTS</button>`;
+            congratsHtml += `<button class="print-btn" id="finalBackToMenuBtn">🏠 BACK TO MAIN MENU</button>`;
         } else { 
-            congratsHtml += `<button class="print-btn" id="nextLevelBtn">🚀 NEXT LEVEL</button>`; 
+            congratsHtml += `<button class="print-btn" id="nextLevelBtn">🚀 NEXT LEVEL</button>`;
+            congratsHtml += `<button class="print-btn" id="levelBackToMenuBtn">🏠 MAIN MENU</button>`;
         } 
         congratsHtml += `<button class="print-btn" id="printLevelBtn">🖨️ PRINT LEVEL</button></div></div>`; 
+        
         levelCompleteArea.innerHTML = congratsHtml; 
         levelCompleteArea.classList.remove('hidden'); 
         quizPanel.classList.add('hidden'); 
         
         if (currentLevelIndex === 9) { 
-            document.getElementById('showFinalResultsBtn')?.addEventListener('click', showFinalResults); 
+            document.getElementById('showFinalResultsBtn')?.addEventListener('click', showFinalResults);
+            document.getElementById('finalBackToMenuBtn')?.addEventListener('click', showMainMenu);
         } else { 
             document.getElementById('nextLevelBtn')?.addEventListener('click', () => { 
                 currentLevelIndex++; 
@@ -1373,6 +1762,7 @@
                 startTimer(); 
                 renderQuestion(); 
             }); 
+            document.getElementById('levelBackToMenuBtn')?.addEventListener('click', showMainMenu);
         } 
         document.getElementById('printLevelBtn')?.addEventListener('click', () => printLevelResults(currentLevelIndex)); 
     }
@@ -1424,29 +1814,43 @@
                 html += `<div class="results-question"><h4>Q${i+1}. ${qq.question}</h4><p><strong>Your answer:</strong> ${userText} ${isCorrect ? '✅' : '❌'}</p><p><strong>Correct answer:</strong> ${qq.options[qq.answer]}</p><div class="workings">📚 ${qq.workings}</div></div>`; 
             }); 
         } 
-        html += '<button class="print-btn" id="printFinalBtn">🖨️ PRINT FINAL RESULTS</button></div>'; 
+        html += '<button class="print-btn" id="printFinalBtn">🖨️ PRINT FINAL RESULTS</button>';
+        html += '<button class="print-btn" id="finalResultsBackToMenuBtn">🏠 BACK TO MAIN MENU</button></div>'; 
         resultsArea.innerHTML = html; 
-        document.getElementById('printFinalBtn')?.addEventListener('click', ()=>window.print()); 
+        document.getElementById('printFinalBtn')?.addEventListener('click', ()=>window.print());
+        document.getElementById('finalResultsBackToMenuBtn')?.addEventListener('click', showMainMenu);
     }
 
-    function resignQuiz() { if (confirm('Resign? All progress will be lost.')) location.reload(); }
+    // ========== EVENT LISTENERS ==========
+    // Navigation
+    mainMenuStartBtn.addEventListener('click', showStartPlaying);
+    
+    backToMainMenuBtn.addEventListener('click', showMainMenu);
+    
+    quitToMainMenuBtn.addEventListener('click', () => {
+        if (confirm('Quit to main menu? All progress will be lost.')) {
+            showMainMenu();
+        }
+    });
+    
+    resignToMenuBtn.addEventListener('click', () => {
+        if (confirm('Return to main menu? All progress will be lost.')) {
+            showMainMenu();
+        }
+    });
 
-    // track selection – disable once started
+    // Track selection
     [trackPrimary, trackJunior, trackSenior].forEach(btn => {
         btn.addEventListener('click', function() {
-            if (quizStarted) {
-                alert('You cannot switch tracks while a test is in progress. Finish or resign first.');
-                return;
-            }
             document.querySelectorAll('.track-option').forEach(b => b.classList.remove('selected'));
             this.classList.add('selected');
             if (this.id === 'trackPrimary') currentTrack = 'primary';
             else if (this.id === 'trackJunior') currentTrack = 'junior';
             else currentTrack = 'senior';
-            globalCategoryDisplay.innerText = currentTrack === 'primary' ? 'Primary' : currentTrack === 'junior' ? 'Junior Sec' : 'Senior Sec';
         });
     });
 
+    // Start quiz
     startBtn.addEventListener('click', () => {
         // freeze track selector
         trackSelectorDiv.classList.add('disabled');
@@ -1466,7 +1870,6 @@
                 rawLevels.push([...questionBank[currentTrack][i]]);
             } else {
                 console.error(`Missing level ${i} for track ${currentTrack}`);
-                // Create a fallback question
                 rawLevels.push([{
                     subject: 'general',
                     question: `Sample question for level ${i+1}`,
@@ -1485,7 +1888,7 @@
         questionStatus = levelQuestions.map(lvl => new Array(lvl.length).fill('unanswered'));
 
         quizStarted = true; 
-        startContainer.classList.add('hidden'); 
+        startPlayingSection.classList.add('hidden');
         quizPanel.classList.remove('hidden');
         currentLevelIndex = 0; 
         currentQuestionIndex = 0; 
@@ -1497,7 +1900,6 @@
 
     submitAnswerBtn.addEventListener('click', submitAnswer);
     nextBtn.addEventListener('click', nextQuestion);
-    resignBtn.addEventListener('click', resignQuiz);
     document.addEventListener('keydown', handleEnter);
 })();
 </script>

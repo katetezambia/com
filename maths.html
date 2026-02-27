@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛡️ CyberSafe – MATHS · Zambia Grades 1-12</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>🛡️ CyberSafe – MATHS · responsive</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,11 +16,18 @@
             background: linear-gradient(145deg, #0c1f2e, #142b3b);
             min-height: 100vh;
             display: flex;
- margin: 0;
             color: #ecf9ff;
         }
 
-        /* ----- leaderboard panel (left) ----- */
+        /* ----- RESPONSIVE FLEX CONTAINER ----- */
+        .responsive-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+            flex-wrap: wrap;  /* allows stacking on mobile */
+        }
+
+        /* ----- leaderboard panel (left) – adapts ----- */
         .leaderboard-panel {
             background: #0e2a38;
             width: 300px;
@@ -32,6 +39,7 @@
             gap: 1.5rem;
             overflow-y: auto;
             color: #e0f7fa;
+            transition: width 0.2s;
         }
 
         .leaderboard-panel h2 {
@@ -41,6 +49,7 @@
             border-bottom: 4px dashed #4dd0e1;
             padding-bottom: 0.8rem;
             text-shadow: 2px 2px 0 #1e4e5f;
+            word-break: break-word;
         }
 
         .leaderboard-panel ol {
@@ -65,6 +74,8 @@
             justify-content: space-between;
             border: 1px solid #7ad0e6;
             color: #f9f9f9;
+            flex-wrap: wrap;
+            word-break: break-word;
         }
 
         .leaderboard-panel li::before {
@@ -90,9 +101,10 @@
             border: 4px solid #8ad4e8;
             color: #fff4cf;
             box-shadow: 0 4px 0 #126c84;
+            word-break: break-word;
         }
 
-        /* ----- main game area (right) ----- */
+        /* ----- main game area (right) – flexible ----- */
         .game-main {
             flex: 1;
             padding: 2rem 2.8rem;
@@ -100,9 +112,9 @@
             display: flex;
             flex-direction: column;
             border-left: 2px solid #00bcd4;
+            min-width: 280px; /* ensures content doesn't crush */
         }
 
-        /* heading clearly showing CyberSafe - MATHS */
         .main-header-title {
             font-size: 2.6rem;
             background: linear-gradient(145deg, #0b3b4a, #105565);
@@ -114,6 +126,10 @@
             color: #ffecbb;
             text-shadow: 3px 3px 0 #1e5871;
             box-shadow: 0 6px 0 #7b5c0c;
+            text-align: center;
+            width: fit-content;
+            max-width: 100%;
+            word-break: break-word;
         }
 
         .user-header {
@@ -122,29 +138,33 @@
             align-items: center;
             justify-content: space-between;
             background: #1b5870;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 60px;
             margin-bottom: 1.5rem;
             box-shadow: 0 8px 0 #0e4052;
             border: 2px solid #78c4d4;
+            gap: 1rem;
         }
 
         .user-greeting {
             font-size: 2rem;
             color: #fdeaa9;
             font-weight: bold;
+            word-break: break-word;
         }
 
         .button-group {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .game-btn {
             background: #facc15;
             border: none;
             font-weight: bold;
-            padding: 12px 28px;
+            padding: 12px 20px;
             border-radius: 40px;
             font-size: 1.2rem;
             cursor: pointer;
@@ -153,11 +173,18 @@
             font-family: inherit;
             border: 2px solid #ca8a04;
             color: #0f172a;
+            white-space: nowrap;
         }
 
-        .game-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 1px 0 #b7811a;
+        @media (max-width: 600px) {
+            .game-btn {
+                padding: 10px 14px;
+                font-size: 1rem;
+                white-space: normal;
+            }
+            .user-greeting {
+                font-size: 1.5rem;
+            }
         }
 
         .logout-btn {
@@ -169,6 +196,7 @@
 
         .stats-row {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around;
             background: #1b6077;
             border-radius: 50px;
@@ -177,14 +205,18 @@
             font-size: 1.8rem;
             font-weight: bold;
             border: 4px solid #4cb3d1;
+            gap: 0.8rem;
         }
 
         .stats-row span {
             background: #0a3847;
-            padding: 0.5rem 2rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
             box-shadow: inset 0 3px 6px #031c24;
             color: #ddf4ff;
+            flex: 1 1 auto;
+            text-align: center;
+            word-break: break-word;
         }
 
         .notification-area {
@@ -202,7 +234,9 @@
             box-shadow: 0 6px 0 #047857;
             border: 2px solid #fff;
             width: fit-content;
+            max-width: 100%;
             margin: 0 auto;
+            word-break: break-word;
         }
 
         .notification.warning {
@@ -221,12 +255,14 @@
             color: #fff2b5;
             font-weight: bold;
             width: fit-content;
+            max-width: 100%;
             font-family: monospace;
             box-shadow: 0 0 10px #ffb347;
+            word-break: break-word;
         }
 
         .question-giant {
-            font-size: 4.5rem;
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
             background: linear-gradient(145deg, #145d77, #0c4357);
             border: 6px double #f97316;
             padding: 2rem 1rem;
@@ -248,9 +284,10 @@
         }
 
         .answer-form input {
-            width: 70%;
-            padding: 25px 30px;
-            font-size: 3rem;
+            width: 100%;
+            max-width: 700px;
+            padding: 25px 20px;
+            font-size: clamp(2rem, 8vw, 3rem);
             text-align: center;
             border: 6px solid #00bcd4;
             border-radius: 70px;
@@ -270,14 +307,15 @@
             background: #16a34a;
             color: white;
             border: none;
-            font-size: 2.5rem;
-            padding: 0.8rem 3rem;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            padding: 0.8rem 2.5rem;
             border-radius: 60px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 8px 0 #15803d;
             transition: 0.06s linear;
             border: 2px solid #166534;
+            width: fit-content;
         }
 
         .submit-btn:active {
@@ -292,7 +330,7 @@
 
         .action-row {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             margin: 1.5rem 0 1rem;
             flex-wrap: wrap;
@@ -304,15 +342,17 @@
             padding: 1rem 1.5rem;
             margin: 1.5rem 0 0.5rem;
             border: 3px solid #ffb74d;
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
             font-size: 1rem;
+            width: 100%;
         }
 
         .history-panel h3 {
             color: #fcd34d;
             margin-bottom: 0.7rem;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            word-break: break-word;
         }
 
         .history-entry {
@@ -321,44 +361,69 @@
             margin: 0.4rem 0;
             border-radius: 40px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             border: 1px solid #a5e1f2;
             color: #fef9c3;
+            word-break: break-word;
+            gap: 0.5rem;
         }
 
         .footer-copyright {
             text-align: center;
             margin-top: 1rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
             background: #175a6b;
-            padding: 0.5rem;
+            padding: 0.8rem;
             border-radius: 40px;
             color: #d7f0fa;
             font-weight: bold;
             border: 2px solid #ffb74d;
+            word-break: break-word;
         }
 
+        /* grade overlay – responsive */
         .grade-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 30, 50, 0.85);
+            background: rgba(0, 30, 50, 0.9);
             backdrop-filter: blur(6px);
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            padding: 1rem;
         }
 
         .grade-card {
             background: #1f5875;
-            padding: 3.5rem 5rem;
-            border-radius: 80px;
+            padding: 2.5rem 3rem;
+            border-radius: 60px;
             box-shadow: 0 20px 0 #27748f;
             text-align: center;
             border: 6px solid #f9a825;
-            max-height: 80vh;
+            max-width: 95%;
+            max-height: 90vh;
             overflow-y: auto;
             color: #fef9e0;
+            width: 600px;
+        }
+
+        @media (max-width: 600px) {
+            .grade-card {
+                padding: 1.8rem 1.5rem;
+            }
+            .grade-card h2 {
+                font-size: 2.2rem;
+            }
+            .grade-card select {
+                font-size: 1.5rem;
+                padding: 0.8rem 1rem;
+            }
+            .grade-card button {
+                font-size: 1.8rem;
+                padding: 0.8rem 2rem;
+            }
         }
 
         .grade-card h2 {
@@ -404,10 +469,54 @@
             box-shadow: 0 5px 0 #1e40af;
             color: white;
         }
+
+        /* medium screens: allow leaderboard to shrink gracefully */
+        @media (max-width: 900px) {
+            .leaderboard-panel {
+                width: 260px;
+                padding: 1.2rem 0.8rem;
+            }
+            .game-main {
+                padding: 1.5rem 1.2rem;
+            }
+            .main-header-title {
+                font-size: 2rem;
+                padding: 0.5rem 1.5rem;
+            }
+        }
+
+        /* small screens: stack vertically */
+        @media (max-width: 700px) {
+            .responsive-container {
+                flex-direction: column;
+            }
+            .leaderboard-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 6px solid #00acc1;
+                max-height: 350px;
+            }
+            .game-main {
+                border-left: none;
+                border-top: 2px solid #00bcd4;
+            }
+            .user-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .button-group {
+                justify-content: center;
+            }
+        }
+
+        /* touch optimizations */
+        button, input {
+            touch-action: manipulation;
+        }
     </style>
 </head>
 <body>
-    <!-- GRADE OVERLAY (unchanged) -->
+    <!-- grade overlay (unchanged but responsive) -->
     <div class="grade-overlay" id="gradeOverlay" role="dialog" aria-labelledby="grade-heading">
         <div class="grade-card">
             <h2 id="grade-heading">🛡️ CyberSafe · Choose Grade</h2>
@@ -430,71 +539,72 @@
         </div>
     </div>
 
-    <!-- LEFT LEADERBOARD -->
-    <div class="leaderboard-panel">
-        <h2>🏆 Leaderboard</h2>
-        <ol id="leaderboardList"></ol>
-        <div class="your-rank" id="yourRankDisplay">⭐ Loading rank...</div>
-        <div style="margin-top: auto; font-size: 1.2rem; background: #1b5b6e; border-radius: 30px; padding: 0.8rem; text-align: center;">
-            🎓 4 correct = extra life<br>⏱️ 30s per question
-        </div>
-    </div>
-
-    <!-- RIGHT GAME AREA with corrected timer & heading -->
-    <div class="game-main">
-        <!-- clear CyberSafe - MATHS heading -->
-        <div class="main-header-title">🛡️ CyberSafe – MATHS</div>
-
-        <div class="user-header">
-            <span class="user-greeting">👤 <strong id="playerName">Mwila</strong></span>
-            <div class="button-group">
-                <button class="game-btn" id="progressBtn">📈 Progress</button>
-                <button class="game-btn" id="resetHistoryBtn">🔄 Reset</button>
-                <button class="game-btn logout-btn" id="logoutBtn">🚪 Logout</button>
+    <!-- responsive container replaces old fixed layout -->
+    <div class="responsive-container">
+        <!-- LEFT LEADERBOARD -->
+        <div class="leaderboard-panel">
+            <h2>🏆 Leaderboard</h2>
+            <ol id="leaderboardList"></ol>
+            <div class="your-rank" id="yourRankDisplay">⭐ Loading rank...</div>
+            <div style="margin-top: auto; font-size: 1.2rem; background: #1b5b6e; border-radius: 30px; padding: 0.8rem; text-align: center;">
+                🎓 4 correct = extra life<br>⏱️ 30s per question
             </div>
         </div>
 
-        <div class="stats-row">
-            <span id="scoreDisplay">🔢 Score: 0</span>
-            <span id="livesDisplay">❤️ Lives: 3</span>
-            <span id="gradeDisplay">📘 Grade: 12</span>
-        </div>
+        <!-- RIGHT GAME AREA -->
+        <div class="game-main">
+            <div class="main-header-title">🛡️ CyberSafe – MATHS</div>
 
-        <div class="notification-area" id="notificationArea"></div>
+            <div class="user-header">
+                <span class="user-greeting">👤 <strong id="playerName">Mwila</strong></span>
+                <div class="button-group">
+                    <button class="game-btn" id="progressBtn">📈 Progress</button>
+                    <button class="game-btn" id="resetHistoryBtn">🔄 Reset</button>
+                    <button class="game-btn logout-btn" id="logoutBtn">🚪 Logout</button>
+                </div>
+            </div>
 
-        <!-- Timer display (now correctly updated) -->
-        <div class="timer-box" id="timerDisplay">⏱ 30s</div>
+            <div class="stats-row">
+                <span id="scoreDisplay">🔢 Score: 0</span>
+                <span id="livesDisplay">❤️ Lives: 3</span>
+                <span id="gradeDisplay">📘 Grade: 12</span>
+            </div>
 
-        <div class="question-giant" id="questionText">log₂8 = ?</div>
+            <div class="notification-area" id="notificationArea"></div>
 
-        <form class="answer-form" id="answerForm">
-            <input type="number" id="answerInput" placeholder="type answer" step="any" inputmode="numeric" autofocus required>
-            <button type="submit" class="submit-btn" id="submitAnswer">🚀 Submit</button>
-        </form>
+            <div class="timer-box" id="timerDisplay">⏱ 30s</div>
 
-        <div class="action-row">
-            <button class="game-btn" id="changeGradeBtn">🔁 Change grade</button>
-            <button class="game-btn" id="pauseTimerBtn">⏸️ Pause</button>
-            <button class="game-btn" id="resumeTimerBtn" style="display:none;">▶️ Resume</button>
-            <button class="game-btn" id="newQuestionBtn">✨ Skip (cost 1 life)</button>
-            <button class="game-btn restart-btn" id="restartGameBtn">⟲ Restart</button>
-        </div>
+            <div class="question-giant" id="questionText">log₂8 = ?</div>
 
-        <!-- History panel -->
-        <div class="history-panel" id="historyPanel">
-            <h3>📋 History (question → your / correct)</h3>
-            <div id="historyList"></div>
-        </div>
+            <form class="answer-form" id="answerForm">
+                <input type="number" id="answerInput" placeholder="type answer" step="any" inputmode="numeric" autofocus required>
+                <button type="submit" class="submit-btn" id="submitAnswer">🚀 Submit</button>
+            </form>
 
-        <div class="footer-copyright" id="dynamicFooter">
-            developed by: Mwila Christopher | cmwila7@gmail.com | +260976620788 | copyright © 2025
+            <div class="action-row">
+                <button class="game-btn" id="changeGradeBtn">🔁 Change grade</button>
+                <button class="game-btn" id="pauseTimerBtn">⏸️ Pause</button>
+                <button class="game-btn" id="resumeTimerBtn" style="display:none;">▶️ Resume</button>
+                <button class="game-btn" id="newQuestionBtn">✨ Skip (cost 1 life)</button>
+                <button class="game-btn restart-btn" id="restartGameBtn">⟲ Restart</button>
+            </div>
+
+            <!-- History panel -->
+            <div class="history-panel" id="historyPanel">
+                <h3>📋 History (question → your / correct)</h3>
+                <div id="historyList"></div>
+            </div>
+
+            <div class="footer-copyright" id="dynamicFooter">
+                developed by: Mwila Christopher | cmwila7@gmail.com | +260976620788 | copyright © 2025
+            </div>
         </div>
     </div>
 
     <script>
         (function() {
-            const STORAGE_KEY = 'cyberSafeMathsFixed';
-            const LEADERBOARD_KEY = 'mathsLeaderboardFinal';
+            const STORAGE_KEY = 'cyberSafeMathsResp';
+            const LEADERBOARD_KEY = 'mathsLeaderboardResp';
 
             let gameState = {
                 player: 'Mwila',
@@ -593,15 +703,15 @@
                 setTimeout(() => { if (area.firstChild?.textContent === msg) area.innerHTML = ''; }, 2000);
             }
 
-            // ----- FIXED TIMER -----
+            // ----- TIMER (fixed & robust) -----
             let timerInterval = null;
             function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
 
             function startTimer() {
                 if (!gameState.timerActive) return;
-                stopTimer(); // clear any old interval
+                stopTimer();
                 timerInterval = setInterval(() => {
-                    if (!gameState.timerActive) return; // paused
+                    if (!gameState.timerActive) return;
                     gameState.timeLeft -= 1;
                     if (gameState.timeLeft <= 0) {
                         gameState.timeLeft = 0;
@@ -643,7 +753,7 @@
                 document.getElementById('resumeTimerBtn').style.display = 'none';
             }
 
-            // ----- QUESTION GENERATION (ensures no repeats) -----
+            // ----- QUESTION GENERATION (no repeats) – same as before, compact -----
             function generateQuestion() {
                 const grade = gameState.grade;
                 let a, b, c, op, answer, text;
@@ -730,7 +840,7 @@
                 document.getElementById('answerInput').value = '';
                 document.getElementById('answerInput').focus();
                 if (!gameState.timerActive) resumeTimer(); 
-                else { stopTimer(); startTimer(); } // ensure fresh timer
+                else { stopTimer(); startTimer(); }
             }
 
             function gameOver(customMsg) {

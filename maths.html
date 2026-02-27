@@ -497,9 +497,9 @@
             <!-- User Profile: name, school, zone (free text), district (dropdown all 15 Eastern Province) -->
             <div class="profile-card">
                 <div class="profile-fields">
-                    <div class="profile-item"><label>👤 Name:</label><input type="text" id="profileName" placeholder="e.g. Thandiwe" value="Mwila"></div>
+                    <div class="profile-item"><label>👤 Name:</label><input type="text" id="profileName" placeholder="e.g. Lubuto" value="Lubuto Mwila"></div>
                     <div class="profile-item"><label>🏫 School:</label><input type="text" id="profileSchool" placeholder="e.g. Katete Basic" value="Katete Day"></div>
-                    <div class="profile-item"><label>📍 Zone:</label><input type="text" id="profileZone" placeholder="e.g. Chifunda" value="Chifunda"></div>
+                    <div class="profile-item"><label>📍 Zone:</label><input type="text" id="profileZone" placeholder="e.g. Katete Central Zone" value="Katete Central Zone"></div>
                     <div class="profile-item"><label>🗺️ District:</label>
                         <select id="profileDistrict">
                             <option value="Katete" selected>Katete</option>
@@ -577,7 +577,7 @@
             let profile = {
                 name: 'Mwila',
                 school: 'Katete Day',
-                zone: 'Chifunda',
+                zone: 'Katete Central Zone',
                 district: 'Katete'
             };
 
@@ -682,7 +682,7 @@
             function updateProfileFromInputs() {
                 profile.name = document.getElementById('profileName').value.trim() || 'Mwila';
                 profile.school = document.getElementById('profileSchool').value.trim() || 'Katete Day';
-                profile.zone = document.getElementById('profileZone').value.trim() || 'Chifunda';
+                profile.zone = document.getElementById('profileZone').value.trim() || 'Katete Central Zone';
                 profile.district = document.getElementById('profileDistrict').value;
                 gameState.player = profile.name;
                 document.getElementById('playerName').textContent = profile.name;

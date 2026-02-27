@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>CyberSecure World Class Quize · 3-Track Challenge</title>
+    <title>🛡️ CyberSafe QUIZE · 10-Level Challenge</title>
     <style>
         * {
             box-sizing: border-box;
@@ -74,7 +74,6 @@
             white-space: nowrap;
         }
 
-        /* track selector */
         .track-selector {
             background: #1f3f5c;
             border-radius: 60px;
@@ -308,7 +307,6 @@
         .hidden { display: none !important; }
         .start-wrapper { text-align: center; padding: 10px 0 0; }
 
-        /* print */
         @media print {
             body { background: white; padding: 0; }
             .jets-card { max-width: 100%; background: white; box-shadow: none; padding: 15px; }
@@ -316,44 +314,48 @@
             #resultsArea { display: block !important; background: white; color: black; }
             .results-page { max-height: none; overflow: visible; }
         }
+
+        /* Disable track clicks after start */
+        .track-selector.disabled .track-option {
+            pointer-events: none;
+            opacity: 0.5;
+            filter: grayscale(0.6);
+        }
     </style>
 </head>
 <body>
 <div class="jets-card">
     <h1>
-        <span class="cyber-icon">🧪</span>
-        <span>JETS · 3-Track World Class</span>
+        <span class="cyber-icon">🛡️</span>
+        <span>CyberSafe QUIZE · 10-Level Challenge</span>
     </h1>
     <div class="jets-sub">
-        <span>Zambian JETS · 10 levels per track · 100 questions per category</span>
+        <span>🇿🇲 Zambian Competence Based Curriculum · Pre-school to A-level STEM</span>
         <div class="category-badge" id="globalCategoryDisplay">Primary</div>
     </div>
 
-    <!-- TRACK SELECTOR (Primary / Junior / Senior) -->
     <div class="track-selector" id="trackSelector">
         <div class="track-option selected" data-track="primary" id="trackPrimary">📘 PRIMARY (G1-7)</div>
         <div class="track-option" data-track="junior" id="trackJunior">📗 JUNIOR SEC (F1-2)</div>
         <div class="track-option" data-track="senior" id="trackSenior">📕 SENIOR SEC (G10-12)</div>
     </div>
 
-    <!-- PROFILE + START (prefilled) -->
     <div id="startContainer" class="start-wrapper">
         <div class="profile-area">
-            <div class="profile-field"><label>👤 Full name</label><input type="text" id="userName" value="Chileshe Banda"></div>
-            <div class="profile-field"><label>🏫 School</label><input type="text" id="userSchool" value="Lusaka JETS Academy"></div>
-            <div class="profile-field"><label>📍 Zone</label><input type="text" id="userZone" value="Chilanga"></div>
-            <div class="profile-field"><label>🗺️ District</label><input type="text" id="userDistrict" value="Lusaka"></div>
+            <div class="profile-field"><label>👤 Full name</label><input type="text" id="userName" value="Faith Mwila"></div>
+            <div class="profile-field"><label>🏫 School</label><input type="text" id="userSchool" value="Katete Day Secondary School"></div>
+            <div class="profile-field"><label>📍 Zone</label><input type="text" id="userZone" value="Katete Central Zone"></div>
+            <div class="profile-field"><label>🗺️ District</label><input type="text" id="userDistrict" value="Katete District"></div>
         </div>
         <button class="nav-btn start-btn" id="startQuizBtn">🚀 START SELECTED TRACK</button>
     </div>
 
-    <!-- QUIZ PANEL -->
     <div class="quiz-panel hidden" id="quizPanel">
         <div class="user-info-bar" id="userInfoBar">
-            <span id="displayName">Chileshe Banda</span>
-            <span id="displaySchool">Lusaka JETS Academy</span>
-            <span id="displayZone">Chilanga</span>
-            <span id="displayDistrict">Lusaka</span>
+            <span id="displayName">Faith Mwila</span>
+            <span id="displaySchool">Katete Day Secondary School</span>
+            <span id="displayZone">Katete Central Zone</span>
+            <span id="displayDistrict">Katete District</span>
         </div>
         <div class="header-row">
             <div class="badge" id="levelDisplay">Level 1 · Primary</div>
@@ -369,13 +371,9 @@
         <div style="margin-top:12px; text-align:center;">Press ENTER or SUBMIT · answers lock · 10 questions per level</div>
     </div>
 
-    <!-- LEVEL COMPLETE / CONGRATS -->
     <div id="levelCompleteArea" class="hidden"></div>
-
-    <!-- FINAL RESULTS AREA -->
     <div id="resultsArea" class="hidden"></div>
 
-    <!-- FOOTER WITH DYNAMIC YEAR -->
     <div class="footer-note">
         Developed by Mwila Christopher · email: cmwila7@gmail.com · phone: +260976620788<br>
         © <span id="currentYearSpan"></span> Mwila Christopher. All rights reserved.
@@ -386,131 +384,797 @@
 (function() {
     document.getElementById('currentYearSpan').textContent = new Date().getFullYear();
 
-    // ---------- WORLD CLASS JETS 3-TRACK DATABASE (10 levels per track, each 10 questions) ----------
-    const questionBank = {
-        primary: [
-            // level 1-10 each with 10 questions (abbreviated for realistic length but full 10 each)
-            [ // level1 primary
-                { subject:'math', q:'5 + 3 = ?', opts:['6','7','8','9'], ans:2, work:'5+3=8' },
-                { subject:'math', q:'10 - 4 = ?', opts:['5','6','7','8'], ans:1, work:'10-4=6' },
-                { subject:'science', q:'Which animal lays eggs?', opts:['Dog','Cat','Chicken','Cow'], ans:2, work:'Chicken lays eggs.' },
-                { subject:'science', q:'What color is a banana?', opts:['Red','Yellow','Green','Blue'], ans:1, work:'Banana is yellow.' },
-                { subject:'tech', q:'Used to type on computer', opts:['Mouse','Keyboard','Monitor','Printer'], ans:1, work:'Keyboard for typing.' },
-                { subject:'math', q:'7 + 2 = ?', opts:['8','9','10','11'], ans:1, work:'7+2=9' },
-                { subject:'math', q:'15 - 7 = ?', opts:['6','7','8','9'], ans:2, work:'15-7=8' },
-                { subject:'science', q:'Part of plant underground', opts:['Stem','Leaf','Root','Flower'], ans:2, work:'Roots' },
-                { subject:'tech', q:'Device to show pictures', opts:['CPU','Monitor','Mouse','Speaker'], ans:1, work:'Monitor' },
-                { subject:'math', q:'4 × 3 = ?', opts:['7','12','14','9'], ans:1, work:'4×3=12' }
-            ],
-            [ // level2 primary
-                { subject:'math', q:'8 + 6 = ?', opts:['12','13','14','15'], ans:2, work:'8+6=14' },
-                { subject:'math', q:'20 - 9 = ?', opts:['9','10','11','12'], ans:2, work:'20-9=11' },
-                { subject:'science', q:'Which organ pumps blood?', opts:['Brain','Heart','Lungs','Stomach'], ans:1, work:'Heart' },
-                { subject:'science', q:'What gas do we breathe in?', opts:['Oxygen','CO2','Nitrogen','Hydrogen'], ans:0, work:'Oxygen' },
-                { subject:'tech', q:'What does “USB” stand for?', opts:['Universal Serial Bus','United Serial Bus','Universal Sync Bus','Upper Serial Bus'], ans:0, work:'Universal Serial Bus' },
-                { subject:'math', q:'9 + 7 = ?', opts:['15','16','17','18'], ans:1, work:'16' },
-                { subject:'math', q:'3 × 4 = ?', opts:['7','12','14','9'], ans:1, work:'12' },
-                { subject:'science', q:'Which is a sense organ?', opts:['Nose','Hair','Bone','Muscle'], ans:0, work:'Nose' },
-                { subject:'tech', q:'Part that stores files', opts:['RAM','Hard drive','CPU','GPU'], ans:1, work:'Hard drive' },
-                { subject:'math', q:'6 ÷ 2 = ?', opts:['2','3','4','5'], ans:1, work:'3' }
-            ],
-            // ... levels 3-10 primary (would fill, but keep constructor similar; for brevity we add dummy with pattern)
-        ],
-        junior: [
-            [ // level1 junior
-                { subject:'math', q:'Solve 3x = 21', opts:['5','6','7','8'], ans:2, work:'x=7' },
-                { subject:'math', q:'Expand 2(a+3)', opts:['2a+3','2a+6','a+6','2a+5'], ans:1, work:'2a+6' },
-                { subject:'chem', q:'Symbol for sodium', opts:['S','Na','So','K'], ans:1, work:'Na' },
-                { subject:'phys', q:'Unit of force', opts:['Joule','Newton','Watt','Pascal'], ans:1, work:'Newton' },
-                { subject:'bio', q:'Which vitamin from sun?', opts:['A','B12','C','D'], ans:3, work:'Vitamin D' },
-                { subject:'math', q:'15% of 200 = ?', opts:['20','25','30','35'], ans:2, work:'30' },
-                { subject:'chem', q:'Gas essential for burning', opts:['O2','CO2','N2','H2'], ans:0, work:'Oxygen' },
-                { subject:'phys', q:'Which is a scalar?', opts:['Force','Velocity','Mass','Acceleration'], ans:2, work:'Mass' },
-                { subject:'bio', q:'Main constituent of blood', opts:['Plasma','RBC','WBC','Platelets'], ans:0, work:'Plasma' },
-                { subject:'math', q:'Area of rectangle 5cm×3cm', opts:['8','15','16','10'], ans:1, work:'15cm²' }
-            ],
-            // additional levels...
-        ],
-        senior: [
-            [ // level1 senior
-                { subject:'math', q:'Derivative of 5x³', opts:['15x²','10x²','5x²','3x²'], ans:0, work:'15x²' },
-                { subject:'chem', q:'pH of HCl (strong acid)', opts:['1','7','14','10'], ans:0, work:'~1' },
-                { subject:'phys', q:'SI unit of current', opts:['Volt','Ampere','Ohm','Coulomb'], ans:1, work:'Ampere' },
-                { subject:'math', q:'∫ 2x dx', opts:['x²+C','2x²+C','x²','2x+C'], ans:0, work:'x²+C' },
-                { subject:'tech', q:'Which is OOP concept?', opts:['Encapsulation','Bootloader','Kernel','BIOS'], ans:0, work:'Encapsulation' },
-                { subject:'math', q:'log₁₀100 = ?', opts:['1','2','10','100'], ans:1, work:'2' },
-                { subject:'chem', q:'Formula of sulphuric acid', opts:['HCl','HNO₃','H₂SO₄','CH₃COOH'], ans:2, work:'H₂SO₄' },
-                { subject:'phys', q:'Photon energy formula', opts:['E=hf','E=mc²','F=ma','PV=nRT'], ans:0, work:'E=hf' },
-                { subject:'math', q:'Value of sin 60°', opts:['0.5','√3/2','1/√2','1'], ans:1, work:'√3/2' },
-                { subject:'tech', q:'Which sorting fastest avg?', opts:['Bubble','Quick','Merge','Insert'], ans:1, work:'Quick sort' }
-            ]
-        ]
-    };
-
-    // Fill remaining levels with reasonable repetitive data (to keep code concise but full 10 levels each)
-    function fillBank() {
-        // generate primary level 3-10 (each 10 questions) using pattern
-        for (let lvl = 2; lvl < 10; lvl++) { // level3 index2
-            let level = [];
-            for (let q=0; q<10; q++) {
-                level.push({
-                    subject: ['math','science','tech'][q%3],
-                    question: `Primary L${lvl+1} Q${q+1}: sample question?`,
-                    opts: ['A','B','C','D'],
-                    ans: q%4,
-                    workings: `workings for primary ${lvl+1}`
-                });
+    // ========== AUDIO EFFECTS ==========
+    function createSound(type) {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            if (type === 'correct') {
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.2);
+            } else {
+                oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.15);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.25);
             }
-            questionBank.primary[lvl] = level;
-        }
-        // junior level 2-10
-        for (let lvl = 1; lvl < 10; lvl++) {
-            let level = [];
-            for (let q=0; q<10; q++) {
-                level.push({
-                    subject: ['math','chem','phys','bio'][q%4],
-                    question: `Junior L${lvl+1} Q${q+1}: advanced prep`,
-                    opts: ['opt1','opt2','opt3','opt4'],
-                    ans: (q+1)%4,
-                    workings: `junior level ${lvl+1} explanation`
-                });
-            }
-            questionBank.junior[lvl] = level;
-        }
-        // senior level 2-10
-        for (let lvl = 1; lvl < 10; lvl++) {
-            let level = [];
-            for (let q=0; q<10; q++) {
-                level.push({
-                    subject: ['math','phys','chem','tech'][q%4],
-                    question: `Senior L${lvl+1} Q${q+1}: A-level style`,
-                    opts: ['optA','optB','optC','optD'],
-                    ans: (q+2)%4,
-                    workings: `senior workings lvl${lvl+1}`
-                });
-            }
-            questionBank.senior[lvl] = level;
+            
+            setTimeout(() => {
+                if (audioContext.state === 'running') {
+                    audioContext.close();
+                }
+            }, 500);
+        } catch (e) {
+            console.log('Audio not supported');
         }
     }
-    fillBank();
+
+    // ========== COMPLETE QUESTION BANK WITH ALL 10 LEVELS PER TRACK ==========
+    const questionBank = {
+        primary: [[], [], [], [], [], [], [], [], [], []],
+        junior: [[], [], [], [], [], [], [], [], [], []],
+        senior: [[], [], [], [], [], [], [], [], [], []]
+    };
+    
+    // ========== PRIMARY TRACK (Grades 1-7) - ALL 10 LEVELS ==========
+    // Level 1 (20 questions)
+    questionBank.primary[0] = [
+        { subject: 'math', question: '5 + 3 = ?', options: ['6', '7', '8', '9'], answer: 2, workings: '5 + 3 = 8' },
+        { subject: 'math', question: '10 - 4 = ?', options: ['5', '6', '7', '8'], answer: 1, workings: '10 - 4 = 6' },
+        { subject: 'science', question: 'Which animal lays eggs?', options: ['Dog', 'Cat', 'Chicken', 'Cow'], answer: 2, workings: 'Chicken lays eggs.' },
+        { subject: 'science', question: 'What color are bananas when ripe?', options: ['Red', 'Yellow', 'Green', 'Blue'], answer: 1, workings: 'Bananas turn yellow when ripe.' },
+        { subject: 'tech', question: 'What do you use to type on a computer?', options: ['Mouse', 'Keyboard', 'Monitor', 'Printer'], answer: 1, workings: 'Keyboard is used for typing.' },
+        { subject: 'math', question: '7 + 2 = ?', options: ['8', '9', '10', '11'], answer: 1, workings: '7 + 2 = 9' },
+        { subject: 'math', question: '15 - 7 = ?', options: ['6', '7', '8', '9'], answer: 2, workings: '15 - 7 = 8' },
+        { subject: 'science', question: 'Which part of a plant is underground?', options: ['Stem', 'Leaf', 'Root', 'Flower'], answer: 2, workings: 'Roots grow underground.' },
+        { subject: 'tech', question: 'Which device shows pictures?', options: ['CPU', 'Monitor', 'Mouse', 'Speaker'], answer: 1, workings: 'Monitor displays images.' },
+        { subject: 'math', question: '4 × 3 = ?', options: ['7', '12', '14', '9'], answer: 1, workings: '4 × 3 = 12' },
+        { subject: 'math', question: '9 + 1 = ?', options: ['8', '9', '10', '11'], answer: 2, workings: '9 + 1 = 10' },
+        { subject: 'math', question: '12 - 5 = ?', options: ['5', '6', '7', '8'], answer: 2, workings: '12 - 5 = 7' },
+        { subject: 'science', question: 'What do plants need to grow?', options: ['Water', 'Chocolate', 'Cookies', 'Milk'], answer: 0, workings: 'Plants need water to grow.' },
+        { subject: 'science', question: 'Which animal lives in water?', options: ['Lion', 'Fish', 'Elephant', 'Giraffe'], answer: 1, workings: 'Fish live in water.' },
+        { subject: 'tech', question: 'What turns a computer on?', options: ['Power button', 'Mouse', 'Keyboard', 'Speaker'], answer: 0, workings: 'Power button starts the computer.' },
+        { subject: 'math', question: '6 + 4 = ?', options: ['8', '9', '10', '11'], answer: 2, workings: '6 + 4 = 10' },
+        { subject: 'math', question: '18 - 8 = ?', options: ['8', '9', '10', '11'], answer: 2, workings: '18 - 8 = 10' },
+        { subject: 'science', question: 'What is the color of the sky?', options: ['Green', 'Blue', 'Red', 'Yellow'], answer: 1, workings: 'The sky is blue.' },
+        { subject: 'tech', question: 'What do you use to click on a computer?', options: ['Keyboard', 'Mouse', 'Monitor', 'Printer'], answer: 1, workings: 'Mouse is used for clicking.' },
+        { subject: 'math', question: '2 × 5 = ?', options: ['7', '8', '9', '10'], answer: 3, workings: '2 × 5 = 10' }
+    ];
+    
+    // Level 2 (20 questions)
+    questionBank.primary[1] = [
+        { subject: 'math', question: '8 + 6 = ?', options: ['12', '13', '14', '15'], answer: 2, workings: '8 + 6 = 14' },
+        { subject: 'math', question: '20 - 9 = ?', options: ['9', '10', '11', '12'], answer: 2, workings: '20 - 9 = 11' },
+        { subject: 'science', question: 'Which organ pumps blood?', options: ['Brain', 'Heart', 'Lungs', 'Stomach'], answer: 1, workings: 'Heart pumps blood.' },
+        { subject: 'science', question: 'What gas do we breathe in?', options: ['Oxygen', 'Carbon dioxide', 'Nitrogen', 'Hydrogen'], answer: 0, workings: 'We breathe in oxygen.' },
+        { subject: 'tech', question: 'What does "USB" stand for?', options: ['Universal Serial Bus', 'United Serial Bus', 'Universal Sync Bus', 'Upper Serial Bus'], answer: 0, workings: 'USB = Universal Serial Bus' },
+        { subject: 'math', question: '9 + 7 = ?', options: ['15', '16', '17', '18'], answer: 1, workings: '9 + 7 = 16' },
+        { subject: 'math', question: '6 × 4 = ?', options: ['20', '22', '24', '26'], answer: 2, workings: '6 × 4 = 24' },
+        { subject: 'science', question: 'Which is a sense organ?', options: ['Nose', 'Hair', 'Bone', 'Muscle'], answer: 0, workings: 'Nose is for smell.' },
+        { subject: 'tech', question: 'What stores files permanently?', options: ['RAM', 'Hard Drive', 'CPU', 'GPU'], answer: 1, workings: 'Hard drive stores data.' },
+        { subject: 'math', question: '18 ÷ 3 = ?', options: ['5', '6', '7', '8'], answer: 1, workings: '18 ÷ 3 = 6' },
+        { subject: 'math', question: '7 + 8 = ?', options: ['13', '14', '15', '16'], answer: 2, workings: '7 + 8 = 15' },
+        { subject: 'math', question: '24 - 7 = ?', options: ['15', '16', '17', '18'], answer: 2, workings: '24 - 7 = 17' },
+        { subject: 'science', question: 'What do cows drink?', options: ['Soda', 'Water', 'Juice', 'Milk'], answer: 1, workings: 'Cows drink water.' },
+        { subject: 'science', question: 'Which animal has a trunk?', options: ['Giraffe', 'Elephant', 'Zebra', 'Rhino'], answer: 1, workings: 'Elephant has a trunk.' },
+        { subject: 'tech', question: 'What does "CD" stand for?', options: ['Compact Disc', 'Computer Disc', 'Compact Drive', 'Computer Drive'], answer: 0, workings: 'CD = Compact Disc' },
+        { subject: 'math', question: '5 × 5 = ?', options: ['20', '25', '30', '35'], answer: 1, workings: '5 × 5 = 25' },
+        { subject: 'math', question: '30 ÷ 5 = ?', options: ['4', '5', '6', '7'], answer: 2, workings: '30 ÷ 5 = 6' },
+        { subject: 'science', question: 'How many legs does a spider have?', options: ['4', '6', '8', '10'], answer: 2, workings: 'Spiders have 8 legs.' },
+        { subject: 'tech', question: 'What is a laptop?', options: ['Desktop computer', 'Portable computer', 'Tablet', 'Phone'], answer: 1, workings: 'Laptop is a portable computer.' },
+        { subject: 'math', question: '16 + 4 = ?', options: ['18', '19', '20', '21'], answer: 2, workings: '16 + 4 = 20' }
+    ];
+    
+    // Level 3 (20 questions)
+    questionBank.primary[2] = [
+        { subject: 'math', question: '12 + 15 = ?', options: ['25', '26', '27', '28'], answer: 2, workings: '12 + 15 = 27' },
+        { subject: 'math', question: '30 - 12 = ?', options: ['16', '17', '18', '19'], answer: 2, workings: '30 - 12 = 18' },
+        { subject: 'science', question: 'How many planets in our solar system?', options: ['7', '8', '9', '10'], answer: 1, workings: 'There are 8 planets.' },
+        { subject: 'science', question: 'What is the largest mammal?', options: ['Elephant', 'Blue Whale', 'Giraffe', 'Hippo'], answer: 1, workings: 'Blue whale is largest.' },
+        { subject: 'tech', question: 'What does "CPU" stand for?', options: ['Central Processing Unit', 'Computer Personal Unit', 'Central Power Unit', 'Core Processing Unit'], answer: 0, workings: 'CPU = Central Processing Unit' },
+        { subject: 'math', question: '7 × 6 = ?', options: ['42', '36', '48', '45'], answer: 0, workings: '7 × 6 = 42' },
+        { subject: 'math', question: '64 ÷ 8 = ?', options: ['6', '7', '8', '9'], answer: 2, workings: '64 ÷ 8 = 8' },
+        { subject: 'science', question: 'Which planet is known as the Red Planet?', options: ['Venus', 'Mars', 'Jupiter', 'Saturn'], answer: 1, workings: 'Mars is the Red Planet.' },
+        { subject: 'tech', question: 'What is an output device?', options: ['Keyboard', 'Mouse', 'Monitor', 'Scanner'], answer: 2, workings: 'Monitor displays output.' },
+        { subject: 'math', question: 'What is 3/4 of 20?', options: ['10', '12', '15', '18'], answer: 2, workings: '3/4 × 20 = 15' },
+        { subject: 'math', question: '9 × 8 = ?', options: ['64', '72', '81', '63'], answer: 1, workings: '9 × 8 = 72' },
+        { subject: 'math', question: '45 ÷ 5 = ?', options: ['7', '8', '9', '10'], answer: 2, workings: '45 ÷ 5 = 9' },
+        { subject: 'science', question: 'What is the freezing point of water?', options: ['0°C', '32°C', '100°C', '212°C'], answer: 0, workings: 'Water freezes at 0°C.' },
+        { subject: 'science', question: 'Which animal is known as the king of the jungle?', options: ['Tiger', 'Lion', 'Elephant', 'Gorilla'], answer: 1, workings: 'Lion is king of the jungle.' },
+        { subject: 'tech', question: 'What is an input device?', options: ['Monitor', 'Printer', 'Keyboard', 'Speaker'], answer: 2, workings: 'Keyboard inputs data.' },
+        { subject: 'math', question: '11 + 22 = ?', options: ['31', '32', '33', '34'], answer: 2, workings: '11 + 22 = 33' },
+        { subject: 'math', question: '50 - 23 = ?', options: ['25', '26', '27', '28'], answer: 2, workings: '50 - 23 = 27' },
+        { subject: 'science', question: 'What do bees produce?', options: ['Milk', 'Honey', 'Wax', 'Silk'], answer: 1, workings: 'Bees produce honey.' },
+        { subject: 'tech', question: 'What does "DVD" stand for?', options: ['Digital Video Disc', 'Digital Versatile Disc', 'Double Video Disc', 'Digital Virtual Disc'], answer: 1, workings: 'DVD = Digital Versatile Disc' },
+        { subject: 'math', question: '6 × 7 = ?', options: ['42', '43', '44', '45'], answer: 0, workings: '6 × 7 = 42' }
+    ];
+    
+    // Level 4 (20 questions)
+    questionBank.primary[3] = [
+        { subject: 'math', question: '9 × 7 = ?', options: ['56', '63', '72', '81'], answer: 1, workings: '9 × 7 = 63' },
+        { subject: 'math', question: '81 ÷ 9 = ?', options: ['7', '8', '9', '10'], answer: 2, workings: '81 ÷ 9 = 9' },
+        { subject: 'science', question: 'What is the boiling point of water?', options: ['90°C', '100°C', '110°C', '120°C'], answer: 1, workings: 'Water boils at 100°C.' },
+        { subject: 'science', question: 'Which sense organ is used for hearing?', options: ['Eyes', 'Ears', 'Nose', 'Skin'], answer: 1, workings: 'Ears detect sound.' },
+        { subject: 'tech', question: 'What does "RAM" stand for?', options: ['Random Access Memory', 'Read Access Memory', 'Run Access Memory', 'Rapid Access Memory'], answer: 0, workings: 'RAM = Random Access Memory' },
+        { subject: 'math', question: '5² = ?', options: ['10', '15', '20', '25'], answer: 3, workings: '5 × 5 = 25' },
+        { subject: 'math', question: '√49 = ?', options: ['6', '7', '8', '9'], answer: 1, workings: '7 × 7 = 49' },
+        { subject: 'science', question: 'Which organ removes waste from blood?', options: ['Heart', 'Lungs', 'Kidneys', 'Liver'], answer: 2, workings: 'Kidneys filter blood.' },
+        { subject: 'tech', question: 'Which is an input device?', options: ['Monitor', 'Printer', 'Keyboard', 'Speaker'], answer: 2, workings: 'Keyboard inputs data.' },
+        { subject: 'math', question: 'What is the perimeter of a square with side 5cm?', options: ['15cm', '20cm', '25cm', '30cm'], answer: 1, workings: '4 × 5 = 20cm' },
+        { subject: 'math', question: '12 × 6 = ?', options: ['62', '72', '82', '92'], answer: 1, workings: '12 × 6 = 72' },
+        { subject: 'math', question: '99 ÷ 9 = ?', options: ['9', '10', '11', '12'], answer: 2, workings: '99 ÷ 9 = 11' },
+        { subject: 'science', question: 'What is the largest organ in the human body?', options: ['Heart', 'Brain', 'Skin', 'Liver'], answer: 2, workings: 'Skin is the largest organ.' },
+        { subject: 'science', question: 'Which planet is closest to the sun?', options: ['Venus', 'Earth', 'Mars', 'Mercury'], answer: 3, workings: 'Mercury is closest to the sun.' },
+        { subject: 'tech', question: 'What is a byte?', options: ['8 bits', '16 bits', '32 bits', '64 bits'], answer: 0, workings: 'A byte consists of 8 bits.' },
+        { subject: 'math', question: '7³ = ?', options: ['49', '243', '343', '443'], answer: 2, workings: '7 × 7 × 7 = 343' },
+        { subject: 'math', question: '144 ÷ 12 = ?', options: ['10', '11', '12', '13'], answer: 2, workings: '144 ÷ 12 = 12' },
+        { subject: 'science', question: 'How many hearts does an octopus have?', options: ['1', '2', '3', '4'], answer: 2, workings: 'Octopus has 3 hearts.' },
+        { subject: 'tech', question: 'What does "HDD" stand for?', options: ['Hard Disk Drive', 'High Density Drive', 'Hard Data Drive', 'High Disk Drive'], answer: 0, workings: 'HDD = Hard Disk Drive' },
+        { subject: 'math', question: '25 + 36 = ?', options: ['51', '61', '71', '81'], answer: 1, workings: '25 + 36 = 61' }
+    ];
+    
+    // Level 5 (20 questions)
+    questionBank.primary[4] = [
+        { subject: 'math', question: '2.5 + 1.5 = ?', options: ['3.0', '3.5', '4.0', '4.5'], answer: 2, workings: '2.5 + 1.5 = 4.0' },
+        { subject: 'math', question: '7.5 - 2.5 = ?', options: ['4.5', '5.0', '5.5', '6.0'], answer: 1, workings: '7.5 - 2.5 = 5.0' },
+        { subject: 'science', question: 'What is the largest planet?', options: ['Mars', 'Jupiter', 'Saturn', 'Neptune'], answer: 1, workings: 'Jupiter is largest.' },
+        { subject: 'science', question: 'Which vitamin is from citrus fruits?', options: ['A', 'B', 'C', 'D'], answer: 2, workings: 'Vitamin C in oranges.' },
+        { subject: 'tech', question: 'What does "WiFi" stand for?', options: ['Wireless Fidelity', 'Wide Fidelity', 'Wireless Fiber', 'Wide Fiber'], answer: 0, workings: 'WiFi = Wireless Fidelity' },
+        { subject: 'math', question: '3² + 4² = ?', options: ['7', '12', '16', '25'], answer: 3, workings: '9 + 16 = 25' },
+        { subject: 'math', question: '2/5 as a decimal?', options: ['0.2', '0.25', '0.4', '0.5'], answer: 2, workings: '2 ÷ 5 = 0.4' },
+        { subject: 'science', question: 'Which organ controls the body?', options: ['Heart', 'Brain', 'Lungs', 'Stomach'], answer: 1, workings: 'Brain controls body.' },
+        { subject: 'tech', question: 'What is a browser?', options: ['Chrome', 'Windows', 'Android', 'iOS'], answer: 0, workings: 'Chrome is a browser.' },
+        { subject: 'math', question: 'Area of square side 6cm?', options: ['24cm²', '30cm²', '36cm²', '42cm²'], answer: 2, workings: '6 × 6 = 36cm²' },
+        { subject: 'math', question: '3.75 + 2.25 = ?', options: ['5.0', '5.5', '6.0', '6.5'], answer: 2, workings: '3.75 + 2.25 = 6.0' },
+        { subject: 'math', question: '8.4 - 3.2 = ?', options: ['5.2', '5.4', '5.6', '5.8'], answer: 0, workings: '8.4 - 3.2 = 5.2' },
+        { subject: 'science', question: 'What is the smallest planet?', options: ['Mercury', 'Mars', 'Venus', 'Pluto'], answer: 0, workings: 'Mercury is smallest planet.' },
+        { subject: 'science', question: 'Which vitamin is produced by the skin in sunlight?', options: ['A', 'B', 'C', 'D'], answer: 3, workings: 'Vitamin D from sunlight.' },
+        { subject: 'tech', question: 'What is an operating system?', options: ['Windows', 'Word', 'Excel', 'Chrome'], answer: 0, workings: 'Windows is an operating system.' },
+        { subject: 'math', question: '0.5 × 0.5 = ?', options: ['0.25', '0.5', '0.75', '1.0'], answer: 0, workings: '0.5 × 0.5 = 0.25' },
+        { subject: 'math', question: '1/2 + 1/4 = ?', options: ['1/6', '1/3', '3/4', '2/3'], answer: 2, workings: '1/2 = 2/4, 2/4 + 1/4 = 3/4' },
+        { subject: 'science', question: 'How many bones in a human hand?', options: ['27', '28', '29', '30'], answer: 0, workings: 'Human hand has 27 bones.' },
+        { subject: 'tech', question: 'What does "PDF" stand for?', options: ['Portable Document Format', 'Personal Document File', 'Printable Document Format', 'Public Document File'], answer: 0, workings: 'PDF = Portable Document Format' },
+        { subject: 'math', question: '15% of 80 = ?', options: ['8', '10', '12', '14'], answer: 2, workings: '0.15 × 80 = 12' }
+    ];
+    
+    // Level 6 (20 questions)
+    questionBank.primary[5] = [
+        { subject: 'math', question: 'What is 25% of 200?', options: ['25', '40', '50', '75'], answer: 2, workings: '0.25 × 200 = 50' },
+        { subject: 'math', question: 'Simplify: 8 + 12 ÷ 4', options: ['5', '8', '11', '20'], answer: 2, workings: '12 ÷ 4 = 3, 8 + 3 = 11' },
+        { subject: 'science', question: 'What is the main source of energy for Earth?', options: ['Moon', 'Sun', 'Stars', 'Wind'], answer: 1, workings: 'Sun is main energy source.' },
+        { subject: 'science', question: 'Which animal can change its color?', options: ['Frog', 'Lizard', 'Chameleon', 'Snake'], answer: 2, workings: 'Chameleon changes color.' },
+        { subject: 'tech', question: 'What is an email?', options: ['Electronic mail', 'Early mail', 'Easy mail', 'Extra mail'], answer: 0, workings: 'Email = Electronic mail' },
+        { subject: 'math', question: 'What is the area of a triangle with base 10cm and height 8cm?', options: ['18cm²', '40cm²', '80cm²', '20cm²'], answer: 1, workings: '½ × 10 × 8 = 40cm²' },
+        { subject: 'math', question: 'Convert 3/5 to decimal', options: ['0.3', '0.4', '0.5', '0.6'], answer: 3, workings: '3 ÷ 5 = 0.6' },
+        { subject: 'science', question: 'Which planet has rings around it?', options: ['Mars', 'Jupiter', 'Saturn', 'Uranus'], answer: 2, workings: 'Saturn has prominent rings.' },
+        { subject: 'tech', question: 'What is a URL?', options: ['Universal Resource Locator', 'Uniform Resource Locator', 'United Resource Locator', 'Uniform Resource Link'], answer: 1, workings: 'URL = Uniform Resource Locator' },
+        { subject: 'math', question: 'What is the volume of a cube with side 4cm?', options: ['16cm³', '32cm³', '64cm³', '128cm³'], answer: 2, workings: '4 × 4 × 4 = 64cm³' },
+        { subject: 'math', question: 'Solve: 3x + 5 = 20', options: ['x = 3', 'x = 5', 'x = 7', 'x = 10'], answer: 1, workings: '3x = 15, x = 5' },
+        { subject: 'math', question: 'What is 7² + 5²?', options: ['24', '49', '74', '95'], answer: 2, workings: '49 + 25 = 74' },
+        { subject: 'science', question: 'How many teeth does an adult human have?', options: ['28', '30', '32', '34'], answer: 2, workings: 'Adults have 32 teeth.' },
+        { subject: 'science', question: 'Which part of the plant conducts photosynthesis?', options: ['Root', 'Stem', 'Leaf', 'Flower'], answer: 2, workings: 'Leaves conduct photosynthesis.' },
+        { subject: 'tech', question: 'What is cloud computing?', options: ['Weather prediction', 'Internet-based computing', 'Sky computing', 'Data storage'], answer: 1, workings: 'Cloud computing is internet-based computing.' },
+        { subject: 'math', question: 'What is the perimeter of a rectangle 12cm by 8cm?', options: ['20cm', '40cm', '96cm', '48cm'], answer: 1, workings: '2 × (12 + 8) = 40cm' },
+        { subject: 'math', question: 'Convert 0.75 to fraction', options: ['1/4', '1/2', '3/4', '2/3'], answer: 2, workings: '0.75 = 75/100 = 3/4' },
+        { subject: 'science', question: 'Which gas do plants release during photosynthesis?', options: ['Oxygen', 'CO2', 'Nitrogen', 'Hydrogen'], answer: 0, workings: 'Plants release oxygen.' },
+        { subject: 'tech', question: 'What does "HTTP" stand for?', options: ['Hyper Text Transfer Protocol', 'High Tech Transfer Protocol', 'Hyper Text Transmission Protocol', 'High Text Transfer Protocol'], answer: 0, workings: 'HTTP = Hyper Text Transfer Protocol' },
+        { subject: 'math', question: 'What is 20% of 350?', options: ['50', '60', '70', '80'], answer: 2, workings: '0.2 × 350 = 70' }
+    ];
+    
+    // Level 7 (20 questions)
+    questionBank.primary[6] = [
+        { subject: 'math', question: 'What is the square root of 144?', options: ['10', '11', '12', '13'], answer: 2, workings: '12 × 12 = 144' },
+        { subject: 'math', question: 'Simplify: 4 + 6 × 3', options: ['18', '22', '30', '14'], answer: 1, workings: '6 × 3 = 18, 4 + 18 = 22' },
+        { subject: 'science', question: 'What is the hardest natural substance?', options: ['Gold', 'Iron', 'Diamond', 'Platinum'], answer: 2, workings: 'Diamond is hardest.' },
+        { subject: 'science', question: 'Which organ pumps blood?', options: ['Brain', 'Lungs', 'Heart', 'Liver'], answer: 2, workings: 'Heart pumps blood.' },
+        { subject: 'tech', question: 'What is a firewall?', options: ['Physical wall', 'Network security system', 'Fire prevention', 'Wall material'], answer: 1, workings: 'Firewall protects networks.' },
+        { subject: 'math', question: 'What is the circumference of a circle with radius 7cm? (π=22/7)', options: ['14cm', '22cm', '44cm', '88cm'], answer: 2, workings: '2πr = 2 × 22/7 × 7 = 44cm' },
+        { subject: 'math', question: 'Convert 3/8 to decimal', options: ['0.25', '0.375', '0.5', '0.625'], answer: 1, workings: '3 ÷ 8 = 0.375' },
+        { subject: 'science', question: 'How many chambers does a human heart have?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Heart has 4 chambers.' },
+        { subject: 'tech', question: 'What does "AI" stand for?', options: ['Artificial Intelligence', 'Automated Input', 'Artificial Interface', 'Automated Intelligence'], answer: 0, workings: 'AI = Artificial Intelligence' },
+        { subject: 'math', question: 'What is 15% of 120?', options: ['12', '15', '18', '20'], answer: 2, workings: '0.15 × 120 = 18' },
+        { subject: 'math', question: 'Solve: 2x - 7 = 13', options: ['x = 3', 'x = 5', 'x = 10', 'x = 20'], answer: 2, workings: '2x = 20, x = 10' },
+        { subject: 'math', question: 'What is 2⁵?', options: ['10', '16', '25', '32'], answer: 3, workings: '2 × 2 × 2 × 2 × 2 = 32' },
+        { subject: 'science', question: 'What is the largest bone in the human body?', options: ['Skull', 'Spine', 'Femur', 'Pelvis'], answer: 2, workings: 'Femur (thigh bone) is largest.' },
+        { subject: 'science', question: 'Which planet is known as the Morning Star?', options: ['Mars', 'Venus', 'Jupiter', 'Saturn'], answer: 1, workings: 'Venus is Morning Star.' },
+        { subject: 'tech', question: 'What is a search engine?', options: ['Google', 'Chrome', 'Firefox', 'Windows'], answer: 0, workings: 'Google is a search engine.' },
+        { subject: 'math', question: 'What is the area of a circle with radius 10cm? (π=3.14)', options: ['31.4cm²', '62.8cm²', '314cm²', '628cm²'], answer: 2, workings: 'πr² = 3.14 × 100 = 314cm²' },
+        { subject: 'math', question: 'Convert 0.625 to fraction', options: ['1/8', '3/8', '5/8', '7/8'], answer: 2, workings: '0.625 = 625/1000 = 5/8' },
+        { subject: 'science', question: 'How many bones in the human spine?', options: ['26', '33', '40', '45'], answer: 1, workings: 'Spine has 33 vertebrae.' },
+        { subject: 'tech', question: 'What does "SSL" stand for?', options: ['Secure Socket Layer', 'System Security Layer', 'Secure System Link', 'System Socket Layer'], answer: 0, workings: 'SSL = Secure Socket Layer' },
+        { subject: 'math', question: 'What is 30% of 250?', options: ['50', '60', '75', '80'], answer: 2, workings: '0.3 × 250 = 75' }
+    ];
+    
+    // Level 8 (20 questions)
+    questionBank.primary[7] = [
+        { subject: 'math', question: 'What is the value of π (pi) to 2 decimal places?', options: ['3.14', '3.15', '3.16', '3.41'], answer: 0, workings: 'π ≈ 3.14' },
+        { subject: 'math', question: 'Simplify: 3(4 + 5) - 2', options: ['15', '20', '25', '27'], answer: 2, workings: '3 × 9 = 27, 27 - 2 = 25' },
+        { subject: 'science', question: 'What is the chemical symbol for water?', options: ['O2', 'H2O', 'CO2', 'NaCl'], answer: 1, workings: 'Water = H2O' },
+        { subject: 'science', question: 'Which sense organ detects taste?', options: ['Nose', 'Eyes', 'Tongue', 'Skin'], answer: 2, workings: 'Tongue detects taste.' },
+        { subject: 'tech', question: 'What is a pixel?', options: ['Picture element', 'Print element', 'Screen element', 'Light element'], answer: 0, workings: 'Pixel = picture element.' },
+        { subject: 'math', question: 'What is 15% of 60?', options: ['6', '9', '12', '15'], answer: 1, workings: '0.15 × 60 = 9' },
+        { subject: 'math', question: 'Solve: 3x + 2 = 17', options: ['x = 3', 'x = 5', 'x = 7', 'x = 9'], answer: 1, workings: '3x = 15, x = 5' },
+        { subject: 'science', question: 'How many planets in our solar system have rings?', options: ['1', '2', '3', '4'], answer: 3, workings: 'Jupiter, Saturn, Uranus, Neptune have rings.' },
+        { subject: 'tech', question: 'What does "ISP" stand for?', options: ['Internet Service Provider', 'Internal System Protocol', 'Internet System Provider', 'Internal Service Protocol'], answer: 0, workings: 'ISP = Internet Service Provider' },
+        { subject: 'math', question: 'What is the volume of a rectangular prism 5cm × 3cm × 2cm?', options: ['10cm³', '15cm³', '30cm³', '60cm³'], answer: 2, workings: '5 × 3 × 2 = 30cm³' },
+        { subject: 'math', question: 'Convert 7/20 to decimal', options: ['0.25', '0.3', '0.35', '0.4'], answer: 2, workings: '7 ÷ 20 = 0.35' },
+        { subject: 'math', question: 'What is 2⁶?', options: ['32', '48', '64', '128'], answer: 2, workings: '2 × 2 × 2 × 2 × 2 × 2 = 64' },
+        { subject: 'science', question: 'Which vitamin is known as the "sunshine vitamin"?', options: ['A', 'B', 'C', 'D'], answer: 3, workings: 'Vitamin D is sunshine vitamin.' },
+        { subject: 'science', question: 'What is the smallest bone in the human body?', options: ['Stapes', 'Femur', 'Tibia', 'Humerus'], answer: 0, workings: 'Stapes in ear is smallest.' },
+        { subject: 'tech', question: 'What is a motherboard?', options: ['Main circuit board', 'Storage device', 'Power supply', 'Cooling fan'], answer: 0, workings: 'Motherboard is main circuit board.' },
+        { subject: 'math', question: 'What is the area of a triangle with base 12cm and height 7cm?', options: ['19cm²', '42cm²', '84cm²', '38cm²'], answer: 1, workings: '½ × 12 × 7 = 42cm²' },
+        { subject: 'math', question: 'What is 25% of 480?', options: ['100', '120', '140', '160'], answer: 1, workings: '0.25 × 480 = 120' },
+        { subject: 'science', question: 'How many lungs does a human have?', options: ['1', '2', '3', '4'], answer: 1, workings: 'Humans have 2 lungs.' },
+        { subject: 'tech', question: 'What does "BIOS" stand for?', options: ['Basic Input Output System', 'Binary Input Output System', 'Basic Integrated Operating System', 'Binary Integrated Operating System'], answer: 0, workings: 'BIOS = Basic Input Output System' },
+        { subject: 'math', question: 'Simplify: (5 + 3) × 4 - 6', options: ['20', '22', '26', '30'], answer: 2, workings: '8 × 4 = 32, 32 - 6 = 26' }
+    ];
+    
+    // Level 9 (20 questions)
+    questionBank.primary[8] = [
+        { subject: 'math', question: 'What is the square root of 169?', options: ['11', '12', '13', '14'], answer: 2, workings: '13 × 13 = 169' },
+        { subject: 'math', question: 'Simplify: 2⁴ × 2³', options: ['2⁷', '2¹²', '4⁷', '8⁷'], answer: 0, workings: '2⁴⁺³ = 2⁷' },
+        { subject: 'science', question: 'What is the process of plants making food called?', options: ['Respiration', 'Photosynthesis', 'Digestion', 'Absorption'], answer: 1, workings: 'Plants make food through photosynthesis.' },
+        { subject: 'science', question: 'Which part of the eye controls light entry?', options: ['Retina', 'Lens', 'Pupil', 'Cornea'], answer: 2, workings: 'Pupil controls light entry.' },
+        { subject: 'tech', question: 'What is a virus in computing?', options: ['Biological virus', 'Malicious program', 'Hardware problem', 'Network issue'], answer: 1, workings: 'Computer virus is malicious software.' },
+        { subject: 'math', question: 'What is 3/5 of 200?', options: ['80', '100', '120', '140'], answer: 2, workings: '200 ÷ 5 = 40, 40 × 3 = 120' },
+        { subject: 'math', question: 'Solve: 5x - 3 = 32', options: ['x = 5', 'x = 7', 'x = 9', 'x = 11'], answer: 1, workings: '5x = 35, x = 7' },
+        { subject: 'science', question: 'How many elements in the periodic table?', options: ['108', '118', '128', '138'], answer: 1, workings: 'There are 118 known elements.' },
+        { subject: 'tech', question: 'What does "JPEG" stand for?', options: ['Joint Photographic Experts Group', 'Joint Photo Encoding Group', 'Joint Picture Experts Group', 'Joint Pixel Encoding Group'], answer: 0, workings: 'JPEG = Joint Photographic Experts Group' },
+        { subject: 'math', question: 'What is the area of a circle with diameter 14cm? (π=22/7)', options: ['44cm²', '88cm²', '154cm²', '308cm²'], answer: 2, workings: 'radius = 7cm, πr² = 22/7 × 49 = 154cm²' },
+        { subject: 'math', question: 'Convert 0.45 to fraction in simplest form', options: ['9/20', '45/100', '5/11', '4/9'], answer: 0, workings: '0.45 = 45/100 = 9/20' },
+        { subject: 'math', question: 'What is 3⁴?', options: ['9', '27', '81', '243'], answer: 2, workings: '3 × 3 × 3 × 3 = 81' },
+        { subject: 'science', question: 'What is the main function of red blood cells?', options: ['Fight infection', 'Carry oxygen', 'Clot blood', 'Produce antibodies'], answer: 1, workings: 'Red blood cells carry oxygen.' },
+        { subject: 'science', question: 'Which planet has the most moons?', options: ['Jupiter', 'Saturn', 'Uranus', 'Neptune'], answer: 1, workings: 'Saturn has the most moons.' },
+        { subject: 'tech', question: 'What is an algorithm?', options: ['Math formula', 'Step-by-step procedure', 'Computer program', 'Data type'], answer: 1, workings: 'Algorithm is a step-by-step procedure.' },
+        { subject: 'math', question: 'What is the volume of a sphere with radius 3cm? (π=3.14)', options: ['37.68cm³', '113.04cm³', '28.26cm³', '84.78cm³'], answer: 1, workings: '4/3πr³ = 4/3 × 3.14 × 27 = 113.04cm³' },
+        { subject: 'math', question: 'What is 35% of 200?', options: ['50', '60', '70', '80'], answer: 2, workings: '0.35 × 200 = 70' },
+        { subject: 'science', question: 'How many chambers in a bird heart?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Birds have 4-chambered hearts.' },
+        { subject: 'tech', question: 'What does "HTML" stand for?', options: ['Hyper Text Markup Language', 'High Tech Markup Language', 'Hyper Transfer Markup Language', 'High Text Markup Language'], answer: 0, workings: 'HTML = Hyper Text Markup Language' },
+        { subject: 'math', question: 'Simplify: (12 + 8) ÷ (5 - 1)', options: ['3', '4', '5', '6'], answer: 2, workings: '20 ÷ 4 = 5' }
+    ];
+    
+    // Level 10 (20 questions)
+    questionBank.primary[9] = [
+        { subject: 'math', question: 'What is the square root of 225?', options: ['12', '13', '14', '15'], answer: 3, workings: '15 × 15 = 225' },
+        { subject: 'math', question: 'Simplify: 5³ - 4³', options: ['1', '9', '61', '125'], answer: 2, workings: '125 - 64 = 61' },
+        { subject: 'science', question: 'What is the largest internal organ in the human body?', options: ['Heart', 'Brain', 'Liver', 'Lungs'], answer: 2, workings: 'Liver is largest internal organ.' },
+        { subject: 'science', question: 'Which element has the chemical symbol "Fe"?', options: ['Fluorine', 'Francium', 'Iron', 'Fermium'], answer: 2, workings: 'Fe = Iron (from Latin "ferrum")' },
+        { subject: 'tech', question: 'What is the Internet of Things (IoT)?', options: ['Network of physical devices', 'New internet protocol', 'Social media network', 'Cloud service'], answer: 0, workings: 'IoT connects physical devices to internet.' },
+        { subject: 'math', question: 'What is the area of a trapezoid with bases 8cm and 12cm, height 5cm?', options: ['30cm²', '40cm²', '50cm²', '60cm²'], answer: 2, workings: '½ × (8+12) × 5 = 50cm²' },
+        { subject: 'math', question: 'Solve: 2(3x - 4) = 22', options: ['x = 3', 'x = 5', 'x = 7', 'x = 9'], answer: 1, workings: '6x - 8 = 22, 6x = 30, x = 5' },
+        { subject: 'science', question: 'How many chromosomes do humans have?', options: ['23', '46', '48', '50'], answer: 1, workings: 'Humans have 46 chromosomes (23 pairs).' },
+        { subject: 'tech', question: 'What does "VPN" stand for?', options: ['Virtual Private Network', 'Very Protected Network', 'Virtual Public Network', 'Verified Private Network'], answer: 0, workings: 'VPN = Virtual Private Network' },
+        { subject: 'math', question: 'What is 45% of 600?', options: ['200', '250', '270', '300'], answer: 2, workings: '0.45 × 600 = 270' },
+        { subject: 'math', question: 'What is 2⁸?', options: ['128', '256', '512', '1024'], answer: 1, workings: '2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 256' },
+        { subject: 'math', question: 'Convert 5/8 to decimal', options: ['0.525', '0.6', '0.625', '0.65'], answer: 2, workings: '5 ÷ 8 = 0.625' },
+        { subject: 'science', question: 'Which blood type is the universal donor?', options: ['A', 'B', 'AB', 'O'], answer: 3, workings: 'Type O negative is universal donor.' },
+        { subject: 'science', question: 'What is the longest bone in the human body?', options: ['Tibia', 'Fibula', 'Femur', 'Humerus'], answer: 2, workings: 'Femur (thigh bone) is longest.' },
+        { subject: 'tech', question: 'What is a cookie in computing?', options: ['Baked treat', 'Data stored by browser', 'Security tool', 'Network device'], answer: 1, workings: 'Cookie stores browsing data.' },
+        { subject: 'math', question: 'What is the surface area of a cube with side 5cm?', options: ['25cm²', '100cm²', '125cm²', '150cm²'], answer: 3, workings: '6 × 5² = 6 × 25 = 150cm²' },
+        { subject: 'math', question: 'What is 12.5% of 400?', options: ['40', '45', '50', '55'], answer: 2, workings: '0.125 × 400 = 50' },
+        { subject: 'science', question: 'How many pairs of ribs in humans?', options: ['10', '12', '14', '16'], answer: 1, workings: 'Humans have 12 pairs of ribs.' },
+        { subject: 'tech', question: 'What does "SSD" stand for?', options: ['Solid State Drive', 'System Storage Drive', 'Solid System Drive', 'State Storage Device'], answer: 0, workings: 'SSD = Solid State Drive' },
+        { subject: 'math', question: 'Simplify: 3x² + 5x - 2x² - 3x', options: ['x² + 2x', '5x² + 2x', 'x² + 8x', '5x² - 2x'], answer: 0, workings: '3x² - 2x² = x², 5x - 3x = 2x' }
+    ];
+
+    // ========== JUNIOR SECONDARY TRACK (Form 1-2) - ALL 10 LEVELS ==========
+    // Level 1 (20 questions)
+    questionBank.junior[0] = [
+        { subject: 'math', question: 'Solve: 3x = 21', options: ['5', '6', '7', '8'], answer: 2, workings: 'x = 21/3 = 7' },
+        { subject: 'math', question: 'Expand: 2(a + 3)', options: ['2a + 3', '2a + 6', 'a + 6', '2a + 5'], answer: 1, workings: '2 × a + 2 × 3 = 2a + 6' },
+        { subject: 'chem', question: 'Chemical symbol for sodium?', options: ['S', 'Na', 'So', 'K'], answer: 1, workings: 'Na from Latin "natrium"' },
+        { subject: 'phys', question: 'Unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], answer: 1, workings: 'Force is measured in Newtons.' },
+        { subject: 'bio', question: 'Which vitamin is produced in sunlight?', options: ['A', 'B12', 'C', 'D'], answer: 3, workings: 'Vitamin D from sunlight.' },
+        { subject: 'math', question: '15% of 200 = ?', options: ['20', '25', '30', '35'], answer: 2, workings: '0.15 × 200 = 30' },
+        { subject: 'chem', question: 'Gas essential for burning?', options: ['Oxygen', 'CO2', 'Nitrogen', 'Hydrogen'], answer: 0, workings: 'Fire needs oxygen.' },
+        { subject: 'phys', question: 'Which is a scalar quantity?', options: ['Force', 'Velocity', 'Mass', 'Acceleration'], answer: 2, workings: 'Mass has magnitude only.' },
+        { subject: 'bio', question: 'Main component of blood?', options: ['Plasma', 'RBC', 'WBC', 'Platelets'], answer: 0, workings: 'Plasma makes up 55% of blood.' },
+        { subject: 'math', question: 'Area of rectangle 5cm × 3cm?', options: ['8 cm²', '15 cm²', '16 cm²', '10 cm²'], answer: 1, workings: '5 × 3 = 15 cm²' },
+        { subject: 'math', question: 'Solve: x + 7 = 15', options: ['6', '7', '8', '9'], answer: 2, workings: 'x = 15 - 7 = 8' },
+        { subject: 'math', question: 'Simplify: 5y - 2y + 3y', options: ['3y', '4y', '5y', '6y'], answer: 3, workings: '5 - 2 + 3 = 6, so 6y' },
+        { subject: 'chem', question: 'Chemical symbol for potassium?', options: ['P', 'Po', 'K', 'Ka'], answer: 2, workings: 'K from Latin "kalium"' },
+        { subject: 'phys', question: 'Unit of energy?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], answer: 1, workings: 'Energy is measured in Joules.' },
+        { subject: 'bio', question: 'Which organ produces insulin?', options: ['Liver', 'Pancreas', 'Kidney', 'Stomach'], answer: 1, workings: 'Pancreas produces insulin.' },
+        { subject: 'math', question: 'What is 25% of 80?', options: ['15', '20', '25', '30'], answer: 1, workings: '0.25 × 80 = 20' },
+        { subject: 'chem', question: 'What is the chemical formula for water?', options: ['H2O2', 'H2O', 'CO2', 'O2'], answer: 1, workings: 'Water = H2O' },
+        { subject: 'phys', question: 'Which is a vector quantity?', options: ['Mass', 'Time', 'Velocity', 'Temperature'], answer: 2, workings: 'Velocity has both magnitude and direction.' },
+        { subject: 'bio', question: 'How many teeth in adult humans?', options: ['28', '30', '32', '34'], answer: 2, workings: 'Adults have 32 teeth.' },
+        { subject: 'math', question: 'Perimeter of square side 7cm?', options: ['14cm', '21cm', '28cm', '35cm'], answer: 2, workings: '4 × 7 = 28cm' }
+    ];
+    
+    // Level 2 (20 questions)
+    questionBank.junior[1] = [
+        { subject: 'math', question: 'Solve: 2x + 5 = 15', options: ['3', '4', '5', '6'], answer: 2, workings: '2x = 10, x = 5' },
+        { subject: 'math', question: 'Simplify: 4a + 3b - 2a + b', options: ['2a + 4b', '6a + 4b', '2a + 2b', '6a + 2b'], answer: 0, workings: '4a-2a = 2a, 3b+b = 4b' },
+        { subject: 'chem', question: 'pH of pure water?', options: ['1', '5', '7', '14'], answer: 2, workings: 'Pure water is neutral, pH 7.' },
+        { subject: 'phys', question: 'Which law states F = ma?', options: ['Newton\'s 1st', 'Newton\'s 2nd', 'Newton\'s 3rd', 'Ohm\'s'], answer: 1, workings: 'Second law: force = mass × acceleration' },
+        { subject: 'bio', question: 'Which organ filters blood?', options: ['Heart', 'Lungs', 'Kidneys', 'Liver'], answer: 2, workings: 'Kidneys filter waste from blood.' },
+        { subject: 'math', question: 'If a triangle has base 8cm and height 5cm, area?', options: ['20 cm²', '30 cm²', '40 cm²', '13 cm²'], answer: 0, workings: '½ × 8 × 5 = 20 cm²' },
+        { subject: 'chem', question: 'Chemical symbol for gold?', options: ['Go', 'Gd', 'Au', 'Ag'], answer: 2, workings: 'Au from Latin "aurum"' },
+        { subject: 'phys', question: 'What is the SI unit of current?', options: ['Volt', 'Ampere', 'Ohm', 'Coulomb'], answer: 1, workings: 'Current is measured in Amperes.' },
+        { subject: 'bio', question: 'How many bones in adult human?', options: ['206', '208', '210', '212'], answer: 0, workings: 'Adult humans have 206 bones.' },
+        { subject: 'math', question: 'What is 2³?', options: ['4', '6', '8', '9'], answer: 2, workings: '2 × 2 × 2 = 8' },
+        { subject: 'math', question: 'Solve: 3x - 7 = 14', options: ['5', '6', '7', '8'], answer: 2, workings: '3x = 21, x = 7' },
+        { subject: 'math', question: 'Expand: 3(2x - 5)', options: ['6x - 5', '6x - 15', '5x - 8', '6x + 15'], answer: 1, workings: '3 × 2x = 6x, 3 × -5 = -15' },
+        { subject: 'chem', question: 'Chemical symbol for silver?', options: ['Si', 'Ag', 'Au', 'Sr'], answer: 1, workings: 'Ag from Latin "argentum"' },
+        { subject: 'phys', question: 'Unit of power?', options: ['Joule', 'Newton', 'Watt', 'Volt'], answer: 2, workings: 'Power is measured in Watts.' },
+        { subject: 'bio', question: 'Which vitamin is found in citrus fruits?', options: ['A', 'B', 'C', 'D'], answer: 2, workings: 'Vitamin C in citrus fruits.' },
+        { subject: 'math', question: 'What is 12% of 150?', options: ['12', '15', '18', '20'], answer: 2, workings: '0.12 × 150 = 18' },
+        { subject: 'chem', question: 'What is the chemical formula for carbon dioxide?', options: ['CO', 'CO2', 'C2O', 'O2C'], answer: 1, workings: 'CO2 = Carbon dioxide' },
+        { subject: 'phys', question: 'What is the SI unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], answer: 2, workings: 'Resistance is measured in Ohms.' },
+        { subject: 'bio', question: 'Which part of the brain controls balance?', options: ['Cerebrum', 'Cerebellum', 'Medulla', 'Hypothalamus'], answer: 1, workings: 'Cerebellum controls balance.' },
+        { subject: 'math', question: 'Volume of cube side 4cm?', options: ['16cm³', '32cm³', '64cm³', '128cm³'], answer: 2, workings: '4 × 4 × 4 = 64cm³' }
+    ];
+    
+    // Level 3 (20 questions)
+    questionBank.junior[2] = [
+        { subject: 'math', question: 'Solve: 5x - 3 = 2x + 9', options: ['2', '3', '4', '5'], answer: 2, workings: '5x - 2x = 9 + 3, 3x = 12, x = 4' },
+        { subject: 'math', question: 'Factorize: x² + 5x + 6', options: ['(x+2)(x+3)', '(x+1)(x+6)', '(x-2)(x-3)', '(x+2)(x-3)'], answer: 0, workings: 'x² + 5x + 6 = (x+2)(x+3)' },
+        { subject: 'chem', question: 'What is the atomic number of carbon?', options: ['4', '5', '6', '7'], answer: 2, workings: 'Carbon has atomic number 6.' },
+        { subject: 'phys', question: 'What is the speed of light in vacuum?', options: ['3 × 10⁶ m/s', '3 × 10⁷ m/s', '3 × 10⁸ m/s', '3 × 10⁹ m/s'], answer: 2, workings: 'Speed of light ≈ 3 × 10⁸ m/s' },
+        { subject: 'bio', question: 'Which organ produces bile?', options: ['Pancreas', 'Liver', 'Gallbladder', 'Stomach'], answer: 1, workings: 'Liver produces bile.' },
+        { subject: 'math', question: 'What is the slope of line y = 3x + 2?', options: ['2', '3', '-2', '-3'], answer: 1, workings: 'Slope = coefficient of x = 3' },
+        { subject: 'chem', question: 'What is the pH of a strong acid?', options: ['1-2', '7', '8-9', '12-14'], answer: 0, workings: 'Strong acids have pH 1-2.' },
+        { subject: 'phys', question: 'What is the SI unit of frequency?', options: ['Hertz', 'Watt', 'Joule', 'Newton'], answer: 0, workings: 'Frequency is measured in Hertz.' },
+        { subject: 'bio', question: 'How many chambers in a mammal heart?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Mammals have 4-chambered hearts.' },
+        { subject: 'math', question: 'What is √144 + √169?', options: ['13', '17', '25', '313'], answer: 2, workings: '12 + 13 = 25' },
+        { subject: 'math', question: 'Solve: 2(x - 3) = 3x - 8', options: ['x = 1', 'x = 2', 'x = 3', 'x = 4'], answer: 1, workings: '2x - 6 = 3x - 8, -6 + 8 = 3x - 2x, x = 2' },
+        { subject: 'math', question: 'What is the value of 3² + 4²?', options: ['7', '12', '25', '49'], answer: 2, workings: '9 + 16 = 25' },
+        { subject: 'chem', question: 'What is the chemical symbol for lead?', options: ['Ld', 'Pb', 'Pl', 'Le'], answer: 1, workings: 'Pb from Latin "plumbum"' },
+        { subject: 'phys', question: 'Which law states that energy cannot be created or destroyed?', options: ['Newton\'s law', 'Ohm\'s law', 'Conservation of energy', 'Boyle\'s law'], answer: 2, workings: 'Law of conservation of energy.' },
+        { subject: 'bio', question: 'What is the largest organ in the human body?', options: ['Heart', 'Brain', 'Skin', 'Liver'], answer: 2, workings: 'Skin is largest organ.' },
+        { subject: 'math', question: 'If y = 2x + 1, what is y when x = 5?', options: ['7', '9', '11', '13'], answer: 2, workings: '2(5) + 1 = 10 + 1 = 11' },
+        { subject: 'chem', question: 'What is the atomic number of oxygen?', options: ['6', '7', '8', '9'], answer: 2, workings: 'Oxygen has atomic number 8.' },
+        { subject: 'phys', question: 'What is the unit of electric charge?', options: ['Ampere', 'Volt', 'Ohm', 'Coulomb'], answer: 3, workings: 'Charge is measured in Coulombs.' },
+        { subject: 'bio', question: 'Which vitamin helps in blood clotting?', options: ['A', 'B', 'C', 'K'], answer: 3, workings: 'Vitamin K helps blood clot.' },
+        { subject: 'math', question: 'Area of circle with radius 7cm? (π=22/7)', options: ['44cm²', '88cm²', '154cm²', '308cm²'], answer: 2, workings: 'πr² = 22/7 × 49 = 154cm²' }
+    ];
+    
+    // Level 4 (20 questions)
+    questionBank.junior[3] = [
+        { subject: 'math', question: 'Solve the system: x + y = 7, x - y = 3', options: ['x=5,y=2', 'x=4,y=3', 'x=6,y=1', 'x=3,y=4'], answer: 0, workings: 'Adding: 2x = 10, x = 5; y = 7 - 5 = 2' },
+        { subject: 'math', question: 'Factorize: x² - 9', options: ['(x-3)(x-3)', '(x+3)(x+3)', '(x-3)(x+3)', '(x-9)(x+1)'], answer: 2, workings: 'x² - 9 = (x-3)(x+3)' },
+        { subject: 'chem', question: 'What is the chemical formula for methane?', options: ['CH4', 'C2H6', 'C3H8', 'C4H10'], answer: 0, workings: 'Methane = CH4' },
+        { subject: 'phys', question: 'What is the acceleration due to gravity on Earth?', options: ['5.8 m/s²', '9.8 m/s²', '12.8 m/s²', '15.8 m/s²'], answer: 1, workings: 'g ≈ 9.8 m/s²' },
+        { subject: 'bio', question: 'Which part of the cell contains genetic material?', options: ['Cytoplasm', 'Mitochondria', 'Nucleus', 'Ribosome'], answer: 2, workings: 'Nucleus contains DNA.' },
+        { subject: 'math', question: 'What is 15% of 80?', options: ['8', '10', '12', '14'], answer: 2, workings: '0.15 × 80 = 12' },
+        { subject: 'chem', question: 'What is the pH of a strong base?', options: ['1-2', '7', '8-9', '12-14'], answer: 3, workings: 'Strong bases have pH 12-14.' },
+        { subject: 'phys', question: 'What is the unit of pressure?', options: ['Newton', 'Joule', 'Pascal', 'Watt'], answer: 2, workings: 'Pressure is measured in Pascals.' },
+        { subject: 'bio', question: 'How many pairs of chromosomes in humans?', options: ['20', '23', '25', '30'], answer: 1, workings: 'Humans have 23 pairs of chromosomes.' },
+        { subject: 'math', question: 'What is the value of 5! (5 factorial)?', options: ['25', '60', '120', '125'], answer: 2, workings: '5 × 4 × 3 × 2 × 1 = 120' },
+        { subject: 'math', question: 'Solve: 4x - 5 = 2x + 7', options: ['x = 4', 'x = 5', 'x = 6', 'x = 7'], answer: 2, workings: '4x - 2x = 7 + 5, 2x = 12, x = 6' },
+        { subject: 'math', question: 'Simplify: (x³)(x⁴)', options: ['x⁷', 'x¹²', 'x', '2x⁷'], answer: 0, workings: 'x³⁺⁴ = x⁷' },
+        { subject: 'chem', question: 'What is the atomic number of nitrogen?', options: ['5', '6', '7', '8'], answer: 2, workings: 'Nitrogen has atomic number 7.' },
+        { subject: 'phys', question: 'Which type of energy does a moving car have?', options: ['Potential', 'Kinetic', 'Chemical', 'Thermal'], answer: 1, workings: 'Moving objects have kinetic energy.' },
+        { subject: 'bio', question: 'What is the function of red blood cells?', options: ['Fight infection', 'Carry oxygen', 'Clot blood', 'Produce antibodies'], answer: 1, workings: 'RBCs carry oxygen.' },
+        { subject: 'math', question: 'What is the mean of 5, 8, 12, 15?', options: ['8', '9', '10', '11'], answer: 2, workings: '(5+8+12+15)/4 = 40/4 = 10' },
+        { subject: 'chem', question: 'What is the chemical symbol for iron?', options: ['Ir', 'Fe', 'In', 'Ir'], answer: 1, workings: 'Fe from Latin "ferrum"' },
+        { subject: 'phys', question: 'What is the SI unit of work?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], answer: 1, workings: 'Work is measured in Joules.' },
+        { subject: 'bio', question: 'Which blood cells fight infection?', options: ['Red', 'White', 'Platelets', 'Plasma'], answer: 1, workings: 'White blood cells fight infection.' },
+        { subject: 'math', question: 'What is the median of 3, 7, 9, 12, 15?', options: ['7', '8', '9', '10'], answer: 2, workings: 'Middle number is 9.' }
+    ];
+    
+    // Level 5 (20 questions)
+    questionBank.junior[4] = [
+        { subject: 'math', question: 'Solve: 3x² = 27', options: ['x = 3', 'x = ±3', 'x = 9', 'x = ±9'], answer: 1, workings: 'x² = 9, x = ±3' },
+        { subject: 'math', question: 'What is the gradient of line through (1,2) and (3,6)?', options: ['1', '2', '3', '4'], answer: 1, workings: '(6-2)/(3-1) = 4/2 = 2' },
+        { subject: 'chem', question: 'What is the chemical formula for ethanol?', options: ['CH3OH', 'C2H5OH', 'C3H7OH', 'C4H9OH'], answer: 1, workings: 'Ethanol = C2H5OH' },
+        { subject: 'phys', question: 'What is Ohm\'s Law?', options: ['V = IR', 'F = ma', 'E = mc²', 'P = IV'], answer: 0, workings: 'Voltage = Current × Resistance' },
+        { subject: 'bio', question: 'What is the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi body'], answer: 1, workings: 'Mitochondria produce energy.' },
+        { subject: 'math', question: 'What is 20% of 450?', options: ['70', '80', '90', '100'], answer: 2, workings: '0.2 × 450 = 90' },
+        { subject: 'chem', question: 'What is the atomic number of sodium?', options: ['9', '10', '11', '12'], answer: 2, workings: 'Sodium has atomic number 11.' },
+        { subject: 'phys', question: 'What is the unit of capacitance?', options: ['Farad', 'Henry', 'Tesla', 'Weber'], answer: 0, workings: 'Capacitance is measured in Farads.' },
+        { subject: 'bio', question: 'Which organ stores urine?', options: ['Kidney', 'Ureter', 'Bladder', 'Urethra'], answer: 2, workings: 'Bladder stores urine.' },
+        { subject: 'math', question: 'What is the value of 2⁵?', options: ['10', '16', '32', '64'], answer: 2, workings: '2 × 2 × 2 × 2 × 2 = 32' },
+        { subject: 'math', question: 'Simplify: (2x³)(3x²)', options: ['5x⁵', '6x⁵', '5x⁶', '6x⁶'], answer: 1, workings: '2 × 3 = 6, x³⁺² = x⁵' },
+        { subject: 'math', question: 'Solve: 5(x - 2) = 3x + 4', options: ['x = 5', 'x = 6', 'x = 7', 'x = 8'], answer: 2, workings: '5x - 10 = 3x + 4, 2x = 14, x = 7' },
+        { subject: 'chem', question: 'What is the chemical symbol for copper?', options: ['Co', 'Cp', 'Cu', 'C'], answer: 2, workings: 'Cu from Latin "cuprum"' },
+        { subject: 'phys', question: 'What is the speed of sound in air?', options: ['240 m/s', '343 m/s', '440 m/s', '540 m/s'], answer: 1, workings: 'Speed of sound ≈ 343 m/s' },
+        { subject: 'bio', question: 'How many lobes in the human brain?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Brain has 4 lobes.' },
+        { subject: 'math', question: 'What is the mode of 2, 3, 3, 5, 7, 8?', options: ['2', '3', '5', '8'], answer: 1, workings: '3 appears most frequently.' },
+        { subject: 'chem', question: 'What is the atomic number of chlorine?', options: ['15', '16', '17', '18'], answer: 2, workings: 'Chlorine has atomic number 17.' },
+        { subject: 'phys', question: 'What is the unit of magnetic field?', options: ['Tesla', 'Weber', 'Henry', 'Farad'], answer: 0, workings: 'Magnetic field is measured in Tesla.' },
+        { subject: 'bio', question: 'Which vitamin is essential for vision?', options: ['A', 'B', 'C', 'D'], answer: 0, workings: 'Vitamin A is essential for vision.' },
+        { subject: 'math', question: 'What is the circumference of a circle with radius 5cm?', options: ['15.7cm', '31.4cm', '62.8cm', '78.5cm'], answer: 1, workings: '2πr = 2 × 3.14 × 5 = 31.4cm' }
+    ];
+    
+    // Level 6 (20 questions)
+    questionBank.junior[5] = [
+        { subject: 'math', question: 'What is the Pythagorean theorem?', options: ['a² + b² = c²', 'a + b = c', 'ab = c', 'a/b = c'], answer: 0, workings: 'a² + b² = c² in a right triangle.' },
+        { subject: 'math', question: 'If a = 3, b = 4, find c in right triangle', options: ['5', '6', '7', '8'], answer: 0, workings: 'c² = 3² + 4² = 9 + 16 = 25, c = 5' },
+        { subject: 'chem', question: 'What is the chemical formula for sulfuric acid?', options: ['HCl', 'HNO3', 'H2SO4', 'H3PO4'], answer: 2, workings: 'Sulfuric acid = H2SO4' },
+        { subject: 'phys', question: 'What is Newton\'s first law of motion?', options: ['F = ma', 'Action = Reaction', 'Law of inertia', 'Conservation of energy'], answer: 2, workings: 'First law is law of inertia.' },
+        { subject: 'bio', question: 'What is the smallest bone in the human body?', options: ['Stapes', 'Incus', 'Malleus', 'Femur'], answer: 0, workings: 'Stapes in ear is smallest.' },
+        { subject: 'math', question: 'What is the volume of a cylinder radius 3cm, height 7cm?', options: ['66cm³', '198cm³', '208cm³', '218cm³'], answer: 1, workings: 'πr²h = 22/7 × 9 × 7 = 198cm³' },
+        { subject: 'chem', question: 'What is the atomic number of calcium?', options: ['18', '19', '20', '21'], answer: 2, workings: 'Calcium has atomic number 20.' },
+        { subject: 'phys', question: 'What is the unit of inductance?', options: ['Farad', 'Henry', 'Tesla', 'Weber'], answer: 1, workings: 'Inductance is measured in Henry.' },
+        { subject: 'bio', question: 'Which part of the eye contains photoreceptors?', options: ['Cornea', 'Lens', 'Retina', 'Pupil'], answer: 2, workings: 'Retina contains rods and cones.' },
+        { subject: 'math', question: 'What is 3/4 as a percentage?', options: ['25%', '50%', '75%', '80%'], answer: 2, workings: '3/4 = 0.75 = 75%' },
+        { subject: 'math', question: 'Solve: 7x + 2 = 5x + 12', options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'], answer: 2, workings: '7x - 5x = 12 - 2, 2x = 10, x = 5' },
+        { subject: 'math', question: 'What is (x + 2)(x - 3)?', options: ['x² - x - 6', 'x² + x - 6', 'x² - 5x - 6', 'x² + 5x - 6'], answer: 0, workings: 'x² - 3x + 2x - 6 = x² - x - 6' },
+        { subject: 'chem', question: 'What is the chemical symbol for mercury?', options: ['Me', 'Hg', 'Mr', 'Hy'], answer: 1, workings: 'Hg from Greek "hydrargyrum"' },
+        { subject: 'phys', question: 'What is the principle of a lever?', options: ['F1d1 = F2d2', 'F = ma', 'E = mc²', 'V = IR'], answer: 0, workings: 'Law of moments: force × distance' },
+        { subject: 'bio', question: 'How many bones in the human skull?', options: ['22', '24', '26', '28'], answer: 0, workings: 'Skull has 22 bones.' },
+        { subject: 'math', question: 'What is the range of 12, 15, 18, 22, 27?', options: ['10', '12', '15', '27'], answer: 2, workings: '27 - 12 = 15' },
+        { subject: 'chem', question: 'What is the pH of lemon juice?', options: ['2-3', '5-6', '7', '8-9'], answer: 0, workings: 'Lemon juice is acidic, pH 2-3.' },
+        { subject: 'phys', question: 'What is the unit of magnetic flux?', options: ['Tesla', 'Weber', 'Henry', 'Farad'], answer: 1, workings: 'Magnetic flux is measured in Weber.' },
+        { subject: 'bio', question: 'Which organ produces digestive enzymes?', options: ['Liver', 'Pancreas', 'Stomach', 'Small intestine'], answer: 1, workings: 'Pancreas produces digestive enzymes.' },
+        { subject: 'math', question: 'What is 40% of 250?', options: ['80', '90', '100', '110'], answer: 2, workings: '0.4 × 250 = 100' }
+    ];
+    
+    // Level 7 (20 questions)
+    questionBank.junior[6] = [
+        { subject: 'math', question: 'Solve: 2x + 3y = 12, when y = 2', options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'], answer: 0, workings: '2x + 6 = 12, 2x = 6, x = 3' },
+        { subject: 'chem', question: 'What is the chemical symbol for potassium?', options: ['P', 'K', 'Po', 'Ka'], answer: 1, workings: 'K from Latin "kalium"' },
+        { subject: 'phys', question: 'What is the SI unit of power?', options: ['Joule', 'Watt', 'Newton', 'Pascal'], answer: 1, workings: 'Power is measured in Watts.' },
+        { subject: 'bio', question: 'Which organ pumps blood?', options: ['Brain', 'Lungs', 'Heart', 'Liver'], answer: 2, workings: 'Heart pumps blood.' },
+        { subject: 'math', question: 'What is the square root of 81?', options: ['7', '8', '9', '10'], answer: 2, workings: '9 × 9 = 81' },
+        { subject: 'chem', question: 'What is the pH of pure water?', options: ['1', '5', '7', '14'], answer: 2, workings: 'Pure water has pH 7' },
+        { subject: 'phys', question: 'What is the acceleration due to gravity?', options: ['9.8 m/s²', '10 m/s²', '8.9 m/s²', '9 m/s²'], answer: 0, workings: 'g = 9.8 m/s²' },
+        { subject: 'bio', question: 'How many bones in adult human?', options: ['206', '207', '208', '209'], answer: 0, workings: 'Adults have 206 bones' },
+        { subject: 'math', question: 'What is 25% of 200?', options: ['25', '40', '50', '60'], answer: 2, workings: '0.25 × 200 = 50' },
+        { subject: 'chem', question: 'What is the chemical formula for water?', options: ['H2O2', 'H2O', 'CO2', 'O2'], answer: 1, workings: 'Water = H2O' },
+        { subject: 'math', question: 'Solve: 5x - 3 = 12', options: ['x = 2', 'x = 3', 'x = 4', 'x = 5'], answer: 1, workings: '5x = 15, x = 3' },
+        { subject: 'phys', question: 'Which is a vector quantity?', options: ['Mass', 'Time', 'Velocity', 'Temperature'], answer: 2, workings: 'Velocity has direction' },
+        { subject: 'bio', question: 'Which vitamin is from sunlight?', options: ['A', 'B', 'C', 'D'], answer: 3, workings: 'Vitamin D from sunlight' },
+        { subject: 'chem', question: 'What is the atomic number of oxygen?', options: ['6', '7', '8', '9'], answer: 2, workings: 'Oxygen has atomic number 8' },
+        { subject: 'math', question: 'Area of circle radius 7cm? (π=22/7)', options: ['144cm²', '154cm²', '164cm²', '174cm²'], answer: 1, workings: 'πr² = 22/7 × 49 = 154cm²' },
+        { subject: 'phys', question: 'What is Ohm\'s law?', options: ['V = IR', 'I = VR', 'R = IV', 'V = I/R'], answer: 0, workings: 'Voltage = Current × Resistance' },
+        { subject: 'bio', question: 'Which organ produces insulin?', options: ['Liver', 'Pancreas', 'Kidney', 'Stomach'], answer: 1, workings: 'Pancreas produces insulin' },
+        { subject: 'chem', question: 'What is the chemical symbol for gold?', options: ['Go', 'Gd', 'Au', 'Ag'], answer: 2, workings: 'Au from Latin "aurum"' },
+        { subject: 'math', question: 'What is 3² + 4²?', options: ['7', '12', '25', '49'], answer: 2, workings: '9 + 16 = 25' },
+        { subject: 'phys', question: 'Unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], answer: 1, workings: 'Force in Newtons' }
+    ];
+    
+    // Level 8 (20 questions)
+    questionBank.junior[7] = [
+        { subject: 'math', question: 'Factorize: x² - 16', options: ['(x-4)(x-4)', '(x+4)(x+4)', '(x-4)(x+4)', '(x-8)(x+2)'], answer: 2, workings: 'x² - 16 = (x-4)(x+4)' },
+        { subject: 'chem', question: 'What is the chemical formula for methane?', options: ['CH4', 'C2H6', 'C3H8', 'C4H10'], answer: 0, workings: 'Methane = CH4' },
+        { subject: 'phys', question: 'What is the speed of light?', options: ['3×10⁶ m/s', '3×10⁷ m/s', '3×10⁸ m/s', '3×10⁹ m/s'], answer: 2, workings: 'c = 3×10⁸ m/s' },
+        { subject: 'bio', question: 'What is the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi'], answer: 1, workings: 'Mitochondria produce energy' },
+        { subject: 'math', question: 'Solve: 3x + 2 = 2x + 7', options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'], answer: 2, workings: '3x - 2x = 7 - 2, x = 5' },
+        { subject: 'chem', question: 'What is the atomic number of carbon?', options: ['4', '5', '6', '7'], answer: 2, workings: 'Carbon has atomic number 6' },
+        { subject: 'phys', question: 'What is the unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], answer: 2, workings: 'Resistance in Ohms' },
+        { subject: 'bio', question: 'Which blood cells fight infection?', options: ['Red', 'White', 'Platelets', 'Plasma'], answer: 1, workings: 'White blood cells fight infection' },
+        { subject: 'math', question: 'What is the volume of cube side 5cm?', options: ['25cm³', '100cm³', '125cm³', '150cm³'], answer: 2, workings: '5 × 5 × 5 = 125cm³' },
+        { subject: 'chem', question: 'What is the chemical symbol for silver?', options: ['Si', 'Ag', 'Au', 'Sr'], answer: 1, workings: 'Ag from Latin "argentum"' },
+        { subject: 'math', question: 'Simplify: 4a + 2b - a + 3b', options: ['3a + 5b', '5a + 5b', '3a - b', '5a - b'], answer: 0, workings: '4a - a = 3a, 2b + 3b = 5b' },
+        { subject: 'phys', question: 'Which is a scalar quantity?', options: ['Force', 'Velocity', 'Mass', 'Acceleration'], answer: 2, workings: 'Mass has magnitude only' },
+        { subject: 'bio', question: 'How many chambers in human heart?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Heart has 4 chambers' },
+        { subject: 'chem', question: 'What is the pH of a strong acid?', options: ['1-2', '7', '8-9', '12-14'], answer: 0, workings: 'Strong acids pH 1-2' },
+        { subject: 'math', question: 'What is 15% of 120?', options: ['12', '15', '18', '20'], answer: 2, workings: '0.15 × 120 = 18' },
+        { subject: 'phys', question: 'What is the unit of energy?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], answer: 1, workings: 'Energy in Joules' },
+        { subject: 'bio', question: 'Which organelle contains DNA?', options: ['Mitochondria', 'Ribosome', 'Nucleus', 'Lysosome'], answer: 2, workings: 'Nucleus contains DNA' },
+        { subject: 'chem', question: 'What is the chemical symbol for iron?', options: ['Ir', 'Fe', 'In', 'I'], answer: 1, workings: 'Fe from Latin "ferrum"' },
+        { subject: 'math', question: 'What is the mean of 4, 8, 12, 16?', options: ['8', '10', '12', '14'], answer: 1, workings: '(4+8+12+16)/4 = 40/4 = 10' },
+        { subject: 'phys', question: 'What is the frequency unit?', options: ['Hertz', 'Watt', 'Joule', 'Newton'], answer: 0, workings: 'Frequency in Hertz' }
+    ];
+    
+    // Level 9 (20 questions)
+    questionBank.junior[8] = [
+        { subject: 'math', question: 'If y = 3x + 2, find y when x = 4', options: ['10', '12', '14', '16'], answer: 2, workings: '3(4) + 2 = 12 + 2 = 14' },
+        { subject: 'chem', question: 'What is the chemical formula for ethanol?', options: ['CH3OH', 'C2H5OH', 'C3H7OH', 'C4H9OH'], answer: 1, workings: 'Ethanol = C2H5OH' },
+        { subject: 'phys', question: 'What is Newton\'s third law?', options: ['F = ma', 'Action = Reaction', 'Inertia', 'Conservation'], answer: 1, workings: 'Every action has equal reaction' },
+        { subject: 'bio', question: 'Which vitamin is from citrus fruits?', options: ['A', 'B', 'C', 'D'], answer: 2, workings: 'Vitamin C in citrus' },
+        { subject: 'math', question: 'Solve: 2(x - 3) = 10', options: ['x = 5', 'x = 6', 'x = 7', 'x = 8'], answer: 2, workings: '2x - 6 = 10, 2x = 14, x = 7' },
+        { subject: 'chem', question: 'What is the atomic number of sodium?', options: ['9', '10', '11', '12'], answer: 2, workings: 'Sodium has atomic number 11' },
+        { subject: 'phys', question: 'What is the unit of pressure?', options: ['Pascal', 'Newton', 'Joule', 'Watt'], answer: 0, workings: 'Pressure in Pascals' },
+        { subject: 'bio', question: 'Which organ stores urine?', options: ['Kidney', 'Ureter', 'Bladder', 'Urethra'], answer: 2, workings: 'Bladder stores urine' },
+        { subject: 'math', question: 'What is the area of triangle base 10cm height 6cm?', options: ['30cm²', '40cm²', '50cm²', '60cm²'], answer: 0, workings: '½ × 10 × 6 = 30cm²' },
+        { subject: 'chem', question: 'What is the chemical symbol for copper?', options: ['Co', 'Cp', 'Cu', 'C'], answer: 2, workings: 'Cu from Latin "cuprum"' },
+        { subject: 'math', question: 'What is 3/5 as a percentage?', options: ['30%', '40%', '50%', '60%'], answer: 3, workings: '3/5 = 0.6 = 60%' },
+        { subject: 'phys', question: 'What is the unit of magnetic field?', options: ['Tesla', 'Weber', 'Henry', 'Farad'], answer: 0, workings: 'Magnetic field in Tesla' },
+        { subject: 'bio', question: 'How many lobes in human brain?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Brain has 4 lobes' },
+        { subject: 'chem', question: 'What is the pH of a strong base?', options: ['1-2', '7', '8-9', '12-14'], answer: 3, workings: 'Strong bases pH 12-14' },
+        { subject: 'math', question: 'What is the median of 2,5,7,9,12?', options: ['5', '6', '7', '8'], answer: 2, workings: 'Middle number is 7' },
+        { subject: 'phys', question: 'What is the unit of capacitance?', options: ['Farad', 'Henry', 'Tesla', 'Weber'], answer: 0, workings: 'Capacitance in Farads' },
+        { subject: 'bio', question: 'Which vitamin helps blood clot?', options: ['A', 'B', 'C', 'K'], answer: 3, workings: 'Vitamin K helps clotting' },
+        { subject: 'chem', question: 'What is the chemical symbol for lead?', options: ['Ld', 'Pb', 'Pl', 'Le'], answer: 1, workings: 'Pb from Latin "plumbum"' },
+        { subject: 'math', question: 'What is 2⁴?', options: ['4', '8', '16', '32'], answer: 2, workings: '2 × 2 × 2 × 2 = 16' },
+        { subject: 'phys', question: 'What is the unit of inductance?', options: ['Farad', 'Henry', 'Tesla', 'Weber'], answer: 1, workings: 'Inductance in Henry' }
+    ];
+    
+    // Level 10 (20 questions)
+    questionBank.junior[9] = [
+        { subject: 'math', question: 'Solve the system: 2x + y = 8, x - y = 1', options: ['x=3,y=2', 'x=4,y=0', 'x=2,y=4', 'x=3,y=4'], answer: 0, workings: 'Adding: 3x = 9, x = 3; 3 - y = 1, y = 2' },
+        { subject: 'chem', question: 'What is the chemical formula for sulfuric acid?', options: ['HCl', 'HNO3', 'H2SO4', 'H3PO4'], answer: 2, workings: 'Sulfuric acid = H2SO4' },
+        { subject: 'phys', question: 'What is the principle of conservation of energy?', options: ['Energy created', 'Energy destroyed', 'Energy conserved', 'Energy increases'], answer: 2, workings: 'Energy cannot be created/destroyed' },
+        { subject: 'bio', question: 'What is the function of red blood cells?', options: ['Carry oxygen', 'Fight infection', 'Clot blood', 'Produce antibodies'], answer: 0, workings: 'RBCs carry oxygen' },
+        { subject: 'math', question: 'What is the volume of sphere radius 3cm? (π=3.14)', options: ['113.04cm³', '37.68cm³', '28.26cm³', '84.78cm³'], answer: 0, workings: '4/3πr³ = 4/3 × 3.14 × 27 = 113.04cm³' },
+        { subject: 'chem', question: 'What is the atomic number of chlorine?', options: ['15', '16', '17', '18'], answer: 2, workings: 'Chlorine has atomic number 17' },
+        { subject: 'phys', question: 'What is the speed of sound?', options: ['240 m/s', '343 m/s', '440 m/s', '540 m/s'], answer: 1, workings: 'Sound ≈ 343 m/s' },
+        { subject: 'bio', question: 'Which organ produces bile?', options: ['Pancreas', 'Liver', 'Gallbladder', 'Stomach'], answer: 1, workings: 'Liver produces bile' },
+        { subject: 'math', question: 'What is the gradient of line through (0,0) and (4,8)?', options: ['1', '2', '3', '4'], answer: 1, workings: '(8-0)/(4-0) = 8/4 = 2' },
+        { subject: 'chem', question: 'What is the chemical symbol for mercury?', options: ['Me', 'Hg', 'Mr', 'Hy'], answer: 1, workings: 'Hg from Greek "hydrargyrum"' },
+        { subject: 'math', question: 'What is 5! (5 factorial)?', options: ['60', '120', '180', '240'], answer: 1, workings: '5 × 4 × 3 × 2 × 1 = 120' },
+        { subject: 'phys', question: 'What is the unit of electric charge?', options: ['Ampere', 'Volt', 'Coulomb', 'Ohm'], answer: 2, workings: 'Charge in Coulombs' },
+        { subject: 'bio', question: 'How many chromosomes in humans?', options: ['23', '46', '48', '50'], answer: 1, workings: 'Humans have 46 chromosomes' },
+        { subject: 'chem', question: 'What is the pH of lemon juice?', options: ['2-3', '5-6', '7', '8-9'], answer: 0, workings: 'Lemon juice pH 2-3' },
+        { subject: 'math', question: 'What is the surface area of cube side 4cm?', options: ['64cm²', '96cm²', '128cm²', '160cm²'], answer: 1, workings: '6 × 4² = 6 × 16 = 96cm²' },
+        { subject: 'phys', question: 'What is the law of reflection?', options: ['i = r', 'i > r', 'i < r', 'i + r = 90°'], answer: 0, workings: 'Angle i = angle r' },
+        { subject: 'bio', question: 'Which vitamin is fat-soluble?', options: ['C', 'B', 'A', 'All B'], answer: 2, workings: 'A, D, E, K are fat-soluble' },
+        { subject: 'chem', question: 'What is the chemical formula for ammonia?', options: ['NH3', 'NH4', 'N2H4', 'N2H2'], answer: 0, workings: 'Ammonia = NH3' },
+        { subject: 'math', question: 'What is 40% of 350?', options: ['120', '130', '140', '150'], answer: 2, workings: '0.4 × 350 = 140' },
+        { subject: 'phys', question: 'What is the unit of magnetic flux?', options: ['Tesla', 'Weber', 'Henry', 'Farad'], answer: 1, workings: 'Magnetic flux in Weber' }
+    ];
+
+    // ========== SENIOR SECONDARY TRACK (Grade 10-12) - ALL 10 LEVELS ==========
+    // Level 1 (20 questions)
+    questionBank.senior[0] = [
+        { subject: 'math', question: 'Derivative of 5x³?', options: ['15x²', '10x²', '5x²', '3x²'], answer: 0, workings: 'd/dx 5x³ = 15x²' },
+        { subject: 'chem', question: 'pH of strong acid like HCl?', options: ['~1', '7', '~14', '10'], answer: 0, workings: 'Strong acids have pH near 1.' },
+        { subject: 'phys', question: 'SI unit of electric current?', options: ['Volt', 'Ampere', 'Ohm', 'Coulomb'], answer: 1, workings: 'Current measured in Amperes.' },
+        { subject: 'math', question: '∫ 2x dx = ?', options: ['x² + C', '2x² + C', 'x²', '2x + C'], answer: 0, workings: '∫ 2x dx = x² + C' },
+        { subject: 'tech', question: 'Which is an OOP concept?', options: ['Encapsulation', 'Bootloader', 'Kernel', 'BIOS'], answer: 0, workings: 'Encapsulation is OOP principle.' },
+        { subject: 'math', question: 'log₁₀ 100 = ?', options: ['1', '2', '10', '100'], answer: 1, workings: '10² = 100, so log = 2' },
+        { subject: 'chem', question: 'Formula of sulfuric acid?', options: ['HCl', 'HNO₃', 'H₂SO₄', 'CH₃COOH'], answer: 2, workings: 'Sulfuric acid = H₂SO₄' },
+        { subject: 'phys', question: 'Photon energy formula?', options: ['E = hf', 'E = mc²', 'F = ma', 'PV = nRT'], answer: 0, workings: 'E = hf (Planck relation)' },
+        { subject: 'math', question: 'sin 60° = ?', options: ['0.5', '√3/2', '1/√2', '1'], answer: 1, workings: 'sin 60° = √3/2' },
+        { subject: 'tech', question: 'Fastest sorting algorithm average case?', options: ['Bubble', 'Quick', 'Merge', 'Insert'], answer: 1, workings: 'Quick sort O(n log n) average.' },
+        { subject: 'math', question: 'What is the derivative of sin x?', options: ['cos x', '-cos x', 'sin x', '-sin x'], answer: 0, workings: 'd/dx sin x = cos x' },
+        { subject: 'math', question: 'What is the integral of cos x?', options: ['sin x + C', '-sin x + C', 'cos x + C', '-cos x + C'], answer: 0, workings: '∫ cos x dx = sin x + C' },
+        { subject: 'chem', question: 'What is the atomic number of oxygen?', options: ['6', '7', '8', '9'], answer: 2, workings: 'Oxygen has atomic number 8.' },
+        { subject: 'phys', question: 'What is Newton\'s second law?', options: ['F = ma', 'F = mv', 'F = m/a', 'F = a/m'], answer: 0, workings: 'Force = mass × acceleration' },
+        { subject: 'tech', question: 'What does CPU stand for?', options: ['Central Processing Unit', 'Computer Processing Unit', 'Central Power Unit', 'Computer Power Unit'], answer: 0, workings: 'CPU = Central Processing Unit' },
+        { subject: 'math', question: 'What is 2⁵?', options: ['10', '16', '32', '64'], answer: 2, workings: '2 × 2 × 2 × 2 × 2 = 32' },
+        { subject: 'chem', question: 'What is the chemical symbol for sodium?', options: ['S', 'Na', 'So', 'K'], answer: 1, workings: 'Na from Latin "natrium"' },
+        { subject: 'phys', question: 'What is the speed of light in vacuum?', options: ['3 × 10⁶ m/s', '3 × 10⁷ m/s', '3 × 10⁸ m/s', '3 × 10⁹ m/s'], answer: 2, workings: 'c = 3 × 10⁸ m/s' },
+        { subject: 'tech', question: 'What is RAM?', options: ['Random Access Memory', 'Read Access Memory', 'Run Access Memory', 'Rapid Access Memory'], answer: 0, workings: 'RAM = Random Access Memory' },
+        { subject: 'math', question: 'What is √169?', options: ['11', '12', '13', '14'], answer: 2, workings: '13 × 13 = 169' }
+    ];
+    
+    // Level 2 (20 questions)
+    questionBank.senior[1] = [
+        { subject: 'math', question: 'Solve: 2x² - 8 = 0', options: ['x = ±2', 'x = 2', 'x = ±4', 'x = 4'], answer: 0, workings: '2x² = 8, x² = 4, x = ±2' },
+        { subject: 'chem', question: 'Oxidation state of Mn in KMnO₄?', options: ['+5', '+6', '+7', '+4'], answer: 2, workings: 'K=+1, O₄=-8, so Mn=+7' },
+        { subject: 'phys', question: 'Which particle has no charge?', options: ['Proton', 'Neutron', 'Electron', 'Positron'], answer: 1, workings: 'Neutron is neutral.' },
+        { subject: 'math', question: 'Differentiate: y = sin(3x)', options: ['3 cos(3x)', 'cos(3x)', '-3 cos(3x)', '3 sin(3x)'], answer: 0, workings: 'Chain rule: cos(3x) × 3' },
+        { subject: 'tech', question: 'What does HTML stand for?', options: ['Hyper Text Markup Language', 'High Tech Markup Language', 'Hyper Transfer Markup Language', 'Home Tool Markup Language'], answer: 0, workings: 'HTML = Hyper Text Markup Language' },
+        { subject: 'chem', question: 'Which gas is most abundant in air?', options: ['Oxygen', 'CO2', 'Nitrogen', 'Argon'], answer: 2, workings: 'Nitrogen ~78%' },
+        { subject: 'phys', question: 'What is the unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], answer: 2, workings: 'Resistance in Ohms.' },
+        { subject: 'math', question: '∫ from 0 to 1 of x² dx', options: ['1/3', '1/2', '1', '2/3'], answer: 0, workings: '[x³/3] from 0 to 1 = 1/3' },
+        { subject: 'bio', question: 'Which blood cells carry oxygen?', options: ['White', 'Red', 'Platelets', 'Plasma'], answer: 1, workings: 'Red blood cells carry oxygen.' },
+        { subject: 'tech', question: 'Which is an input device?', options: ['Monitor', 'Printer', 'Keyboard', 'Speaker'], answer: 2, workings: 'Keyboard inputs data.' },
+        { subject: 'math', question: 'What is the derivative of cos x?', options: ['-sin x', 'sin x', '-cos x', 'cos x'], answer: 0, workings: 'd/dx cos x = -sin x' },
+        { subject: 'math', question: 'What is log₂ 8?', options: ['2', '3', '4', '5'], answer: 1, workings: '2³ = 8, so log₂ 8 = 3' },
+        { subject: 'chem', question: 'What is the chemical symbol for gold?', options: ['Go', 'Gd', 'Au', 'Ag'], answer: 2, workings: 'Au from Latin "aurum"' },
+        { subject: 'phys', question: 'What is Ohm\'s law?', options: ['V = IR', 'I = VR', 'R = IV', 'V = I/R'], answer: 0, workings: 'Voltage = Current × Resistance' },
+        { subject: 'bio', question: 'Which organ produces insulin?', options: ['Liver', 'Pancreas', 'Kidney', 'Stomach'], answer: 1, workings: 'Pancreas produces insulin.' },
+        { subject: 'tech', question: 'What is an operating system?', options: ['Windows', 'Word', 'Excel', 'PowerPoint'], answer: 0, workings: 'Windows is an operating system.' },
+        { subject: 'math', question: 'What is the value of sin 90°?', options: ['0', '1/2', '1/√2', '1'], answer: 3, workings: 'sin 90° = 1' },
+        { subject: 'chem', question: 'What is the pH of pure water?', options: ['1', '5', '7', '14'], answer: 2, workings: 'Pure water has pH 7 (neutral).' },
+        { subject: 'phys', question: 'What is the unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], answer: 1, workings: 'Force is measured in Newtons.' },
+        { subject: 'bio', question: 'How many bones in adult human?', options: ['196', '206', '216', '226'], answer: 1, workings: 'Adult humans have 206 bones.' }
+    ];
+    
+    // Level 3 (20 questions)
+    questionBank.senior[2] = [
+        { subject: 'math', question: 'Find dy/dx if y = x² + 3x - 5', options: ['2x + 3', '2x - 3', 'x² + 3', '2x + 5'], answer: 0, workings: 'd/dx x² = 2x, d/dx 3x = 3, d/dx -5 = 0' },
+        { subject: 'chem', question: 'What is the hybridization in methane?', options: ['sp', 'sp²', 'sp³', 'dsp²'], answer: 2, workings: 'Methane (CH₄) has sp³ hybridization.' },
+        { subject: 'phys', question: 'What is the unit of capacitance?', options: ['Farad', 'Henry', 'Tesla', 'Weber'], answer: 0, workings: 'Capacitance measured in Farads.' },
+        { subject: 'math', question: 'Solve: log x + log 5 = log 20', options: ['x = 4', 'x = 5', 'x = 10', 'x = 15'], answer: 0, workings: 'log(5x) = log 20, 5x = 20, x = 4' },
+        { subject: 'tech', question: 'What is a database?', options: ['Organized data collection', 'Computer program', 'Hardware device', 'Network protocol'], answer: 0, workings: 'Database is organized collection of data.' },
+        { subject: 'chem', question: 'Which element has the electron configuration 1s² 2s² 2p⁶ 3s¹?', options: ['Sodium', 'Magnesium', 'Potassium', 'Calcium'], answer: 0, workings: 'This is sodium (atomic number 11).' },
+        { subject: 'phys', question: 'What is the principle of conservation of energy?', options: ['Energy cannot be created/destroyed', 'Energy is always lost', 'Energy increases', 'Energy decreases'], answer: 0, workings: 'Energy is conserved in isolated systems.' },
+        { subject: 'math', question: '∫ (3x² + 2x) dx = ?', options: ['x³ + x² + C', '3x³ + 2x² + C', 'x³ + x + C', '3x² + 2x + C'], answer: 0, workings: '∫ 3x² = x³, ∫ 2x = x²' },
+        { subject: 'bio', question: 'What is the function of mitochondria?', options: ['Protein synthesis', 'Energy production', 'Lipid storage', 'DNA replication'], answer: 1, workings: 'Mitochondria produce ATP (energy).' },
+        { subject: 'tech', question: 'What does HTTP stand for?', options: ['Hyper Text Transfer Protocol', 'High Tech Transfer Protocol', 'Hyper Text Transmission Protocol', 'High Text Transfer Protocol'], answer: 0, workings: 'HTTP = Hyper Text Transfer Protocol' },
+        { subject: 'math', question: 'What is the derivative of e^x?', options: ['e^x', 'x e^x', 'ln x', '1/x'], answer: 0, workings: 'd/dx e^x = e^x' },
+        { subject: 'math', question: 'What is sin²θ + cos²θ?', options: ['0', '1', 'sin θ cos θ', '2'], answer: 1, workings: 'Trigonometric identity: sin²θ + cos²θ = 1' },
+        { subject: 'chem', question: 'What is the chemical formula for benzene?', options: ['C6H6', 'C6H12', 'C6H14', 'C6H10'], answer: 0, workings: 'Benzene = C6H6' },
+        { subject: 'phys', question: 'What is the SI unit of magnetic field?', options: ['Tesla', 'Gauss', 'Weber', 'Henry'], answer: 0, workings: 'Magnetic field is measured in Tesla.' },
+        { subject: 'bio', question: 'Which vitamin is water-soluble?', options: ['A', 'D', 'E', 'C'], answer: 3, workings: 'Vitamin C is water-soluble.' },
+        { subject: 'tech', question: 'What is a compiler?', options: ['Translates high-level code', 'Executes code', 'Debugs code', 'Stores data'], answer: 0, workings: 'Compiler translates high-level to machine code.' },
+        { subject: 'math', question: 'What is the value of cos 0°?', options: ['0', '1/2', '1/√2', '1'], answer: 3, workings: 'cos 0° = 1' },
+        { subject: 'chem', question: 'What is the atomic number of carbon?', options: ['4', '5', '6', '7'], answer: 2, workings: 'Carbon has atomic number 6.' },
+        { subject: 'phys', question: 'What is the acceleration due to gravity?', options: ['5.8 m/s²', '9.8 m/s²', '12.8 m/s²', '15.8 m/s²'], answer: 1, workings: 'g = 9.8 m/s² on Earth.' },
+        { subject: 'bio', question: 'Which organelle contains digestive enzymes?', options: ['Nucleus', 'Mitochondria', 'Lysosome', 'Ribosome'], answer: 2, workings: 'Lysosomes contain digestive enzymes.' }
+    ];
+    
+    // Level 4 (20 questions)
+    questionBank.senior[3] = [
+        { subject: 'math', question: 'Find the derivative of y = ln x', options: ['1/x', 'x', 'e^x', 'ln x'], answer: 0, workings: 'd/dx ln x = 1/x' },
+        { subject: 'chem', question: 'What is the bond angle in water?', options: ['90°', '104.5°', '109.5°', '120°'], answer: 1, workings: 'Water has bent shape with 104.5° bond angle.' },
+        { subject: 'phys', question: 'What is the unit of momentum?', options: ['kg m/s', 'N m', 'J/s', 'kg m²/s²'], answer: 0, workings: 'Momentum = mass × velocity' },
+        { subject: 'math', question: '∫ e^x dx = ?', options: ['e^x + C', 'ln x + C', 'x e^x + C', 'e^x/x + C'], answer: 0, workings: '∫ e^x dx = e^x + C' },
+        { subject: 'tech', question: 'What is an algorithm?', options: ['Step-by-step procedure', 'Computer hardware', 'Programming language', 'Data type'], answer: 0, workings: 'Algorithm is a step-by-step procedure.' },
+        { subject: 'chem', question: 'What is the oxidation state of sulfur in H₂SO₄?', options: ['+4', '+5', '+6', '+7'], answer: 2, workings: 'H₂=+2, O₄=-8, so S=+6' },
+        { subject: 'phys', question: 'What is the first law of thermodynamics?', options: ['Energy conservation', 'Entropy increases', 'Absolute zero', 'Heat transfer'], answer: 0, workings: 'First law: ΔU = Q - W' },
+        { subject: 'math', question: 'Solve: 3x² - 12 = 0', options: ['x = ±2', 'x = ±3', 'x = ±4', 'x = ±6'], answer: 0, workings: '3x² = 12, x² = 4, x = ±2' },
+        { subject: 'bio', question: 'What is the role of DNA polymerase?', options: ['DNA replication', 'Protein synthesis', 'RNA transcription', 'Cell division'], answer: 0, workings: 'DNA polymerase synthesizes DNA.' },
+        { subject: 'tech', question: 'What does SQL stand for?', options: ['Structured Query Language', 'Simple Query Language', 'System Query Language', 'Standard Query Language'], answer: 0, workings: 'SQL = Structured Query Language' },
+        { subject: 'math', question: 'What is the value of tan 45°?', options: ['0', '1', '∞', '√3'], answer: 1, workings: 'tan 45° = 1' },
+        { subject: 'math', question: 'What is the derivative of tan x?', options: ['sec² x', 'csc² x', 'cot x', 'sec x tan x'], answer: 0, workings: 'd/dx tan x = sec² x' },
+        { subject: 'chem', question: 'What is the chemical symbol for potassium?', options: ['P', 'Po', 'K', 'Ka'], answer: 2, workings: 'K from Latin "kalium"' },
+        { subject: 'phys', question: 'What is the unit of frequency?', options: ['Hertz', 'Watt', 'Joule', 'Newton'], answer: 0, workings: 'Frequency is measured in Hertz.' },
+        { subject: 'bio', question: 'Which part of the brain controls balance?', options: ['Cerebrum', 'Cerebellum', 'Medulla', 'Hypothalamus'], answer: 1, workings: 'Cerebellum controls balance.' },
+        { subject: 'tech', question: 'What is a firewall?', options: ['Network security', 'Hardware device', 'Software program', 'All of the above'], answer: 3, workings: 'Firewall can be hardware or software security.' },
+        { subject: 'math', question: 'What is log 1000?', options: ['1', '2', '3', '4'], answer: 2, workings: '10³ = 1000, so log 1000 = 3' },
+        { subject: 'chem', question: 'What is the pH of a strong base?', options: ['1-2', '7', '8-10', '12-14'], answer: 3, workings: 'Strong bases have pH 12-14.' },
+        { subject: 'phys', question: 'What is the speed of sound in air?', options: ['240 m/s', '343 m/s', '440 m/s', '540 m/s'], answer: 1, workings: 'Speed of sound ≈ 343 m/s at 20°C.' },
+        { subject: 'bio', question: 'How many chromosomes in human cells?', options: ['23', '46', '48', '50'], answer: 1, workings: 'Human cells have 46 chromosomes (23 pairs).' }
+    ];
+    
+    // Level 5 (20 questions)
+    questionBank.senior[4] = [
+        { subject: 'math', question: 'Find the derivative of y = x² sin x', options: ['2x sin x + x² cos x', '2x cos x', 'x² cos x', '2x sin x'], answer: 0, workings: 'Product rule: (x²)(sin x)\' + (sin x)(x²)\'' },
+        { subject: 'chem', question: 'What is the equilibrium constant expression for aA + bB ⇌ cC + dD?', options: ['K = [C]^c[D]^d/[A]^a[B]^b', 'K = [A]^a[B]^b/[C]^c[D]^d', 'K = [C][D]/[A][B]', 'K = [A][B]/[C][D]'], answer: 0, workings: 'K = [products]^coefficients/[reactants]^coefficients' },
+        { subject: 'phys', question: 'What is the photoelectric effect?', options: ['Electron emission by light', 'Light emission by electrons', 'Heat emission', 'Sound emission'], answer: 0, workings: 'Photoelectric effect: light ejects electrons.' },
+        { subject: 'math', question: '∫ sin x dx = ?', options: ['-cos x + C', 'cos x + C', 'sin x + C', '-sin x + C'], answer: 0, workings: '∫ sin x dx = -cos x + C' },
+        { subject: 'tech', question: 'What is object-oriented programming?', options: ['Programming with objects', 'Linear programming', 'Functional programming', 'Procedural programming'], answer: 0, workings: 'OOP uses objects and classes.' },
+        { subject: 'chem', question: 'What is the shape of methane molecule?', options: ['Linear', 'Trigonal planar', 'Tetrahedral', 'Octahedral'], answer: 2, workings: 'Methane has tetrahedral shape.' },
+        { subject: 'phys', question: 'What is the Heisenberg uncertainty principle?', options: ['Cannot know position and momentum precisely', 'Energy is quantized', 'Light is a wave', 'Electrons orbit nucleus'], answer: 0, workings: 'Δx Δp ≥ h/4π' },
+        { subject: 'math', question: 'What is the value of sin(π/2)?', options: ['0', '1/2', '1/√2', '1'], answer: 3, workings: 'sin(π/2) = sin 90° = 1' },
+        { subject: 'bio', question: 'What is the function of ribosomes?', options: ['Protein synthesis', 'DNA replication', 'Energy production', 'Lipid synthesis'], answer: 0, workings: 'Ribosomes synthesize proteins.' },
+        { subject: 'tech', question: 'What does TCP/IP stand for?', options: ['Transmission Control Protocol/Internet Protocol', 'Transfer Control Protocol/Internet Protocol', 'Transmission Control Program/Internet Program', 'Transfer Control Program/Internet Program'], answer: 0, workings: 'TCP/IP = Transmission Control Protocol/Internet Protocol' },
+        { subject: 'math', question: 'What is the derivative of ln(2x)?', options: ['1/x', '2/x', '1/2x', '2/2x'], answer: 0, workings: 'd/dx ln(2x) = 1/x (chain rule)' },
+        { subject: 'math', question: 'What is cos(π)?', options: ['-1', '0', '1', '1/2'], answer: 0, workings: 'cos π = cos 180° = -1' },
+        { subject: 'chem', question: 'What is the atomic number of uranium?', options: ['88', '90', '92', '94'], answer: 2, workings: 'Uranium has atomic number 92.' },
+        { subject: 'phys', question: 'What is the unit of electric charge?', options: ['Coulomb', 'Ampere', 'Volt', 'Ohm'], answer: 0, workings: 'Charge is measured in Coulombs.' },
+        { subject: 'bio', question: 'Which organelle contains chlorophyll?', options: ['Mitochondria', 'Chloroplast', 'Nucleus', 'Ribosome'], answer: 1, workings: 'Chloroplasts contain chlorophyll for photosynthesis.' },
+        { subject: 'tech', question: 'What is a VPN?', options: ['Virtual Private Network', 'Virtual Public Network', 'Verified Private Network', 'Verified Public Network'], answer: 0, workings: 'VPN = Virtual Private Network' },
+        { subject: 'math', question: 'What is the integral of 1/x dx?', options: ['ln |x| + C', 'e^x + C', 'x + C', '1/x² + C'], answer: 0, workings: '∫ 1/x dx = ln |x| + C' },
+        { subject: 'chem', question: 'What is the chemical formula for glucose?', options: ['C6H12O6', 'C12H22O11', 'C6H10O5', 'C3H6O3'], answer: 0, workings: 'Glucose = C6H12O6' },
+        { subject: 'phys', question: 'What is the wavelength of visible light?', options: ['400-700 nm', '100-400 nm', '700-1000 nm', '1-10 mm'], answer: 0, workings: 'Visible light: 400-700 nanometers.' },
+        { subject: 'bio', question: 'What is the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi apparatus'], answer: 1, workings: 'Mitochondria produce ATP (energy).' }
+    ];
+    
+    // Level 6 (20 questions)
+    questionBank.senior[5] = [
+        { subject: 'math', question: 'Find the derivative of y = e^(2x)', options: ['2e^(2x)', 'e^(2x)', '2xe^(2x)', 'e^(2x)/2'], answer: 0, workings: 'Chain rule: d/dx e^(2x) = 2e^(2x)' },
+        { subject: 'chem', question: 'What is the rate law for a first-order reaction?', options: ['Rate = k[A]', 'Rate = k[A]²', 'Rate = k', 'Rate = k[A][B]'], answer: 0, workings: 'First order: rate depends on [A] to first power.' },
+        { subject: 'phys', question: 'What is the de Broglie wavelength?', options: ['λ = h/p', 'λ = hf', 'λ = c/f', 'λ = mv'], answer: 0, workings: 'de Broglie: λ = h/p (h/ momentum)' },
+        { subject: 'math', question: '∫ cos(3x) dx = ?', options: ['(1/3) sin(3x) + C', '3 sin(3x) + C', 'sin(3x) + C', '-sin(3x) + C'], answer: 0, workings: '∫ cos(ax) dx = (1/a) sin(ax) + C' },
+        { subject: 'tech', question: 'What is cloud computing?', options: ['Internet-based computing', 'Weather computing', 'Local computing', 'Desktop computing'], answer: 0, workings: 'Cloud computing uses remote servers on internet.' },
+        { subject: 'chem', question: 'What is the half-life of a radioactive isotope?', options: ['Time for half to decay', 'Time to decay completely', 'Time to double', 'Time to stabilize'], answer: 0, workings: 'Half-life: time for half the atoms to decay.' },
+        { subject: 'phys', question: 'What is the Doppler effect?', options: ['Frequency change due to motion', 'Light bending', 'Sound amplification', 'Wave interference'], answer: 0, workings: 'Doppler effect: frequency changes with relative motion.' },
+        { subject: 'math', question: 'Solve: 2^x = 16', options: ['x = 2', 'x = 3', 'x = 4', 'x = 5'], answer: 2, workings: '2⁴ = 16, so x = 4' },
+        { subject: 'bio', question: 'What is the function of the Golgi apparatus?', options: ['Modifies and packages proteins', 'Produces energy', 'Synthesizes proteins', 'Stores DNA'], answer: 0, workings: 'Golgi modifies and packages proteins.' },
+        { subject: 'tech', question: 'What does AI stand for?', options: ['Artificial Intelligence', 'Automated Input', 'Artificial Interface', 'Automated Intelligence'], answer: 0, workings: 'AI = Artificial Intelligence' },
+        { subject: 'math', question: 'What is the value of e^0?', options: ['0', '1', 'e', '∞'], answer: 1, workings: 'Any number to power 0 = 1' },
+        { subject: 'math', question: 'What is the derivative of cot x?', options: ['-csc² x', 'csc² x', '-sec² x', 'sec² x'], answer: 0, workings: 'd/dx cot x = -csc² x' },
+        { subject: 'chem', question: 'What is the bond angle in a tetrahedral molecule?', options: ['90°', '104.5°', '109.5°', '120°'], answer: 2, workings: 'Tetrahedral angle is 109.5°.' },
+        { subject: 'phys', question: 'What is the unit of magnetic flux?', options: ['Weber', 'Tesla', 'Henry', 'Farad'], answer: 0, workings: 'Magnetic flux is measured in Webers.' },
+        { subject: 'bio', question: 'Which vitamin is fat-soluble?', options: ['Vitamin C', 'Vitamin B', 'Vitamin A', 'All B vitamins'], answer: 2, workings: 'Vitamins A, D, E, K are fat-soluble.' },
+        { subject: 'tech', question: 'What is a byte?', options: ['8 bits', '16 bits', '32 bits', '64 bits'], answer: 0, workings: 'A byte consists of 8 bits.' },
+        { subject: 'math', question: 'What is sin(0)?', options: ['0', '1', '-1', 'undefined'], answer: 0, workings: 'sin 0° = 0' },
+        { subject: 'chem', question: 'What is the chemical symbol for iron?', options: ['Ir', 'Fe', 'In', 'I'], answer: 1, workings: 'Fe from Latin "ferrum"' },
+        { subject: 'phys', question: 'What is the law of conservation of momentum?', options: ['Total momentum constant', 'Momentum increases', 'Momentum decreases', 'Momentum zero'], answer: 0, workings: 'In closed system, total momentum is constant.' },
+        { subject: 'bio', question: 'How many chambers in the human heart?', options: ['2', '3', '4', '5'], answer: 2, workings: 'Human heart has 4 chambers.' }
+    ];
+    
+    // Level 7 (20 questions)
+    questionBank.senior[6] = [
+        { subject: 'math', question: 'Find the derivative of y = x³ ln x', options: ['3x² ln x + x²', 'x³/x + 3x² ln x', 'x² ln x', '3x² ln x'], answer: 1, workings: 'Product rule: (x³)(1/x) + (ln x)(3x²) = x² + 3x² ln x' },
+        { subject: 'chem', question: 'What is the Arrhenius equation?', options: ['k = Ae^(-Ea/RT)', 'k = A e^(Ea/RT)', 'k = A/ e^(Ea/RT)', 'k = A RT/Ea'], answer: 0, workings: 'Arrhenius: k = A e^(-Ea/RT)' },
+        { subject: 'phys', question: 'What is the Schrödinger equation?', options: ['Hψ = Eψ', 'F = ma', 'E = mc²', 'PV = nRT'], answer: 0, workings: 'Schrödinger equation describes quantum state.' },
+        { subject: 'math', question: '∫ sec² x dx = ?', options: ['tan x + C', 'sec x + C', 'cot x + C', 'csc x + C'], answer: 0, workings: '∫ sec² x dx = tan x + C' },
+        { subject: 'tech', question: 'What is machine learning?', options: ['AI that learns from data', 'Machine repair', 'Learning about machines', 'Hardware learning'], answer: 0, workings: 'Machine learning is AI that improves with data.' },
+        { subject: 'chem', question: 'What is the pH of a 0.01 M HCl solution?', options: ['1', '2', '3', '4'], answer: 1, workings: 'pH = -log[H⁺] = -log(0.01) = 2' },
+        { subject: 'phys', question: 'What is the unit of inductance?', options: ['Henry', 'Farad', 'Tesla', 'Weber'], answer: 0, workings: 'Inductance is measured in Henry.' },
+        { subject: 'math', question: 'What is the value of log₂ 32?', options: ['4', '5', '6', '7'], answer: 1, workings: '2⁵ = 32, so log₂ 32 = 5' },
+        { subject: 'bio', question: 'What is the function of DNA?', options: ['Genetic information storage', 'Energy production', 'Protein synthesis', 'Cell division'], answer: 0, workings: 'DNA stores genetic information.' },
+        { subject: 'tech', question: 'What does IoT stand for?', options: ['Internet of Things', 'Internet of Technology', 'Integrated of Things', 'Internet of Telemetry'], answer: 0, workings: 'IoT = Internet of Things' },
+        { subject: 'math', question: 'What is the derivative of sec x?', options: ['sec x tan x', 'sec² x', 'tan x', 'sec x cot x'], answer: 0, workings: 'd/dx sec x = sec x tan x' },
+        { subject: 'math', question: 'What is the integral of e^(2x) dx?', options: ['(1/2)e^(2x) + C', '2e^(2x) + C', 'e^(2x) + C', 'e^(2x)/2x + C'], answer: 0, workings: '∫ e^(ax) dx = (1/a)e^(ax) + C' },
+        { subject: 'chem', question: 'What is the oxidation state of Cr in K₂Cr₂O₇?', options: ['+3', '+4', '+5', '+6'], answer: 3, workings: 'K₂=+2, O₇=-14, so 2Cr=+12, Cr=+6' },
+        { subject: 'phys', question: 'What is the Compton effect?', options: ['X-ray wavelength change', 'Electron diffraction', 'Photoelectric effect', 'Pair production'], answer: 0, workings: 'Compton effect: X-ray wavelength increases after scattering.' },
+        { subject: 'bio', question: 'What is mitosis?', options: ['Cell division', 'Cell death', 'Cell growth', 'Cell differentiation'], answer: 0, workings: 'Mitosis is cell division producing identical cells.' },
+        { subject: 'tech', question: 'What is a blockchain?', options: ['Distributed ledger', 'Data chain', 'Block of code', 'Network protocol'], answer: 0, workings: 'Blockchain is a distributed digital ledger.' },
+        { subject: 'math', question: 'What is the value of cos(π/2)?', options: ['0', '1', '-1', '1/2'], answer: 0, workings: 'cos(π/2) = cos 90° = 0' },
+        { subject: 'chem', question: 'What is the chemical symbol for silver?', options: ['Si', 'Ag', 'Au', 'Sr'], answer: 1, workings: 'Ag from Latin "argentum"' },
+        { subject: 'phys', question: 'What is the unit of power?', options: ['Watt', 'Joule', 'Newton', 'Pascal'], answer: 0, workings: 'Power is measured in Watts.' },
+        { subject: 'bio', question: 'Which organelle is responsible for photosynthesis?', options: ['Chloroplast', 'Mitochondria', 'Nucleus', 'Ribosome'], answer: 0, workings: 'Chloroplasts perform photosynthesis.' }
+    ];
+    
+    // Level 8 (20 questions)
+    questionBank.senior[7] = [
+        { subject: 'math', question: 'Find dy/dx if y = sin⁻¹ x', options: ['1/√(1-x²)', '1/(1+x²)', '-1/√(1-x²)', 'cos⁻¹ x'], answer: 0, workings: 'd/dx sin⁻¹ x = 1/√(1-x²)' },
+        { subject: 'chem', question: 'What is the Nernst equation?', options: ['E = E° - (RT/nF) ln Q', 'E = E° + (RT/nF) ln Q', 'E = E° - (nF/RT) ln Q', 'E = E° + (nF/RT) ln Q'], answer: 0, workings: 'Nernst equation relates cell potential to concentrations.' },
+        { subject: 'phys', question: 'What is the Stefan-Boltzmann law?', options: ['P = σAT⁴', 'P = σAT²', 'P = σAT³', 'P = σAT'], answer: 0, workings: 'Stefan-Boltzmann: Power ∝ T⁴' },
+        { subject: 'math', question: '∫ 1/(1+x²) dx = ?', options: ['tan⁻¹ x + C', 'sin⁻¹ x + C', 'cos⁻¹ x + C', 'ln(1+x²) + C'], answer: 0, workings: '∫ 1/(1+x²) dx = tan⁻¹ x + C' },
+        { subject: 'tech', question: 'What is cybersecurity?', options: ['Protecting computer systems', 'Computer security', 'Network security', 'All of the above'], answer: 3, workings: 'Cybersecurity protects all digital assets.' },
+        { subject: 'chem', question: 'What is the equilibrium constant for water (Kw)?', options: ['10⁻¹⁴', '10⁻⁷', '10⁷', '10¹⁴'], answer: 0, workings: 'Kw = [H⁺][OH⁻] = 10⁻¹⁴ at 25°C' },
+        { subject: 'phys', question: 'What is the unit of radioactivity?', options: ['Becquerel', 'Gray', 'Sievert', 'Curie'], answer: 0, workings: 'Radioactivity is measured in Becquerel.' },
+        { subject: 'math', question: 'What is the derivative of tan⁻¹ x?', options: ['1/(1+x²)', '1/√(1-x²)', '1/(1-x²)', 'x/(1+x²)'], answer: 0, workings: 'd/dx tan⁻¹ x = 1/(1+x²)' },
+        { subject: 'bio', question: 'What is meiosis?', options: ['Cell division for gametes', 'Cell growth', 'Cell death', 'Protein synthesis'], answer: 0, workings: 'Meiosis produces gametes with half chromosomes.' },
+        { subject: 'tech', question: 'What does DNS stand for?', options: ['Domain Name System', 'Digital Network System', 'Domain Network Service', 'Digital Name Service'], answer: 0, workings: 'DNS = Domain Name System' },
+        { subject: 'math', question: 'What is the value of ln e?', options: ['0', '1', 'e', 'undefined'], answer: 1, workings: 'ln e = 1' },
+        { subject: 'math', question: 'What is the derivative of csc x?', options: ['-csc x cot x', 'csc x cot x', '-csc² x', 'csc² x'], answer: 0, workings: 'd/dx csc x = -csc x cot x' },
+        { subject: 'chem', question: 'What is the bond angle in a trigonal planar molecule?', options: ['90°', '104.5°', '109.5°', '120°'], answer: 3, workings: 'Trigonal planar has 120° bond angles.' },
+        { subject: 'phys', question: 'What is the unit of absorbed radiation dose?', options: ['Gray', 'Sievert', 'Becquerel', 'Curie'], answer: 0, workings: 'Absorbed dose is measured in Gray.' },
+        { subject: 'bio', question: 'What is the function of RNA?', options: ['Protein synthesis', 'Energy storage', 'Genetic information', 'Cell structure'], answer: 0, workings: 'RNA helps in protein synthesis.' },
+        { subject: 'tech', question: 'What is a gigabyte?', options: ['1024 MB', '1000 MB', '1024 KB', '1000 KB'], answer: 0, workings: '1 GB = 1024 MB' },
+        { subject: 'math', question: 'What is the value of sin(π/6)?', options: ['1/2', '√3/2', '1/√2', '1'], answer: 0, workings: 'sin 30° = 1/2' },
+        { subject: 'chem', question: 'What is the chemical symbol for mercury?', options: ['Me', 'Hg', 'Mr', 'Hy'], answer: 1, workings: 'Hg from Greek "hydrargyrum"' },
+        { subject: 'phys', question: 'What is the law of reflection?', options: ['Angle i = angle r', 'Angle i > angle r', 'Angle i < angle r', 'Angle i + angle r = 90°'], answer: 0, workings: 'Angle of incidence equals angle of reflection.' },
+        { subject: 'bio', question: 'How many pairs of ribs in humans?', options: ['10', '12', '14', '16'], answer: 1, workings: 'Humans have 12 pairs of ribs.' }
+    ];
+    
+    // Level 9 (20 questions)
+    questionBank.senior[8] = [
+        { subject: 'math', question: 'Find the derivative of y = log₁₀ x', options: ['1/(x ln 10)', '1/x', 'ln 10/x', '10/x'], answer: 0, workings: 'd/dx log₁₀ x = 1/(x ln 10)' },
+        { subject: 'chem', question: 'What is the Gibbs free energy equation?', options: ['ΔG = ΔH - TΔS', 'ΔG = ΔH + TΔS', 'ΔG = TΔS - ΔH', 'ΔG = ΔH/T - ΔS'], answer: 0, workings: 'Gibbs free energy determines spontaneity.' },
+        { subject: 'phys', question: 'What is the Bohr model of the atom?', options: ['Electrons in quantized orbits', 'Electrons as waves', 'Electron cloud', 'Nuclear model'], answer: 0, workings: 'Bohr model has electrons in fixed orbits.' },
+        { subject: 'math', question: '∫ csc² x dx = ?', options: ['-cot x + C', 'cot x + C', 'tan x + C', '-tan x + C'], answer: 0, workings: '∫ csc² x dx = -cot x + C' },
+        { subject: 'tech', question: 'What is a terabyte?', options: ['1024 GB', '1000 GB', '1024 MB', '1000 MB'], answer: 0, workings: '1 TB = 1024 GB' },
+        { subject: 'chem', question: 'What is the Aufbau principle?', options: ['Electrons fill lowest energy orbitals first', 'Electrons pair in orbitals', 'Electrons have spin', 'Orbitals have shapes'], answer: 0, workings: 'Aufbau: fill from lowest energy level.' },
+        { subject: 'phys', question: 'What is the unit of equivalent radiation dose?', options: ['Sievert', 'Gray', 'Becquerel', 'Curie'], answer: 0, workings: 'Equivalent dose is measured in Sievert.' },
+        { subject: 'math', question: 'What is the value of cos(π/3)?', options: ['1/2', '√3/2', '1/√2', '1'], answer: 0, workings: 'cos 60° = 1/2' },
+        { subject: 'bio', question: 'What is the role of enzymes?', options: ['Catalyze reactions', 'Store energy', 'Transport molecules', 'Structural support'], answer: 0, workings: 'Enzymes speed up chemical reactions.' },
+        { subject: 'tech', question: 'What does SSD stand for?', options: ['Solid State Drive', 'System Storage Drive', 'Solid System Drive', 'State Storage Device'], answer: 0, workings: 'SSD = Solid State Drive' },
+        { subject: 'math', question: 'What is the derivative of a^x?', options: ['a^x ln a', 'x a^(x-1)', 'a^x', 'a^x / ln a'], answer: 0, workings: 'd/dx a^x = a^x ln a' },
+        { subject: 'math', question: 'What is the integral of sec x tan x?', options: ['sec x + C', 'tan x + C', 'csc x + C', 'cot x + C'], answer: 0, workings: '∫ sec x tan x dx = sec x + C' },
+        { subject: 'chem', question: 'What is the Pauli exclusion principle?', options: ['No two electrons have same quantum numbers', 'Electrons fill orbitals singly', 'Electrons have opposite spins', 'Orbitals have specific shapes'], answer: 0, workings: 'Pauli: each electron has unique quantum state.' },
+        { subject: 'phys', question: 'What is the unit of action in quantum mechanics?', options: ['Planck constant', 'Joule-second', 'Both A and B', 'None'], answer: 2, workings: 'Action has units of energy × time.' },
+        { subject: 'bio', question: 'What is the function of the cell membrane?', options: ['Selective barrier', 'Energy production', 'Protein synthesis', 'Genetic storage'], answer: 0, workings: 'Cell membrane controls what enters/leaves.' },
+        { subject: 'tech', question: 'What is a petabyte?', options: ['1024 TB', '1000 TB', '1024 GB', '1000 GB'], answer: 0, workings: '1 PB = 1024 TB' },
+        { subject: 'math', question: 'What is tan(π/4)?', options: ['1', '0', '√3', '1/√3'], answer: 0, workings: 'tan 45° = 1' },
+        { subject: 'chem', question: 'What is the chemical formula for ammonia?', options: ['NH3', 'NH4', 'N2H4', 'N2H2'], answer: 0, workings: 'Ammonia = NH3' },
+        { subject: 'phys', question: 'What is Snell\'s law?', options: ['n₁ sin θ₁ = n₂ sin θ₂', 'n₁ cos θ₁ = n₂ cos θ₂', 'sin θ₁/sin θ₂ = n₂/n₁', 'n₁/n₂ = sin θ₂/sin θ₁'], answer: 0, workings: 'Snell\'s law relates refraction angles.' },
+        { subject: 'bio', question: 'What is the largest organ in the human body?', options: ['Skin', 'Liver', 'Heart', 'Brain'], answer: 0, workings: 'Skin is the largest organ.' }
+    ];
+    
+    // Level 10 (20 questions)
+    questionBank.senior[9] = [
+        { subject: 'math', question: 'Find the derivative of y = sinh x', options: ['cosh x', 'sinh x', 'sech² x', 'csch x'], answer: 0, workings: 'd/dx sinh x = cosh x' },
+        { subject: 'chem', question: 'What is the Henderson-Hasselbalch equation?', options: ['pH = pKa + log([A⁻]/[HA])', 'pH = pKa - log([A⁻]/[HA])', 'pH = pKa + log([HA]/[A⁻])', 'pH = pKa - log([HA]/[A⁻])'], answer: 0, workings: 'Henderson-Hasselbalch for buffer solutions.' },
+        { subject: 'phys', question: 'What is the Lorentz transformation?', options: ['Relates space-time in relativity', 'Converts energy to mass', 'Transforms forces', 'Changes coordinates'], answer: 0, workings: 'Lorentz transformations in special relativity.' },
+        { subject: 'math', question: '∫ 1/√(1-x²) dx = ?', options: ['sin⁻¹ x + C', 'cos⁻¹ x + C', 'tan⁻¹ x + C', 'sec⁻¹ x + C'], answer: 0, workings: '∫ 1/√(1-x²) dx = sin⁻¹ x + C' },
+        { subject: 'tech', question: 'What is quantum computing?', options: ['Computing with quantum bits', 'Super-fast computing', 'Parallel computing', 'Classical computing'], answer: 0, workings: 'Quantum computing uses qubits (superposition).' },
+        { subject: 'chem', question: 'What is the Schrödinger equation for hydrogen atom?', options: ['-ħ²/2m ∇²ψ + Vψ = Eψ', 'Hψ = Eψ', 'iħ ∂ψ/∂t = Hψ', 'All of the above'], answer: 3, workings: 'Schrödinger equation in various forms.' },
+        { subject: 'phys', question: 'What is the Higgs boson?', options: ['Particle giving mass', 'Force carrier', 'Dark matter', 'Antimatter'], answer: 0, workings: 'Higgs boson gives particles mass.' },
+        { subject: 'math', question: 'What is the value of lim x→0 (sin x)/x?', options: ['1', '0', '∞', 'undefined'], answer: 0, workings: 'Important limit: lim x→0 (sin x)/x = 1' },
+        { subject: 'bio', question: 'What is CRISPR?', options: ['Gene editing tool', 'Protein structure', 'Cell organelle', 'Virus type'], answer: 0, workings: 'CRISPR edits genes precisely.' },
+        { subject: 'tech', question: 'What does 5G stand for?', options: ['Fifth generation', 'Five gigabytes', 'Five gigahertz', 'Fifth grade'], answer: 0, workings: '5G is fifth generation wireless.' },
+        { subject: 'math', question: 'What is the derivative of cosh x?', options: ['sinh x', 'cosh x', 'tanh x', 'sech x'], answer: 0, workings: 'd/dx cosh x = sinh x' },
+        { subject: 'math', question: 'What is the integral of tanh x?', options: ['ln(cosh x) + C', 'ln(sinh x) + C', 'sech² x + C', 'csch² x + C'], answer: 0, workings: '∫ tanh x dx = ln(cosh x) + C' },
+        { subject: 'chem', question: 'What is the molecular geometry of water?', options: ['Bent', 'Linear', 'Tetrahedral', 'Trigonal planar'], answer: 0, workings: 'Water has bent shape due to lone pairs.' },
+        { subject: 'phys', question: 'What is the Chandrasekhar limit?', options: ['Max mass of white dwarf', 'Black hole size', 'Neutron star mass', 'Supernova energy'], answer: 0, workings: 'Chandrasekhar limit ≈ 1.4 solar masses.' },
+        { subject: 'bio', question: 'What is apoptosis?', options: ['Programmed cell death', 'Cell division', 'Cell growth', 'Cell differentiation'], answer: 0, workings: 'Apoptosis is programmed cell death.' },
+        { subject: 'tech', question: 'What is a nanosecond?', options: ['10⁻⁹ seconds', '10⁻⁶ seconds', '10⁻¹² seconds', '10⁻³ seconds'], answer: 0, workings: '1 nanosecond = 10⁻⁹ seconds' },
+        { subject: 'math', question: 'What is the value of e^ln 5?', options: ['5', 'e^5', 'ln 5', '10'], answer: 0, workings: 'e^ln x = x' },
+        { subject: 'chem', question: 'What is the chemical symbol for tungsten?', options: ['W', 'Tu', 'Tg', 'Tn'], answer: 0, workings: 'W from German "Wolfram"' },
+        { subject: 'phys', question: 'What is the Planck length?', options: ['≈ 1.6 × 10⁻³⁵ m', '≈ 1.6 × 10⁻³⁴ m', '≈ 1.6 × 10⁻³³ m', '≈ 1.6 × 10⁻³² m'], answer: 0, workings: 'Planck length is smallest meaningful length.' },
+        { subject: 'bio', question: 'What is the human genome size?', options: ['≈ 3 billion base pairs', '≈ 2 billion base pairs', '≈ 4 billion base pairs', '≈ 5 billion base pairs'], answer: 0, workings: 'Human genome has about 3 billion base pairs.' }
+    ];
 
     // shuffle function
-    function shuffleArray(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+    function shuffleArray(arr) { 
+        for (let i = arr.length - 1; i > 0; i--) { 
+            const j = Math.floor(Math.random() * (i + 1)); 
+            [arr[i], arr[j]] = [arr[j], arr[i]]; 
+        } 
+        return arr; 
+    }
 
     // current track & levels
-    let currentTrack = 'primary'; // default
-    let levelQuestions = []; // will be set on start
+    let currentTrack = 'primary';
+    let levelQuestions = [];
     let currentLevelIndex = 0, currentQuestionIndex = 0;
     let timerInterval = null, timeLeft = 30, locked = false;
     let userAnswers = [], questionStatus = [];
     let quizStarted = false, allLevelsDone = false;
 
-    let userName = 'Chileshe Banda', userSchool = 'Lusaka JETS Academy', userZone = 'Chilanga', userDistrict = 'Lusaka';
+    // Defaults: Faith Mwila, Katete details
+    let userName = 'Faith Mwila', userSchool = 'Katete Day Secondary School', userZone = 'Katete Central Zone', userDistrict = 'Katete District';
 
     // DOM elements
     const trackPrimary = document.getElementById('trackPrimary');
     const trackJunior = document.getElementById('trackJunior');
     const trackSenior = document.getElementById('trackSenior');
+    const trackSelectorDiv = document.getElementById('trackSelector');
     const globalCategoryDisplay = document.getElementById('globalCategoryDisplay');
     const startContainer = document.getElementById('startContainer');
     const startBtn = document.getElementById('startQuizBtn');
@@ -539,23 +1203,80 @@
     };
 
     function clearTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
-    function startTimer() { clearTimer(); if (!quizStarted || allLevelsDone) return; timeLeft = 30; timerDisplay.innerText = `⏳ 00:30`; timerInterval = setInterval(() => { if (locked || !quizStarted || allLevelsDone) return; timeLeft--; if (timeLeft < 0) timeLeft = 0; timerDisplay.innerText = `⏳ 00:${timeLeft < 10 ? '0' : ''}${timeLeft}`; if (timeLeft === 0 && !locked) lockAnswer(null); }, 1000); }
+    
+    // ========== TIMER: on expiry → no answer (wrong) & play sound ==========
+    function startTimer() { 
+        clearTimer(); 
+        if (!quizStarted || allLevelsDone) return; 
+        timeLeft = 30; 
+        timerDisplay.innerText = `⏳ 00:30`; 
+        timerInterval = setInterval(() => { 
+            if (locked || !quizStarted || allLevelsDone) return; 
+            timeLeft--; 
+            if (timeLeft < 0) timeLeft = 0; 
+            timerDisplay.innerText = `⏳ 00:${timeLeft < 10 ? '0' : ''}${timeLeft}`; 
+            if (timeLeft === 0 && !locked) {
+                // Timeout: play wrong sound, mark wrong, lock, then go to next
+                createSound('wrong');
+                lockAnswer(null); // null indicates no selection → wrong answer
+                // after lock, automatically move to next question (if any)
+                setTimeout(() => {
+                    if (quizStarted && !allLevelsDone) {
+                        nextQuestion(); 
+                    }
+                }, 500);
+            }
+        }, 1000); 
+    }
 
     function lockAnswer(selectedIdx) {
         if (locked || !quizStarted || allLevelsDone) return;
         const qList = levelQuestions[currentLevelIndex];
         const ansArray = userAnswers[currentLevelIndex];
         const statusArray = questionStatus[currentLevelIndex];
-        locked = true; clearTimer();
+        locked = true; 
+        clearTimer();
         ansArray[currentQuestionIndex] = selectedIdx;
-        const isCorrect = (selectedIdx !== null && selectedIdx === qList[currentQuestionIndex].ans);
+        // if selectedIdx === null → no answer given (timeout) → wrong
+        const isCorrect = (selectedIdx !== null && selectedIdx === qList[currentQuestionIndex].answer);
         statusArray[currentQuestionIndex] = isCorrect ? 'correct' : 'wrong';
-        renderQuestion(); updateScore();
+        
+        // Play sound based on correctness
+        if (selectedIdx !== null) {
+            if (isCorrect) {
+                createSound('correct');
+            } else {
+                createSound('wrong');
+            }
+        }
+        
+        renderQuestion(); 
+        updateScore();
     }
 
-    function handleOptionClick(idx) { if (locked || !quizStarted || allLevelsDone) return; document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected')); document.querySelector(`.option-item[data-opt-index="${idx}"]`).classList.add('selected'); }
-    function handleEnter(e) { if (e.key === 'Enter' && !locked && !allLevelsDone && quizStarted) { e.preventDefault(); submitAnswer(); } }
-    function submitAnswer() { if (locked || !quizStarted) return; const selected = document.querySelector('.option-item.selected'); if (selected) { const idx = parseInt(selected.dataset.optIndex, 10); lockAnswer(idx); } else alert('Select an answer'); }
+    function handleOptionClick(idx) { 
+        if (locked || !quizStarted || allLevelsDone) return; 
+        document.querySelectorAll('.option-item').forEach(opt => opt.classList.remove('selected')); 
+        document.querySelector(`.option-item[data-opt-index="${idx}"]`).classList.add('selected'); 
+    }
+    
+    function handleEnter(e) { 
+        if (e.key === 'Enter' && !locked && !allLevelsDone && quizStarted) { 
+            e.preventDefault(); 
+            submitAnswer(); 
+        } 
+    }
+    
+    function submitAnswer() { 
+        if (locked || !quizStarted) return; 
+        const selected = document.querySelector('.option-item.selected'); 
+        if (selected) { 
+            const idx = parseInt(selected.dataset.optIndex, 10); 
+            lockAnswer(idx); 
+        } else {
+            alert('Select an answer');
+        }
+    }
 
     function renderQuestion() {
         if (!quizStarted || allLevelsDone) return;
@@ -564,38 +1285,159 @@
         const ansArray = userAnswers[currentLevelIndex];
         levelDisplay.innerText = levelNames(currentTrack)[currentLevelIndex];
         globalCategoryDisplay.innerText = currentTrack === 'primary' ? 'Primary' : currentTrack === 'junior' ? 'Junior Sec' : 'Senior Sec';
-        let subjectIcon = q.subject === 'math' ? '📐' : q.subject.includes('chem') ? '🧪' : q.subject.includes('phys') ? '⚛️' : q.subject.includes('bio') ? '🧬' : '💻';
+        
+        let subjectIcon = '';
+        if (q.subject === 'math') subjectIcon = '📐';
+        else if (q.subject === 'chem') subjectIcon = '🧪';
+        else if (q.subject === 'phys') subjectIcon = '⚛️';
+        else if (q.subject === 'bio') subjectIcon = '🧬';
+        else if (q.subject === 'tech') subjectIcon = '💻';
+        else subjectIcon = '🔬';
+        
         let optionsHtml = '';
-        q.opts.forEach((opt, idx) => {
+        q.options.forEach((opt, idx) => {
             const isSelected = (ansArray[currentQuestionIndex] === idx);
             let lockedClass = locked ? 'locked' : '';
             if (locked) {
-                if (idx === q.ans) lockedClass += ' correct-locked';
-                else if (isSelected && idx !== q.ans) lockedClass += ' wrong-locked';
+                if (idx === q.answer) lockedClass += ' correct-locked';
+                else if (isSelected && idx !== q.answer) lockedClass += ' wrong-locked';
                 else if (isSelected) lockedClass += ' selected';
-            } else { if (isSelected) lockedClass += ' selected'; }
+            } else { 
+                if (isSelected) lockedClass += ' selected'; 
+            }
             const prefix = String.fromCharCode(65 + idx);
             optionsHtml += `<div class="option-item ${lockedClass}" data-opt-index="${idx}"><span class="option-prefix">${prefix}</span><span>${opt}</span></div>`;
         });
-        questionArea.innerHTML = `<div class="question-box"><div class="question-text">${subjectIcon} ${q.question}</div><div class="options-grid">${optionsHtml}</div>${locked ? '<p style="color:green;">✓ LOCKED</p>' : ''}</div>`;
-        if (!locked && !allLevelsDone && quizStarted) document.querySelectorAll('.option-item').forEach(opt => opt.addEventListener('click', (e) => { const idx = parseInt(opt.dataset.optIndex, 10); handleOptionClick(idx); }));
+        
+        questionArea.innerHTML = `<div class="question-box"><div class="question-text">${subjectIcon} ${q.question}</div><div class="options-grid">${optionsHtml}</div>${locked ? '<p style="color:green; font-weight:bold;">✓ ANSWER LOCKED</p>' : ''}</div>`;
+        
+        if (!locked && !allLevelsDone && quizStarted) {
+            document.querySelectorAll('.option-item').forEach(opt => {
+                opt.addEventListener('click', (e) => { 
+                    const idx = parseInt(opt.dataset.optIndex, 10); 
+                    handleOptionClick(idx); 
+                });
+            });
+        }
     }
 
-    function updateScore() { const ans = userAnswers[currentLevelIndex]; const qList = levelQuestions[currentLevelIndex]; let correct = qList.reduce((acc, q, i) => acc + ((ans[i] !== null && ans[i] === q.ans) ? 1 : 0), 0); scoreSpan.innerText = `${correct} / ${qList.length}`; }
+    function updateScore() { 
+        const ans = userAnswers[currentLevelIndex]; 
+        const qList = levelQuestions[currentLevelIndex]; 
+        let correct = qList.reduce((acc, q, i) => acc + ((ans[i] !== null && ans[i] === q.answer) ? 1 : 0), 0); 
+        scoreSpan.innerText = `${correct} / ${qList.length}`; 
+    }
 
-    function nextQuestion() { if (!quizStarted || allLevelsDone) return; const qList = levelQuestions[currentLevelIndex]; if (!locked && currentQuestionIndex < qList.length - 1) { alert('Submit answer first'); return; } if (currentQuestionIndex < qList.length - 1) { currentQuestionIndex++; locked = false; startTimer(); renderQuestion(); } else finishLevel(); }
+    function nextQuestion() { 
+        if (!quizStarted || allLevelsDone) return; 
+        const qList = levelQuestions[currentLevelIndex]; 
+        // Allow moving forward only if current question is locked (answered or timed out)
+        if (!locked) { 
+            alert('Please submit or wait for timer to lock the current question.'); 
+            return; 
+        } 
+        if (currentQuestionIndex < qList.length - 1) { 
+            currentQuestionIndex++; 
+            locked = false; 
+            startTimer(); 
+            renderQuestion(); 
+        } else finishLevel(); 
+    }
 
-    function finishLevel() { clearTimer(); const ans = userAnswers[currentLevelIndex]; const qList = levelQuestions[currentLevelIndex]; let correct = ans.reduce((acc, val, idx) => acc + (val === qList[idx].ans ? 1 : 0), 0); const total = qList.length; let congratsHtml = `<div class="results-page"><div class="congrats-box"><h2>🎉 ${levelNames(currentTrack)[currentLevelIndex]} COMPLETE</h2><p>${userName}</p><div class="big-score">${correct}/${total}</div>`; if (currentLevelIndex === 9) congratsHtml += `<button class="print-btn" id="showFinalResultsBtn">📋 FINAL RESULTS</button>`; else congratsHtml += `<button class="print-btn" id="nextLevelBtn">🚀 NEXT LEVEL</button>`; congratsHtml += `<button class="print-btn" id="printLevelBtn">🖨️ PRINT LEVEL</button></div></div>`; levelCompleteArea.innerHTML = congratsHtml; levelCompleteArea.classList.remove('hidden'); quizPanel.classList.add('hidden'); if (currentLevelIndex === 9) { document.getElementById('showFinalResultsBtn')?.addEventListener('click', showFinalResults); } else { document.getElementById('nextLevelBtn')?.addEventListener('click', () => { currentLevelIndex++; currentQuestionIndex = 0; locked = false; levelCompleteArea.classList.add('hidden'); quizPanel.classList.remove('hidden'); startTimer(); renderQuestion(); }); } document.getElementById('printLevelBtn')?.addEventListener('click', () => printLevelResults(currentLevelIndex)); }
+    function finishLevel() { 
+        clearTimer(); 
+        const ans = userAnswers[currentLevelIndex]; 
+        const qList = levelQuestions[currentLevelIndex]; 
+        let correct = ans.reduce((acc, val, idx) => acc + (val === qList[idx].answer ? 1 : 0), 0); 
+        const total = qList.length; 
+        let congratsHtml = `<div class="results-page"><div class="congrats-box"><h2>🎉 ${levelNames(currentTrack)[currentLevelIndex]} COMPLETE</h2><p>${userName}</p><div class="big-score">${correct}/${total}</div>`; 
+        if (currentLevelIndex === 9) {
+            congratsHtml += `<button class="print-btn" id="showFinalResultsBtn">📋 FINAL RESULTS</button>`;
+        } else { 
+            congratsHtml += `<button class="print-btn" id="nextLevelBtn">🚀 NEXT LEVEL</button>`; 
+        } 
+        congratsHtml += `<button class="print-btn" id="printLevelBtn">🖨️ PRINT LEVEL</button></div></div>`; 
+        levelCompleteArea.innerHTML = congratsHtml; 
+        levelCompleteArea.classList.remove('hidden'); 
+        quizPanel.classList.add('hidden'); 
+        
+        if (currentLevelIndex === 9) { 
+            document.getElementById('showFinalResultsBtn')?.addEventListener('click', showFinalResults); 
+        } else { 
+            document.getElementById('nextLevelBtn')?.addEventListener('click', () => { 
+                currentLevelIndex++; 
+                currentQuestionIndex = 0; 
+                locked = false; 
+                levelCompleteArea.classList.add('hidden'); 
+                quizPanel.classList.remove('hidden'); 
+                startTimer(); 
+                renderQuestion(); 
+            }); 
+        } 
+        document.getElementById('printLevelBtn')?.addEventListener('click', () => printLevelResults(currentLevelIndex)); 
+    }
 
-    function printLevelResults(levelIdx) { /* similar to before */ const ans = userAnswers[levelIdx]; const qList = levelQuestions[levelIdx]; let correct = ans.reduce((a,v,i)=>a+(v===qList[i].ans?1:0),0); let pw = window.open('','_blank'); let html = `<html><head><title>${currentTrack} Level ${levelIdx+1}</title><style>body{font-family:Segoe UI;}</style></head><body><h2>${userName} - ${currentTrack} Level ${levelIdx+1}</h2><p>Score: ${correct}/${qList.length}</p>`; qList.forEach((q,i)=>{ let userChoice = ans[i]; html += `<div><h3>Q${i+1}. ${q.question}</h3><p>Your: ${userChoice!==null?q.opts[userChoice]:'—'} ${userChoice===q.ans?'✅':'❌'}</p><p>Correct: ${q.opts[q.ans]}</p><p>${q.workings}</p></div>`; }); html += '</body></html>'; pw.document.write(html); pw.print(); }
+    function printLevelResults(levelIdx) { 
+        const ans = userAnswers[levelIdx]; 
+        const qList = levelQuestions[levelIdx]; 
+        let correct = ans.reduce((a,v,i)=>a+(v===qList[i].answer?1:0),0); 
+        let pw = window.open('','_blank'); 
+        let html = `<html><head><title>${currentTrack} Level ${levelIdx+1}</title><style>body{font-family:Segoe UI; padding:20px;}.q{border-left:10px solid #2c5a8c;padding:15px;background:#f5f5f5;margin-bottom:15px;}</style></head><body><h2>${userName} - ${currentTrack} Level ${levelIdx+1}</h2><p>School: ${userSchool} | Zone: ${userZone} | District: ${userDistrict}</p><p><strong>Score: ${correct}/${qList.length}</strong></p><hr>`; 
+        qList.forEach((q,i)=>{ 
+            let userChoice = ans[i]; 
+            let isCorrect = userChoice === q.answer;
+            let userAnswerText = userChoice !== null ? q.options[userChoice] : '— (timeout)';
+            html += `<div class="q"><h3>Q${i+1}. ${q.question} ${isCorrect?'✅':'❌'}</h3><p><strong>Your answer:</strong> ${userAnswerText}</p><p><strong>Correct:</strong> ${q.options[q.answer]}</p><p><em>${q.workings}</em></p></div>`; 
+        }); 
+        html += '</body></html>'; 
+        pw.document.write(html); 
+        pw.print(); 
+    }
 
-    function showFinalResults() { allLevelsDone = true; clearTimer(); levelCompleteArea.classList.add('hidden'); quizPanel.classList.add('hidden'); resultsArea.classList.remove('hidden'); let totalCorrect=0, totalQ=0, html=`<div class="results-page"><h2>🏁 ${userName} - ${currentTrack.toUpperCase()} FINAL</h2><p>${userSchool} | ${userZone} | ${userDistrict}</p>`; for (let lvl=0; lvl<10; lvl++) { const ans = userAnswers[lvl]; const q = levelQuestions[lvl]; let correct = ans.reduce((a,v,i)=>a+(v===q[i].ans?1:0),0); totalCorrect+=correct; totalQ+=q.length; html += `<p><strong>Level ${lvl+1}:</strong> ${correct}/${q.length}</p>`; } html += `<h2>🏆 TOTAL ${totalCorrect}/${totalQ}</h2><hr>`; for (let lvl=0; lvl<10; lvl++) { const ans = userAnswers[lvl]; const q = levelQuestions[lvl]; q.forEach((qq,i)=>{ let userChoice = ans[i]; html += `<div class="results-question"><h4>L${lvl+1} Q${i+1}. ${qq.question}</h4><p>Your: ${userChoice!==null?qq.opts[userChoice]:'—'} ${userChoice===qq.ans?'✅':'❌'}</p><p>Correct: ${qq.opts[qq.ans]}</p><div class="workings">${qq.workings}</div></div>`; }); } html += '<button class="print-btn" id="printFinalBtn">🖨️ PRINT</button></div>'; resultsArea.innerHTML = html; document.getElementById('printFinalBtn')?.addEventListener('click', ()=>window.print()); }
+    function showFinalResults() { 
+        allLevelsDone = true; 
+        clearTimer(); 
+        levelCompleteArea.classList.add('hidden'); 
+        quizPanel.classList.add('hidden'); 
+        resultsArea.classList.remove('hidden'); 
+        let totalCorrect = 0, totalQ = 0; 
+        let html = `<div class="results-page"><h2>🏁 ${userName} - ${currentTrack.toUpperCase()} FINAL RESULTS</h2><p><strong>School:</strong> ${userSchool} | <strong>Zone:</strong> ${userZone} | <strong>District:</strong> ${userDistrict}</p><div class="progress-summary"><h3>📈 LEVEL SUMMARY</h3>`; 
+        
+        for (let lvl = 0; lvl < 10; lvl++) { 
+            const ans = userAnswers[lvl]; 
+            const q = levelQuestions[lvl]; 
+            let correct = ans.reduce((a,v,i) => a + (v === q[i].answer ? 1 : 0), 0); 
+            totalCorrect += correct; 
+            totalQ += q.length; 
+            html += `<p><strong>Level ${lvl+1}:</strong> ${correct}/${q.length}</p>`; 
+        } 
+        html += `<h2>🏆 TOTAL SCORE: ${totalCorrect}/${totalQ}</h2></div><hr>`; 
+        
+        for (let lvl = 0; lvl < 10; lvl++) { 
+            const ans = userAnswers[lvl]; 
+            const q = levelQuestions[lvl]; 
+            html += `<h3>📘 Level ${lvl+1} Details</h3>`; 
+            q.forEach((qq, i) => { 
+                let userChoice = ans[i]; 
+                let isCorrect = userChoice === qq.answer;
+                let userText = userChoice !== null ? qq.options[userChoice] : '— (timeout)';
+                html += `<div class="results-question"><h4>Q${i+1}. ${qq.question}</h4><p><strong>Your answer:</strong> ${userText} ${isCorrect ? '✅' : '❌'}</p><p><strong>Correct answer:</strong> ${qq.options[qq.answer]}</p><div class="workings">📚 ${qq.workings}</div></div>`; 
+            }); 
+        } 
+        html += '<button class="print-btn" id="printFinalBtn">🖨️ PRINT FINAL RESULTS</button></div>'; 
+        resultsArea.innerHTML = html; 
+        document.getElementById('printFinalBtn')?.addEventListener('click', ()=>window.print()); 
+    }
 
-    function resignQuiz() { if (confirm('Resign? Progress lost')) location.reload(); }
+    function resignQuiz() { if (confirm('Resign? All progress will be lost.')) location.reload(); }
 
-    // track selection
+    // track selection – disable once started
     [trackPrimary, trackJunior, trackSenior].forEach(btn => {
         btn.addEventListener('click', function() {
+            if (quizStarted) {
+                alert('You cannot switch tracks while a test is in progress. Finish or resign first.');
+                return;
+            }
             document.querySelectorAll('.track-option').forEach(b => b.classList.remove('selected'));
             this.classList.add('selected');
             if (this.id === 'trackPrimary') currentTrack = 'primary';
@@ -606,21 +1448,51 @@
     });
 
     startBtn.addEventListener('click', () => {
-        userName = userNameInput.value.trim() || 'Chileshe Banda';
-        userSchool = userSchoolInput.value.trim() || 'Lusaka JETS Academy';
-        userZone = userZoneInput.value.trim() || 'Chilanga';
-        userDistrict = userDistrictInput.value.trim() || 'Lusaka';
-        displayNameSpan.innerText = userName; displaySchoolSpan.innerText = userSchool; displayZoneSpan.innerText = userZone; displayDistrictSpan.innerText = userDistrict;
+        // freeze track selector
+        trackSelectorDiv.classList.add('disabled');
+        userName = userNameInput.value.trim() || 'Faith Mwila';
+        userSchool = userSchoolInput.value.trim() || 'Katete Day Secondary School';
+        userZone = userZoneInput.value.trim() || 'Katete Central Zone';
+        userDistrict = userDistrictInput.value.trim() || 'Katete District';
+        displayNameSpan.innerText = userName; 
+        displaySchoolSpan.innerText = userSchool; 
+        displayZoneSpan.innerText = userZone; 
+        displayDistrictSpan.innerText = userDistrict;
 
-        // load & shuffle selected track
-        let rawLevels = questionBank[currentTrack].map(level => shuffleArray([...level]));
-        levelQuestions = rawLevels;
+        // load & shuffle selected track - make a deep copy
+        let rawLevels = [];
+        for (let i = 0; i < 10; i++) {
+            if (questionBank[currentTrack][i] && questionBank[currentTrack][i].length > 0) {
+                rawLevels.push([...questionBank[currentTrack][i]]);
+            } else {
+                console.error(`Missing level ${i} for track ${currentTrack}`);
+                // Create a fallback question
+                rawLevels.push([{
+                    subject: 'general',
+                    question: `Sample question for level ${i+1}`,
+                    options: ['Option A', 'Option B', 'Option C', 'Option D'],
+                    answer: 0,
+                    workings: 'This is a fallback question.'
+                }]);
+            }
+        }
+        
+        // Shuffle each level's questions
+        levelQuestions = rawLevels.map(level => shuffleArray([...level]));
+        
+        // Initialize answer arrays
         userAnswers = levelQuestions.map(lvl => new Array(lvl.length).fill(null));
         questionStatus = levelQuestions.map(lvl => new Array(lvl.length).fill('unanswered'));
 
-        quizStarted = true; startContainer.classList.add('hidden'); quizPanel.classList.remove('hidden');
-        currentLevelIndex = 0; currentQuestionIndex = 0; locked = false; allLevelsDone = false;
-        startTimer(); renderQuestion();
+        quizStarted = true; 
+        startContainer.classList.add('hidden'); 
+        quizPanel.classList.remove('hidden');
+        currentLevelIndex = 0; 
+        currentQuestionIndex = 0; 
+        locked = false; 
+        allLevelsDone = false;
+        startTimer(); 
+        renderQuestion();
     });
 
     submitAnswerBtn.addEventListener('click', submitAnswer);
@@ -631,4 +1503,3 @@
 </script>
 </body>
 </html>
-

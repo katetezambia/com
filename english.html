@@ -350,48 +350,48 @@
             .score-box { margin-left: 0; width: 100%; text-align: center; }
             .track-btn { width: 100%; text-align: center; }
         }
-		
-		
-				
-				
-				.facebook-link {
-			background: #1877F2; /* Facebook blue */
-			color: white !important;
-			padding: clamp(4px, 1.5vw, 6px) clamp(12px, 3vw, 16px);
-			border-radius: 60px;
-			display: inline-flex;
-			align-items: center;
-			gap: 4px;
-			text-decoration: none;
-			transition: var(--transition);
-			font-size: clamp(0.75rem, 2vw, 0.875rem);
-		}
+        
+        
+                
+                
+                .facebook-link {
+            background: #1877F2; /* Facebook blue */
+            color: white !important;
+            padding: clamp(4px, 1.5vw, 6px) clamp(12px, 3vw, 16px);
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+        }
 
-		.facebook-link:hover {
-			background: #1664d9;
-			transform: translateY(-2px);
-			box-shadow: var(--shadow);
-		}
-		.developer-link {
-			background: var(--zambia-green);
-			color: white !important;
-			padding: clamp(4px, 1.5vw, 6px) clamp(12px, 3vw, 16px);
-			border-radius: 60px;
-			display: inline-flex;
-			align-items: center;
-			gap: 4px;
-			text-decoration: none;
-			transition: var(--transition);
-			font-size: clamp(0.75rem, 2vw, 0.875rem);
-		}
+        .facebook-link:hover {
+            background: #1664d9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .developer-link {
+            background: var(--zambia-green);
+            color: white !important;
+            padding: clamp(4px, 1.5vw, 6px) clamp(12px, 3vw, 16px);
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+        }
 
-		.developer-link:hover {
-			background: var(--zambia-green-dark);
-			transform: translateY(-2px);
-			box-shadow: var(--shadow);
-		}
-		
-		@keyframes soft-blink {
+        .developer-link:hover {
+            background: var(--zambia-green-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        @keyframes soft-blink {
     0% { opacity: 1; }
     50% { opacity: 0.8; }
     100% { opacity: 1; }
@@ -480,12 +480,12 @@
 
     <div class="footer no-print">
 <div class="developer-heading">· <script>document.write(new Date().getFullYear())</script> EDITION |  DEVELOPER DETAILS: </div>
-		<div class="developer-info">
-			<a href="#" class="developer-link">👤 Mwila Christopher</a>
-			<a href="mailto:cmwila7@gmail.com" class="email-link">📧 cmwila7@gmail.com</a>
-			<a href="https://wa.me/260976620788" target="_blank" class="whatsapp-link">📱 +260 976 620 788</a>
-			<a href="https://web.facebook.com/Cmwilachanda" target="_blank" class="facebook-link">📘 Facebook</a>
-		</div>
+        <div class="developer-info">
+            <a href="#" class="developer-link">👤 Mwila Christopher</a>
+            <a href="mailto:cmwila7@gmail.com" class="email-link">📧 cmwila7@gmail.com</a>
+            <a href="https://wa.me/260976620788" target="_blank" class="whatsapp-link">📱 +260 976 620 788</a>
+            <a href="https://web.facebook.com/Cmwilachanda" target="_blank" class="facebook-link">📘 Facebook</a>
+        </div>
     </div>
 </div>
 
@@ -526,16 +526,12 @@ function generateUniqueId(prefix, number) {
 }
 
 // ==================== FIXED OPTION GENERATOR ====================
-// This ensures the correct answer is ALWAYS at the specified index
 function createFixedOptions(correct, wrong1, wrong2, wrong3, correctIndex) {
-    // Create array with correct answer at the specified position
     const options = new Array(4);
     const wrongs = [wrong1, wrong2, wrong3];
     
-    // Place correct answer at the specified index
     options[correctIndex] = correct;
     
-    // Fill remaining positions with wrong answers
     let wrongIndex = 0;
     for (let i = 0; i < 4; i++) {
         if (i !== correctIndex) {
@@ -545,6 +541,26 @@ function createFixedOptions(correct, wrong1, wrong2, wrong3, correctIndex) {
     }
     
     return { options: options, answer: correctIndex };
+}
+
+// ==================== HELPER FUNCTION TO PARSE TIME WITH AM/PM ====================
+function parseTimeTo24Hour(timeString) {
+    // Handle formats like "6:00 AM", "12:00 PM", "4:00 PM", etc.
+    const match = timeString.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!match) return parseInt(timeString); // fallback to simple parseInt
+    
+    let hour = parseInt(match[1]);
+    const minute = parseInt(match[2]);
+    const period = match[3].toUpperCase();
+    
+    // Convert to 24-hour format
+    if (period === 'PM' && hour !== 12) {
+        hour += 12;
+    } else if (period === 'AM' && hour === 12) {
+        hour = 0; // 12 AM is midnight (0)
+    }
+    
+    return hour;
 }
 
 // Track used questions to prevent ANY repetition
@@ -585,8 +601,19 @@ for (let i = 0; i < 200; i++) {
     const timeIndex = i % times.length;
     const person = people[personIndex];
     const time = times[timeIndex];
-    const hour = parseInt(time);
-    const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+    
+    // FIXED: Use the proper parsing function to get 24-hour hour
+    const hour = parseTimeTo24Hour(time);
+    
+    // Determine greeting based on the 24-hour hour
+    let greeting;
+    if (hour >= 5 && hour < 12) {
+        greeting = "Good morning";
+    } else if (hour >= 12 && hour < 18) {
+        greeting = "Good afternoon";
+    } else {
+        greeting = "Good evening";
+    }
     
     let title = "";
     if (person.includes("president")) title = "Your Excellency";
@@ -606,7 +633,6 @@ for (let i = 0; i < 200; i++) {
     if (usedQuestions.has(question)) continue;
     usedQuestions.add(question);
     
-    // Rotate correct answer position (0-3) to ensure balance
     const correctPos = i % 4;
     const { options, answer } = createFixedOptions(
         correctResponse,
@@ -624,7 +650,7 @@ for (let i = 0; i < 200; i++) {
         answer: answer,
         correctAnswerText: correctResponse,
         topic: "Greetings",
-        explanation: `At ${time}, we say "${greeting}" and address ${person} respectfully.`
+        explanation: `At ${time} (${hour}:00 in 24-hour), we say "${greeting}" and address ${person} respectfully.`
     });
 }
 
@@ -784,9 +810,9 @@ for (let i = 0; i < 200; i++) {
     const correctPos = (i + 3) % 4;
     const { options, answer } = createFixedOptions(
         prov.meaning,
-        "The opposite meaning",
-        "An unrelated meaning",
-        "A literal interpretation",
+        "A literal interpretation of each word",
+        "The opposite meaning of what is said",
+        "Only applies to farming situations",
         correctPos
     );
     
@@ -802,44 +828,261 @@ for (let i = 0; i < 200; i++) {
     });
 }
 
-// 5. IDIOMS - 200 unique
+// 5. IDIOMS - 200 unique with VARIED options
 const idiomList = [
-    { idiom: "kill two birds with one stone", meaning: "achieve two things with one action" },
-    { idiom: "be on cloud nine", meaning: "be extremely happy" },
-    { idiom: "cost an arm and a leg", meaning: "be very expensive" },
-    { idiom: "let the cat out of the bag", meaning: "reveal a secret" },
-    { idiom: "hit the nail on the head", meaning: "be exactly right" },
-    { idiom: "be under the weather", meaning: "feel unwell" },
-    { idiom: "spill the beans", meaning: "reveal secret information" },
-    { idiom: "bite the bullet", meaning: "face a difficult situation bravely" },
-    { idiom: "break the ice", meaning: "start a conversation" },
-    { idiom: "pull someone's leg", meaning: "tease or joke with someone" },
-    { idiom: "be in the same boat", meaning: "be in the same situation" },
-    { idiom: "cut corners", meaning: "do something poorly to save time" },
-    { idiom: "get cold feet", meaning: "become nervous before an event" },
-    { idiom: "go back to the drawing board", meaning: "start over" },
-    { idiom: "hang in there", meaning: "persevere through difficulty" },
-    { idiom: "hit the sack", meaning: "go to sleep" },
-    { idiom: "be on the ball", meaning: "be alert and efficient" },
-    { idiom: "out of the blue", meaning: "happen unexpectedly" },
-    { idiom: "over the moon", meaning: "be very happy" },
-    { idiom: "piece of cake", meaning: "be very easy" },
-    { idiom: "a rip-off", meaning: "be overpriced" },
-    { idiom: "sitting on the fence", meaning: "be undecided" },
-    { idiom: "a steal", meaning: "be very cheap" },
-    { idiom: "a stone's throw away", meaning: "be very close" },
-    { idiom: "through thick and thin", meaning: "through good and bad times" },
-    { idiom: "up in the air", meaning: "be uncertain" },
-    { idiom: "a wild goose chase", meaning: "futile search" },
-    { idiom: "add insult to injury", meaning: "make a bad situation worse" },
-    { idiom: "at the drop of a hat", meaning: "immediately" },
-    { idiom: "back to square one", meaning: "start over" },
-    { idiom: "barking up the wrong tree", meaning: "pursue mistaken course" },
-    { idiom: "beat around the bush", meaning: "avoid the main topic" },
-    { idiom: "best of both worlds", meaning: "enjoy different advantages" },
-    { idiom: "blessing in disguise", meaning: "bad thing with good result" },
-    { idiom: "burn the midnight oil", meaning: "work late" },
-    { idiom: "call it a day", meaning: "stop working" }
+    { 
+        idiom: "kill two birds with one stone", 
+        meaning: "achieve two things with one action",
+        wrong1: "hunt animals using rocks",
+        wrong2: "be very cruel to animals",
+        wrong3: "work slowly and carefully"
+    },
+    { 
+        idiom: "be on cloud nine", 
+        meaning: "be extremely happy",
+        wrong1: "be daydreaming or distracted",
+        wrong2: "be very high in the sky",
+        wrong3: "be confused about reality"
+    },
+    { 
+        idiom: "cost an arm and a leg", 
+        meaning: "be very expensive",
+        wrong1: "require surgery to afford",
+        wrong2: "be cheap and affordable",
+        wrong3: "involve losing body parts"
+    },
+    { 
+        idiom: "let the cat out of the bag", 
+        meaning: "reveal a secret",
+        wrong1: "free a trapped animal",
+        wrong2: "buy something without seeing it",
+        wrong3: "make a mess accidentally"
+    },
+    { 
+        idiom: "hit the nail on the head", 
+        meaning: "be exactly right",
+        wrong1: "injure yourself with a tool",
+        wrong2: "build something with wood",
+        wrong3: "miss the target completely"
+    },
+    { 
+        idiom: "be under the weather", 
+        meaning: "feel unwell",
+        wrong1: "stand outside in rain",
+        wrong2: "be affected by climate change",
+        wrong3: "enjoy outdoor activities"
+    },
+    { 
+        idiom: "spill the beans", 
+        meaning: "reveal secret information",
+        wrong1: "make a mess while cooking",
+        wrong2: "drop food on the floor",
+        wrong3: "plant seeds in a garden"
+    },
+    { 
+        idiom: "bite the bullet", 
+        meaning: "face a difficult situation bravely",
+        wrong1: "chew on metal objects",
+        wrong2: "attack someone violently",
+        wrong3: "avoid danger by hiding"
+    },
+    { 
+        idiom: "break the ice", 
+        meaning: "start a conversation",
+        wrong1: "damage frozen water",
+        wrong2: "cause a conflict or fight",
+        wrong3: "cool down a hot drink"
+    },
+    { 
+        idiom: "pull someone's leg", 
+        meaning: "tease or joke with someone",
+        wrong1: "trip someone while walking",
+        wrong2: "stretch another person's body",
+        wrong3: "force someone to move"
+    },
+    { 
+        idiom: "be in the same boat", 
+        meaning: "be in the same situation",
+        wrong1: "go sailing together",
+        wrong2: "be in a small vehicle",
+        wrong3: "disagree completely"
+    },
+    { 
+        idiom: "cut corners", 
+        meaning: "do something poorly to save time",
+        wrong1: "use scissors on paper",
+        wrong2: "take a shortcut while driving",
+        wrong3: "avoid dangerous places",
+        explanation: "Cutting corners means doing something quickly but not carefully, often sacrificing quality."
+    },
+    { 
+        idiom: "get cold feet", 
+        meaning: "become nervous before an event",
+        wrong1: "walk barefoot in snow",
+        wrong2: "feel physically cold",
+        wrong3: "be confident and ready"
+    },
+    { 
+        idiom: "go back to the drawing board", 
+        meaning: "start over",
+        wrong1: "return to art class",
+        wrong2: "draw pictures again",
+        wrong3: "continue with the same plan"
+    },
+    { 
+        idiom: "hang in there", 
+        meaning: "persevere through difficulty",
+        wrong1: "attach something to a wall",
+        wrong2: "go away and leave",
+        wrong3: "climb up a rope"
+    },
+    { 
+        idiom: "hit the sack", 
+        meaning: "go to sleep",
+        wrong1: "punch a bag violently",
+        wrong2: "pack belongings for travel",
+        wrong3: "work in a factory"
+    },
+    { 
+        idiom: "be on the ball", 
+        meaning: "be alert and efficient",
+        wrong1: "play sports actively",
+        wrong2: "sit on a round object",
+        wrong3: "be slow and careless"
+    },
+    { 
+        idiom: "out of the blue", 
+        meaning: "happen unexpectedly",
+        wrong1: "come from the sky",
+        wrong2: "be painted blue",
+        wrong3: "happen as planned"
+    },
+    { 
+        idiom: "over the moon", 
+        meaning: "be very happy",
+        wrong1: "travel to outer space",
+        wrong2: "jump very high",
+        wrong3: "be extremely sad"
+    },
+    { 
+        idiom: "piece of cake", 
+        meaning: "be very easy",
+        wrong1: "a dessert to eat",
+        wrong2: "something delicious",
+        wrong3: "be extremely difficult"
+    },
+    { 
+        idiom: "a rip-off", 
+        meaning: "be overpriced",
+        wrong1: "tear paper into pieces",
+        wrong2: "a good bargain",
+        wrong3: "steal from someone"
+    },
+    { 
+        idiom: "sitting on the fence", 
+        meaning: "be undecided",
+        wrong1: "rest on a wooden barrier",
+        wrong2: "have already decided",
+        wrong3: "avoid physical activity"
+    },
+    { 
+        idiom: "a steal", 
+        meaning: "be very cheap",
+        wrong1: "take something illegally",
+        wrong2: "be very expensive",
+        wrong3: "rob a bank"
+    },
+    { 
+        idiom: "a stone's throw away", 
+        meaning: "be very close",
+        wrong1: "throw rocks at something",
+        wrong2: "be very far away",
+        wrong3: "play with pebbles"
+    },
+    { 
+        idiom: "through thick and thin", 
+        meaning: "through good and bad times",
+        wrong1: "cut through wood and metal",
+        wrong2: "go through dense forest",
+        wrong3: "only during easy times"
+    },
+    { 
+        idiom: "up in the air", 
+        meaning: "be uncertain",
+        wrong1: "fly like a bird",
+        wrong2: "be completely decided",
+        wrong3: "float without gravity"
+    },
+    { 
+        idiom: "a wild goose chase", 
+        meaning: "futile search",
+        wrong1: "hunt geese for food",
+        wrong2: "chase animals for fun",
+        wrong3: "find something easily"
+    },
+    { 
+        idiom: "add insult to injury", 
+        meaning: "make a bad situation worse",
+        wrong1: "hurt someone with words",
+        wrong2: "apologize after hurting",
+        wrong3: "ignore someone's pain"
+    },
+    { 
+        idiom: "at the drop of a hat", 
+        meaning: "immediately",
+        wrong1: "wait for a signal",
+        wrong2: "take a long time",
+        wrong3: "throw away clothing"
+    },
+    { 
+        idiom: "back to square one", 
+        meaning: "start over",
+        wrong1: "return to a game board",
+        wrong2: "make progress forward",
+        wrong3: "move to a new location"
+    },
+    { 
+        idiom: "barking up the wrong tree", 
+        meaning: "pursue mistaken course",
+        wrong1: "dogs making noise",
+        wrong2: "climb trees incorrectly",
+        wrong3: "be on the right path"
+    },
+    { 
+        idiom: "beat around the bush", 
+        meaning: "avoid the main topic",
+        wrong1: "hit plants with a stick",
+        wrong2: "go straight to the point",
+        wrong3: "exercise in the garden"
+    },
+    { 
+        idiom: "best of both worlds", 
+        meaning: "enjoy different advantages",
+        wrong1: "travel to different places",
+        wrong2: "have nothing good",
+        wrong3: "choose only one option"
+    },
+    { 
+        idiom: "blessing in disguise", 
+        meaning: "bad thing with good result",
+        wrong1: "a hidden treasure",
+        wrong2: "wear a costume",
+        wrong3: "something purely bad"
+    },
+    { 
+        idiom: "burn the midnight oil", 
+        meaning: "work late",
+        wrong1: "set fire to fuel",
+        wrong2: "go to bed early",
+        wrong3: "waste resources carelessly"
+    },
+    { 
+        idiom: "call it a day", 
+        meaning: "stop working",
+        wrong1: "name a specific date",
+        wrong2: "continue working longer",
+        wrong3: "make a phone call"
+    }
 ];
 
 for (let i = 0; i < 200; i++) {
@@ -853,9 +1096,9 @@ for (let i = 0; i < 200; i++) {
     const correctPos = (i + 1) % 4;
     const { options, answer } = createFixedOptions(
         idm.meaning,
-        "A literal interpretation",
-        "The opposite meaning",
-        "None of the above",
+        idm.wrong1,
+        idm.wrong2,
+        idm.wrong3,
         correctPos
     );
     

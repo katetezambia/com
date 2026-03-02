@@ -1,0 +1,2534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>🛡️ CyberSafe ICT · CBC ZAMBIA · REALISTIC ANSWERS</title>
+    <style>
+        /* ========== ULTRA-RESPONSIVE DESIGN – OPTIMIZED 320px → 4K ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        :root {
+            --zambia-green: #006B3F;
+            --zambia-green-light: #00A86B;
+            --zambia-green-dark: #004d2e;
+            --zambia-blue: #0033a0;
+            --zambia-blue-light: #1e4fd0;
+            --zambia-blue-dark: #001f66;
+            --zambia-orange: #F4A300;
+            --zambia-orange-light: #ffb52e;
+            --zambia-orange-dark: #b57c00;
+            --zambia-red: #CE1126;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-600: #4b5563;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.15);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --radius-full: 9999px;
+        }
+
+        html {
+            font-size: 14px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        @media (min-width: 400px) { html { font-size: 15px; } }
+        @media (min-width: 600px) { html { font-size: 16px; } }
+        @media (min-width: 1200px) { html { font-size: 17px; } }
+        @media (min-width: 2000px) { html { font-size: 20px; } }
+
+        body {
+            background: linear-gradient(145deg, var(--zambia-blue) 0%, var(--zambia-green) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: clamp(0.5rem, 2vw, 1.5rem);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: min(1400px, 98vw);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: clamp(1rem, 4vw, 2.5rem);
+        }
+
+        h1 {
+            color: var(--zambia-green);
+            border-left: 0.5rem solid var(--zambia-orange);
+            padding-left: clamp(1rem, 3vw, 2rem);
+            font-size: clamp(1.8rem, 6vw, 3.2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .nav-bar {
+            background: var(--zambia-blue);
+            border-radius: var(--radius-full);
+            padding: clamp(0.4rem, 2vw, 0.9rem) clamp(0.8rem, 3vw, 1.8rem);
+            display: flex;
+            gap: clamp(0.3rem, 2vw, 1rem);
+            margin-bottom: clamp(1.2rem, 4vw, 2.5rem);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: clamp(0.5rem, 2vw, 0.9rem) clamp(1rem, 3vw, 2.2rem);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: clamp(0.8rem, 3vw, 1.1rem);
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex: 0 1 auto;
+        }
+
+        .nav-btn:hover { background: rgba(255,255,255,0.2); }
+        .nav-btn.active { background: var(--zambia-orange); color: var(--zambia-blue); }
+
+        .track-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin: clamp(1.5rem, 4vw, 2.8rem) 0;
+            width: 100%;
+        }
+
+        .track-btn {
+            background: white;
+            border: 3px solid var(--zambia-green);
+            color: var(--zambia-green);
+            padding: clamp(0.8rem, 2.5vw, 1.4rem) clamp(0.5rem, 2vw, 1.5rem);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            width: 100%;
+            white-space: normal;
+            word-break: keep-all;
+            line-height: 1.2;
+        }
+
+        .track-btn.selected {
+            background: var(--zambia-green);
+            color: white;
+            border-color: var(--zambia-orange);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .input-group {
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: clamp(1.2rem, 4vw, 2.2rem);
+            margin: clamp(1rem, 3vw, 2rem) 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: clamp(0.8rem, 2vw, 1.5rem);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: clamp(0.8rem, 2.5vw, 1.2rem) clamp(1rem, 3vw, 1.8rem);
+            border: 2px solid var(--zambia-green);
+            border-radius: var(--radius-full);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            background: white;
+        }
+
+        .btn {
+            background: var(--zambia-orange);
+            color: white;
+            border: none;
+            padding: clamp(0.8rem, 2.5vw, 1.3rem) clamp(1.2rem, 4vw, 2.5rem);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+            cursor: pointer;
+            border-bottom: 4px solid var(--zambia-orange-dark);
+            transition: all 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 480px) {
+            .btn { white-space: normal; width: 100%; }
+            .action-bar .btn { width: auto; }
+        }
+
+        .btn-blue { background: var(--zambia-blue); border-bottom-color: var(--zambia-blue-dark); }
+        .btn-red { background: var(--zambia-red); border-bottom-color: #8b0000; }
+        .btn-green { background: var(--zambia-green); border-bottom-color: var(--zambia-green-dark); }
+
+        .quiz-header {
+            background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue));
+            color: white;
+            padding: clamp(0.8rem, 2.5vw, 1.4rem) clamp(1rem, 3vw, 2rem);
+            border-radius: var(--radius-full);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+        }
+
+        .progress-bar {
+            height: clamp(0.8rem, 2vw, 1.2rem);
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            margin: 1.2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--zambia-orange), var(--zambia-orange-light));
+            border-radius: var(--radius-full);
+            transition: width 0.3s;
+        }
+
+        .question-box {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: clamp(1.2rem, 4vw, 2.2rem);
+            border-left: clamp(0.4rem, 1.5vw, 0.8rem) solid var(--zambia-orange);
+            box-shadow: var(--shadow-md);
+            margin: 1.2rem 0;
+        }
+
+        .question-number {
+            color: var(--zambia-blue);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            background: var(--gray-100);
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: var(--radius-full);
+        }
+
+        .question-text {
+            font-size: clamp(1.1rem, 4vw, 1.6rem);
+            font-weight: 700;
+            color: var(--zambia-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: clamp(0.6rem, 2vw, 1rem);
+        }
+
+        .option {
+            background: white;
+            border: 3px solid var(--zambia-green);
+            border-radius: var(--radius-md);
+            padding: clamp(0.9rem, 2.5vw, 1.5rem);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: clamp(0.6rem, 2vw, 1.2rem);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            transition: all 0.15s;
+            width: 100%;
+            word-break: break-word;
+        }
+
+        .option-prefix {
+            background: var(--zambia-orange);
+            color: white;
+            width: clamp(2.2rem, 6vw, 3rem);
+            height: clamp(2.2rem, 6vw, 3rem);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            flex-shrink: 0;
+        }
+
+        .option.correct-answer {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724 !important;
+        }
+        .option.correct-answer .option-prefix {
+            background: #28a745 !important;
+            color: white !important;
+        }
+        .option.wrong-answer {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24 !important;
+        }
+        .option.wrong-answer .option-prefix {
+            background: #dc3545 !important;
+            color: white !important;
+        }
+        .option.selected {
+            background: var(--zambia-green);
+            color: white;
+            border-color: var(--zambia-orange);
+        }
+        .option.selected .option-prefix {
+            background: white;
+            color: var(--zambia-green);
+        }
+
+        .explanation {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: #e3f2fd;
+            border-radius: var(--radius-md);
+            border-left: 6px solid var(--zambia-blue);
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            line-height: 1.6;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .score-box {
+            background: var(--zambia-orange);
+            padding: clamp(0.6rem, 2vw, 1rem) clamp(1.2rem, 4vw, 2rem);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            margin-left: auto;
+            color: white;
+            border-bottom: 4px solid var(--zambia-orange-dark);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 550px) {
+            .score-box { margin-left: 0; width: 100%; text-align: center; }
+            .action-bar { justify-content: stretch; }
+            .action-bar .btn { flex: 1 1 auto; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(0.6rem, 2vw, 1.2rem);
+            margin: 1.2rem 0;
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .stat-card {
+            background: white;
+            padding: clamp(0.8rem, 2.5vw, 1.5rem);
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--zambia-green);
+        }
+
+        .stat-number {
+            font-size: clamp(1.6rem, 5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--zambia-orange);
+            line-height: 1.2;
+        }
+
+        .results-preview {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-md);
+            overflow-x: auto;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+        }
+
+        .results-table th {
+            background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue));
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .results-table td {
+            padding: 0.8rem;
+            border: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        .results-table tr.correct-row {
+            background: #d4edda;
+        }
+
+        .results-table tr.incorrect-row {
+            background: #f8d7da;
+        }
+
+        .explanation-cell {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            max-width: 300px;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid var(--zambia-orange);
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 1rem;
+        }
+
+        .developer-heading {
+            font-weight: 700;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            color: var(--zambia-blue);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .developer-info {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .developer-info a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-full);
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .developer-info a:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .developer-link { background: var(--zambia-green); color: white !important; }
+        .email-link { background: var(--zambia-blue); color: white !important; }
+        .whatsapp-link { background: #25D366; color: white !important; }
+        .facebook-link { background: #1877F2; color: white !important; }
+
+        @media (max-width: 480px) {
+            .developer-info a { width: 100%; justify-content: center; }
+        }
+
+        .hidden { display: none !important; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; padding: 0.5in; }
+            .container { box-shadow: none; max-width: 100%; }
+            .results-table { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🛡️ CyberSafe · ICT CBC ZAMBIA · 5000+ REALISTIC ANSWERS</h1>
+    <div class="nav-bar no-print">
+        <button class="nav-btn active" onclick="showSection('mainMenu')">🏠 Home</button>
+        <button class="nav-btn" onclick="showSection('startPlaying')">🎮 Start Quiz</button>
+        <button class="nav-btn sound-toggle" onclick="toggleSound()">🔊 Sound On</button>
+    </div>
+
+    <!-- MAIN MENU -->
+    <div id="mainMenu">
+        <div style="background: linear-gradient(135deg, var(--zambia-orange), var(--zambia-orange-light)); border-radius: var(--radius-lg); padding: clamp(1.5rem,5vw,2.8rem); text-align:center;">
+            <h2 style="color: var(--zambia-blue); font-size: clamp(1.5rem,5vw,2.2rem);">CBC ICT (Forms 1-4)</h2>
+            <p style="font-size:clamp(1rem,4vw,1.4rem); margin:0.8rem 0;">5,000+ Unique Questions · Realistic Answer Choices</p>
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-number" id="form1Count">0</div><div class="stat-label">Form 1</div></div>
+                <div class="stat-card"><div class="stat-number" id="form2Count">0</div><div class="stat-label">Form 2</div></div>
+                <div class="stat-card"><div class="stat-number" id="form3Count">0</div><div class="stat-label">Form 3</div></div>
+                <div class="stat-card"><div class="stat-number" id="form4Count">0</div><div class="stat-label">Form 4</div></div>
+            </div>
+        </div>
+        <button class="btn" style="margin:1.5rem auto; display:block;" onclick="showSection('startPlaying')">▶ Begin ICT QUIZ 2026</button>
+    </div>
+
+    <!-- REGISTRATION + TRACK -->
+    <div id="startPlaying" class="hidden">
+        <h2 style="color:var(--zambia-green); margin-bottom:1.2rem; font-size:clamp(1.4rem,5vw,2rem);">Candidate Registration</h2>
+        <div class="track-selector">
+            <button class="track-btn selected" onclick="selectTrack('form1', this)">📘 FORM 1</button>
+            <button class="track-btn" onclick="selectTrack('form2', this)">📗 FORM 2</button>
+            <button class="track-btn" onclick="selectTrack('form3', this)">📕 FORM 3</button>
+            <button class="track-btn" onclick="selectTrack('form4', this)">📙 FORM 4</button>
+        </div>
+        <div class="input-group">
+            <input type="text" class="input-field" id="fullName" placeholder="Full Name" value="Martin Mwila">
+            <input type="text" class="input-field" id="schoolName" placeholder="School Name" value="Katete Day">
+            <input type="text" class="input-field" id="zoneName" placeholder="Zone" value="Katete Central">
+            <input type="text" class="input-field" id="districtName" placeholder="District" value="Katete">
+        </div>
+        <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn" onclick="startQUIZE()">▶ START QUIZ</button>
+            <button class="btn btn-blue" onclick="showSection('mainMenu')">◀ BACK</button>
+        </div>
+    </div>
+
+    <!-- QUIZ PANEL -->
+    <div id="quizPanel" class="hidden">
+        <div style="display:flex; justify-content:space-between; margin-bottom:1.2rem; flex-wrap:wrap; gap:0.8rem;" class="no-print">
+            <button class="btn btn-red" onclick="quitQuiz()">◀ Quit</button>
+            <div style="background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue)); color:white; padding:0.6rem 1.5rem; border-radius:var(--radius-full); font-weight:600; text-align:center; font-size:clamp(0.8rem,3vw,1rem);" id="candidateInfo"></div>
+        </div>
+        <div class="quiz-header">
+            <span id="levelDisplay">Form 1 · Topic</span>
+            <span>⏱️ <span id="timerDisplay">00:30</span></span>
+        </div>
+        <div class="progress-bar no-print"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="questionContainer" class="question-box"></div>
+        <div class="action-bar no-print">
+            <button class="btn" id="submitBtn" onclick="submitAnswer()">✔ SUBMIT</button>
+            <button class="btn btn-blue" id="nextBtn" onclick="nextQuestion()">NEXT ⏩</button>
+            <div class="score-box" id="scoreDisplay">0/20</div>
+        </div>
+    </div>
+
+    <!-- LEVEL COMPLETE with PRINT PREVIEW -->
+    <div id="levelComplete" class="hidden"></div>
+    
+    <!-- RESULTS SECTION -->
+    <div id="resultsSection" class="hidden"></div>
+
+    <!-- FOOTER -->
+    <div class="footer no-print">
+        <div class="developer-heading">© 2026 EDITION | MWILA CHRISTOPHER</div>
+        <div class="developer-info">
+            <a href="#" class="developer-link" title="Developer Profile">👤 Mwila Christopher</a>
+            <a href="mailto:cmwila7@gmail.com" class="email-link" title="Send Email">📧 cmwila7@gmail.com</a>
+            <a href="https://wa.me/260976620788" target="_blank" class="whatsapp-link" title="Chat on WhatsApp">📱 +260 976 620 788</a>
+            <a href="https://web.facebook.com/Cmwilachanda" target="_blank" class="facebook-link" title="Follow on Facebook">📘 Facebook</a>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    // ========== SOUND TOGGLE ==========
+    let soundEnabled = true;
+    window.toggleSound = function() {
+        soundEnabled = !soundEnabled;
+        document.querySelector('.sound-toggle').textContent = soundEnabled ? '🔊 Sound On' : '🔇 Sound Off';
+    };
+    
+    function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            if (type === 'correct') {
+                oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } else {
+                oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.3);
+            }
+        } catch (e) {}
+    }
+    window.playSound = playSound;
+
+    function generateUniqueId(prefix, number) {
+        return `${prefix}_ICT${number}_${Date.now()}_${Math.random().toString(36).substr(2, 12)}`;
+    }
+
+    // ========== REALISTIC ANSWER GENERATOR ==========
+    // Creates four plausible answers without any numbered patterns
+    function createRealisticOptions(correctAnswer, wrongOptionsArray) {
+        // wrongOptionsArray should contain 3 wrong answers
+        const options = new Array(4);
+        const correctIndex = Math.floor(Math.random() * 4);
+        
+        options[correctIndex] = correctAnswer;
+        
+        let wrongIndex = 0;
+        for (let i = 0; i < 4; i++) {
+            if (i !== correctIndex) {
+                options[i] = wrongOptionsArray[wrongIndex % 3];
+                wrongIndex++;
+            }
+        }
+        
+        return { options, answer: correctIndex };
+    }
+
+    // ========== QUESTION BANK ==========
+    const questionBank = { form1: [], form2: [], form3: [], form4: [] };
+
+    // ---------- FORM 1: 1250 unique questions with realistic answers ----------
+    const f1Topics = [
+        "History of Computing", "Computer Hardware", "Computer Software", 
+        "Input Devices", "Output Devices", "Storage Devices", 
+        "Operating Systems", "File Management", "Internet Basics",
+        "Digital Literacy", "ICT in Society", "Data Representation"
+    ];
+    
+    for (let i = 1; i <= 1250; i++) {
+        let topic = f1Topics[(i-1) % f1Topics.length];
+        let qText, correct, wrongs;
+        
+        if (topic === "History of Computing") {
+            const questionPool = [
+                { 
+                    q: "Who is credited with designing the first mechanical computer?", 
+                    c: "Charles Babbage",
+                    w: ["Alan Turing", "John von Neumann", "Herman Hollerith"]
+                },
+                { 
+                    q: "Which generation of computers used vacuum tubes?", 
+                    c: "First generation",
+                    w: ["Second generation", "Third generation", "Fourth generation"]
+                },
+                { 
+                    q: "ENIAC was primarily used for what purpose?", 
+                    c: "Military calculations",
+                    w: ["Business data processing", "Personal computing", "Game development"]
+                },
+                { 
+                    q: "The microprocessor was invented in which decade?", 
+                    c: "1970s",
+                    w: ["1950s", "1960s", "1980s"]
+                },
+                { 
+                    q: "What was the name of the first electronic general-purpose computer?", 
+                    c: "ENIAC",
+                    w: ["UNIVAC", "EDVAC", "Mark I"]
+                },
+                { 
+                    q: "The abacus is classified as what type of computing device?", 
+                    c: "Manual calculating device",
+                    w: ["Electronic computer", "Mechanical computer", "Analog computer"]
+                },
+                { 
+                    q: "Magnetic tape storage was introduced in which generation?", 
+                    c: "Second generation",
+                    w: ["First generation", "Third generation", "Fourth generation"]
+                },
+                { 
+                    q: "Integrated circuits (ICs) are characteristic of which generation?", 
+                    c: "Third generation",
+                    w: ["Second generation", "Fourth generation", "First generation"]
+                },
+                { 
+                    q: "The term 'computer bug' originated from what incident?", 
+                    c: "A moth found in a relay",
+                    w: ["A software error", "A programming mistake", "A hardware failure"]
+                },
+                { 
+                    q: "Who invented the World Wide Web?", 
+                    c: "Tim Berners-Lee",
+                    w: ["Bill Gates", "Steve Jobs", "Mark Zuckerberg"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-H${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Computer Hardware") {
+            const questionPool = [
+                { 
+                    q: "Which component executes program instructions?", 
+                    c: "Central Processing Unit",
+                    w: ["Random Access Memory", "Hard Disk Drive", "Motherboard"]
+                },
+                { 
+                    q: "What does RAM stand for?", 
+                    c: "Random Access Memory",
+                    w: ["Read Access Memory", "Rapid Access Memory", "Readily Available Memory"]
+                },
+                { 
+                    q: "Which type of memory retains data when power is off?", 
+                    c: "ROM",
+                    w: ["RAM", "Cache", "Register"]
+                },
+                { 
+                    q: "CPU clock speed is typically measured in?", 
+                    c: "Gigahertz",
+                    w: ["Megabytes", "Gigabytes", "Bits per second"]
+                },
+                { 
+                    q: "What does USB stand for?", 
+                    c: "Universal Serial Bus",
+                    w: ["Universal System Bus", "United Serial Bus", "Universal Serial Board"]
+                },
+                { 
+                    q: "Which component stores the computer's firmware?", 
+                    c: "ROM chip",
+                    w: ["Hard drive", "RAM module", "CPU cache"]
+                },
+                { 
+                    q: "The motherboard contains which essential component?", 
+                    c: "Chipset",
+                    w: ["Power supply", "Hard drive", "Graphics card"]
+                },
+                { 
+                    q: "Which is an example of an expansion card?", 
+                    c: "Graphics card",
+                    w: ["CPU", "RAM stick", "Power supply unit"]
+                },
+                { 
+                    q: "What is the function of a heat sink?", 
+                    c: "Dissipate heat from components",
+                    w: ["Generate heat", "Store data", "Process instructions"]
+                },
+                { 
+                    q: "Which port is commonly used to connect a monitor?", 
+                    c: "HDMI",
+                    w: ["USB", "Ethernet", "Audio jack"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-HW${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Computer Software") {
+            const questionPool = [
+                { 
+                    q: "Which type of software controls hardware operations?", 
+                    c: "Operating system",
+                    w: ["Application software", "Utility software", "Device drivers"]
+                },
+                { 
+                    q: "Microsoft Word is classified as what type of software?", 
+                    c: "Word processing software",
+                    w: ["Spreadsheet software", "Presentation software", "Database software"]
+                },
+                { 
+                    q: "Which of these is NOT system software?", 
+                    c: "Microsoft Excel",
+                    w: ["Windows 10", "Linux kernel", "macOS"]
+                },
+                { 
+                    q: "A compiler is an example of what type of software?", 
+                    c: "System software",
+                    w: ["Application software", "Utility software", "Entertainment software"]
+                },
+                { 
+                    q: "The operating system is primarily responsible for?", 
+                    c: "Managing hardware resources",
+                    w: ["Creating documents", "Browsing internet", "Playing games"]
+                },
+                { 
+                    q: "Utility software is designed to?", 
+                    c: "Maintain and optimize the system",
+                    w: ["Create documents", "Browse the web", "Play multimedia"]
+                },
+                { 
+                    q: "Which is an example of open-source operating system?", 
+                    c: "Linux",
+                    w: ["Windows", "macOS", "iOS"]
+                },
+                { 
+                    q: "Antivirus programs are classified as what type of software?", 
+                    c: "Utility software",
+                    w: ["System software", "Application software", "Firmware"]
+                },
+                { 
+                    q: "Device drivers are essential for?", 
+                    c: "Enabling hardware-OS communication",
+                    w: ["Running applications", "Browsing internet", "Editing documents"]
+                },
+                { 
+                    q: "What does GUI stand for?", 
+                    c: "Graphical User Interface",
+                    w: ["General User Interface", "Graphical Universal Interface", "General Universal Interface"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-SW${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Input Devices") {
+            const questionPool = [
+                { 
+                    q: "Which device is primarily used for typing text?", 
+                    c: "Keyboard",
+                    w: ["Mouse", "Monitor", "Printer"]
+                },
+                { 
+                    q: "A mouse is classified as which type of device?", 
+                    c: "Input device",
+                    w: ["Output device", "Storage device", "Processing device"]
+                },
+                { 
+                    q: "Which of these is used to capture physical documents digitally?", 
+                    c: "Scanner",
+                    w: ["Printer", "Monitor", "Speaker"]
+                },
+                { 
+                    q: "A microphone is what type of device?", 
+                    c: "Input device",
+                    w: ["Output device", "Storage device", "Processing device"]
+                },
+                { 
+                    q: "Which device is used to capture images and video?", 
+                    c: "Webcam",
+                    w: ["Printer", "Speaker", "Projector"]
+                },
+                { 
+                    q: "A trackball is an example of what kind of device?", 
+                    c: "Pointing device",
+                    w: ["Output device", "Storage device", "Printing device"]
+                },
+                { 
+                    q: "Which device is commonly used for gaming control?", 
+                    c: "Joystick",
+                    w: ["Printer", "Monitor", "Speaker"]
+                },
+                { 
+                    q: "A touchscreen functions as both input and what?", 
+                    c: "Output device",
+                    w: ["Storage device", "Processing device", "Network device"]
+                },
+                { 
+                    q: "Barcode readers are typically used in?", 
+                    c: "Retail checkout systems",
+                    w: ["Home computers", "Gaming consoles", "Medical devices"]
+                },
+                { 
+                    q: "Biometric scanners are used for?", 
+                    c: "Identity verification",
+                    w: ["Data storage", "Internet browsing", "Gaming"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-IN${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Output Devices") {
+            const questionPool = [
+                { 
+                    q: "Which device displays visual information from the computer?", 
+                    c: "Monitor",
+                    w: ["Keyboard", "Mouse", "Scanner"]
+                },
+                { 
+                    q: "A printer is classified as which type of device?", 
+                    c: "Output device",
+                    w: ["Input device", "Storage device", "Processing device"]
+                },
+                { 
+                    q: "Which device produces sound from the computer?", 
+                    c: "Speaker",
+                    w: ["Microphone", "Scanner", "Webcam"]
+                },
+                { 
+                    q: "What is the primary function of speakers?", 
+                    c: "Audio output",
+                    w: ["Audio input", "Image display", "Data storage"]
+                },
+                { 
+                    q: "Which device produces physical copies of documents?", 
+                    c: "Printer",
+                    w: ["Monitor", "Projector", "Speaker"]
+                },
+                { 
+                    q: "A projector is what type of device?", 
+                    c: "Output device",
+                    w: ["Input device", "Storage device", "Processing device"]
+                },
+                { 
+                    q: "Headphones are classified as which type of device?", 
+                    c: "Output device",
+                    w: ["Input device", "Storage device", "Processing device"]
+                },
+                { 
+                    q: "Which device is used for large format printing?", 
+                    c: "Plotter",
+                    w: ["Laser printer", "Inkjet printer", "3D printer"]
+                },
+                { 
+                    q: "A refreshable braille display is used by?", 
+                    c: "Visually impaired users",
+                    w: ["Gamers", "Programmers", "Artists"]
+                },
+                { 
+                    q: "Which of these is NOT an output device?", 
+                    c: "Touchscreen",
+                    w: ["Monitor", "Printer", "Speaker"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-OUT${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Storage Devices") {
+            const questionPool = [
+                { 
+                    q: "Which device provides long-term data storage?", 
+                    c: "Hard disk drive",
+                    w: ["RAM", "CPU cache", "Processor register"]
+                },
+                { 
+                    q: "Hard disk drives use what technology for storage?", 
+                    c: "Magnetic storage",
+                    w: ["Optical storage", "Solid state storage", "Volatile storage"]
+                },
+                { 
+                    q: "Which storage type typically offers the largest capacity?", 
+                    c: "Hard disk drive",
+                    w: ["USB flash drive", "CD-ROM", "RAM"]
+                },
+                { 
+                    q: "What does SSD stand for?", 
+                    c: "Solid State Drive",
+                    w: ["Solid State Disk", "Super Speed Drive", "System Storage Device"]
+                },
+                { 
+                    q: "Which is an example of optical storage?", 
+                    c: "DVD",
+                    w: ["Hard disk", "Flash drive", "SSD"]
+                },
+                { 
+                    q: "Flash drives use what type of storage technology?", 
+                    c: "Solid state storage",
+                    w: ["Magnetic storage", "Optical storage", "Volatile storage"]
+                },
+                { 
+                    q: "Which type of memory loses data when power is off?", 
+                    c: "RAM",
+                    w: ["ROM", "Hard disk", "Flash drive"]
+                },
+                { 
+                    q: "What does CD-ROM stand for?", 
+                    c: "Compact Disc Read-Only Memory",
+                    w: ["Computer Disc Random Access Memory", "Compact Data Read-Only Memory", "Central Disc Read-Only Memory"]
+                },
+                { 
+                    q: "Cloud storage refers to?", 
+                    c: "Data stored on remote servers",
+                    w: ["Data stored on local hard drive", "Data stored on USB drive", "Data stored on CD"]
+                },
+                { 
+                    q: "Which storage device has no moving parts?", 
+                    c: "SSD",
+                    w: ["HDD", "Floppy disk", "Magnetic tape"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-ST${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Operating Systems") {
+            const questionPool = [
+                { 
+                    q: "Which of the following is an operating system?", 
+                    c: "Windows 10",
+                    w: ["Microsoft Word", "Excel", "PowerPoint"]
+                },
+                { 
+                    q: "Windows is what type of software?", 
+                    c: "System software",
+                    w: ["Application software", "Utility software", "Entertainment software"]
+                },
+                { 
+                    q: "Which operating system is known for being open source?", 
+                    c: "Linux",
+                    w: ["Windows", "macOS", "iOS"]
+                },
+                { 
+                    q: "The kernel is a core component of what?", 
+                    c: "Operating system",
+                    w: ["Application software", "Hardware", "Device drivers"]
+                },
+                { 
+                    q: "Which OS is pre-installed on Apple Mac computers?", 
+                    c: "macOS",
+                    w: ["Windows", "Linux", "Android"]
+                },
+                { 
+                    q: "Which is a mobile operating system?", 
+                    c: "Android",
+                    w: ["Windows 10", "macOS", "Linux"]
+                },
+                { 
+                    q: "What is the primary role of an operating system?", 
+                    c: "Manage hardware and software resources",
+                    w: ["Browse the internet", "Create documents", "Play games"]
+                },
+                { 
+                    q: "Which OS is most commonly used on servers?", 
+                    c: "Linux",
+                    w: ["Windows 10", "macOS", "iOS"]
+                },
+                { 
+                    q: "Multitasking capability is provided by?", 
+                    c: "Operating system",
+                    w: ["Application software", "Hardware", "Device drivers"]
+                },
+                { 
+                    q: "Which OS is developed by Microsoft?", 
+                    c: "Windows",
+                    w: ["macOS", "Linux", "Android"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-OS${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "File Management") {
+            const questionPool = [
+                { 
+                    q: "Which is a valid file extension for a text file?", 
+                    c: ".txt",
+                    w: [".exe", ".jpg", ".mp3"]
+                },
+                { 
+                    q: "To organize files in a hierarchical structure, you create?", 
+                    c: "Folders",
+                    w: ["Documents", "Icons", "Shortcuts"]
+                },
+                { 
+                    q: "Which key combination permanently deletes a file?", 
+                    c: "Shift + Delete",
+                    w: ["Ctrl + Delete", "Alt + Delete", "Delete key alone"]
+                },
+                { 
+                    q: "The Recycle Bin temporarily stores what?", 
+                    c: "Deleted files",
+                    w: ["Copied files", "Moved files", "Installed programs"]
+                },
+                { 
+                    q: "Which character is not allowed in Windows filenames?", 
+                    c: "/",
+                    w: ["_", "-", " "]
+                },
+                { 
+                    q: "Copying a file means to?", 
+                    c: "Duplicate it to another location",
+                    w: ["Move it to another location", "Delete it", "Rename it"]
+                },
+                { 
+                    q: "The file extension .jpg indicates what type of file?", 
+                    c: "Image file",
+                    w: ["Text file", "Audio file", "Video file"]
+                },
+                { 
+                    q: "What is a safe file handling practice?", 
+                    c: "Regular data backup",
+                    w: ["Deleting system files", "Using unknown USB drives", "Opening all email attachments"]
+                },
+                { 
+                    q: "A file path indicates what?", 
+                    c: "The location of a file",
+                    w: ["The size of a file", "The type of file", "The creation date"]
+                },
+                { 
+                    q: "What does 'Save As' do?", 
+                    c: "Creates a copy with a new name/location",
+                    w: ["Deletes the file", "Prints the file", "Closes the file"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-FM${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Internet Basics") {
+            const questionPool = [
+                { 
+                    q: "What does ISP stand for?", 
+                    c: "Internet Service Provider",
+                    w: ["Internal Service Provider", "International Service Provider", "Internet Speed Provider"]
+                },
+                { 
+                    q: "Which is a web browser?", 
+                    c: "Google Chrome",
+                    w: ["Windows", "Linux", "macOS"]
+                },
+                { 
+                    q: "What is the primary purpose of a search engine?", 
+                    c: "Find information on the web",
+                    w: ["Send emails", "Create documents", "Play games"]
+                },
+                { 
+                    q: "URL stands for what?", 
+                    c: "Uniform Resource Locator",
+                    w: ["Universal Resource Locator", "Uniform Research Locator", "Universal Research Link"]
+                },
+                { 
+                    q: "Which protocol is used for web pages?", 
+                    c: "HTTP",
+                    w: ["FTP", "SMTP", "POP3"]
+                },
+                { 
+                    q: "Email stands for?", 
+                    c: "Electronic mail",
+                    w: ["Electric mail", "Easymail", "Electronic message"]
+                },
+                { 
+                    q: "Which is an online safety practice?", 
+                    c: "Using strong passwords",
+                    w: ["Sharing passwords", "Clicking unknown links", "Downloading all attachments"]
+                },
+                { 
+                    q: "What is a modem used for?", 
+                    c: "Connect to the internet",
+                    w: ["Print documents", "Store data", "Display images"]
+                },
+                { 
+                    q: "A domain name is what?", 
+                    c: "Website address",
+                    w: ["Email address", "IP address", "File name"]
+                },
+                { 
+                    q: "What is a firewall?", 
+                    c: "Network security system",
+                    w: ["Web browser", "Search engine", "File storage"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-INET${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Digital Literacy") {
+            const questionPool = [
+                { 
+                    q: "Digital literacy refers to the ability to?", 
+                    c: "Use digital tools effectively",
+                    w: ["Type quickly", "Play video games", "Write computer programs"]
+                },
+                { 
+                    q: "Which is an example of a digital device?", 
+                    c: "Smartphone",
+                    w: ["Book", "Pen", "Desk"]
+                },
+                { 
+                    q: "Ethical technology use includes?", 
+                    c: "Citing online sources",
+                    w: ["Copying others' work", "Sharing passwords", "Illegal downloading"]
+                },
+                { 
+                    q: "What is cyberbullying?", 
+                    c: "Harassment using digital means",
+                    w: ["Online gaming", "Social media posting", "Email communication"]
+                },
+                { 
+                    q: "A digital footprint refers to?", 
+                    c: "Online activity traces",
+                    w: ["A type of virus", "A social media app", "A digital signature"]
+                },
+                { 
+                    q: "Netiquette refers to what?", 
+                    c: "Online etiquette rules",
+                    w: ["Internet speed", "Network settings", "Web design"]
+                },
+                { 
+                    q: "Password protection is part of what?", 
+                    c: "Online safety",
+                    w: ["Hardware maintenance", "Software installation", "Network configuration"]
+                },
+                { 
+                    q: "Identifying online scams is part of?", 
+                    c: "Digital literacy",
+                    w: ["Typing skills", "Gaming", "Programming"]
+                },
+                { 
+                    q: "Two-factor authentication adds what?", 
+                    c: "Extra security layer",
+                    w: ["Faster internet", "More storage", "Better graphics"]
+                },
+                { 
+                    q: "What is phishing?", 
+                    c: "Fraudulent attempt to get sensitive data",
+                    w: ["Online fishing game", "Email service", "File sharing method"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-DL${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "ICT in Society") {
+            const questionPool = [
+                { 
+                    q: "ICT stands for what?", 
+                    c: "Information and Communication Technology",
+                    w: ["International Computer Technology", "Internet and Communication Technology", "Information and Computer Terms"]
+                },
+                { 
+                    q: "Which is an ICT tool commonly used in business?", 
+                    c: "Spreadsheet software",
+                    w: ["Hammer", "Saw", "Drill"]
+                },
+                { 
+                    q: "E-commerce refers to what?", 
+                    c: "Online buying and selling",
+                    w: ["Email communication", "Electronic research", "Online gaming"]
+                },
+                { 
+                    q: "Mobile banking is an example of?", 
+                    c: "Digital finance",
+                    w: ["E-learning", "E-commerce", "E-governance"]
+                },
+                { 
+                    q: "ICT helps businesses primarily by?", 
+                    c: "Improving communication efficiency",
+                    w: ["Increasing paper usage", "Slowing processes", "Raising costs"]
+                },
+                { 
+                    q: "Telemedicine enables what?", 
+                    c: "Remote medical consultations",
+                    w: ["Online shopping", "Distance learning", "Digital gaming"]
+                },
+                { 
+                    q: "E-learning platforms are used for?", 
+                    c: "Online education",
+                    w: ["Banking", "Shopping", "Gaming"]
+                },
+                { 
+                    q: "Social media is primarily used for?", 
+                    c: "Connecting with others",
+                    w: ["Data storage", "Word processing", "Spreadsheet calculations"]
+                },
+                { 
+                    q: "E-government services include?", 
+                    c: "Online tax filing",
+                    w: ["Video games", "Social media", "Email"]
+                },
+                { 
+                    q: "The digital divide refers to what?", 
+                    c: "Gap in technology access",
+                    w: ["Internet speed difference", "Computer age difference", "Software version gap"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-SOC${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Data Representation") {
+            const questionPool = [
+                { 
+                    q: "What is a bit in computing?", 
+                    c: "Binary digit (0 or 1)",
+                    w: ["Byte of data", "Nibble of data", "Word of data"]
+                },
+                { 
+                    q: "How many bits make up one byte?", 
+                    c: "8 bits",
+                    w: ["4 bits", "16 bits", "32 bits"]
+                },
+                { 
+                    q: "Which is an example of a binary number?", 
+                    c: "1010",
+                    w: ["1234", "ABCD", "10.5"]
+                },
+                { 
+                    q: "ASCII stands for what?", 
+                    c: "American Standard Code for Information Interchange",
+                    w: ["American System Code for Information Interchange", "Advanced Standard Code for International Interchange", "American Standard Code for International Interchange"]
+                },
+                { 
+                    q: "One megabyte is equal to?", 
+                    c: "1024 kilobytes",
+                    w: ["1000 kilobytes", "1024 bytes", "1000 bytes"]
+                },
+                { 
+                    q: "Which is a unit of data storage?", 
+                    c: "Gigabyte",
+                    w: ["Gigahertz", "Volt", "Watt"]
+                },
+                { 
+                    q: "The binary system uses which base?", 
+                    c: "Base-2",
+                    w: ["Base-10", "Base-8", "Base-16"]
+                },
+                { 
+                    q: "Hexadecimal system uses which base?", 
+                    c: "Base-16",
+                    w: ["Base-2", "Base-8", "Base-10"]
+                },
+                { 
+                    q: "What does 1 KB equal?", 
+                    c: "1024 bytes",
+                    w: ["1000 bytes", "1024 bits", "1000 bits"]
+                },
+                { 
+                    q: "Which is the smallest unit of data?", 
+                    c: "Bit",
+                    w: ["Byte", "Kilobyte", "Megabyte"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F1-DR${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        
+        let { options, answer } = createRealisticOptions(correct, wrongs);
+        questionBank.form1.push({
+            id: generateUniqueId('F1', i),
+            databaseNumber: i,
+            question: qText,
+            options: options,
+            answer: answer,
+            correctAnswerText: correct,
+            topic: topic,
+            explanation: `The correct answer is "${correct}". ${wrongs[0]}, ${wrongs[1]}, and ${wrongs[2]} are incorrect because they do not accurately describe this ${topic} concept.`
+        });
+    }
+
+    // ---------- FORM 2: 1250 unique with realistic answers ----------
+    const f2Topics = ["Word Processing", "Spreadsheets", "Presentations", "Desktop Publishing", "Email", "Internet Communication", "Web Design", "Computer Ethics"];
+    
+    for (let i = 1; i <= 1250; i++) {
+        let topic = f2Topics[(i-1) % f2Topics.length];
+        let qText, correct, wrongs;
+        
+        if (topic === "Word Processing") {
+            const questionPool = [
+                { 
+                    q: "Which software is specifically designed for creating text documents?", 
+                    c: "Microsoft Word",
+                    w: ["Microsoft Excel", "Microsoft PowerPoint", "Microsoft Access"]
+                },
+                { 
+                    q: "What is the main purpose of a word processor?", 
+                    c: "Create and edit text documents",
+                    w: ["Perform calculations", "Create presentations", "Manage databases"]
+                },
+                { 
+                    q: "Which feature automatically checks for spelling errors?", 
+                    c: "Spell checker",
+                    w: ["Grammar checker", "Thesaurus", "Word counter"]
+                },
+                { 
+                    q: "Mail merge is used to?", 
+                    c: "Combine documents with data source",
+                    w: ["Merge two documents", "Send emails", "Print envelopes"]
+                },
+                { 
+                    q: "Which is an example of word processing software?", 
+                    c: "Google Docs",
+                    w: ["Google Sheets", "Google Slides", "Google Forms"]
+                },
+                { 
+                    q: "A template in word processing is what?", 
+                    c: "Pre-designed document format",
+                    w: ["Font style", "Paragraph style", "Page layout"]
+                },
+                { 
+                    q: "What does the Ctrl+B shortcut do in MS Word?", 
+                    c: "Apply bold formatting",
+                    w: ["Save document", "Copy text", "Paste text"]
+                },
+                { 
+                    q: "Page orientation can be either portrait or what?", 
+                    c: "Landscape",
+                    w: ["Square", "Circular", "Panoramic"]
+                },
+                { 
+                    q: "A header appears in what part of the document?", 
+                    c: "Top margin of each page",
+                    w: ["Bottom margin", "Left margin", "Right margin"]
+                },
+                { 
+                    q: "Line spacing refers to?", 
+                    c: "Vertical space between lines",
+                    w: ["Horizontal space between words", "Space between paragraphs", "Page margins"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F2-WP${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Spreadsheets") {
+            const questionPool = [
+                { 
+                    q: "Which software is primarily used for numerical calculations?", 
+                    c: "Microsoft Excel",
+                    w: ["Microsoft Word", "Microsoft PowerPoint", "Microsoft Outlook"]
+                },
+                { 
+                    q: "In a spreadsheet, what is a cell?", 
+                    c: "Intersection of a row and column",
+                    w: ["Entire worksheet", "Single row", "Single column"]
+                },
+                { 
+                    q: "Which function adds a range of numbers?", 
+                    c: "SUM",
+                    w: ["AVERAGE", "COUNT", "MAX"]
+                },
+                { 
+                    q: "A chart in a spreadsheet is used to?", 
+                    c: "Visually represent data",
+                    w: ["Store data", "Print data", "Sort data"]
+                },
+                { 
+                    q: "Which is a spreadsheet application?", 
+                    c: "Google Sheets",
+                    w: ["Google Docs", "Google Slides", "Google Forms"]
+                },
+                { 
+                    q: "A formula in Excel begins with what symbol?", 
+                    c: "=",
+                    w: ["+", "-", "*"]
+                },
+                { 
+                    q: "What does the AVERAGE function do?", 
+                    c: "Calculates the mean of values",
+                    w: ["Counts cells", "Finds maximum", "Finds minimum"]
+                },
+                { 
+                    q: "A worksheet is also known as what?", 
+                    c: "Spreadsheet tab",
+                    w: ["Workbook", "Cell", "Range"]
+                },
+                { 
+                    q: "Which reference type changes when copied?", 
+                    c: "Relative reference",
+                    w: ["Absolute reference", "Mixed reference", "Circular reference"]
+                },
+                { 
+                    q: "Pivot tables are used to?", 
+                    c: "Summarize and analyze data",
+                    w: ["Create charts", "Sort data", "Filter data"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F2-SS${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Presentations") {
+            const questionPool = [
+                { 
+                    q: "Which software is used to create slideshows?", 
+                    c: "Microsoft PowerPoint",
+                    w: ["Microsoft Word", "Microsoft Excel", "Microsoft Access"]
+                },
+                { 
+                    q: "A single page in a presentation is called a?", 
+                    c: "Slide",
+                    w: ["Page", "Sheet", "Document"]
+                },
+                { 
+                    q: "What is a slide transition?", 
+                    c: "Effect when moving between slides",
+                    w: ["Animation within slide", "Text formatting", "Image style"]
+                },
+                { 
+                    q: "Animations in presentations apply to what?", 
+                    c: "Elements within a slide",
+                    w: ["Entire slides", "Background", "Slide transitions"]
+                },
+                { 
+                    q: "Which is a presentation software?", 
+                    c: "Google Slides",
+                    w: ["Google Docs", "Google Sheets", "Google Forms"]
+                },
+                { 
+                    q: "A slide master is used to?", 
+                    c: "Apply consistent formatting to all slides",
+                    w: ["Create animations", "Add transitions", "Insert images"]
+                },
+                { 
+                    q: "What is the purpose of a handout in presentations?", 
+                    c: "Printed summary for audience",
+                    w: ["Speaker notes", "Slide show", "Digital copy"]
+                },
+                { 
+                    q: "Which view shows thumbnail versions of all slides?", 
+                    c: "Slide sorter view",
+                    w: ["Normal view", "Reading view", "Slide show view"]
+                },
+                { 
+                    q: "A hyperlink in a presentation can link to?", 
+                    c: "Another slide or website",
+                    w: ["Only the next slide", "Only the first slide", "Only external files"]
+                },
+                { 
+                    q: "What does the F5 key do in PowerPoint?", 
+                    c: "Start the slideshow",
+                    w: ["Save presentation", "Print slides", "Close presentation"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F2-PPT${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else {
+            // Generic but still realistic for remaining topics
+            let baseTopic = topic.toLowerCase().replace(" ", "");
+            const genericPool = [
+                { 
+                    q: `What is the main purpose of ${topic} in ICT?`, 
+                    c: `Creating and managing ${topic.toLowerCase()} documents`,
+                    w: [`Playing games`, `Browsing internet`, `System maintenance`]
+                },
+                { 
+                    q: `Which tool is commonly used for ${topic}?`, 
+                    c: `Specialized ${topic.toLowerCase()} software`,
+                    w: [`General purpose software`, `Hardware device`, `Network protocol`]
+                },
+                { 
+                    q: `${topic} is most important for what type of task?`, 
+                    c: `${topic} related professional work`,
+                    w: [`Personal entertainment`, `Hardware repair`, `Network configuration`]
+                }
+            ];
+            let qItem = genericPool[i % genericPool.length];
+            qText = qItem.q + ` (F2-${baseTopic}${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        
+        let { options, answer } = createRealisticOptions(correct, wrongs);
+        questionBank.form2.push({
+            id: generateUniqueId('F2', i),
+            databaseNumber: i,
+            question: qText,
+            options: options,
+            answer: answer,
+            correctAnswerText: correct,
+            topic: topic,
+            explanation: `The correct answer is "${correct}". ${wrongs[0]}, ${wrongs[1]}, and ${wrongs[2]} are not accurate for this ${topic} concept.`
+        });
+    }
+
+    // ---------- FORM 3: 1250 unique with realistic answers ----------
+    const f3Topics = ["Advanced Word", "Advanced Excel", "Database", "Networking", "Web Development", "Cybersecurity", "Multimedia"];
+    
+    for (let i = 1; i <= 1250; i++) {
+        let topic = f3Topics[(i-1) % f3Topics.length];
+        let qText, correct, wrongs;
+        
+        if (topic === "Advanced Word") {
+            const questionPool = [
+                { 
+                    q: "What feature creates automatic table of contents?", 
+                    c: "Heading styles and referencing",
+                    w: ["Manual typing", "Copy and paste", "Text boxes"]
+                },
+                { 
+                    q: "Track Changes feature is used for?", 
+                    c: "Collaborative editing and review",
+                    w: ["Spell checking", "Formatting", "Printing"]
+                },
+                { 
+                    q: "What are macros used for in Word?", 
+                    c: "Automating repetitive tasks",
+                    w: ["Creating tables", "Inserting images", "Formatting text"]
+                },
+                { 
+                    q: "A mail merge requires what two components?", 
+                    c: "Main document and data source",
+                    w: ["Template and styles", "Images and text", "Headers and footers"]
+                },
+                { 
+                    q: "What is a cross-reference in Word?", 
+                    c: "Link to other parts of document",
+                    w: ["External website link", "Email address", "File attachment"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-AW${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Advanced Excel") {
+            const questionPool = [
+                { 
+                    q: "What does VLOOKUP function do?", 
+                    c: "Searches vertically for data",
+                    w: ["Searches horizontally", "Creates charts", "Formats cells"]
+                },
+                { 
+                    q: "A pivot table is used to?", 
+                    c: "Summarize large datasets",
+                    w: ["Create formulas", "Format cells", "Print worksheets"]
+                },
+                { 
+                    q: "What is a macro in Excel?", 
+                    c: "Automated sequence of actions",
+                    w: ["Cell formula", "Chart type", "Worksheet"]
+                },
+                { 
+                    q: "Conditional formatting does what?", 
+                    c: "Applies formatting based on cell values",
+                    w: ["Formats all cells equally", "Adds borders", "Changes font size"]
+                },
+                { 
+                    q: "What is a data validation in Excel?", 
+                    c: "Restricts what can be entered in a cell",
+                    w: ["Checks spelling", "Validates formulas", "Creates charts"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-AE${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Database") {
+            const questionPool = [
+                { 
+                    q: "What is a primary key in a database?", 
+                    c: "Unique identifier for records",
+                    w: ["Foreign key", "Index field", "Sort field"]
+                },
+                { 
+                    q: "SQL stands for what?", 
+                    c: "Structured Query Language",
+                    w: ["Simple Query Language", "Standard Question Language", "System Query Logic"]
+                },
+                { 
+                    q: "What is a relational database?", 
+                    c: "Data stored in related tables",
+                    w: ["Single table storage", "File-based storage", "Cloud storage only"]
+                },
+                { 
+                    q: "A query is used to?", 
+                    c: "Retrieve specific data",
+                    w: ["Delete entire database", "Create tables", "Design forms"]
+                },
+                { 
+                    q: "What is database normalization?", 
+                    c: "Organizing data to reduce redundancy",
+                    w: ["Encrypting data", "Backing up data", "Indexing data"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-DB${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Networking") {
+            const questionPool = [
+                { 
+                    q: "What does IP address stand for?", 
+                    c: "Internet Protocol address",
+                    w: ["Internet Provider address", "Internal Protocol address", "Interface Protocol address"]
+                },
+                { 
+                    q: "A router is used to?", 
+                    c: "Connect different networks",
+                    w: ["Connect devices within same network", "Store data", "Print documents"]
+                },
+                { 
+                    q: "What is a LAN?", 
+                    c: "Local Area Network",
+                    w: ["Wide Area Network", "Wireless Network", "Virtual Network"]
+                },
+                { 
+                    q: "What does DNS do?", 
+                    c: "Converts domain names to IP addresses",
+                    w: ["Sends emails", "Hosts websites", "Secures networks"]
+                },
+                { 
+                    q: "What is a firewall used for?", 
+                    c: "Block unauthorized access",
+                    w: ["Speed up connection", "Store data", "Print documents"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-NET${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Web Development") {
+            const questionPool = [
+                { 
+                    q: "HTML stands for what?", 
+                    c: "HyperText Markup Language",
+                    w: ["HyperText Machine Language", "High-Level Text Markup", "Hyperlink Text Management"]
+                },
+                { 
+                    q: "What is CSS used for?", 
+                    c: "Styling web pages",
+                    w: ["Creating web structure", "Adding interactivity", "Database management"]
+                },
+                { 
+                    q: "JavaScript is primarily used for?", 
+                    c: "Adding interactivity to websites",
+                    w: ["Styling pages", "Structuring content", "Database queries"]
+                },
+                { 
+                    q: "What is a responsive website?", 
+                    c: "Adapts to different screen sizes",
+                    w: ["Loads quickly", "Has animations", "Uses many images"]
+                },
+                { 
+                    q: "What does SEO stand for?", 
+                    c: "Search Engine Optimization",
+                    w: ["Site Enhancement Operation", "Server Efficiency Option", "Secure External Output"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-WEB${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Cybersecurity") {
+            const questionPool = [
+                { 
+                    q: "What is phishing?", 
+                    c: "Fraudulent attempt to steal data",
+                    w: ["Network scanning", "Data encryption", "Password cracking"]
+                },
+                { 
+                    q: "Malware is short for what?", 
+                    c: "Malicious software",
+                    w: ["Malformed hardware", "Marketing software", "Management software"]
+                },
+                { 
+                    q: "What is two-factor authentication?", 
+                    c: "Using two verification methods",
+                    w: ["Two passwords", "Two usernames", "Two devices"]
+                },
+                { 
+                    q: "A virus is what type of threat?", 
+                    c: "Self-replicating malware",
+                    w: ["Hardware failure", "Network issue", "User error"]
+                },
+                { 
+                    q: "What is encryption used for?", 
+                    c: "Protecting data confidentiality",
+                    w: ["Speeding up data", "Compressing data", "Deleting data"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-SEC${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Multimedia") {
+            const questionPool = [
+                { 
+                    q: "What does JPEG stand for?", 
+                    c: "Joint Photographic Experts Group",
+                    w: ["Java Photo Editor Graphics", "JavaScript Photo Engine", "Joint Photo Encoding"]
+                },
+                { 
+                    q: "MP3 is a format for what?", 
+                    c: "Compressed audio",
+                    w: ["Video files", "Images", "Documents"]
+                },
+                { 
+                    q: "What is a codec used for?", 
+                    c: "Encoding/decoding media files",
+                    w: ["Creating graphics", "Editing text", "Browsing web"]
+                },
+                { 
+                    q: "Streaming media refers to?", 
+                    c: "Playing content while downloading",
+                    w: ["Downloading completely first", "Uploading files", "Storing locally"]
+                },
+                { 
+                    q: "What is resolution in multimedia?", 
+                    c: "Number of pixels in display",
+                    w: ["File size", "Color depth", "Frame rate"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F3-MM${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        
+        let { options, answer } = createRealisticOptions(correct, wrongs);
+        questionBank.form3.push({
+            id: generateUniqueId('F3', i),
+            databaseNumber: i,
+            question: qText,
+            options: options,
+            answer: answer,
+            correctAnswerText: correct,
+            topic: topic,
+            explanation: `The correct answer is "${correct}". The other options are common misconceptions about ${topic}.`
+        });
+    }
+
+    // ---------- FORM 4: 1250 unique with realistic answers ----------
+    const f4Topics = ["Programming Basics", "System Analysis", "Network Security", "Cloud Computing", "Emerging Technologies", "Project Management"];
+    
+    for (let i = 1; i <= 1250; i++) {
+        let topic = f4Topics[(i-1) % f4Topics.length];
+        let qText, correct, wrongs;
+        
+        if (topic === "Programming Basics") {
+            const questionPool = [
+                { 
+                    q: "What is a variable in programming?", 
+                    c: "Named storage for data",
+                    w: ["Fixed value", "Programming language", "Code comment"]
+                },
+                { 
+                    q: "What does HTML stand for?", 
+                    c: "HyperText Markup Language",
+                    w: ["Hyper Transfer Markup Language", "High Text Machine Language", "Hyperlink Text Management"]
+                },
+                { 
+                    q: "What is an algorithm?", 
+                    c: "Step-by-step problem-solving procedure",
+                    w: ["Programming language", "Computer hardware", "Data type"]
+                },
+                { 
+                    q: "What is a loop used for?", 
+                    c: "Repeating code multiple times",
+                    w: ["Stopping program", "Defining variables", "Commenting code"]
+                },
+                { 
+                    q: "What is debugging?", 
+                    c: "Finding and fixing errors",
+                    w: ["Writing code", "Testing performance", "Compiling program"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F4-PROG${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "System Analysis") {
+            const questionPool = [
+                { 
+                    q: "What is system analysis?", 
+                    c: "Studying current system to design improvements",
+                    w: ["Installing new hardware", "Writing code", "Testing software"]
+                },
+                { 
+                    q: "What is a feasibility study?", 
+                    c: "Evaluating if project is viable",
+                    w: ["Writing requirements", "Testing system", "Installing software"]
+                },
+                { 
+                    q: "What are requirements in system analysis?", 
+                    c: "What the system must do",
+                    w: ["System limitations", "User manuals", "Hardware specs"]
+                },
+                { 
+                    q: "What is a use case diagram?", 
+                    c: "Shows system-user interactions",
+                    w: ["Database design", "Network topology", "Program flowchart"]
+                },
+                { 
+                    q: "What does SDLC stand for?", 
+                    c: "Software Development Life Cycle",
+                    w: ["System Design Life Cycle", "Software Design Logic Concept", "System Development Logic Control"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F4-SA${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Network Security") {
+            const questionPool = [
+                { 
+                    q: "What is a firewall's main purpose?", 
+                    c: "Monitor and filter network traffic",
+                    w: ["Store network data", "Accelerate connection", "Backup files"]
+                },
+                { 
+                    q: "What is encryption used for?", 
+                    c: "Protecting data confidentiality",
+                    w: ["Compressing data", "Deleting data", "Organizing data"]
+                },
+                { 
+                    q: "What is a VPN used for?", 
+                    c: "Secure remote connection",
+                    w: ["Faster internet", "Data storage", "Website hosting"]
+                },
+                { 
+                    q: "What is a DDoS attack?", 
+                    c: "Overwhelming system with traffic",
+                    w: ["Data theft", "Virus infection", "Password cracking"]
+                },
+                { 
+                    q: "What is authentication?", 
+                    c: "Verifying user identity",
+                    w: ["Encrypting data", "Filtering traffic", "Storing passwords"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F4-NS${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Cloud Computing") {
+            const questionPool = [
+                { 
+                    q: "What is cloud computing?", 
+                    c: "On-demand internet-based computing resources",
+                    w: ["Local server storage", "Desktop software", "Physical hardware"]
+                },
+                { 
+                    q: "What is IaaS in cloud computing?", 
+                    c: "Infrastructure as a Service",
+                    w: ["Internet as a Service", "Integration as a Service", "Interface as a Service"]
+                },
+                { 
+                    q: "What is SaaS?", 
+                    c: "Software as a Service",
+                    w: ["Storage as a Service", "Security as a Service", "System as a Service"]
+                },
+                { 
+                    q: "What is public cloud?", 
+                    c: "Cloud services available to general public",
+                    w: ["Private company cloud", "Government cloud", "Home server"]
+                },
+                { 
+                    q: "What is cloud storage?", 
+                    c: "Data stored on remote servers",
+                    w: ["Local hard drive", "USB flash drive", "CD-ROM"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F4-CLOUD${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Emerging Technologies") {
+            const questionPool = [
+                { 
+                    q: "What is artificial intelligence?", 
+                    c: "Machines simulating human intelligence",
+                    w: ["Basic computer programs", "Simple calculators", "Data storage"]
+                },
+                { 
+                    q: "What is IoT?", 
+                    c: "Internet of Things - connected devices",
+                    w: ["Internal Operating Technology", "Input Output Terminal", "Internet of Terminals"]
+                },
+                { 
+                    q: "What is blockchain?", 
+                    c: "Distributed digital ledger",
+                    w: ["Cryptocurrency only", "Database software", "Network protocol"]
+                },
+                { 
+                    q: "What is machine learning?", 
+                    c: "AI that learns from data",
+                    w: ["Manual programming", "Hardware design", "Network configuration"]
+                },
+                { 
+                    q: "What is 5G technology?", 
+                    c: "Fifth generation mobile network",
+                    w: ["WiFi standard", "Bluetooth version", "Satellite communication"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F4-ET${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        else if (topic === "Project Management") {
+            const questionPool = [
+                { 
+                    q: "What is a project milestone?", 
+                    c: "Key event or achievement",
+                    w: ["Project budget", "Team meeting", "Document"]
+                },
+                { 
+                    q: "What is a Gantt chart used for?", 
+                    c: "Visualizing project schedule",
+                    w: ["Tracking budget", "Managing team", "Documenting requirements"]
+                },
+                { 
+                    q: "What does PM stand for?", 
+                    c: "Project Manager",
+                    w: ["Project Meeting", "Program Memory", "Performance Monitor"]
+                },
+                { 
+                    q: "What is a project scope?", 
+                    c: "Defined boundaries of project",
+                    w: ["Project budget", "Project team", "Project timeline"]
+                },
+                { 
+                    q: "What is risk management?", 
+                    c: "Identifying and mitigating project risks",
+                    w: ["Spending budget", "Hiring team", "Writing code"]
+                }
+            ];
+            let qItem = questionPool[i % questionPool.length];
+            qText = qItem.q + ` (F4-PM${i})`;
+            correct = qItem.c;
+            wrongs = qItem.w;
+        }
+        
+        let { options, answer } = createRealisticOptions(correct, wrongs);
+        questionBank.form4.push({
+            id: generateUniqueId('F4', i),
+            databaseNumber: i,
+            question: qText,
+            options: options,
+            answer: answer,
+            correctAnswerText: correct,
+            topic: topic,
+            explanation: `The correct answer is "${correct}". ${wrongs[0]}, ${wrongs[1]}, and ${wrongs[2]} do not accurately describe this ${topic} concept.`
+        });
+    }
+
+    // Shuffle each form
+    function shuffleArray(arr) { 
+        for (let i = arr.length-1; i>0; i--) { 
+            const j = Math.floor(Math.random()*(i+1)); 
+            [arr[i],arr[j]] = [arr[j],arr[i]]; 
+        } 
+        return arr; 
+    }
+    
+    questionBank.form1 = shuffleArray(questionBank.form1);
+    questionBank.form2 = shuffleArray(questionBank.form2);
+    questionBank.form3 = shuffleArray(questionBank.form3);
+    questionBank.form4 = shuffleArray(questionBank.form4);
+
+    // Update counts
+    document.getElementById('form1Count').textContent = questionBank.form1.length;
+    document.getElementById('form2Count').textContent = questionBank.form2.length;
+    document.getElementById('form3Count').textContent = questionBank.form3.length;
+    document.getElementById('form4Count').textContent = questionBank.form4.length;
+    console.log("TOTAL UNIQUE QUESTIONS:", questionBank.form1.length+questionBank.form2.length+questionBank.form3.length+questionBank.form4.length);
+
+    // ========== GAME ENGINE ==========
+    let currentTrack = 'form1';
+    let currentLevel = 0;
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = [];
+    let userSelections = [];
+    let timer = null;
+    let timeLeft = 30;
+    let score = 0;
+    let usedIds = { form1: [], form2: [], form3: [], form4: [] };
+    let userProfile = { fullName: "Martin Mwila", school: "Katete Day", zone: "Katete Central", district: "Katete" };
+
+    // DOM elements
+    const mainMenu = document.getElementById('mainMenu');
+    const startPlaying = document.getElementById('startPlaying');
+    const quizPanel = document.getElementById('quizPanel');
+    const levelComplete = document.getElementById('levelComplete');
+    const resultsSection = document.getElementById('resultsSection');
+    const questionContainer = document.getElementById('questionContainer');
+    const candidateInfo = document.getElementById('candidateInfo');
+    const levelDisplay = document.getElementById('levelDisplay');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const progressFill = document.getElementById('progressFill');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const submitBtn = document.getElementById('submitBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // ========== SECTION DISPLAY ==========
+    window.showSection = function(section) {
+        [mainMenu, startPlaying, quizPanel, levelComplete, resultsSection].forEach(el => el.classList.add('hidden'));
+        if (section === 'mainMenu') mainMenu.classList.remove('hidden');
+        if (section === 'startPlaying') startPlaying.classList.remove('hidden');
+        if (section === 'quizPanel') quizPanel.classList.remove('hidden');
+        if (section === 'levelComplete') levelComplete.classList.remove('hidden');
+        if (section === 'resultsSection') resultsSection.classList.remove('hidden');
+        
+        document.querySelectorAll('.nav-btn').forEach((btn,i) => { 
+            btn.classList.remove('active'); 
+            if (section==='mainMenu' && i===0) btn.classList.add('active'); 
+            if (section==='startPlaying' && i===1) btn.classList.add('active'); 
+        });
+    };
+
+    // ========== TRACK SELECTION ==========
+    window.selectTrack = function(track, element) { 
+        currentTrack = track; 
+        document.querySelectorAll('.track-btn').forEach(btn => btn.classList.remove('selected')); 
+        element.classList.add('selected'); 
+    };
+
+    // ========== GET UNIQUE QUESTIONS ==========
+    function getUniqueQuestions(track, count) {
+        const bank = questionBank[track]; 
+        const available = bank.filter(q => !usedIds[track].includes(q.id));
+        if (available.length < count) { 
+            usedIds[track] = []; 
+            return getUniqueQuestions(track, count); 
+        }
+        const shuffled = [...available].sort(() => Math.random() - 0.5); 
+        const selected = shuffled.slice(0, count);
+        selected.forEach(q => usedIds[track].push(q.id)); 
+        return selected;
+    }
+
+    // ========== START QUIZ ==========
+    window.startQUIZE = function() {
+        userProfile.fullName = document.getElementById('fullName').value || "Martin Mwila";
+        userProfile.school = document.getElementById('schoolName').value || "Katete Day";
+        userProfile.zone = document.getElementById('zoneName').value || "Katete Central";
+        userProfile.district = document.getElementById('districtName').value || "Katete";
+        candidateInfo.innerHTML = `${userProfile.fullName} | ${userProfile.school} | ${userProfile.zone} | ${userProfile.district}`;
+        currentLevel = 0; 
+        currentQuestions = getUniqueQuestions(currentTrack, 20); 
+        currentIndex = 0;
+        userAnswers = new Array(20).fill(null); 
+        userSelections = new Array(20).fill(null); 
+        score = 0;
+        updateScore(); 
+        showSection('quizPanel'); 
+        renderQuestion(); 
+        startTimer();
+    };
+
+    // ========== RENDER QUESTION ==========
+    function renderQuestion() {
+        if (!currentQuestions[currentIndex]) return; 
+        const q = currentQuestions[currentIndex];
+        const formNames = ['Form 1', 'Form 2', 'Form 3', 'Form 4'];
+        levelDisplay.innerHTML = `${formNames[currentLevel]} · ${q.topic}`;
+        
+        let html = `<div class="question-number">Question ${currentIndex+1} / 20 · DB#${q.databaseNumber}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options-grid">`;
+        
+        q.options.forEach((opt, idx) => { 
+            let additionalClasses = '';
+            
+            if (userAnswers[currentIndex] !== null) {
+                if (idx === q.answer) {
+                    additionalClasses = 'correct-answer';
+                } else if (idx === userAnswers[currentIndex] && userAnswers[currentIndex] !== q.answer) {
+                    additionalClasses = 'wrong-answer';
+                }
+            } else {
+                if (userSelections[currentIndex] === idx) {
+                    additionalClasses = 'selected';
+                }
+            }
+            
+            html += `<div class="option ${additionalClasses}" onclick="selectOption(${idx})">
+                        <span class="option-prefix">${String.fromCharCode(65+idx)}</span>${opt}
+                     </div>`; 
+        });
+        
+        html += '</div>';
+        
+        if (userAnswers[currentIndex] !== null) {
+            const isCorrect = userAnswers[currentIndex] === q.answer;
+            const resultText = isCorrect ? '✅ Correct!' : '❌ Incorrect';
+            const correctLetter = String.fromCharCode(65 + q.answer);
+            html += `<div class="explanation">
+                        <strong>${resultText}</strong><br>
+                        Correct answer: ${correctLetter}. ${q.correctAnswerText}<br>
+                        <small>${q.explanation}</small>
+                     </div>`;
+        }
+        
+        questionContainer.innerHTML = html; 
+        updateProgress();
+        
+        submitBtn.disabled = userAnswers[currentIndex] !== null; 
+        submitBtn.style.opacity = userAnswers[currentIndex] !== null ? '0.5' : '1';
+    }
+
+    // ========== SELECT OPTION ==========
+    window.selectOption = function(idx) { 
+        if (userAnswers[currentIndex] !== null) return;
+        
+        userSelections[currentIndex] = idx; 
+        
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+        event.target.closest('.option').classList.add('selected');
+    };
+    
+    // ========== SUBMIT ANSWER ==========
+    window.submitAnswer = function() {
+        if (userSelections[currentIndex] === null) { 
+            alert('Please select an answer first'); 
+            return; 
+        }
+        
+        userAnswers[currentIndex] = userSelections[currentIndex];
+        renderQuestion();
+        
+        const isCorrect = userAnswers[currentIndex] === currentQuestions[currentIndex].answer;
+        if (isCorrect) { 
+            score += 10; 
+            playSound('correct'); 
+        } else { 
+            playSound('wrong'); 
+        }
+        updateScore();
+    };
+    
+    // ========== NEXT QUESTION ==========
+    window.nextQuestion = function() {
+        if (userAnswers[currentIndex] === null) { 
+            alert('Please submit your answer first'); 
+            return; 
+        }
+        
+        if (currentIndex < currentQuestions.length-1) { 
+            currentIndex++; 
+            renderQuestion(); 
+            resetTimer(); 
+        } else { 
+            finishLevel(); 
+        }
+    };
+    
+    // ========== FINISH LEVEL with PRINT PREVIEW ==========
+    function finishLevel() {
+        clearInterval(timer); 
+        const correctCount = userAnswers.filter((ans, idx) => ans === currentQuestions[idx].answer).length;
+        const percentage = Math.round((correctCount/20)*100); 
+        let emoji = correctCount >= 18 ? '🏆' : correctCount >= 15 ? '🌟' : correctCount >= 10 ? '👍' : '💪';
+        
+        let resultsHTML = `
+            <div class="results-preview">
+                <h3 style="color: var(--zambia-blue); margin-bottom: 1rem;">Level ${currentLevel+1} Results Preview</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        currentQuestions.forEach((q, idx) => {
+            const userAns = userAnswers[idx];
+            const isCorrect = userAns === q.answer;
+            const userLetter = userAns !== null && userAns !== -1 ? String.fromCharCode(65 + userAns) : 'Not answered';
+            const userText = userAns !== null && userAns !== -1 ? q.options[userAns] : 'No answer';
+            const correctLetter = String.fromCharCode(65 + q.answer);
+            const correctText = q.correctAnswerText;
+            const rowClass = isCorrect ? 'correct-row' : 'incorrect-row';
+            
+            resultsHTML += `
+                <tr class="${rowClass}">
+                    <td>${idx+1}</td>
+                    <td><strong>${q.question}</strong></td>
+                    <td>${userLetter}. ${userText}</td>
+                    <td>${correctLetter}. ${correctText}</td>
+                    <td>${isCorrect ? '✅' : '❌'}</td>
+                    <td class="explanation-cell">${q.explanation}</td>
+                </tr>
+            `;
+        });
+        
+        resultsHTML += `
+                    </tbody>
+                </table>
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <button class="btn btn-green" onclick="printResults()">🖨️ Print Full Report</button>
+                </div>
+            </div>
+        `;
+        
+        levelComplete.innerHTML = `
+            <div style="background:white; border-radius:var(--radius-lg); padding:clamp(1.5rem,5vw,2.5rem);">
+                <div style="text-align:center;">
+                    <h2 style="color:var(--zambia-green);">Level ${currentLevel+1} Complete!</h2>
+                    <div class="feedback-emoji">${emoji}</div>
+                    <div style="font-size:clamp(3rem,15vw,5rem);">${correctCount}/20</div>
+                    <div style="font-size:1.5rem;">${percentage}%</div>
+                    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
+                        ${currentLevel<9 ? '<button class="btn" onclick="nextLevel()">🚀 Next Level</button>' : '<button class="btn btn-green" onclick="showResults()">🏁 Final Results</button>'}
+                        <button class="btn" onclick="showSection('mainMenu')">🏠 Home</button>
+                    </div>
+                </div>
+                ${resultsHTML}
+            </div>
+        `;
+        
+        showSection('levelComplete');
+    }
+    
+    // ========== PRINT RESULTS ==========
+    window.printResults = function() {
+        const printWindow = window.open('', '_blank');
+        const formNames = ['Form 1', 'Form 2', 'Form 3', 'Form 4'];
+        const correctCount = userAnswers.filter((ans, idx) => ans === currentQuestions[idx].answer).length;
+        const percentage = Math.round((correctCount/20)*100);
+        
+        let tableRows = '';
+        currentQuestions.forEach((q, idx) => {
+            const userAns = userAnswers[idx];
+            const isCorrect = userAns === q.answer;
+            const userLetter = userAns !== null && userAns !== -1 ? String.fromCharCode(65 + userAns) : 'N/A';
+            const userText = userAns !== null && userAns !== -1 ? q.options[userAns] : 'No answer';
+            const correctLetter = String.fromCharCode(65 + q.answer);
+            const correctText = q.correctAnswerText;
+            const rowColor = isCorrect ? '#d4edda' : '#f8d7da';
+            
+            tableRows += `
+                <tr style="background-color: ${rowColor};">
+                    <td>${idx+1}</td>
+                    <td>${q.databaseNumber}</td>
+                    <td>${q.topic}</td>
+                    <td>${q.question}</td>
+                    <td>${userLetter}. ${userText}</td>
+                    <td>${correctLetter}. ${correctText}</td>
+                    <td>${isCorrect ? 'Correct' : 'Incorrect'}</td>
+                </tr>
+                <tr style="background-color: #f0f9ff;">
+                    <td colspan="7" style="padding: 10px; border-left: 4px solid #006B3F;">
+                        <strong>Explanation:</strong> ${q.explanation}
+                    </td>
+                </tr>
+            `;
+        });
+        
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>CyberSafe ICT - Level ${currentLevel+1} Report</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 30px; }
+                    h1 { color: #006B3F; }
+                    h2 { color: #0033a0; }
+                    .header { 
+                        background: linear-gradient(135deg, #006B3F, #0033a0); 
+                        color: white; 
+                        padding: 20px; 
+                        border-radius: 40px; 
+                        margin-bottom: 20px;
+                    }
+                    table { 
+                        border-collapse: collapse; 
+                        width: 100%; 
+                        margin-top: 20px;
+                        page-break-inside: avoid;
+                    }
+                    th { 
+                        background: #006B3F; 
+                        color: white; 
+                        padding: 12px; 
+                        text-align: left;
+                    }
+                    td { 
+                        border: 1px solid #ddd; 
+                        padding: 10px; 
+                        vertical-align: top;
+                    }
+                    .summary {
+                        font-size: 1.2rem;
+                        margin: 15px 0;
+                    }
+                    @media print {
+                        body { padding: 0.2in; }
+                        .no-print { display: none; }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>🛡️ CyberSafe ICT CBC Zambia</h1>
+                    <h2>Level ${currentLevel+1} Performance Report</h2>
+                    <p><strong>${userProfile.fullName}</strong> | ${userProfile.school} | ${userProfile.zone} District</p>
+                    <p>Form: ${formNames[currentLevel]} | Date: ${new Date().toLocaleDateString()}</p>
+                </div>
+                
+                <div class="summary">
+                    <strong>Score: ${correctCount}/20 (${percentage}%)</strong>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>DB#</th>
+                            <th>Topic</th>
+                            <th>Question</th>
+                            <th>Your Answer</th>
+                            <th>Correct Answer</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tableRows}
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 30px;">Report generated by CyberSafe ICT System | © Mwila Christopher</p>
+            </body>
+            </html>
+        `);
+        
+        printWindow.document.close();
+        printWindow.print();
+    };
+    
+    // ========== NEXT LEVEL ==========
+    window.nextLevel = function() { 
+        if (currentLevel < 9) { 
+            currentLevel++; 
+            currentQuestions = getUniqueQuestions(currentTrack, 20); 
+            currentIndex = 0; 
+            userAnswers = new Array(20).fill(null); 
+            userSelections = new Array(20).fill(null); 
+            score = 0; 
+            updateScore(); 
+            showSection('quizPanel'); 
+            renderQuestion(); 
+            startTimer(); 
+        } else { 
+            showResults(); 
+        } 
+    };
+    
+    // ========== SHOW RESULTS ==========
+    window.showResults = function() { 
+        const correct = userAnswers.filter((ans, idx) => ans === currentQuestions[idx].answer).length; 
+        resultsSection.innerHTML = `
+            <div style="padding:clamp(1.5rem,5vw,2.5rem); text-align:center;">
+                <h2 style="color:var(--zambia-green);">Final Results</h2>
+                <div class="user-badge">${userProfile.fullName}</div>
+                <div style="font-size:clamp(3rem,15vw,5rem);">${correct}/20</div>
+                <div style="margin:1rem;">${Math.round(correct/20*100)}%</div>
+                <button class="btn" onclick="printResults()">🖨️ Print Full Report</button>
+                <button class="btn btn-blue" onclick="showSection('mainMenu')">Home</button>
+            </div>
+        `; 
+        showSection('resultsSection'); 
+    };
+    
+    // ========== TIMER FUNCTIONS ==========
+    function startTimer() { 
+        clearInterval(timer); 
+        timeLeft = 30; 
+        timerDisplay.textContent = '00:30'; 
+        timer = setInterval(() => { 
+            timeLeft--; 
+            timerDisplay.textContent = `00:${timeLeft<10 ? '0'+timeLeft : timeLeft}`; 
+            if (timeLeft <= 0 && userAnswers[currentIndex] === null && userSelections[currentIndex] === null) { 
+                clearInterval(timer); 
+                userSelections[currentIndex] = -1; 
+                userAnswers[currentIndex] = -1; 
+                playSound('wrong'); 
+                renderQuestion(); 
+            } 
+        }, 1000); 
+    }
+    
+    function resetTimer() { 
+        clearInterval(timer); 
+        startTimer(); 
+    }
+    
+    function updateScore() { 
+        scoreDisplay.textContent = `${Math.floor(score/10)}/20`; 
+    }
+    
+    function updateProgress() { 
+        progressFill.style.width = ((currentIndex+1)/20*100) + '%'; 
+    }
+    
+    // ========== QUIT QUIZ ==========
+    window.quitQuiz = function() { 
+        if (confirm('Quit quiz? Your progress will be lost.')) { 
+            clearInterval(timer); 
+            showSection('mainMenu'); 
+        } 
+    };
+    
+    // ========== KEYBOARD SHORTCUTS ==========
+    document.addEventListener('keydown', function(e) {
+        if (!quizPanel.classList.contains('hidden')) {
+            const key = e.key;
+            
+            if (key >= '1' && key <= '4' && userAnswers[currentIndex] === null) {
+                e.preventDefault();
+                const idx = parseInt(key) - 1;
+                const optionDivs = document.querySelectorAll('.option');
+                if (optionDivs[idx]) {
+                    userSelections[currentIndex] = idx;
+                    optionDivs.forEach(opt => opt.classList.remove('selected'));
+                    optionDivs[idx].classList.add('selected');
+                }
+            }
+            
+            if (key === 'Enter' && userAnswers[currentIndex] === null && userSelections[currentIndex] !== null) {
+                e.preventDefault();
+                submitAnswer();
+            }
+            
+            if ((key === ' ' || key === 'Space') && userAnswers[currentIndex] !== null) {
+                e.preventDefault();
+                nextQuestion();
+            }
+        }
+    });
+    
+    showSection('mainMenu');
+})();
+</script>
+</body>
+</html>

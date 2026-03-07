@@ -1,607 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>CyberSafe Quizzes · 2026 refresh</title>
-<style>
-/* ===== RESET & MODERN 2026 VARIABLES ===== */
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
+  <meta charset="UTF-8">
+  <!-- ✅ responsive meta for all screens (mobile, tablet, 4k) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>CyberSafe Quizzes · fluid 2026</title>
+  <style>
+    /* === RESET + 2026 VARIABLES – scaled for all resolutions === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
 
-/* Enhanced Zambian palette – fresh, deep, and glowing */
-:root {
---green-deep: #006B3F;        /* original flag green */
---green-vibrant: #00A86B;
---green-soft: #E5F3E9;
---blue-deep: #0033a0;
---blue-electric: #1e4fd0;
---blue-aurora: #D6E4FF;
---orange-bright: #F4A300;
---orange-glint: #ffb52e;
---orange-soft: #FFEED6;
---red-energy: #CE1126;
---gray-50: #f8fafc;
---gray-100: #f1f4f9;
---gray-200: #e2e8f0;
---gray-600: #475569;
---shadow-float: 0 25px 40px -15px rgba(0, 60, 50, 0.25),
-0 10px 20px -8px rgba(0, 30, 50, 0.2);
---shadow-hover: 0 35px 50px -18px #006B3F80,
-0 15px 25px -8px #0033a060;
---transition-smooth: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
---glass-edge: 1px solid rgba(255,255,255,0.5);
---card-radius: clamp(1.8rem, 5vw, 3rem);
-}
+    :root {
+      --green-deep: #006B3F;
+      --green-vibrant: #00A86B;
+      --green-soft: #E5F3E9;
+      --blue-deep: #0033a0;
+      --blue-electric: #1e4fd0;
+      --blue-aurora: #D6E4FF;
+      --orange-bright: #F4A300;
+      --orange-glint: #ffb52e;
+      --orange-soft: #FFEED6;
+      --red-energy: #CE1126;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f4f9;
+      --gray-200: #e2e8f0;
+      --gray-600: #475569;
+      --shadow-float: 0 20px 35px -12px rgba(0, 40, 30, 0.25), 0 8px 18px -6px rgba(0, 20, 40, 0.2);
+      --shadow-hover: 0 35px 50px -18px #006B3Fb3, 0 12px 25px -10px #0033a099;
+      --transition-smooth: all 0.3s ease-out;
+      --glass-edge: 1px solid rgba(255,255,255,0.5);
+      /* responsive radius – small on mobile, large on 4k */
+      --card-radius: max(1.5rem, min(4vw, 3.5rem));
+    }
 
-/* ===== BACKGROUND WITH DYNAMIC GRADIENT (2026 depth) ===== */
-body {
-min-height: 100vh;
-background: radial-gradient(circle at 10% 30%, var(--blue-electric), var(--blue-deep) 60%),
-linear-gradient(145deg, var(--green-deep) 0%, var(--blue-deep) 90%);
-background-blend-mode: overlay;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: clamp(0.75rem, 3vw, 2rem);
-position: relative;
-}
-/* floating digital noise (very subtle) */
-body::after {
-content: '';
-position: fixed;
-inset: 0;
-background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMjAgMjBhMTAgMTAgMCAwIDEgMTAgMTAgMTAgMTAgMCAwIDEtMTAgMTAgMTAgMTAgMCAwIDEtMTAtMTAgMTAgMTAgMCAwIDEgMTAtMTB6IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDIiLz48L3N2Zz4=') repeat;
-opacity: 0.2;
-pointer-events: none;
-}
+    /* === background – deep, smooth, no hard edges === */
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 20%, var(--blue-electric), var(--blue-deep) 70%),
+                  linear-gradient(135deg, var(--green-deep) 0%, var(--blue-deep) 100%);
+      background-blend-mode: overlay;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(0.75rem, 2vw, 2.5rem);
+      position: relative;
+    }
+    /* fine digital noise – subtle on all densities */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMjAgMjBhMTAgMTAgMCAwIDEgMTAgMTAgMTAgMTAgMCAwIDEtMTAgMTAgMTAgMTAgMCAwIDEtMTAtMTAgMTAgMTAgMCAwIDEgMTAtMTB6IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDIiLz48L3N2Zz4=');
+      opacity: 0.15;
+      pointer-events: none;
+    }
 
-/* ===== CARD – elevated glassmorphism ===== */
-.cover-card {
-max-width: 1400px;
-width: 100%;
-background: rgba(255, 255, 255, 0.92);
-backdrop-filter: blur(16px) saturate(180%);
--webkit-backdrop-filter: blur(16px) saturate(180%);
-border-radius: clamp(2rem, 6vw, 4rem);
-box-shadow: var(--shadow-float);
-padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 3rem);
-border: var(--glass-edge);
-transition: var(--transition-smooth);
-}
-.cover-card:hover {
-box-shadow: var(--shadow-hover);
-background: rgba(255, 255, 255, 0.95);
-}
+    /* === MAIN CARD – fully fluid, no fixed widths === */
+    .cover-card {
+      width: 100%;
+      max-width: 1800px;          /* comfortable on 4k, still centered */
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px) saturate(170%);
+      -webkit-backdrop-filter: blur(14px) saturate(170%);
+      border-radius: clamp(2rem, 5vw, 5rem);
+      box-shadow: var(--shadow-float);
+      padding: clamp(1.8rem, 4vw, 4.5rem) clamp(1.2rem, 3vw, 3.5rem);
+      border: var(--glass-edge);
+      transition: var(--transition-smooth);
+    }
+    .cover-card:hover {
+      box-shadow: var(--shadow-hover);
+      background: rgba(255, 255, 255, 0.94);
+    }
 
-/* ===== BRAND HEADER – bold & layered ===== */
-.brand {
-display: flex;
-align-items: center;
-gap: clamp(0.8rem, 2.5vw, 1.5rem);
-margin-bottom: clamp(2rem, 4vw, 3rem);
-border-bottom: 4px solid var(--orange-bright);
-padding-bottom: clamp(1rem, 3vw, 1.8rem);
-flex-wrap: wrap;
-}
+    /* === brand – always row, but wraps neatly === */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.8rem, 2vw, 2rem);
+      margin-bottom: clamp(1.5rem, 3vw, 3rem);
+      border-bottom: 4px solid var(--orange-bright);
+      padding-bottom: clamp(0.8rem, 2vw, 1.8rem);
+      flex-wrap: wrap;
+    }
 
-.shield-icon {
-font-size: clamp(3rem, 10vw, 5rem);
-line-height: 1;
-filter: drop-shadow(0 8px 12px #0033a040);
-transform: scale(1);
-transition: var(--transition-smooth);
-display: inline-block;
-}
-.shield-icon:hover {
-transform: scale(1.05) rotate(2deg);
-filter: drop-shadow(0 12px 16px #F4A30060);
-}
+    .shield-icon {
+      font-size: clamp(3.2rem, 10vw, 6rem);
+      line-height: 1;
+      filter: drop-shadow(0 6px 10px #0033a040);
+      transition: var(--transition-smooth);
+      flex-shrink: 0;
+    }
+    .shield-icon:hover {
+      transform: scale(1.05) rotate(2deg);
+      filter: drop-shadow(0 12px 15px #F4A30070);
+    }
 
-.brand-text {
-flex: 1;
-min-width: 240px;
-}
+    .brand-text {
+      flex: 1;
+      min-width: 200px;
+    }
 
-.brand-text h1 {
-font-size: clamp(2rem, 7vw, 3.8rem);
-font-weight: 800;
-background: linear-gradient(120deg, var(--green-deep) 0%, var(--blue-electric) 40%, var(--orange-bright) 80%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-line-height: 1.1;
-letter-spacing: -0.02em;
-}
+    .brand-text h1 {
+      font-size: clamp(2rem, 6vw, 4.8rem);
+      font-weight: 800;
+      background: linear-gradient(145deg, var(--green-deep), var(--blue-electric) 50%, var(--orange-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
 
-.brand-text .sub {
-font-size: clamp(1rem, 2.5vw, 1.4rem);
-color: var(--blue-deep);
-font-weight: 600;
-letter-spacing: 1px;
-margin-top: 0.4rem;
-background: var(--orange-soft);
-display: inline-block;
-padding: 0.25rem 1.2rem;
-border-radius: 60px;
-border: 1px solid var(--orange-bright);
-}
+    .brand-text .sub {
+      font-size: clamp(0.9rem, 2.2vw, 1.6rem);
+      color: var(--blue-deep);
+      font-weight: 600;
+      background: var(--orange-soft);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      border: 1px solid var(--orange-bright);
+      margin-top: 0.4rem;
+    }
 
-/* ===== WELCOME PILL – modern & luminous ===== */
-.welcome {
-background: rgba(255,255,255,0.75);
-backdrop-filter: blur(8px);
--webkit-backdrop-filter: blur(8px);
-border-radius: 100px;
-padding: clamp(0.9rem, 2.5vw, 1.3rem) clamp(2rem, 5vw, 3rem);
-margin-bottom: clamp(2.5rem, 5vw, 4rem);
-width: fit-content;
-max-width: 100%;
-box-shadow: 0 10px 18px -8px rgba(0,50,30,0.2);
-border: 1px solid rgba(255,215,0,0.3);
-}
+    /* === welcome pill – always fits === */
+    .welcome {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 100px;
+      padding: clamp(0.7rem, 2vw, 1.3rem) clamp(1.2rem, 4vw, 3rem);
+      margin-bottom: clamp(2rem, 4vw, 4rem);
+      width: fit-content;
+      max-width: 100%;
+      box-shadow: 0 8px 18px -6px rgba(0,50,30,0.2);
+      border: 1px solid rgba(255,200,0,0.3);
+    }
 
-.welcome p {
-font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-color: var(--blue-deep);
-font-weight: 550;
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-gap: 0.8rem;
-}
+    .welcome p {
+      font-size: clamp(1rem, 2.2vw, 1.7rem);
+      color: var(--blue-deep);
+      font-weight: 550;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem 1rem;
+    }
 
-.welcome p span {
-background: var(--orange-bright);
-padding: 0.5rem 1.8rem;
-border-radius: 60px;
-color: var(--blue-deep);
-font-weight: 800;
-box-shadow: 0 2px 10px var(--orange-glint);
-border: 1px solid white;
-}
+    .welcome p span {
+      background: var(--orange-bright);
+      padding: 0.4rem 1.5rem;
+      border-radius: 60px;
+      color: var(--blue-deep);
+      font-weight: 800;
+      box-shadow: 0 2px 8px var(--orange-glint);
+      border: 1px solid white;
+      white-space: nowrap;
+    }
+    @media (max-width: 480px) {
+      .welcome p span { white-space: normal; }
+    }
 
-/* ===== SECTION LABEL – with accent stripe & glow ===== */
-.section-label {
-margin: 2.2rem 0 2.2rem 0;
-}
+    /* === section label === */
+    .section-label {
+      margin: 1.8rem 0 1.8rem;
+    }
+    .section-label h2 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      border-left: 10px solid var(--orange-bright);
+      padding-left: clamp(1rem, 2.5vw, 2.5rem);
+      text-shadow: 0 2px 4px var(--orange-soft);
+      letter-spacing: -0.01em;
+    }
 
-.section-label h2 {
-font-size: clamp(1.8rem, 5vw, 2.5rem);
-font-weight: 700;
-color: var(--green-deep);
-border-left: 10px solid var(--orange-bright);
-padding-left: clamp(1.5rem, 3vw, 2.2rem);
-text-shadow: 0 2px 5px var(--orange-soft);
-letter-spacing: -0.01em;
-}
+    /* === GRID – truly responsive: mobile 1 col, tablet 2, desktop 3+ === */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: clamp(1.2rem, 2.5vw, 2.5rem);
+      margin: 2rem 0 1.5rem;
+    }
 
-/* ===== RESPONSIVE GRID – fluid & bouncy ===== */
-.card-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-gap: clamp(1.8rem, 3vw, 2.5rem);
-margin: 2.5rem 0 2rem;
-}
+    /* === subject cards – touch friendly, no fixed height === */
+    .subject-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border-radius: var(--card-radius);
+      padding: clamp(1.5rem, 3vw, 2.8rem) clamp(1rem, 2vw, 2rem);
+      box-shadow: 0 18px 28px -14px rgba(0, 60, 40, 0.25);
+      transition: var(--transition-smooth);
+      border: 2px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
 
-/* ===== SUBJECT CARD – 2026 floating panels ===== */
-.subject-card {
-background: rgba(255, 255, 255, 0.8);
-backdrop-filter: blur(6px);
--webkit-backdrop-filter: blur(6px);
-border-radius: var(--card-radius);
-padding: clamp(2rem, 4vw, 2.8rem) clamp(1.2rem, 3vw, 2rem);
-box-shadow: 0 25px 35px -18px rgba(0, 60, 40, 0.3);
-transition: var(--transition-smooth);
-border: 2px solid transparent;
-cursor: pointer;
-text-decoration: none;
-color: inherit;
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-position: relative;
-overflow: hidden;
-height: 100%;
-will-change: transform, border-color;
-}
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 0%, var(--orange-soft), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
 
-/* background glow on hover */
-.subject-card::before {
-content: '';
-position: absolute;
-inset: 0;
-background: radial-gradient(circle at 50% 0%, var(--orange-soft), transparent 70%);
-opacity: 0;
-transition: opacity 0.4s ease;
-pointer-events: none;
-}
+    .subject-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: var(--orange-bright);
+      box-shadow: 0 28px 40px -16px #006B3F;
+      background: white;
+    }
+    .subject-card:hover::before { opacity: 0.6; }
 
-.subject-card:hover {
-transform: translateY(-12px) scale(1.02);
-border-color: var(--orange-bright);
-box-shadow: 0 40px 55px -15px #006B3F;
-background: white;
-}
+    .card-accent {
+      width: clamp(70px, 13vw, 120px);
+      height: clamp(70px, 13vw, 120px);
+      background: var(--green-vibrant);
+      border-radius: 50% 30% 50% 30% / 40% 50% 40% 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      color: white;
+      box-shadow: 0 15px 20px -8px currentColor;
+      transition: var(--transition-smooth);
+      border: 2px solid rgba(255,255,255,0.4);
+      flex-shrink: 0;
+    }
+    .subject-card:nth-child(1) .card-accent { background: linear-gradient(145deg, #1e4fd0, #0033a0); } 
+    .subject-card:nth-child(2) .card-accent { background: linear-gradient(145deg, #00d4a0, #006B3F); } 
+    .subject-card:nth-child(3) .card-accent { background: linear-gradient(145deg, #F4A300, #b57c00); } 
+    .subject-card:nth-child(4) .card-accent { background: linear-gradient(145deg, #CE1126, #a00020); } 
+    .subject-card:nth-child(5) .card-accent { background: linear-gradient(145deg, #1e4fd0, #0033a0); } 
+    .subject-card:nth-child(6) .card-accent { background: linear-gradient(145deg, #00d4a0, #006B3F); } 
+    .subject-card:nth-child(7) .card-accent { background: linear-gradient(145deg, #F4A300, #b57c00); } 
 
-.subject-card:hover::before {
-opacity: 0.5;
-}
+    .subject-card:hover .card-accent {
+      border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
+      transform: scale(1.07) rotate(2deg);
+      box-shadow: 0 22px 28px -10px var(--orange-bright);
+    }
 
-.card-accent {
-width: clamp(80px, 14vw, 110px);
-height: clamp(80px, 14vw, 110px);
-background: var(--green-vibrant);
-border-radius: 50% 30% 50% 30% / 40% 50% 40% 50%;     /* organic blob shape */
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 1.8rem;
-font-size: clamp(2.5rem, 6vw, 4rem);
-color: white;
-box-shadow: 0 18px 22px -10px currentColor;
-transition: var(--transition-smooth);
-border: 2px solid rgba(255,255,255,0.5);
-}
+    .subject-card h3 {
+      font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      background: linear-gradient(135deg, var(--blue-deep), var(--green-deep));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
 
-/* individual vibrant gradients */
-.subject-card:nth-child(1) .card-accent { background: linear-gradient(145deg, #1e4fd0, #0033a0); } 
-.subject-card:nth-child(2) .card-accent { background: linear-gradient(145deg, #00d4a0, #006B3F); } 
-.subject-card:nth-child(3) .card-accent { background: linear-gradient(145deg, #F4A300, #b57c00); } 
-.subject-card:nth-child(4) .card-accent { background: linear-gradient(145deg, #CE1126, #a00020); } 
+    .subject-card .badge {
+      background: rgba(0,107,63,0.12);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+      font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+      font-weight: 700;
+      color: var(--blue-deep);
+      margin: 0.6rem 0 0.8rem;
+      border: 1px solid var(--orange-glint);
+      white-space: nowrap;
+    }
+    @media (max-width: 360px) { .subject-card .badge { white-space: normal; } }
 
-.subject-card:hover .card-accent {
-border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;     /* morphing blob */
-transform: scale(1.1) rotate(3deg);
-box-shadow: 0 22px 30px -8px var(--orange-bright);
-}
+    .subject-card .description {
+      font-size: clamp(0.9rem, 1.9vw, 1.15rem);
+      color: var(--gray-600);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      font-weight: 450;
+    }
 
-.subject-card h3 {
-font-size: clamp(1.8rem, 4.5vw, 2.4rem);
-font-weight: 800;
-margin-bottom: 0.6rem;
-background: linear-gradient(135deg, var(--blue-deep), var(--green-deep));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-letter-spacing: -0.02em;
-}
+    .enter-btn {
+      background: rgba(0,107,63,0.08);
+      border: 2px solid var(--green-deep);
+      color: var(--green-deep);
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: clamp(0.9rem, 2vw, 1.3rem);
+      transition: var(--transition-smooth);
+      width: fit-content;
+      margin-top: auto;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    @media (max-width: 380px) { .enter-btn { white-space: normal; padding: 0.6rem 1rem; } }
 
-.subject-card .badge {
-background: rgba(0,107,63,0.1);
-backdrop-filter: blur(4px);
-padding: 0.5rem 1.4rem;
-border-radius: 60px;
-font-size: clamp(0.9rem, 2vw, 1rem);
-font-weight: 700;
-color: var(--blue-deep);
-margin: 0.8rem 0 1.2rem;
-border: 1px solid var(--orange-glint);
-white-space: nowrap;
-}
+    .subject-card:hover .enter-btn {
+      background: var(--green-deep);
+      color: white;
+      border-color: var(--orange-bright);
+      gap: 0.9rem;
+      padding-right: 2rem;
+      box-shadow: 0 10px 18px -6px #006B3F;
+    }
+    .enter-btn span { transition: transform 0.2s; }
+    .subject-card:hover .enter-btn span { transform: translateX(5px); }
 
-.subject-card .description {
-font-size: clamp(1rem, 2vw, 1.1rem);
-color: var(--gray-600);
-line-height: 1.5;
-margin-bottom: 2rem;
-flex-grow: 1;
-font-weight: 450;
-}
+    /* === footer stats – chip row, wraps elegantly === */
+    .footer-info {
+      margin-top: clamp(2rem, 4vw, 4.5rem);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1.8rem;
+      border-top: 3px dashed var(--orange-bright);
+    }
 
-.enter-btn {
-background: rgba(0,107,63,0.08);
-border: 2px solid var(--green-deep);
-color: var(--green-deep);
-padding: 0.9rem 2.2rem;
-border-radius: 60px;
-font-weight: 800;
-font-size: clamp(1rem, 2.2vw, 1.2rem);
-transition: var(--transition-smooth);
-width: fit-content;
-margin-top: auto;
-text-decoration: none;
-display: inline-flex;
-align-items: center;
-gap: 0.6rem;
-white-space: nowrap;
-box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
+    .quiz-stats {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
 
-.subject-card:hover .enter-btn {
-background: var(--green-deep);
-color: white;
-border-color: var(--orange-bright);
-gap: 1rem;
-padding-right: 2.5rem;
-box-shadow: 0 12px 18px -8px #006B3F;
-}
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0,51,160,0.07);
+      backdrop-filter: blur(3px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 550;
+      font-size: clamp(0.8rem, 1.7vw, 1.1rem);
+      border: 1px solid var(--blue-electric);
+      white-space: nowrap;
+    }
+    .stat-item span {
+      font-weight: 800;
+      color: var(--blue-deep);
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      margin-right: 0.1rem;
+    }
+    @media (max-width: 550px) {
+      .stat-item { white-space: normal; }
+    }
 
-/* floating arrow animation */
-.enter-btn span {
-transition: transform 0.3s ease;
-}
-.subject-card:hover .enter-btn span {
-transform: translateX(5px);
-}
+    .developer {
+      font-size: clamp(0.9rem, 2vw, 1.25rem);
+      background: var(--gray-100);
+      padding: 0.7rem 1.8rem;
+      border-radius: 60px;
+      border: 1px solid var(--orange-bright);
+      white-space: nowrap;
+    }
+    .developer strong { color: var(--green-deep); }
 
-/* ===== FOOTER STATS – chip design ===== */
-.footer-info {
-margin-top: clamp(3rem, 6vw, 5rem);
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-align-items: center;
-gap: 2rem;
-padding-top: 2.5rem;
-border-top: 3px dashed var(--orange-bright);
-}
+    /* footer credits – flex on all screens */
+    .footer {
+      width: 100%;
+    }
+    .developer-heading {
+      font-weight: 700;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: var(--blue-deep);
+      margin: 1.5rem 0 0.8rem;
+      letter-spacing: 0.3px;
+    }
+    .developer-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 2rem;
+      align-items: center;
+      background: rgba(255,255,255,0.5);
+      border-radius: 60px;
+      padding: 0.7rem 1.8rem;
+      border: 1px solid var(--green-vibrant);
+    }
+    .developer-info a {
+      text-decoration: none;
+      font-weight: 550;
+      color: var(--blue-deep);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: var(--transition-smooth);
+      border-bottom: 2px solid transparent;
+      font-size: clamp(0.85rem, 1.8vw, 1.15rem);
+      white-space: nowrap;
+    }
+    .developer-info a:hover {
+      color: var(--orange-bright);
+      border-bottom-color: currentColor;
+      transform: translateY(-2px);
+    }
+    .footer-note {
+      margin-top: 1.5rem;
+      font-size: clamp(0.8rem, 1.6vw, 1rem);
+      color: var(--gray-600);
+      text-align: center;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 1.2rem;
+    }
 
-.quiz-stats {
-display: flex;
-gap: clamp(0.8rem, 1.8vw, 2rem);
-flex-wrap: wrap;
-}
+    /* small screen polish */
+    @media (max-width: 500px) {
+      .developer-info {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 30px;
+      }
+      .footer-info {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .quiz-stats { justify-content: center; }
+    }
+    @media (max-width: 400px) {
+      .brand {
+        flex-direction: column;
+        text-align: center;
+      }
+      .section-label h2 { border-left-width: 6px; }
+    }
 
-.stat-item {
-display: flex;
-align-items: center;
-gap: 0.6rem;
-background: rgba(0,51,160,0.07);
-backdrop-filter: blur(4px);
-padding: 0.7rem 1.8rem;
-border-radius: 80px;
-font-weight: 550;
-font-size: clamp(0.95rem, 2vw, 1.1rem);
-border: 1px solid var(--blue-electric);
-}
-
-.stat-item span {
-font-weight: 800;
-color: var(--blue-deep);
-font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-margin-right: 0.2rem;
-}
-
-/* developer section – 2026 minimal contacts */
-.developer {
-font-size: clamp(1rem, 2vw, 1.2rem);
-background: var(--gray-100);
-padding: 0.8rem 2rem;
-border-radius: 60px;
-border: 1px solid var(--orange-bright);
-}
-
-.developer strong {
-color: var(--green-deep);
-}
-
-/* footer credits area */
-.footer {
-width: 100%;
-}
-.developer-heading {
-font-weight: 700;
-font-size: 1.2rem;
-color: var(--blue-deep);
-margin: 1.8rem 0 1rem;
-letter-spacing: 0.5px;
-}
-.developer-info {
-display: flex;
-flex-wrap: wrap;
-gap: 1rem 2rem;
-align-items: center;
-background: rgba(255,255,255,0.5);
-border-radius: 80px;
-padding: 0.8rem 2rem;
-margin: 0.5rem 0 1.5rem;
-border: 1px solid var(--green-vibrant);
-}
-.developer-info a {
-text-decoration: none;
-font-weight: 550;
-color: var(--blue-deep);
-display: inline-flex;
-align-items: center;
-gap: 0.4rem;
-transition: var(--transition-smooth);
-border-bottom: 2px solid transparent;
-}
-.developer-info a:hover {
-color: var(--orange-bright);
-border-bottom-color: currentColor;
-transform: translateY(-2px);
-}
-.footer-note {
-margin-top: 1.8rem;
-font-size: 0.95rem;
-color: var(--gray-600);
-text-align: center;
-border-top: 1px solid var(--gray-200);
-padding-top: 1.5rem;
-font-weight: 450;
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes float-gentle {
-0% { transform: translateY(0); }
-50% { transform: translateY(-8px) scale(1.02); }
-100% { transform: translateY(0); }
-}
-
-.subject-card:hover .card-accent {
-animation: float-gentle 1.5s infinite ease-in-out;
-}
-
-/* ===== RESPONSIVE TWEAKS ===== */
-@media (max-width: 600px) {
-.welcome p {
-justify-content: center;
-}
-.welcome p span {
-white-space: normal;
-text-align: center;
-}
-.footer-info {
-flex-direction: column;
-align-items: stretch;
-}
-.quiz-stats {
-justify-content: center;
-}
-.developer-info {
-flex-direction: column;
-align-items: flex-start;
-border-radius: 40px;
-}
-}
-
-@media (max-width: 400px) {
-.brand {
-flex-direction: column;
-text-align: center;
-}
-.section-label h2 {
-border-left-width: 6px;
-font-size: 1.6rem;
-}
-.subject-card h3 {
-font-size: 2rem;
-}
-}
-
-/* print / no-print already fine */
-.no-print { 
-/* keep original logic */
-}
-/* year update via js is fine */
-</style>
+    /* animation for card accent */
+    @keyframes float-gentle {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px) scale(1.02); }
+      100% { transform: translateY(0); }
+    }
+    .subject-card:hover .card-accent {
+      animation: float-gentle 1.2s infinite ease-in-out;
+    }
+  </style>
 </head>
 <body>
 <div class="cover-card">
-<!-- brand header -->
-<div class="brand">
-<div class="shield-icon">🛡️</div>
-<div class="brand-text">
-<h1>CyberSafe Quizzes</h1>
-<div class="sub">CBC Zambia · 6000+ questions per subject</div>
-</div>
-</div>
+  <!-- brand -->
+  <div class="brand">
+    <div class="shield-icon">🛡️</div>
+    <div class="brand-text">
+      <h1>CyberSafe Quizzes</h1>
+      <div class="sub">CBC Zambia · 6000+ questions per subject</div>
+    </div>
+  </div>
 
-<!-- welcome message -->
-<div class="welcome">
-<p>⚡ ready to test your knowledge? <span>select a subject</span></p>
-</div>
+  <!-- welcome pill -->
+  <div class="welcome">
+    <p>⚡ ready to test your knowledge? <span>select a subject</span></p>
+  </div>
 
-<!-- subject selection grid with live links -->
-<div class="section-label">
-<h2>📚 available quizzes</h2>
-</div>
+  <!-- section title -->
+  <div class="section-label">
+    <h2>📚 available quizzes</h2>
+  </div>
 
-<div class="card-grid">
+  <!-- subject grid (all links open safely) -->
+  <div class="card-grid">
+    <a href="https://katetezambia.github.io/com/ict.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">💻</div>
+      <h3>I.C.T</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">introduction, web, productivity, file management</div>
+      <span class="enter-btn">browse <span>→</span></span>
+    </a>
+    <a href="https://katetezambia.github.io/com/biology.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">🧬</div>
+      <h3>BIOLOGY</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">Mutations, cells, plants – full syllabus</div>
+      <span class="enter-btn">enter lab <span>→</span></span>
+    </a>
+    <a href="https://katetezambia.github.io/com/chemistry.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">🧪</div>
+      <h3>CHEMISTRY</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">atoms, bonding, acids, salts, organic</div>
+      <span class="enter-btn">enter lab <span>→</span></span>
+    </a>
+    <a href="https://katetezambia.github.io/com/physics.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">⚡</div>
+      <h3>PHYSICS</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">mechanics, waves, electricity, modern physics</div>
+      <span class="enter-btn">explore <span>→</span></span>
+    </a>
+    <a href="https://katetezambia.github.io/com/maths.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">📐</div>
+      <h3>MATHEMATICS</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">algebra, geometry, trigonometry, calculus</div>
+      <span class="enter-btn">calculate <span>→</span></span>
+    </a>
+    <a href="https://katetezambia.github.io/com/english.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">📖</div>
+      <h3>ENGLISH</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">grammar, comprehension, literature, writing</div>
+      <span class="enter-btn">read <span>→</span></span>
+    </a>
+    <a href="https://katetezambia.github.io/com/civic.html" class="subject-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-accent">⚖️</div>
+      <h3>CIVIC</h3>
+      <div class="badge">forms 1 · 2 · 3 · 4</div>
+      <div class="description">constitution, elections, citizenship, democracy</div>
+      <span class="enter-btn">enter lab <span>→</span></span>
+    </a>
+  </div>
 
-<!-- I.C.T card -->
-<a href="https://katetezambia.github.io/com/ict.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">💻</div>
-<h3>I.C.T</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">introduction, web, productivity tools, file management</div>
-<span class="enter-btn">browse <span>→</span></span>
-</a>
+  <!-- stats + developer quick info -->
+  <div class="footer-info">
+    <div class="quiz-stats">
+      <div class="stat-item"><span>📊 6000+</span> chemistry</div>
+      <div class="stat-item"><span>📊 6000+</span> physics</div>
+      <div class="stat-item"><span>📊 6000+</span> maths</div>
+      <div class="stat-item"><span>📊 6000+</span> english</div>
+      <div class="stat-item"><span>📊 6000+</span> I.C.T</div>
+      <div class="stat-item"><span>📊 6000+</span> Biology</div>
+      <div class="stat-item"><span>📊 6000+</span> Civic</div>
+    </div>
+    <div class="developer">
+      <strong>✨ MWILA C.</strong> · 2026 edition
+    </div>
+  </div>
 
-<!-- biology card -->
-<a href="https://katetezambia.github.io/com/biology.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">🧬</div>
-<h3>BIOLOGY</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">Mutations, cells, plans - full syllabus</div>
-<span class="enter-btn">enter lab <span>→</span></span>
-</a>
-
-
-<!-- chemistry card -->
-<a href="https://katetezambia.github.io/com/chemistry.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">🧪</div>
-<h3>CHEMISTRY</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">atoms, bonding, acids, salts, organic – full syllabus</div>
-<span class="enter-btn">enter lab <span>→</span></span>
-</a>
-<!-- physics card -->
-<a href="https://katetezambia.github.io/com/physics.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">⚡</div>
-<h3>PHYSICS</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">mechanics, waves, electricity, modern physics</div>
-<span class="enter-btn">explore <span>→</span></span>
-</a>
-<!-- maths card -->
-<a href="https://katetezambia.github.io/com/maths.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">📐</div>
-<h3>MATHEMATICS</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">algebra, geometry, trigonometry, calculus</div>
-<span class="enter-btn">calculate <span>→</span></span>
-</a>
-<!-- english card -->
-<a href="https://katetezambia.github.io/com/english.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">📖</div>
-<h3>ENGLISH</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">grammar, comprehension, literature, writing skills</div>
-<span class="enter-btn">read <span>→</span></span>
-</a>
-
-<!-- Civic card -->
-<a href="https://katetezambia.github.io/com/civic.html" class="subject-card" target="_blank" rel="noopener noreferrer">
-<div class="card-accent">⚖️ </div>
-<h3>CIVIC</h3>
-<div class="badge">forms 1 · 2 · 3 · 4</div>
-<div class="description">constitution, elections, citizenship, democracy - full syllabus</div>
-<span class="enter-btn">enter lab <span>→</span></span>
-</a>
-</div>
-
-<!-- footer with stats + developer credit (2026 style) -->
-<div class="footer-info">
-<div class="quiz-stats">
-<div class="stat-item"><span>📊 6000+</span> chemistry</div>
-<div class="stat-item"><span>📊 6000+</span> physics</div>
-<div class="stat-item"><span>📊 6000+</span> maths</div>
-<div class="stat-item"><span>📊 6000+</span> english</div>
-<div class="stat-item"><span>📊 6000+</span> I.C.T</div>
-<div class="stat-item"><span>📊 6000+</span> Biology</div>
-<div class="stat-item"><span>📊 6000+</span> Civic</div>
-
-
-</div>
-<div class="developer">
-<strong>✨ MWILA C.</strong> · 2026 edition
-</div>
-</div>
-
-<div class="footer no-print">
-<div class="developer-heading">© <script>document.write(new Date().getFullYear())</script> | DEVELOPER: MWILA CHRISTOPHER</div>
-<div class="developer-info">
-<a href="#" class="developer-link">👤 Mwila Christopher</a>
-<a href="mailto:cmwila7@gmail.com" class="email-link">📧 cmwila7@gmail.com</a>
-<a href="https://wa.me/260976620788" target="_blank" class="whatsapp-link">📱 +260 976 620 788</a>
-<a href="https://web.facebook.com/Cmwilachanda" target="_blank" class="facebook-link">📘 Facebook</a>
-</div>
-<div class="footer-note">
-⚡ CyberSafe Quizzes — CBC Zambia edition. Click any card to start (opens in new tab).
-</div>
-</div>
+  <!-- full footer credits (fluid) -->
+  <div class="footer no-print">
+    <div class="developer-heading">© <script>document.write(new Date().getFullYear())</script> | DEVELOPER: MWILA CHRISTOPHER</div>
+    <div class="developer-info">
+      <a href="#" class="developer-link">👤 Mwila Christopher</a>
+      <a href="mailto:cmwila7@gmail.com" class="email-link">📧 cmwila7@gmail.com</a>
+      <a href="https://wa.me/260976620788" target="_blank" class="whatsapp-link">📱 +260 976 620 788</a>
+      <a href="https://web.facebook.com/Cmwilachanda" target="_blank" class="facebook-link">📘 Facebook</a>
+    </div>
+    <div class="footer-note">
+      ⚡ CyberSafe Quizzes — CBC Zambia edition. Click any card to start (opens in new tab).
+    </div>
+  </div>
 </div>
 </body>
 </html>
-
-
-
-
-
-

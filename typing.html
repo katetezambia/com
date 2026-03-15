@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSafe Typing Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff2d95; --neon-blue: #00e5ff; --pollen: #ffd700; --leaf: #32ff7e; --void: #0b0118;
+            --glass: rgba(255, 255, 255, 0.05); --f-pinky: #ff4757; --f-ring: #ffa502;
+            --f-middle: #2ed573; --f-index: #1e90ff; --f-thumb: #747d8c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--void); color: white; font-family: 'Quicksand', sans-serif;
+            height: 100vh; display: flex; overflow: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        #sidebar {
+            width: 260px; background: rgba(0,0,0,0.9); border-right: 2px solid var(--neon-blue);
+            display: flex; flex-direction: column; padding: 15px; z-index: 10; justify-content: space-between;
+        }
+        
+        /* --- ANIMATED SHIELD BADGE --- */
+        .shield-badge-container {
+            display: flex; justify-content: center; padding: 20px 0;
+        }
+        .cyber-shield {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 10px var(--neon-blue)) drop-shadow(0 0 20px var(--neon-blue));
+            animation: shieldFloat 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .cyber-shield:hover {
+            transform: scale(1.65);
+            filter: drop-shadow(0 0 15px var(--neon-pink)) drop-shadow(0 0 30px var(--neon-pink));
+        }
+
+        @keyframes shieldFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .header-brand h1 { font-size: 2.1rem; color: #fff; margin-bottom: 20px; font-family: 'Fredoka One'; line-height: 1.4; text-align: center; }
+        .header-brand .mini-shield { filter: drop-shadow(0 0 5px var(--neon-blue)); }
+        
+        #level-list { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; padding-right: 5px; }
+        #level-list::-webkit-scrollbar { width: 4px; }
+        #level-list::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
+
+        .level-card {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 10px;
+            border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; font-size: 0.75rem;
+        }
+        .level-card.active { border-color: var(--leaf); background: rgba(50, 255, 126, 0.1); }
+        .level-card.locked { opacity: 0.3; cursor: not-allowed; filter: grayscale(1); }
+
+        .dev-info { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 0.8rem; }
+        .whatsapp-link { display: flex; align-items: center; gap: 8px; color: #25D366; text-decoration: none; font-weight: bold; margin-top: 5px;}
+
+        /* --- MAIN --- */
+        main { flex: 1; display: flex; flex-direction: column; padding: 20px; align-items: center; justify-content: space-between; position: relative; }
+        
+        .top-hud { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; width: 100%; max-width: 1100px; }
+        .hud-panel { background: var(--glass); backdrop-filter: blur(10px); border-radius: 15px; padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: center; position: relative; }
+        .glow-text { font-family: 'Fredoka One'; font-size: 1.4rem; text-shadow: 0 0 10px currentColor; }
+        .stat-label { font-size: 0.65rem; letter-spacing: 1px; opacity: 0.8; display: block; margin-bottom: 4px; }
+
+        /* --- STAGE --- */
+        #word-well {
+            font-size: 3.5rem; font-family: 'Fredoka One'; letter-spacing: 4px; padding: 20px 40px;
+            background: rgba(0,0,0,0.3); border-radius: 50px; margin: 20px 0; min-width: 80%; text-align: center;
+            min-height: 120px; display: flex; align-items: center; justify-content: center;
+        }
+        .char { color: rgba(255,255,255,0.1); transition: 0.1s; white-space: pre; border-bottom: 4px solid transparent; }
+        .char.correct { color: var(--leaf); text-shadow: 0 0 15px var(--leaf); }
+        .char.current { color: white; border-bottom-color: var(--neon-pink); animation: blink 0.8s infinite; }
+        .char.error { color: var(--neon-pink); animation: shake 0.2s; }
+
+        @keyframes blink { 50% { opacity: 0.3; } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+        /* --- KEYBOARD & HANDS --- */
+        .cyber-hands { display: flex; gap: 160px; height: 100px; align-items: flex-end; margin-bottom: 10px; }
+        .hand { display: flex; align-items: flex-end; gap: 10px; }
+        .finger { width: 25px; background: #1a1a1a; border-radius: 12px 12px 4px 4px; transition: 0.15s; border: 1px solid rgba(255,255,255,0.05); position: relative; }
+        .finger.active { background: currentColor !important; transform: translateY(-15px); box-shadow: 0 0 30px currentColor; }
+        .f-1 { height: 40px; } .f-2 { height: 70px; } .f-3 { height: 85px; } .f-4 { height: 65px; } 
+        .f-5 { height: 30px; width: 40px; } 
+        
+        .thumb-label { position: absolute; bottom: -20px; width: 100%; text-align: center; font-size: 0.6rem; color: var(--f-thumb); font-weight: bold; opacity: 0; }
+        .finger.active .thumb-label { opacity: 1; }
+
+        .kb-frame { background: #050505; padding: 15px; border-radius: 15px; border: 2px solid #222; }
+        .kb-row { display: flex; justify-content: center; gap: 4px; margin-bottom: 4px; }
+        .key { width: 45px; height: 45px; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'JetBrains Mono'; color: #444; font-size: 0.9rem; border-bottom: 3px solid #000; }
+        .key.highlight { color: white; transform: translateY(2px); border-bottom-width: 0; }
+        .key-space { width: 200px; }
+
+        /* --- MODALS --- */
+        #modal-overlay, #pause-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 100; flex-direction: column; }
+        .win-card { background: #fff; color: #000; padding: 40px; border-radius: 20px; text-align: center; width: 450px; box-shadow: 0 0 50px var(--neon-blue); }
+        button { padding: 12px 30px; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; font-family: 'Quicksand'; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-pause { background: var(--neon-pink); color: white; padding: 5px 10px; margin-top: 5px; font-size: 0.6rem; border-radius: 5px; }
+        
+        #target-wpm-display { font-size: 0.6rem; color: var(--pollen); display: block; margin-top: 2px; }
+    </style>
+</head>
+<body>
+
+    <aside id="sidebar">
+        <div class="header-brand">
+            <div class="shield-badge-container">
+                <div class="cyber-shield">🛡️</div>
+            </div>
+            <h1>CyberSafe Academy</h1>
+            <div id="level-display" style="color: var(--neon-pink); font-size: 0.8rem; letter-spacing: 2px; font-weight: bold; text-align: center;">STAGE 1</div>
+        </div>
+        <div id="level-list"></div>
+        <div class="dev-info">
+
+            <div class="dev-name" style="color: var(--neon-blue); font-weight: bold;">Developer : Mwila Christopher</div>
+            <a href="https://wa.me/260976620788" class="whatsapp-link" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.984-.365-1.739-.757-2.874-2.513-2.961-2.628-.086-.116-.705-.934-.705-1.782 0-.848.43-1.265.584-1.439.154-.174.335-.218.447-.218s.223.001.32.005c.101.004.237-.038.37.284.132.321.455 1.111.494 1.19.039.078.065.17.013.274-.051.104-.077.17-.154.259-.077.089-.162.199-.231.268-.077.078-.157.163-.068.315.089.151.397.655.851 1.059.584.52 1.077.681 1.231.757.153.076.243.064.333-.038.09-.103.385-.447.487-.6.102-.153.205-.128.346-.077.141.051.897.423 1.051.5.154.077.256.115.295.18.039.064.039.372-.105.777z"/></svg>
+                +260976620788
+<br>
+                </a>
+        <div class="dev-name" style="color: var(--neon-blue); font-weight: bold;">Users are advised to use a keyboard for optimum results</div>
+    
+    </div>
+    </aside>
+
+    <main>
+        <div class="top-hud">
+            <div class="hud-panel">
+                <span class="stat-label">SCORE</span>
+                <div id="score" class="glow-text" style="color: var(--pollen);">0</div>
+            </div>
+            <div class="hud-panel">
+                <span class="stat-label">TIME</span>
+                <div id="timer" class="glow-text" style="color: white;">00:00</div>
+            </div>
+            <div class="hud-panel">
+                <span class="stat-label">ACCURACY</span>
+                <div id="live-acc" class="glow-text" style="color: var(--leaf);">100%</div>
+            </div>
+            <div class="hud-panel">
+                <span class="stat-label">PROGRESS</span>
+                <div id="progress-text" style="font-size: 0.65rem; margin-top: 5px; opacity: 0.6;">0 / 40</div>
+                <div style="height: 6px; background: #111; border-radius: 10px; overflow: hidden; margin-top:5px;">
+                    <div id="progress-bar" style="width: 0%; height: 100%; background: var(--leaf); transition: 0.4s;"></div>
+                </div>
+            </div>
+            <div class="hud-panel">
+                <span class="stat-label">WPM</span>
+                <div id="wpm" class="glow-text" style="color: var(--neon-blue);">0</div>
+                <span id="target-wpm-display">GOAL: 15</span>
+                <button class="btn-pause" onclick="togglePause()">PAUSE (ESC)</button>
+            </div>
+        </div>
+
+        <div id="word-well"></div>
+
+        <div class="cyber-hands">
+            <div class="hand">
+                <div id="f-L1" class="finger f-1" style="color: var(--f-pinky)"></div>
+                <div id="f-L2" class="finger f-2" style="color: var(--f-ring)"></div>
+                <div id="f-L3" class="finger f-3" style="color: var(--f-middle)"></div>
+                <div id="f-L4" class="finger f-4" style="color: var(--f-index)"></div>
+                <div id="f-L5" class="finger f-5" style="color: var(--f-thumb)"><span class="thumb-label">SPACE</span></div>
+            </div>
+            <div class="hand">
+                <div id="f-R5" class="finger f-5" style="color: var(--f-thumb)"><span class="thumb-label">SPACE</span></div>
+                <div id="f-R4" class="finger f-4" style="color: var(--f-index)"></div>
+                <div id="f-R3" class="finger f-3" style="color: var(--f-middle)"></div>
+                <div id="f-R2" class="finger f-2" style="color: var(--f-ring)"></div>
+                <div id="f-R1" class="finger f-1" style="color: var(--f-pinky)"></div>
+            </div>
+        </div>
+
+        <div class="kb-frame" id="kb-root"></div>
+
+        <div id="pause-overlay">
+            <h1 style="color: var(--neon-pink); font-family: 'Fredoka One'; font-size: 3rem; margin-bottom: 20px;">SYSTEM PAUSED</h1>
+            <button onclick="togglePause()" style="background: var(--neon-blue); color: #000; font-size: 1.2rem;">RESUME SESSION</button>
+        </div>
+
+        <div id="modal-overlay">
+            <div class="win-card">
+                <h1 id="modal-title">RESULTS</h1>
+                <p id="modal-msg" style="margin: 15px 0; font-weight: bold;"></p>
+                <div id="req-box" style="margin-bottom: 15px; padding: 15px; border-radius: 10px; background: #f0f0f0; font-family: 'JetBrains Mono'; text-align: left; line-height: 1.6;"></div>
+                <button id="modal-btn" style="color: white; width: 100%;"></button>
+            </div>
+        </div>
+    </main>
+
+<script>
+const CURRICULUM = [
+	{ name: "Level 1: Home Anchor",  keys: "FJ",   targetWpm: 15,  words: "ff jj fj jf fff jjj fjf jfj ffjj jjff fffj jjjf fjfj jfjf ffjf jjfj".split(" ") },
+    { name: "Level 2: Home Anchor", keys: "FJDK", targetWpm: 15, words: "f j d k fj dk kf jd fff jjj ddd kkk fd jk df kj fdfj jkdk kdkj fjdj".split(" ") },
+    { name: "Level 3: Full Home Row", keys: "ASDFJKL;", targetWpm: 18, words: "as df jk l; salad flasks asks falls dads lads flasks salsa alfalfa salsa".split(" ") },
+    { name: "Level 4: Home Extensions", keys: "ASDFGHJKL;", targetWpm: 22, words: "ash dash gash hash glass shall slash slag shag lash glass glad dads lads".split(" ") },
+    { name: "Level 5: Top Row Index", keys: "RUTY", targetWpm: 25, words: "jury duty rug tug turn yard tray true yard turn jury duty rug tug tray".split(" ") },
+    { name: "Level 6: Top Row Mastery", keys: "QWERTYUIOP", targetWpm: 28, words: "power tower water treaty purity write type prior turret writer poetry port".split(" ") },
+    { name: "Level 7: Bottom Row Index", keys: "VBNM", targetWpm: 30, words: "burn turn bump numb myth hunt bury ruby turn bump numb myth hunt bury".split(" ") },
+    { name: "Level 8: All Alpha", keys: "AZ", targetWpm: 32, words: "quick brown foxes jump over lazy dogs zebra vapor flaxen quartz back jump".split(" ") },
+    { name: "Level 9: Cyber Terms", keys: "ALPHA", targetWpm: 35, words: "proxy cache virus login script phish shield guard hacker breach secure data".split(" ") },
+    { name: "Level 10: Numbers", keys: "1234567890", targetWpm: 30, words: "code1 code2 code3 1010 2020 5050 999 404 8080 123 456 7890 007 1337".split(" ") },
+    { name: "Level 11: Special Characters", keys: "!@#$", targetWpm: 25, words: "Wait! Stop! #Secure @User Admin! Help? $Cash %Rate ^Up &Link *Star".split(" ") },
+    { name: "Level 12: Complex Strings", keys: "MIXED", targetWpm: 25, words: "user@local 192.168.1.1 <script> admin_pass! 2024-secure.key {data:true}".split(" ") },
+    { name: "Level 13: Cyber Master", keys: "ALL", targetWpm: 40, words: "A quick brown fox jumps over the lazy dog! 123-456. Secure your data?".split(" ") }
+];
+
+const FINGER_MAP = {
+    'Q':'L1','A':'L1','Z':'L1','W':'L2','S':'L2','X':'L2','E':'L3','D':'L3','C':'L3','R':'L4','F':'L4','V':'L4','T':'L4','G':'L4','B':'L4',
+    'Y':'R4','H':'R4','N':'R4','U':'R4','J':'R4','M':'R4','I':'R3','K':'R3',',':'R3','O':'R2','L':'R2','.':'R2','P':'R1',';':'R1',' ':'L5',
+    '1':'L1','2':'L2','3':'L3','4':'L4','5':'L4','6':'R4','7':'R4','8':'R3','9':'R2','0':'R1','-':'R1','=':'R1','!':'L1','?':'R1','.':'R2',',':'R3'
+};
+
+let STATE = { 
+    level: 0, maxUnlocked: 0, wordIdx: 0, charIdx: 0, 
+    score: 0, hits: 0, misses: 0, 
+    elapsedTime: 0, timerId: null, isPaused: false 
+};
+
+function playSfx(freq, type, dur) {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + dur);
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + dur);
+    } catch(e) {}
+}
+
+function buildKeyboard() {
+    const layout = ["1234567890", "QWERTYUIOP", "ASDFGHJKL;", "ZXCVBNM,.", " "];
+    const root = document.getElementById('kb-root');
+    root.innerHTML = '';
+    layout.forEach(rowStr => {
+        const row = document.createElement('div');
+        row.className = 'kb-row';
+        rowStr.split('').forEach(char => {
+            const k = document.createElement('div');
+            k.className = 'key'; 
+            if(char === ' ') k.classList.add('key-space');
+            k.id = `k-${char === ';' ? 'SEMI' : (char === '.' ? 'DOT' : (char === ',' ? 'COMMA' : (char === ' ' ? 'SPACE' : char)))}`;
+            k.innerText = char === ' ' ? 'SPACE' : char;
+            row.appendChild(k);
+        });
+        root.appendChild(row);
+    });
+}
+
+function startTimer() {
+    if (STATE.timerId) return;
+    STATE.timerId = setInterval(() => {
+        if (!STATE.isPaused) {
+            STATE.elapsedTime++;
+            updateStats();
+        }
+    }, 1000);
+}
+
+function togglePause() {
+    if (STATE.hits === 0 && STATE.misses === 0) return;
+    STATE.isPaused = !STATE.isPaused;
+    document.getElementById('pause-overlay').style.display = STATE.isPaused ? 'flex' : 'none';
+}
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+function updateStats() {
+    const total = STATE.hits + STATE.misses;
+    const acc = total === 0 ? 100 : Math.round((STATE.hits / total) * 100);
+    document.getElementById('score').innerText = STATE.score;
+    document.getElementById('timer').innerText = formatTime(STATE.elapsedTime);
+    
+    const accEl = document.getElementById('live-acc');
+    accEl.innerText = acc + "%";
+    accEl.style.color = acc >= 80 ? 'var(--leaf)' : 'var(--neon-pink)';
+
+    if(STATE.elapsedTime > 0) {
+        const mins = STATE.elapsedTime / 60;
+        const currentWpm = Math.round((STATE.hits/5) / mins) || 0;
+        document.getElementById('wpm').innerText = currentWpm;
+    }
+}
+
+function render() {
+    const lvl = CURRICULUM[STATE.level];
+    const word = lvl.words[STATE.wordIdx];
+    
+    document.getElementById('level-display').innerText = `STAGE ${STATE.level + 1}`;
+    document.getElementById('target-wpm-display').innerText = `GOAL: ${lvl.targetWpm} WPM`;
+    document.getElementById('progress-text').innerText = `${STATE.wordIdx} / ${lvl.words.length}`;
+    document.getElementById('progress-bar').style.width = (STATE.wordIdx / lvl.words.length * 100) + "%";
+
+    const well = document.getElementById('word-well');
+    well.innerHTML = word.split('').map((c, i) => 
+        `<span class="char ${i < STATE.charIdx ? 'correct' : (i === STATE.charIdx ? 'current' : '')}">${c}</span>`
+    ).join('');
+
+    document.querySelectorAll('.finger, .key').forEach(el => {
+        el.classList.remove('active', 'highlight');
+        if(el.classList.contains('key')) el.style.backgroundColor = '';
+    });
+
+    const target = word[STATE.charIdx].toUpperCase();
+    const fId = FINGER_MAP[target];
+    if(fId) {
+        const actualFId = fId === 'L5' ? (STATE.hits % 2 === 0 ? 'R5' : 'L5') : fId; 
+        const fingerEl = document.getElementById(`f-${actualFId}`);
+        if(fingerEl) fingerEl.classList.add('active');
+
+        const keyId = target === ';' ? 'SEMI' : (target === '.' ? 'DOT' : (target === ',' ? 'COMMA' : (target === ' ' ? 'SPACE' : target)));
+        const kEl = document.getElementById(`k-${keyId}`);
+        if(kEl) {
+            kEl.classList.add('highlight');
+            kEl.style.backgroundColor = fingerEl ? fingerEl.style.color : 'var(--neon-blue)';
+        }
+    }
+}
+
+window.onkeydown = (e) => {
+    if (e.key === 'Escape') { togglePause(); return; }
+    if(STATE.isPaused || document.getElementById('modal-overlay').style.display === 'flex') return;
+    if(e.key === ' ') e.preventDefault();
+    if(!STATE.timerId) startTimer();
+
+    const typed = e.key;
+    const word = CURRICULUM[STATE.level].words[STATE.wordIdx];
+    const target = word[STATE.charIdx];
+
+    if(typed === target) {
+        playSfx(400 + (STATE.charIdx * 30), 'sine', 0.1);
+        STATE.hits++;
+        STATE.charIdx++;
+        STATE.score += 10;
+        if(STATE.charIdx >= word.length) {
+            STATE.charIdx = 0; STATE.wordIdx++;
+            if(STATE.wordIdx >= CURRICULUM[STATE.level].words.length) levelCheck();
+        }
+    } else if(!['Shift','Control','Alt','Meta','CapsLock'].includes(e.key)) {
+        playSfx(150, 'sawtooth', 0.2);
+        STATE.misses++;
+        STATE.score = Math.max(0, STATE.score - 5);
+    }
+    updateStats();
+    render();
+};
+
+function levelCheck() {
+    clearInterval(STATE.timerId);
+    const lvl = CURRICULUM[STATE.level];
+    const total = STATE.hits + STATE.misses;
+    const acc = Math.round((STATE.hits / total) * 100);
+    const mins = STATE.elapsedTime / 60;
+    const wpm = Math.round((STATE.hits/5) / mins) || 0;
+
+    const overlay = document.getElementById('modal-overlay');
+    const title = document.getElementById('modal-title');
+    const msg = document.getElementById('modal-msg');
+    const reqBox = document.getElementById('req-box');
+    const btn = document.getElementById('modal-btn');
+
+    overlay.style.display = 'flex';
+    const passed = acc >= 80 && wpm >= lvl.targetWpm;
+
+    if(passed) {
+        title.innerText = "ACCESS GRANTED";
+        title.style.color = "var(--leaf)";
+        msg.innerText = "Firewall breached. Sector cleared.";
+        reqBox.innerHTML = `
+            <div style="color:#2ed573">✔ ACCURACY: ${acc}% (Min 80%)</div>
+            <div style="color:#2ed573">✔ SPEED: ${wpm} WPM (Goal ${lvl.targetWpm})</div>
+        `;
+        btn.innerText = "PROCEED TO NEXT SECTOR";
+        btn.style.background = "var(--leaf)";
+        btn.onclick = () => { 
+            STATE.level++; 
+            if(STATE.level > STATE.maxUnlocked) STATE.maxUnlocked = STATE.level;
+            resetStats(); overlay.style.display='none'; buildLevelList(); render(); 
+        };
+    } else {
+        title.innerText = "ACCESS DENIED";
+        title.style.color = "var(--neon-pink)";
+        msg.innerText = "Encryption too slow. Security detected you.";
+        reqBox.innerHTML = `
+            <div style="color:${acc >= 80 ? '#2ed573':'#ff4757'}">ACCURACY: ${acc}% / 80%</div>
+            <div style="color:${wpm >= lvl.targetWpm ? '#2ed573':'#ff4757'}">SPEED: ${wpm} WPM / ${lvl.targetWpm}</div>
+        `;
+        btn.innerText = "REBOOT SESSION (RETRY)";
+        btn.style.background = "var(--neon-pink)";
+        btn.onclick = () => { resetStats(); overlay.style.display='none'; render(); };
+    }
+}
+
+function resetStats() {
+    if (STATE.timerId) clearInterval(STATE.timerId);
+    STATE.wordIdx = 0; STATE.charIdx = 0; STATE.hits = 0; STATE.misses = 0; 
+    STATE.elapsedTime = 0; STATE.timerId = null; STATE.isPaused = false;
+    STATE.score = 0;
+    document.getElementById('wpm').innerText = "0";
+    document.getElementById('timer').innerText = "00:00";
+    document.getElementById('pause-overlay').style.display = 'none';
+    updateStats();
+}
+
+function buildLevelList() {
+    const list = document.getElementById('level-list');
+    list.innerHTML = '';
+    CURRICULUM.forEach((l, i) => {
+        const d = document.createElement('div');
+        const isLocked = i > STATE.maxUnlocked;
+        d.className = `level-card ${i === STATE.level ? 'active' : ''} ${isLocked ? 'locked' : ''}`;
+        d.innerHTML = `<b>STAGE ${i+1}</b><br>${l.name.split(':')[1] || l.name}<br><small>Goal: ${l.targetWpm} WPM</small>`;
+        if(!isLocked) {
+            d.onclick = () => { STATE.level = i; resetStats(); buildLevelList(); render(); };
+        }
+        list.appendChild(d);
+    });
+}
+
+buildKeyboard();
+buildLevelList();
+render();
+</script>
+</body>
+</html>

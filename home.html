@@ -254,6 +254,7 @@
     .subject-card:nth-child(6) .card-accent { background: linear-gradient(145deg, #00d4a0, #006B3F); } 
     .subject-card:nth-child(7) .card-accent { background: linear-gradient(145deg, #F4A300, #b57c00); } 
     .subject-card:nth-child(8) .card-accent { background: linear-gradient(145deg, #1e4fd0, #0033a0); }
+    .subject-card:nth-child(9) .card-accent { background: linear-gradient(145deg, #00d4a0, #006B3F); }
 
     .subject-card:hover .card-accent {
       border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
@@ -717,7 +718,7 @@
     <h2>📚 available quizzes</h2>
   </div>
 
-  <!-- subject grid (all links open safely) -->
+  <!-- subject grid (all links open safely) - FIXED #2: Properly closed after all cards -->
   <div class="card-grid" id="subject-grid">
     <!-- Cards will be populated with view counts by JavaScript -->
     <a href="https://katetezambia.github.io/com/ict.html" class="subject-card" target="_blank" rel="noopener noreferrer" data-path="/com/ict.html">
@@ -829,38 +830,37 @@
       <div class="card-accent">⌨️</div>
       <h3>Cybersafe Touch Typing</h3>
       <div class="badge">All ages</div>
-      <div class="page-view-count" id="view-type">
+      <div class="page-view-count" id="view-typing">
         <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-type">...</span> views
+        <span class="view-number" id="view-number-typing">...</span> views
       </div>
       <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-type" style="width: 0%"></div>
+        <div class="popularity-bar" id="bar-typing" style="width: 0%"></div>
       </div>
       <div class="description">beginner, intermediate, advanced, professional</div>
       <div class="description">Your computer must be connected to a keyboard to play this one</div>
       <span class="enter-btn">enter lab <span>→</span></span>
     </a>
-  </div>
 
-<a href="https://katetezambia.github.io/com/primary_maths.html" class="subject-card" target="_blank" rel="noopener noreferrer" data-path="/com/primary_maths.html">
-      <div class="card-accent">⌨️</div>
-      <h3>Cybersafe Grade 7 Maths </h3>
-      <div class="badge">All ages</div>
-      <div class="page-view-count" id="view-type">
+    <!-- FIXED #2: Primary Maths card now INSIDE the grid container -->
+    <!-- FIXED #4: Added data-path attribute for tracking -->
+    <!-- FIXED #3: Changed all IDs to be unique (using 'primary-maths' instead of 'type') -->
+    <a href="https://katetezambia.github.io/com/primary_maths.html" class="subject-card" target="_blank" rel="noopener noreferrer" data-path="/com/primary_maths.html">
+      <div class="card-accent">🔢</div>
+      <h3>Cybersafe Grade 7 Maths</h3>
+      <div class="badge">Grade 7</div>
+      <div class="page-view-count" id="view-primary-maths">
         <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-type">...</span> views
+        <span class="view-number" id="view-number-primary-maths">...</span> views
       </div>
       <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-type" style="width: 0%"></div>
+        <div class="popularity-bar" id="bar-primary-maths" style="width: 0%"></div>
       </div>
-      <div class="description">beginner, intermediate, advanced, professional</div>
+      <div class="description">Numbers, operations, fractions, geometry, measurement</div>
       <span class="enter-btn">enter Test <span>→</span></span>
     </a>
-  </div>
+  </div> <!-- FIXED #2: Properly closed grid container -->
 
-
-  
-  
   <!-- stats + developer quick info -->
   <div class="footer-info">
     <div class="quiz-stats">
@@ -900,6 +900,7 @@
     const BASE_URL = `https://${GOATCOUNTER_CODE}.goatcounter.com`;
     
     // Page paths to track (matching the data-path attributes on cards)
+    // FIXED #4: Added primary_maths.html to tracking
     const pagePaths = [
         '/com/ict.html',
         '/com/biology.html', 
@@ -908,10 +909,12 @@
         '/com/maths.html',
         '/com/english.html',
         '/com/civic.html',
-        '/com/typing.html'
+        '/com/typing.html',
+        '/com/primary_maths.html'  // Added for tracking
     ];
     
     // Page display names and icons
+    // FIXED #3: Updated IDs to match new unique IDs
     const pageInfo = {
         '/com/ict.html': { name: 'I.C.T', icon: '💻', id: 'ict' },
         '/com/biology.html': { name: 'Biology', icon: '🧬', id: 'bio' },
@@ -920,7 +923,8 @@
         '/com/maths.html': { name: 'Mathematics', icon: '📐', id: 'math' },
         '/com/english.html': { name: 'English', icon: '📖', id: 'eng' },
         '/com/civic.html': { name: 'Civic', icon: '⚖️', id: 'civic' },
-        '/com/typing.html': { name: 'Touch Typing', icon: '⌨️', id: 'type' }
+        '/com/typing.html': { name: 'Touch Typing', icon: '⌨️', id: 'typing' },
+        '/com/primary_maths.html': { name: 'Grade 7 Maths', icon: '🔢', id: 'primary-maths' }
     };
     
     // Store view counts
@@ -946,7 +950,7 @@
             }
             
             const data = await response.json();
-            // The API returns { count: "1,234" } or similar [citation:2]
+            // The API returns { count: "1,234" } or similar
             const countStr = data.count || "0";
             // Remove commas and convert to number
             const count = parseInt(countStr.replace(/,/g, '')) || 0;
@@ -960,7 +964,7 @@
     // Function to fetch total site views
     async function fetchTotalViews() {
         try {
-            // Special path 'TOTAL' gets site-wide total [citation:2]
+            // Special path 'TOTAL' gets site-wide total
             const url = `${BASE_URL}/counter/TOTAL.json`;
             const response = await fetch(url);
             if (!response.ok) return 0;
@@ -983,7 +987,7 @@
         function checkGoatCounter() {
             attempts++;
             if (window.goatcounter && window.goatcounter.visit_count) {
-                // GoatCounter loaded, use it to display live visitor count [citation:2]
+                // GoatCounter loaded, use it to display live visitor count
                 try {
                     window.goatcounter.visit_count({
                         append: '#live-container',
@@ -1110,23 +1114,8 @@
             console.error('Error loading analytics:', error);
             
             // Set fallback values
-            document.getElementById('total-views').innerText = 'Loading...';
-            
-            // Set fallbacks for each card
-            for (const path of pagePaths) {
-                const info = pageInfo[path];
-                if (!info) continue;
-                
-                const viewElement = document.getElementById(`view-number-${info.id}`);
-                if (viewElement) {
-                    viewElement.innerText popularity ranking list
-            updatePopularityList();
-            
-        } catch (error) {
-            console.error('Error loading analytics:', error);
-            
-            // Set fallback values
-            document.getElementById('total-views').innerText = 'Loading...';
+            const totalViewsElement = document.getElementById('total-views');
+            if (totalViewsElement) totalViewsElement.innerText = '—';
             
             // Set fallbacks for each card
             for (const path of pagePaths) {
@@ -1137,26 +1126,14 @@
                 if (viewElement) {
                     viewElement.innerText = '0';
                 }
- = '0';
-                }
             }
-            }
-        }
-    }
         }
     }
     
-    // Initialize    
     // Initialize when DOM is ready
-    when DOM is ready document.addEventListener
-    document.addEventListener('DOM('DOMContentLoaded', functionContentLoaded() {
-        load', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         loadAnalytics();
-       Analytics();
         initLiveVisitorCounter();
-    initLiveVisitorCounter });
-})();
-</();
     });
 })();
 </script>

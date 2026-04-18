@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>🛡️ CyberSafe MATHS · Grade 7 Zambia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        :root {
+            --zambia-green: #006B3F;
+            --zambia-green-light: #00A86B;
+            --zambia-green-dark: #004d2e;
+            --zambia-blue: #0033a0;
+            --zambia-blue-light: #1e4fd0;
+            --zambia-blue-dark: #001f66;
+            --zambia-orange: #F4A300;
+            --zambia-orange-light: #ffb52e;
+            --zambia-orange-dark: #b57c00;
+            --zambia-red: #CE1126;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.15);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --radius-full: 9999px;
+        }
+
+        html { font-size: 14px; -webkit-text-size-adjust: 100%; }
+        @media (min-width: 400px) { html { font-size: 15px; } }
+        @media (min-width: 600px) { html { font-size: 16px; } }
+
+        body {
+            background: linear-gradient(145deg, var(--zambia-blue) 0%, var(--zambia-green) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: clamp(0.5rem, 2vw, 1.5rem);
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: min(1400px, 98vw);
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: clamp(1rem, 4vw, 2.5rem);
+        }
+
+        h1 {
+            color: var(--zambia-green);
+            border-left: 0.5rem solid var(--zambia-orange);
+            padding-left: clamp(1rem, 3vw, 2rem);
+            font-size: clamp(1.8rem, 6vw, 3.2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        h1 .shield-emoji {
+            background: linear-gradient(90deg, #ff3333 0% 50%, #ffffff 50% 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(255, 51, 51, 0.8)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+            animation: shieldGlow 3s ease-in-out infinite;
+            transform: scale(1.05);
+            margin-right: 4px;
+        }
+
+        @keyframes shieldGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 51, 51, 0.8)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)); transform: scale(1.05); }
+            50% { filter: drop-shadow(0 0 15px rgba(255, 51, 51, 1)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 35px rgba(255, 215, 0, 0.8)); transform: scale(1.1); }
+        }
+
+        .nav-bar {
+            background: var(--zambia-blue);
+            border-radius: var(--radius-full);
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .nav-btn:hover { background: rgba(255,255,255,0.2); }
+        .nav-btn.active { background: var(--zambia-orange); color: var(--zambia-blue); }
+
+        .topic-selector {
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .topic-selector h3 { color: var(--zambia-blue); margin-bottom: 0.8rem; font-size: 1rem; }
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.6rem;
+        }
+        .topic-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.8rem;
+            background: white;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--zambia-green);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .topic-checkbox:hover { background: var(--zambia-orange-light); transform: scale(0.98); }
+        .topic-checkbox.selected { background: var(--zambia-green); color: white; border-color: var(--zambia-orange); }
+        .topic-checkbox input { margin-right: 0.3rem; width: 18px; height: 18px; cursor: pointer; }
+        .topic-checkbox label { cursor: pointer; font-weight: 600; font-size: 0.85rem; flex: 1; }
+
+        .reg-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            background: #f0faf5;
+            padding: 14px;
+            border-radius: 20px;
+        }
+        .reg-field { flex: 1; min-width: 120px; }
+        .reg-field label { font-size: 10px; font-weight: 800; color: #1d6b4f; display: block; }
+        .reg-field input { width: 100%; padding: 8px 12px; border-radius: 40px; border: 1.5px solid #cae3d9; font-family: inherit; }
+
+        .btn {
+            background: var(--zambia-orange);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border-bottom: 4px solid var(--zambia-orange-dark);
+            transition: all 0.1s;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-blue { background: var(--zambia-blue); border-bottom-color: var(--zambia-blue-dark); }
+        .btn-red { background: var(--zambia-red); border-bottom-color: #8b0000; }
+        .btn-green { background: var(--zambia-green); border-bottom-color: var(--zambia-green-dark); }
+
+        .quiz-header {
+            background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-full);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .progress-bar { height: 0.8rem; background: var(--gray-200); border-radius: var(--radius-full); margin: 1rem 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--zambia-orange), var(--zambia-orange-light)); border-radius: var(--radius-full); transition: width 0.3s; }
+
+        .question-box {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border-left: 0.5rem solid var(--zambia-orange);
+            box-shadow: var(--shadow-md);
+            margin: 1rem 0;
+        }
+        .question-number {
+            color: var(--zambia-blue);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            background: var(--gray-100);
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+        }
+        .question-text { font-size: 1.2rem; font-weight: 700; color: var(--zambia-blue); margin-bottom: 1.5rem; line-height: 1.4; }
+
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.8rem; }
+        .option {
+            background: white;
+            border: 3px solid var(--zambia-green);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+            transition: all 0.15s;
+        }
+        .option:hover { background: #fcf7e1; transform: scale(0.98); }
+        .option-prefix {
+            background: var(--zambia-orange);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .option.correct-answer { background: #d4edda !important; border-color: #28a745 !important; }
+        .option.correct-answer .option-prefix { background: #28a745 !important; }
+        .option.wrong-answer { background: #f8d7da !important; border-color: #dc3545 !important; }
+        .option.wrong-answer .option-prefix { background: #dc3545 !important; }
+        .option.selected { background: var(--zambia-green); color: white; border-color: var(--zambia-orange); }
+        .option.selected .option-prefix { background: white; color: var(--zambia-green); }
+
+        .explanation {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #e3f2fd;
+            border-radius: var(--radius-md);
+            border-left: 6px solid var(--zambia-blue);
+            font-size: 0.9rem;
+        }
+
+        .action-bar { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; align-items: center; }
+        .score-box {
+            background: var(--zambia-orange);
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: auto;
+            color: white;
+        }
+
+        .results-preview { background: white; border-radius: var(--radius-lg); padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+        .results-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .results-table th { background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue)); color: white; padding: 0.8rem; text-align: left; }
+        .results-table td { padding: 0.8rem; border: 1px solid var(--gray-200); vertical-align: top; }
+        .results-table tr.correct-row { background: #d4edda; }
+        .results-table tr.incorrect-row { background: #f8d7da; }
+
+        .footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 3px solid var(--zambia-orange); text-align: center; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1> <span class="shield-emoji">🛡️</span> CyberSafe MATHS · Grade 7 Zambia</h1>
+    <div class="nav-bar no-print">
+        <button class="nav-btn active" onclick="showSection('mainMenu')">🏠 Home</button>
+        <button class="nav-btn" onclick="showSection('startPlaying')">📝 Start Quiz</button>
+        <button class="nav-btn sound-toggle" onclick="toggleSound()">🔊 Sound On</button>
+    </div>
+
+    <!-- MAIN MENU -->
+    <div id="mainMenu">
+        <div style="background: linear-gradient(135deg, var(--zambia-orange), var(--zambia-orange-light)); border-radius: var(--radius-lg); padding: 2rem; text-align:center;">
+            <h2 style="color: var(--zambia-blue); font-size: 1.8rem;">ECZ MATHEMATICS · GRADE 7</h2>
+            <p style="font-size: 1.2rem; margin: 0.8rem 0;">5,000+ Unique Questions · 17 Topics</p>
+            <p style="font-size: 0.9rem;">🎯 <strong>Mouse:</strong> Click any answer | ⌨️ <strong>Keyboard:</strong> Press A, B, C, D to select | ENTER to submit | ENTER again for next</p>
+        </div>
+        <button class="btn" style="margin:1.5rem auto; display:block;" onclick="showSection('startPlaying')">▶ BEGIN CYBERSAFE MATHS</button>
+    </div>
+
+    <!-- REGISTRATION + TOPIC SELECTION -->
+    <div id="startPlaying" class="hidden">
+        <h2 style="color:var(--zambia-green); margin-bottom:1rem;">📋 Student Registration</h2>
+        
+        <div class="topic-selector">
+            <h3>📚 Select Topics (Check all that apply):</h3>
+            <div class="topic-grid" id="topicGrid"></div>
+            <div style="margin-top: 0.8rem;">
+                <button class="btn-blue" style="padding:0.4rem 1rem; border-radius:40px; border:none; cursor:pointer;" onclick="selectAllTopics()">✅ Select All</button>
+                <button class="btn-blue" style="padding:0.4rem 1rem; border-radius:40px; border:none; cursor:pointer; margin-left:0.5rem;" onclick="deselectAllTopics()">❌ Deselect All</button>
+            </div>
+        </div>
+        
+        <div class="reg-row">
+            <div class="reg-field"><label>👤 Full Name</label><input type="text" id="fullName" placeholder="Mwila Chanda" value="Mwila Chanda"></div>
+            <div class="reg-field"><label>🏫 School</label><input type="text" id="schoolName" placeholder="Katete Primary" value="Katete Primary"></div>
+            <div class="reg-field"><label>📍 District</label><input type="text" id="districtName" placeholder="Katete" value="Katete"></div>
+            <div class="reg-field"><label>📅 Date</label><input type="date" id="quizDate"></div>
+        </div>
+        <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn" id="startQuizBtn">▶ START QUIZ</button>
+            <button class="btn btn-blue" onclick="showSection('mainMenu')">◀ BACK</button>
+        </div>
+    </div>
+
+    <!-- QUIZ PANEL -->
+    <div id="quizPanel" class="hidden">
+        <div style="display:flex; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:0.8rem;" class="no-print">
+            <button class="btn btn-red" onclick="quitQuiz()">◀ Quit</button>
+            <div style="background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue)); color:white; padding:0.6rem 1.5rem; border-radius:var(--radius-full); font-weight:600;" id="candidateInfo"></div>
+        </div>
+        <div class="quiz-header">
+            <span id="topicDisplay">Topic: Multiple Topics</span>
+            <span>⏱️ <span id="timerDisplay">00:30</span></span>
+        </div>
+        <div class="progress-bar no-print"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="questionContainer" class="question-box"></div>
+        <div class="action-bar no-print">
+            <button class="btn" id="submitBtn">✔ SUBMIT (Enter)</button>
+            <button class="btn btn-blue" id="nextBtn">NEXT ⏩ (Enter)</button>
+            <div class="score-box" id="scoreDisplay">0/20</div>
+        </div>
+    </div>
+
+    <!-- RESULTS SECTION -->
+    <div id="resultsSection" class="hidden"></div>
+    
+    <div class="footer no-print">© 2026 CYBERSAFE MATHS | Grade 7 Zambia Curriculum</div>
+</div>
+
+<script>
+(function(){
+    // ========== SOUND SYSTEM ==========
+    let soundEnabled = true;
+    window.toggleSound = function() {
+        soundEnabled = !soundEnabled;
+        document.querySelector('.sound-toggle').textContent = soundEnabled ? '🔊 Sound On' : '🔇 Sound Off';
+    };
+    
+    function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            if (type === 'correct') {
+                oscillator.frequency.value = 880;
+                gainNode.gain.value = 0.15;
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } else if (type === 'wrong') {
+                oscillator.frequency.value = 330;
+                gainNode.gain.value = 0.15;
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.4);
+            } else {
+                oscillator.frequency.value = 1000;
+                gainNode.gain.value = 0.08;
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1);
+            }
+        } catch(e) { }
+    }
+    
+    // ========== QUESTION BANK ==========
+    let MASTER_BANK = [];
+    let qid = 1;
+    
+    function addQ(text, options, correctIdx, explanation, topic) {
+        MASTER_BANK.push({ id: qid++, text: text, options: options.slice(), correct: correctIdx, expl: explanation, topic: topic });
+    }
+    
+    function shuffle(arr) { for(let i=arr.length-1;i>0;i--){ let j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+    function rand(a,b) { return Math.floor(Math.random()*(b-a+1))+a; }
+    function toRoman(n) { const v=[1000,900,500,400,100,90,50,40,10,9,5,4,1]; const s=["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]; let r=""; for(let i=0;i<v.length;i++) while(n>=v[i]) { r+=s[i]; n-=v[i]; } return r; }
+    function gcd(a,b){ while(b){ let t=b; b=a%b; a=t; } return a; }
+    
+    // Core questions
+    addQ("Add 457 364 to 75 396.", ["532 760", "532 750", "522 760", "522 750"], 0, "457364 + 75396 = 532760", "addsub");
+    addQ("In Roman numerals, 75 is the same as...", ["LXXV", "LXXIIIII", "XXXXXXXV", "XXVCV"], 0, "75 = 50+25 = LXXV", "roman");
+    addQ("What are the prime factors of 24?", ["2 and 3", "2 and 4", "2 and 6", "3 and 8"], 0, "24 = 2×2×2×3", "factors");
+    addQ("723 942 − 351 671 = ?", ["372 271", "472 271", "372 371", "472 371"], 0, "723942 - 351671 = 372271", "addsub");
+    addQ("Mrs Kongole bought 260 bananas. She sold 102 bananas. How many remain?", ["158", "148", "152", "185"], 0, "260 - 102 = 158", "wordprob");
+    addQ("If 10 is added to x and the result is 32, what is x?", ["22", "320", "42", "32"], 0, "x = 32 - 10 = 22", "algebra");
+    addQ("Express ratio 8 : 16 : 32 in lowest terms.", ["1 : 2 : 4", "1 : 2 : 3", "1 : 2 : 2", "1 : 2 : 1"], 0, "Divide all by 8", "ratio");
+    addQ("61.111 + 200.3 + 0.004 = ?", ["261.415", "261.118", "63.415", "63.118"], 0, "Add decimals carefully", "addsub");
+    addQ("Next number in 400, 200, 100...?", ["50", "90", "80", "60"], 0, "Divide by 2 each time", "patterns");
+    addQ("286 ÷ 12 = ?", ["23 remainder 10", "23 remainder 6", "23 remainder 5", "23 remainder 4"], 0, "12×23=276, remainder 10", "multdiv");
+    addQ("Convert 38 to base five.", ["123₅", "213₅", "231₅", "301₅"], 0, "38÷5=7r3, 7÷5=1r2, 1÷5=0r1 → 123₅", "bases");
+    addQ("Find 30% of 320.", ["96", "9600", "350", "106"], 0, "0.3 × 320 = 96", "percent");
+    addQ("Convert 17/20 to percentage.", ["85%", "80%", "68%", "60%"], 0, "17÷20=0.85=85%", "percent");
+    addQ("Arrange VI, X, XV, IX smallest to largest.", ["VI, IX, X, XV", "XV, X, IX, VI", "IX, VI, X, XV", "X, VI, IX, XV"], 0, "6,9,10,15", "roman");
+    addQ("Rectangle length 38cm, width 8cm. Area = ?", ["304cm²", "335cm²", "277cm²", "43cm²"], 0, "Area = 38 × 8 = 304 cm²", "geometry");
+    addQ("Solve: 3x + 5 = 20", ["5", "15", "25", "8"], 0, "3x=15, x=5", "algebra");
+    addQ("Perimeter of square side 12cm?", ["48cm", "24cm", "144cm", "36cm"], 0, "Perimeter = 4 × 12 = 48cm", "geometry");
+    addQ("LCM of 6 and 8?", ["24", "12", "48", "16"], 0, "LCM = 24", "factors");
+    addQ("0.75 as fraction in simplest form?", ["3/4", "75/100", "7/5", "1/3"], 0, "0.75 = 75/100 = 3/4", "fractions");
+    addQ("15% of K200 = ?", ["K30", "K20", "K25", "K35"], 0, "15/100 × 200 = 30", "percent");
+    
+    // Generate additional questions
+    for(let i=0; i<700; i++) { let a=rand(100,9999), b=rand(50,5000), s=a+b; let opts=shuffle([s,s+rand(10,200),s-rand(5,100),s+rand(50,300)]); addQ(`Calculate: ${a.toLocaleString()} + ${b.toLocaleString()}`, opts.map(String), opts.indexOf(s), "Add column by column with carrying.", "addsub"); }
+    for(let i=0; i<600; i++) { let a=rand(500,9999), b=rand(50,a-100), d=a-b; let opts=shuffle([d,d+rand(10,150),d-rand(5,80),d+rand(50,200)]); addQ(`Find: ${a.toLocaleString()} − ${b.toLocaleString()}`, opts.map(String), opts.indexOf(d), "Subtract carefully, borrowing when needed.", "addsub"); }
+    for(let i=0; i<700; i++) { let a=rand(10,999), b=rand(5,99), p=a*b; let opts=shuffle([p,p+rand(20,300),p-rand(10,200),p+rand(100,500)]); addQ(`Multiply: ${a} × ${b} = ?`, opts.map(String), opts.indexOf(p), `Multiply ${a} by ${b}.`, "multdiv"); }
+    for(let i=0; i<600; i++) { let pct=rand(5,95), num=rand(50,1000), res=Math.round(num*pct/100); let opts=shuffle([res,res+rand(5,50),res-rand(3,40),res+rand(20,80)]); addQ(`Find ${pct}% of ${num}`, opts.map(v=>`${v}`), opts.indexOf(res), `${pct}% = ${pct}/100 × ${num}`, "percent"); }
+    for(let i=0; i<450; i++) { let n=rand(1,3999), r=toRoman(n); let opts=shuffle([r,toRoman(n+rand(1,10)),toRoman(Math.max(1,n-rand(1,10))),toRoman(n+rand(11,30))]); addQ(`Roman numeral for ${n}`, opts, opts.indexOf(r), `${n} = ${r}`, "roman"); }
+    for(let i=0; i<450; i++) { let a=rand(6,100), b=rand(6,100), h=gcd(a,b); let opts=shuffle([h,h+rand(1,5),Math.max(1,h-rand(1,3)),rand(2,20)]); addQ(`HCF of ${a} and ${b}`, opts.map(String), opts.indexOf(h), "Highest Common Factor", "factors"); let l=(a*b)/h; let opts2=shuffle([l,l+rand(5,30),l-rand(3,20),a*b]); addQ(`LCM of ${a} and ${b}`, opts2.map(String), opts2.indexOf(l), "LCM = (a×b)÷HCF", "factors"); }
+    for(let i=0; i<550; i++) { let x=rand(2,50), c=rand(3,40), eq=x+c; let opts=shuffle([x,x+rand(1,5),x-rand(1,4),rand(10,60)]); addQ(`Solve: x + ${c} = ${eq}`, opts.map(String), opts.indexOf(x), `Subtract ${c} from both sides.`, "algebra"); }
+    for(let i=0; i<600; i++) { let L=rand(5,80), W=rand(3,60), area=L*W; let optsA=shuffle([area,area+rand(10,50),area-rand(5,30),rand(20,200)]); addQ(`Rectangle: length ${L}cm, width ${W}cm. Area = ?`, optsA.map(v=>`${v}cm²`), optsA.map(v=>`${v}cm²`).indexOf(`${area}cm²`), "Area = length × width", "geometry"); }
+    for(let i=0; i<450; i++) { let dist=rand(60,600), time=rand(2,8), speed=Math.round(dist/time); let opts=shuffle([speed,speed+rand(5,25),speed-rand(3,15),rand(20,100)]); addQ(`Distance ${dist}km in ${time} hours. Speed = ?`, opts.map(v=>`${v}km/h`), opts.map(v=>`${v}km/h`).indexOf(`${speed}km/h`), "Speed = Distance ÷ Time", "time"); }
+    
+    console.log("✅ Bank ready:", MASTER_BANK.length);
+    
+    // ========== TOPICS ==========
+    const topicsList = ["addsub","multdiv","fractions","percent","roman","patterns","factors","algebra","ratio","geometry","money","time","data","integers","sets","bases","wordprob"];
+    const topicNice = {
+        addsub:"➕ Addition & Subtraction", multdiv:"✖️ Multiplication & Division", fractions:"🍕 Fractions",
+        percent:"📊 Percentages", roman:"🏛️ Roman Numerals", patterns:"🔢 Number Patterns",
+        factors:"🔍 HCF & LCM", algebra:"🔡 Algebra", ratio:"⚖️ Ratio", geometry:"📐 Geometry",
+        money:"💰 Money", time:"⏰ Time & Speed", data:"📈 Data & Statistics", integers:"➕➖ Integers",
+        sets:"🔵 Sets", bases:"🔢 Number Bases", wordprob:"📖 Word Problems"
+    };
+    
+    let selectedTopics = [...topicsList];
+    
+    function buildTopicGrid() {
+        const grid = document.getElementById('topicGrid');
+        grid.innerHTML = '';
+        topicsList.forEach(topic => {
+            const div = document.createElement('div');
+            div.className = 'topic-checkbox' + (selectedTopics.includes(topic) ? ' selected' : '');
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = selectedTopics.includes(topic);
+            cb.onchange = (e) => {
+                if(cb.checked) { if(!selectedTopics.includes(topic)) selectedTopics.push(topic); }
+                else { selectedTopics = selectedTopics.filter(t => t !== topic); }
+                div.classList.toggle('selected', cb.checked);
+            };
+            const label = document.createElement('label');
+            label.textContent = topicNice[topic];
+            div.appendChild(cb);
+            div.appendChild(label);
+            div.onclick = (e) => { if(e.target !== cb) { cb.checked = !cb.checked; cb.onchange(); } };
+            grid.appendChild(div);
+        });
+    }
+    window.selectAllTopics = () => { selectedTopics = [...topicsList]; buildTopicGrid(); };
+    window.deselectAllTopics = () => { selectedTopics = []; buildTopicGrid(); };
+    
+    function getQuestionsFromSelectedTopics(count) {
+        if(selectedTopics.length === 0) selectedTopics = [...topicsList];
+        let filtered = MASTER_BANK.filter(q => selectedTopics.includes(q.topic));
+        if(filtered.length < count) filtered = MASTER_BANK;
+        return shuffle([...filtered]).slice(0, count);
+    }
+    
+    // ========== QUIZ ENGINE ==========
+    const QUIZ_LEN = 20;
+    let quizQuestions = [];
+    let currentIndex = 0;
+    let selections = [];
+    let submittedFlags = [];
+    let score = 0;
+    let activeQuiz = false;
+    let finishedQuiz = false;
+    let timeLeft = 30;
+    let timerInterval = null;
+    let quizLog = [];
+    
+    window.selectOptionGlobal = function(idx) {
+        if(!activeQuiz || finishedQuiz || submittedFlags[currentIndex]) return;
+        selections[currentIndex] = idx;
+        renderQuestion();
+        playSound('click');
+    };
+    
+    window.submitAnswerGlobal = function() {
+        if(!activeQuiz || finishedQuiz || submittedFlags[currentIndex]) return;
+        let selected = selections[currentIndex];
+        if(selected === null || selected === undefined) { alert("📢 Please select an answer! Click an option or press A, B, C, D."); return; }
+        let q = quizQuestions[currentIndex];
+        let isCorrect = (selected === q.correct);
+        submittedFlags[currentIndex] = true;
+        if(isCorrect) { score += 10; document.getElementById("scoreDisplay").textContent = `${Math.floor(score/10)}/20`; playSound('correct'); } 
+        else { playSound('wrong'); }
+        quizLog.push({num:currentIndex+1, question:q.text, userAns:q.options[selected], correctAns:q.options[q.correct], ok:isCorrect, expl:q.expl});
+        stopTimer();
+        renderQuestion();
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("nextBtn").disabled = false;
+    };
+    
+    window.nextQuestionGlobal = function() {
+        if(!submittedFlags[currentIndex]) { alert("📢 Please submit your answer first!"); return; }
+        if(currentIndex + 1 < QUIZ_LEN) {
+            currentIndex++;
+            timeLeft = 30;
+            updateTimerUI();
+            renderQuestion();
+            updateProgress();
+            startTimer();
+            document.getElementById("submitBtn").disabled = false;
+            document.getElementById("nextBtn").disabled = true;
+        } else {
+            finishQuiz();
+        }
+    };
+    
+    function initQuiz() {
+        stopTimer();
+        activeQuiz = true;
+        finishedQuiz = false;
+        score = 0;
+        quizLog = [];
+        document.getElementById("scoreDisplay").textContent = "0/20";
+        quizQuestions = getQuestionsFromSelectedTopics(QUIZ_LEN);
+        currentIndex = 0;
+        selections = new Array(QUIZ_LEN).fill(null);
+        submittedFlags = new Array(QUIZ_LEN).fill(false);
+        timeLeft = 30;
+        updateTimerUI();
+        document.getElementById("submitBtn").disabled = false;
+        document.getElementById("nextBtn").disabled = true;
+        document.getElementById("resultsSection").classList.add("hidden");
+        renderQuestion();
+        updateProgress();
+        startTimer();
+        document.getElementById("submitBtn").onclick = window.submitAnswerGlobal;
+        document.getElementById("nextBtn").onclick = window.nextQuestionGlobal;
+    }
+    
+    function updateTimerUI() { let mins=Math.floor(timeLeft/60), secs=timeLeft%60; document.getElementById("timerDisplay").textContent=`${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`; }
+    function stopTimer() { if(timerInterval){ clearInterval(timerInterval); timerInterval=null; } }
+    function startTimer() { if(!activeQuiz || finishedQuiz) return; stopTimer(); timerInterval=setInterval(()=>{ if(!activeQuiz||finishedQuiz){ stopTimer(); return; } if(timeLeft<=0){ stopTimer(); if(!submittedFlags[currentIndex]) autoTimeout(); } else{ timeLeft--; updateTimerUI(); } },1000); }
+    
+    function autoTimeout() {
+        if(submittedFlags[currentIndex]) return;
+        selections[currentIndex] = -1;
+        submittedFlags[currentIndex] = true;
+        let q = quizQuestions[currentIndex];
+        quizLog.push({num:currentIndex+1, question:q.text, userAns:"Time out", correctAns:q.options[q.correct], ok:false, expl:q.expl});
+        renderQuestion();
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("nextBtn").disabled = false;
+        playSound('wrong');
+    }
+    
+    function renderQuestion() {
+        if(!quizQuestions.length) return;
+        let q = quizQuestions[currentIndex];
+        let topicsSelected = selectedTopics.length === topicsList.length ? "All Topics" : selectedTopics.map(t=>topicNice[t].split(' ')[0]).join(', ');
+        document.getElementById("topicDisplay").innerHTML = `Topics: ${topicsSelected.substring(0,40)}${topicsSelected.length>40?'...':''}`;
+        let letters = ["A", "B", "C", "D"];
+        let sel = selections[currentIndex];
+        let isSub = submittedFlags[currentIndex];
+        let container = document.getElementById("questionContainer");
+        let optionsHtml = `<div class="question-number">Question ${currentIndex + 1} of 20 · ${topicNice[q.topic]}</div>
+                           <div class="question-text">${q.text}</div>
+                           <div class="options-grid">`;
+        q.options.forEach((opt, i) => {
+            let cls = "option";
+            if(isSub) { 
+                if(i === q.correct) cls += " correct-answer"; 
+                else if(sel === i && sel !== q.correct) cls += " wrong-answer"; 
+            } else if(sel === i) cls += " selected";
+            optionsHtml += `<div class="${cls}" onclick="selectOptionGlobal(${i})">
+                                <span class="option-prefix">${letters[i]}</span>${opt}
+                            </div>`;
+        });
+        optionsHtml += `</div>`;
+        if(isSub) {
+            let correct = (sel === q.correct);
+            optionsHtml += `<div class="explanation">
+                                <strong>${correct ? '✅ Correct! +10 points' : '❌ Incorrect'}</strong><br>
+                                Correct answer: ${letters[q.correct]}. ${q.options[q.correct]}<br>
+                                <small>💡 ${q.expl}</small>
+                            </div>`;
+        }
+        container.innerHTML = optionsHtml;
+        document.getElementById("submitBtn").disabled = (isSub || !activeQuiz);
+        document.getElementById("nextBtn").disabled = !isSub;
+        if(!isSub && activeQuiz && !finishedQuiz && timerInterval === null) startTimer();
+    }
+    
+    function updateProgress() { let percent = ((currentIndex+1)/QUIZ_LEN)*100; document.getElementById("progressFill").style.width = `${percent}%`; }
+    
+    // PROFESSIONAL PRINT PREVIEW - Opens in new window with ALL 20 questions
+    window.printFullReport = function() {
+        let correctCount = quizLog.filter(l => l.ok).length;
+        let percent = Math.round((correctCount/QUIZ_LEN)*100);
+        let grade = percent >= 80 ? "🏆 Excellent" : percent >= 60 ? "👍 Good" : percent >= 40 ? "📘 Satisfactory" : "💪 Needs Practice";
+        let name = document.getElementById("fullName").value || "Learner";
+        let school = document.getElementById("schoolName").value || "";
+        let district = document.getElementById("districtName").value || "";
+        let date = document.getElementById("quizDate").value || new Date().toISOString().slice(0,10);
+        let topicsText = selectedTopics.length === topicsList.length ? "All Topics" : selectedTopics.map(t=>topicNice[t]).join(", ");
+        
+        // Build complete HTML for print window with ALL 20 questions
+        let printHtml = `<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Mathematics Report - ${name}</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background: #f0f2f5;
+                    padding: 40px 20px;
+                }
+                .report-container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    background: white;
+                    border-radius: 20px;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+                    overflow: hidden;
+                }
+                .header {
+                    background: linear-gradient(135deg, #006B3F, #0033a0);
+                    color: white;
+                    padding: 30px;
+                    text-align: center;
+                }
+                .header h1 { font-size: 28px; margin-bottom: 10px; }
+                .header p { font-size: 14px; opacity: 0.9; }
+                .stats {
+                    display: flex;
+                    justify-content: center;
+                    gap: 30px;
+                    padding: 20px;
+                    background: #f8f9fa;
+                    flex-wrap: wrap;
+                }
+                .stat-card {
+                    text-align: center;
+                    padding: 15px 25px;
+                    background: white;
+                    border-radius: 15px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    min-width: 120px;
+                }
+                .stat-value { font-size: 32px; font-weight: bold; color: #006B3F; }
+                .stat-label { font-size: 12px; color: #666; margin-top: 5px; }
+                .grade-badge {
+                    background: #F4A300;
+                    padding: 8px 20px;
+                    border-radius: 40px;
+                    display: inline-block;
+                    font-weight: bold;
+                }
+                .results-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                .results-table th {
+                    background: #006B3F;
+                    color: white;
+                    padding: 12px;
+                    text-align: left;
+                    font-size: 13px;
+                }
+                .results-table td {
+                    padding: 12px;
+                    border-bottom: 1px solid #e0e0e0;
+                    font-size: 13px;
+                    vertical-align: top;
+                }
+                .results-table tr.correct { background: #e8f5e9; }
+                .results-table tr.incorrect { background: #ffebee; }
+                .question-cell { font-weight: 500; max-width: 300px; }
+                .answer-cell { font-family: monospace; }
+                .explanation-cell { font-size: 12px; color: #555; max-width: 250px; }
+                .footer {
+                    text-align: center;
+                    padding: 20px;
+                    background: #f8f9fa;
+                    font-size: 11px;
+                    color: #888;
+                    border-top: 1px solid #e0e0e0;
+                }
+                .watermark {
+                    text-align: center;
+                    font-size: 10px;
+                    color: #aaa;
+                    margin-top: 20px;
+                }
+                @media print {
+                    body { background: white; padding: 0; }
+                    .report-container { box-shadow: none; border-radius: 0; }
+                    .stat-card { box-shadow: none; border: 1px solid #ddd; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="report-container">
+                <div class="header">
+                    <h1>🛡️ CyberSafe MATHS - Grade 7 Examination Report</h1>
+                    <p>Zambia ECZ Curriculum | ${date}</p>
+                </div>
+                
+                <div style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                        <div><strong>👤 Candidate:</strong> ${name}</div>
+                        <div><strong>🏫 School:</strong> ${school}</div>
+                        <div><strong>📍 District:</strong> ${district}</div>
+                        <div><strong>📚 Topics:</strong> ${topicsText.substring(0, 60)}${topicsText.length > 60 ? '...' : ''}</div>
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card"><div class="stat-value">${correctCount}/${QUIZ_LEN}</div><div class="stat-label">Correct Answers</div></div>
+                    <div class="stat-card"><div class="stat-value">${score}</div><div class="stat-label">Total Points</div></div>
+                    <div class="stat-card"><div class="stat-value">${percent}%</div><div class="stat-label">Percentage Score</div></div>
+                    <div class="stat-card"><div class="stat-value"><span class="grade-badge">${grade}</span></div><div class="stat-label">Grade</div></div>
+                </div>
+                
+                <h3 style="padding: 20px 20px 0 20px; color: #006B3F;">📋 Detailed Question Analysis</h3>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">#</th>
+                            <th>Question</th>
+                            <th style="width: 200px;">Your Answer</th>
+                            <th style="width: 200px;">Correct Answer</th>
+                            <th style="width: 60px;">Result</th>
+                            <th style="width: 200px;">Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+        
+        quizLog.forEach(l => {
+            printHtml += `<tr class="${l.ok ? 'correct' : 'incorrect'}">
+                <td style="text-align: center;">${l.num}</td>
+                <td class="question-cell">${l.question}</td>
+                <td class="answer-cell">${l.userAns}</td>
+                <td class="answer-cell"><strong>${l.correctAns}</strong></td>
+                <td style="text-align: center;">${l.ok ? '✓' : '✗'}</td>
+                <td class="explanation-cell">${l.expl}</td>
+            </tr>`;
+        });
+        
+        printHtml += `
+                    </tbody>
+                </table>
+                
+                <div class="footer">
+                   <p>© ${new Date().getFullYear()} CyberSafe Maths | Grade 7 Zambia Curriculum | Generated on ${new Date().toDateString()} at ${new Date().toLocaleTimeString()}</p>
+                </div>
+                    <p>This report is an official record of academic performance. For verification, contact the administration.</p>
+                    <p>Contact  the administration: +260976620788 || email: cmwila7@gmail.com </p>
+                <div class="watermark">CyberSafe Education - Empowering Zambian Learners</div>
+            </div>
+        </body>
+        </html>`;
+        
+        // Open new window with the report
+        let printWindow = window.open('', '_blank', 'width=1000,height=800,scrollbars=yes,resizable=yes');
+        printWindow.document.write(printHtml);
+        printWindow.document.close();
+        printWindow.focus();
+    };
+    
+    function finishQuiz() {
+        finishedQuiz = true;
+        activeQuiz = false;
+        stopTimer();
+        let correctCount = quizLog.filter(l => l.ok).length;
+        let percent = Math.round((correctCount/QUIZ_LEN)*100);
+        let grade = percent >= 80 ? "🏆 Excellent" : percent >= 60 ? "👍 Good" : percent >= 40 ? "📘 Satisfactory" : "💪 Needs Practice";
+        let name = document.getElementById("fullName").value || "Learner";
+        let school = document.getElementById("schoolName").value || "";
+        let district = document.getElementById("districtName").value || "";
+        let date = document.getElementById("quizDate").value || new Date().toISOString().slice(0,10);
+        let topicsText = selectedTopics.length === topicsList.length ? "All Topics" : selectedTopics.map(t=>topicNice[t]).join(", ");
+        
+        let rows = '';
+        quizLog.forEach(l => {
+            rows += `<tr class="${l.ok ? 'correct-row' : 'incorrect-row'}">
+                        <td>${l.num}</td>
+                        <td>${l.question}</td>
+                        <td>${l.userAns}</td>
+                        <td>${l.correctAns}</td>
+                        <td>${l.ok ? '✓ Correct' : '✗ Incorrect'}</td>
+                        <td style="font-size:0.8rem;">${l.expl.substring(0,80)}${l.expl.length>80?'...':''}</td>
+                      </tr>`;
+        });
+        
+        let resultsHTML = `
+            <div style="background:#0a4a35; padding:16px; color:white; border-radius:20px 20px 0 0;">
+                <h2>📜 Mathematics Performance Report - Grade 7</h2>
+                <p><strong>${name}</strong> | ${school} | ${district} | ${date}</p>
+                <p><strong>Topics:</strong> ${topicsText}</p>
+            </div>
+            <div style="display:flex; gap:16px; padding:16px; background:#f4faf7; flex-wrap:wrap;">
+                <div><strong>✅ Correct:</strong> ${correctCount}/${QUIZ_LEN}</div>
+                <div><strong>⭐ Score:</strong> ${score} points</div>
+                <div><strong>📊 Percentage:</strong> ${percent}%</div>
+                <div><strong>🏅 Grade:</strong> ${grade}</div>
+            </div>
+            <div class="results-preview">
+                <h3>📋 Detailed Results - All ${QUIZ_LEN} Questions</h3>
+                <table class="results-table">
+                    <thead><tr><th>#</th><th>Question</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th><th>Explanation</th></tr></thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>
+            <div style="padding:16px; text-align:center;">
+                <button class="btn" onclick="printFullReport()">🖨️ Print / Share Report</button>
+                <button class="btn btn-blue" onclick="backToMenu()">🏠 Main Menu</button>
+                <button class="btn btn-green" onclick="startNewQuiz()">🔄 New Quiz</button>
+            </div>
+        `;
+        document.getElementById("resultsSection").innerHTML = resultsHTML;
+        document.getElementById("resultsSection").classList.remove("hidden");
+        document.getElementById("quizPanel").classList.add("hidden");
+    }
+    
+    window.startNewQuiz = function() { initQuiz(); showSection('quizPanel'); };
+    window.backToMenu = function() { showSection('mainMenu'); };
+    
+    function startQuiz() {
+        let name = document.getElementById("fullName").value;
+        if(!name || name.trim() === "") { alert("Please enter your name to start the quiz!"); return; }
+        if(selectedTopics.length === 0) { alert("Please select at least one topic!"); return; }
+        document.getElementById("candidateInfo").innerHTML = `${name} | ${document.getElementById("schoolName").value}`;
+        initQuiz();
+        showSection('quizPanel');
+    }
+    
+    window.showSection = function(section) {
+        document.getElementById('mainMenu').classList.add('hidden');
+        document.getElementById('startPlaying').classList.add('hidden');
+        document.getElementById('quizPanel').classList.add('hidden');
+        document.getElementById('resultsSection').classList.add('hidden');
+        if(section === 'mainMenu') document.getElementById('mainMenu').classList.remove('hidden');
+        if(section === 'startPlaying') document.getElementById('startPlaying').classList.remove('hidden');
+        if(section === 'quizPanel') document.getElementById('quizPanel').classList.remove('hidden');
+        if(section === 'resultsSection') document.getElementById('resultsSection').classList.remove('hidden');
+        document.querySelectorAll('.nav-btn').forEach((btn, i) => { btn.classList.remove('active'); if(section === 'mainMenu' && i === 0) btn.classList.add('active'); if(section === 'startPlaying' && i === 1) btn.classList.add('active'); });
+    };
+    
+    window.quitQuiz = function() { if(confirm('Quit quiz? Progress will be lost.')) { stopTimer(); showSection('mainMenu'); } };
+    
+    document.getElementById("quizDate").valueAsDate = new Date();
+    document.getElementById("startQuizBtn").onclick = startQuiz;
+    buildTopicGrid();
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        let quizPanel = document.getElementById('quizPanel');
+        if (!quizPanel.classList.contains('hidden') && activeQuiz && !finishedQuiz) {
+            let key = e.key.toLowerCase();
+            if (key === 'a' || key === 'b' || key === 'c' || key === 'd') {
+                e.preventDefault();
+                let idx = key.charCodeAt(0) - 97;
+                if (!submittedFlags[currentIndex] && selections[currentIndex] === null) {
+                    window.selectOptionGlobal(idx);
+                }
+            }
+            if (key === 'enter') {
+                e.preventDefault();
+                if (!submittedFlags[currentIndex] && selections[currentIndex] !== null) {
+                    window.submitAnswerGlobal();
+                } else if (submittedFlags[currentIndex] && document.getElementById("nextBtn").disabled === false) {
+                    window.nextQuestionGlobal();
+                }
+            }
+        }
+    });
+    
+    showSection('mainMenu');
+})();
+</script>
+</body>
+</html>

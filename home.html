@@ -370,145 +370,6 @@
     .enter-btn span { transition: transform 0.2s; }
     .subject-card:hover .enter-btn span { transform: translateX(5px); }
 
-    /* === Analytics Dashboard Section === */
-    .analytics-dashboard {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: var(--card-radius);
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-      margin: 2rem 0 1.5rem;
-      border: 2px solid rgba(255, 215, 0, 0.3);
-    }
-    
-    .dashboard-title {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .dashboard-title h3 {
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--blue-deep);
-    }
-    
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    
-    .dashboard-stat {
-      background: white;
-      border-radius: 60px;
-      padding: 1.2rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      box-shadow: 0 10px 20px -10px rgba(0,0,0,0.1);
-      border: 1px solid var(--orange-glint);
-    }
-    
-    .stat-icon {
-      font-size: 2rem;
-      background: var(--green-soft);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .stat-content {
-      flex: 1;
-    }
-    
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--gray-600);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .stat-value {
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 800;
-      color: var(--blue-deep);
-      line-height: 1.2;
-    }
-    
-    .popularity-list {
-      background: rgba(255,255,255,0.7);
-      border-radius: 30px;
-      padding: 1.5rem;
-    }
-    
-    .popularity-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      color: var(--green-deep);
-      font-size: 1.1rem;
-      border-bottom: 2px dashed var(--orange-bright);
-      padding-bottom: 0.8rem;
-    }
-    
-    .popularity-item {
-      display: flex;
-      align-items: center;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid var(--gray-200);
-    }
-    
-    .popularity-rank {
-      width: 30px;
-      font-weight: 800;
-      color: var(--orange-bright);
-    }
-    
-    .popularity-page {
-      flex: 3;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .page-icon {
-      font-size: 1.2rem;
-    }
-    
-    .page-name {
-      font-weight: 600;
-    }
-    
-    .popularity-count {
-      flex: 1;
-      text-align: right;
-      font-weight: 700;
-      color: var(--blue-deep);
-    }
-    
-    .popularity-bar-small {
-      flex: 2;
-      height: 6px;
-      background: var(--gray-200);
-      border-radius: 10px;
-      margin-left: 1rem;
-      overflow: hidden;
-    }
-    
-    .popularity-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--green-vibrant), var(--orange-bright));
-      border-radius: 10px;
-    }
-    
     /* === footer stats – chip row, wraps elegantly === */
     .footer-info {
       margin-top: clamp(2rem, 4vw, 4.5rem);
@@ -668,70 +529,17 @@
     <p>⚡ ready to test your knowledge? <span>select a subject</span></p>
   </div>
 
-  <!-- Analytics Dashboard Section - Shows which pages are viewed most -->
-  <div class="analytics-dashboard" id="analytics-dashboard">
-    <div class="dashboard-title">
-      <span>📊</span>
-      <h3>Popular Pages · Real Visitor Data</h3>
-    </div>
-    
-    <div class="dashboard-grid">
-      <!-- Total Views Counter (will be populated by JS) -->
-      <div class="dashboard-stat" id="total-views-container">
-        <div class="stat-icon">👥</div>
-        <div class="stat-content">
-          <div class="stat-label">Total Views</div>
-          <div class="stat-value" id="total-views">Loading...</div>
-        </div>
-      </div>
-      
-      <!-- Live Visitors Counter (using GoatCounter's built-in) -->
-      <div class="dashboard-stat" id="live-container">
-        <div class="stat-icon">⚡</div>
-        <div class="stat-content">
-          <div class="stat-label">Live Visitors</div>
-          <div class="stat-value" id="live-visitors">Loading...</div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Popular Pages Ranking List -->
-    <div class="popularity-list">
-      <div class="popularity-header">
-        <span>📈 Page Popularity Rankings</span>
-        <span>Views</span>
-      </div>
-      <div id="popularity-list-container">
-        <!-- Will be populated by JavaScript -->
-        <div class="popularity-item">
-          <div class="popularity-rank">1</div>
-          <div class="popularity-page"><span class="page-icon">⌛</span><span class="page-name">Loading data...</span></div>
-          <div class="popularity-count">...</div>
-          <div class="popularity-bar-small"><div class="popularity-fill" style="width: 0%"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- section title -->
   <div class="section-label">
     <h2>📚 available quizzes</h2>
   </div>
 
-  <!-- subject grid (all links open safely) - FIXED #2: Properly closed after all cards -->
+  <!-- subject grid (all links open safely) -->
   <div class="card-grid" id="subject-grid">
-    <!-- Cards will be populated with view counts by JavaScript -->
     <a href="https://katetezambia.github.io/com/ict.html" class="subject-card" target="_blank" rel="noopener noreferrer" data-path="/com/ict.html">
       <div class="card-accent">💻</div>
       <h3>I.C.T</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-ict">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-ict">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-ict" style="width: 0%"></div>
-      </div>
       <div class="description">introduction, web, productivity, file management</div>
       <span class="enter-btn">browse <span>→</span></span>
     </a>
@@ -740,13 +548,6 @@
       <div class="card-accent">🧬</div>
       <h3>BIOLOGY</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-bio">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-bio">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-bio" style="width: 0%"></div>
-      </div>
       <div class="description">Mutations, cells, plants – full syllabus</div>
       <span class="enter-btn">enter lab <span>→</span></span>
     </a>
@@ -755,13 +556,6 @@
       <div class="card-accent">🧪</div>
       <h3>CHEMISTRY</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-chem">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-chem">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-chem" style="width: 0%"></div>
-      </div>
       <div class="description">atoms, bonding, acids, salts, organic</div>
       <span class="enter-btn">enter lab <span>→</span></span>
     </a>
@@ -770,13 +564,6 @@
       <div class="card-accent">⚡</div>
       <h3>PHYSICS</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-phy">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-phy">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-phy" style="width: 0%"></div>
-      </div>
       <div class="description">mechanics, waves, electricity, modern physics</div>
       <span class="enter-btn">explore <span>→</span></span>
     </a>
@@ -785,13 +572,6 @@
       <div class="card-accent">📐</div>
       <h3>MATHEMATICS</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-math">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-math">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-math" style="width: 0%"></div>
-      </div>
       <div class="description">algebra, geometry, trigonometry, calculus</div>
       <span class="enter-btn">calculate <span>→</span></span>
     </a>
@@ -800,13 +580,6 @@
       <div class="card-accent">📖</div>
       <h3>ENGLISH</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-eng">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-eng">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-eng" style="width: 0%"></div>
-      </div>
       <div class="description">grammar, comprehension, literature, writing</div>
       <span class="enter-btn">read <span>→</span></span>
     </a>
@@ -815,13 +588,6 @@
       <div class="card-accent">⚖️</div>
       <h3>CIVIC</h3>
       <div class="badge">forms 1 · 2 · 3 · 4</div>
-      <div class="page-view-count" id="view-civic">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-civic">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-civic" style="width: 0%"></div>
-      </div>
       <div class="description">constitution, elections, citizenship, democracy</div>
       <span class="enter-btn">enter lab <span>→</span></span>
     </a>
@@ -830,36 +596,19 @@
       <div class="card-accent">⌨️</div>
       <h3>Cybersafe Touch Typing</h3>
       <div class="badge">All ages</div>
-      <div class="page-view-count" id="view-typing">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-typing">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-typing" style="width: 0%"></div>
-      </div>
       <div class="description">beginner, intermediate, advanced, professional</div>
       <div class="description">Your computer must be connected to a keyboard to play this one</div>
       <span class="enter-btn">enter lab <span>→</span></span>
     </a>
 
-    <!-- FIXED #2: Primary Maths card now INSIDE the grid container -->
-    <!-- FIXED #4: Added data-path attribute for tracking -->
-    <!-- FIXED #3: Changed all IDs to be unique (using 'primary-maths' instead of 'type') -->
     <a href="https://katetezambia.github.io/com/primary_maths.html" class="subject-card" target="_blank" rel="noopener noreferrer" data-path="/com/primary_maths.html">
       <div class="card-accent">🔢</div>
       <h3>Cybersafe Grade 7 Maths</h3>
       <div class="badge">Grade 7</div>
-      <div class="page-view-count" id="view-primary-maths">
-        <span class="view-icon">👁️</span>
-        <span class="view-number" id="view-number-primary-maths">...</span> views
-      </div>
-      <div class="popularity-bar-container">
-        <div class="popularity-bar" id="bar-primary-maths" style="width: 0%"></div>
-      </div>
       <div class="description">Numbers, operations, fractions, geometry, measurement</div>
       <span class="enter-btn">enter Test <span>→</span></span>
     </a>
-  </div> <!-- FIXED #2: Properly closed grid container -->
+  </div>
 
   <!-- stats + developer quick info -->
   <div class="footer-info">
@@ -892,249 +641,12 @@
   </div>
 </div>
 
-<!-- JavaScript to fetch and display GoatCounter analytics -->
+<!-- GoatCounter analytics only - no display elements -->
 <script>
 (function() {
-    // Configuration
-    const GOATCOUNTER_CODE = 'mmwilachris';
-    const BASE_URL = `https://${GOATCOUNTER_CODE}.goatcounter.com`;
-    
-    // Page paths to track (matching the data-path attributes on cards)
-    // FIXED #4: Added primary_maths.html to tracking
-    const pagePaths = [
-        '/com/ict.html',
-        '/com/biology.html', 
-        '/com/chemistry.html',
-        '/com/physics.html',
-        '/com/maths.html',
-        '/com/english.html',
-        '/com/civic.html',
-        '/com/typing.html',
-        '/com/primary_maths.html'  // Added for tracking
-    ];
-    
-    // Page display names and icons
-    // FIXED #3: Updated IDs to match new unique IDs
-    const pageInfo = {
-        '/com/ict.html': { name: 'I.C.T', icon: '💻', id: 'ict' },
-        '/com/biology.html': { name: 'Biology', icon: '🧬', id: 'bio' },
-        '/com/chemistry.html': { name: 'Chemistry', icon: '🧪', id: 'chem' },
-        '/com/physics.html': { name: 'Physics', icon: '⚡', id: 'phy' },
-        '/com/maths.html': { name: 'Mathematics', icon: '📐', id: 'math' },
-        '/com/english.html': { name: 'English', icon: '📖', id: 'eng' },
-        '/com/civic.html': { name: 'Civic', icon: '⚖️', id: 'civic' },
-        '/com/typing.html': { name: 'Touch Typing', icon: '⌨️', id: 'typing' },
-        '/com/primary_maths.html': { name: 'Grade 7 Maths', icon: '🔢', id: 'primary-maths' }
-    };
-    
-    // Store view counts
-    let viewCounts = {};
-    let maxViews = 0;
-    
-    // Function to format numbers with commas
-    function formatNumber(num) {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    
-    // Function to fetch page view count for a single path
-    async function fetchPageViews(path) {
-        try {
-            // Encode the path properly
-            const encodedPath = encodeURIComponent(path);
-            const url = `${BASE_URL}/counter/${encodedPath}.json`;
-            
-            const response = await fetch(url);
-            if (!response.ok) {
-                console.warn(`Failed to fetch views for ${path}: ${response.status}`);
-                return 0;
-            }
-            
-            const data = await response.json();
-            // The API returns { count: "1,234" } or similar
-            const countStr = data.count || "0";
-            // Remove commas and convert to number
-            const count = parseInt(countStr.replace(/,/g, '')) || 0;
-            return count;
-        } catch (error) {
-            console.error(`Error fetching ${path}:`, error);
-            return 0;
-        }
-    }
-    
-    // Function to fetch total site views
-    async function fetchTotalViews() {
-        try {
-            // Special path 'TOTAL' gets site-wide total
-            const url = `${BASE_URL}/counter/TOTAL.json`;
-            const response = await fetch(url);
-            if (!response.ok) return 0;
-            
-            const data = await response.json();
-            const countStr = data.count || "0";
-            return parseInt(countStr.replace(/,/g, '')) || 0;
-        } catch (error) {
-            console.error('Error fetching total views:', error);
-            return 0;
-        }
-    }
-    
-    // Initialize GoatCounter visitor counter for live visitors
-    function initLiveVisitorCounter() {
-        // Wait for GoatCounter to load
-        let attempts = 0;
-        const maxAttempts = 20;
-        
-        function checkGoatCounter() {
-            attempts++;
-            if (window.goatcounter && window.goatcounter.visit_count) {
-                // GoatCounter loaded, use it to display live visitor count
-                try {
-                    window.goatcounter.visit_count({
-                        append: '#live-container',
-                        type: 'html',
-                        no_branding: true,
-                        style: `
-                            div { 
-                                border: none; 
-                                background: transparent; 
-                                padding: 0; 
-                                margin: 0; 
-                                font-size: clamp(1.4rem, 2.5vw, 2rem);
-                                font-weight: 800;
-                                color: #0033a0;
-                                line-height: 1.2;
-                            }
-                            #gcvc-for, #gcvc-by { display: none; }
-                        `
-                    });
-                } catch (e) {
-                    console.warn('Could not initialize visitor counter:', e);
-                    document.getElementById('live-visitors').innerText = 'Live';
-                }
-            } else if (attempts < maxAttempts) {
-                setTimeout(checkGoatCounter, 250);
-            } else {
-                document.getElementById('live-visitors').innerText = 'Live';
-            }
-        }
-        
-        checkGoatCounter();
-    }
-    
-    // Update the popularity ranking list
-    function updatePopularityList() {
-        const container = document.getElementById('popularity-list-container');
-        if (!container) return;
-        
-        // Create array of pages with view counts
-        const pagesWithViews = [];
-        for (const path of pagePaths) {
-            const info = pageInfo[path];
-            const count = viewCounts[path] || 0;
-            pagesWithViews.push({
-                path: path,
-                name: info.name,
-                icon: info.icon,
-                count: count
-            });
-        }
-        
-        // Sort by view count (highest first)
-        pagesWithViews.sort((a, b) => b.count - a.count);
-        
-        // Get max count for percentage calculations
-        const maxCount = pagesWithViews.length > 0 ? pagesWithViews[0].count : 1;
-        
-        // Generate HTML
-        let html = '';
-        pagesWithViews.forEach((page, index) => {
-            const percentage = maxCount > 0 ? (page.count / maxCount) * 100 : 0;
-            html += `
-                <div class="popularity-item">
-                    <div class="popularity-rank">${index + 1}</div>
-                    <div class="popularity-page">
-                        <span class="page-icon">${page.icon}</span>
-                        <span class="page-name">${page.name}</span>
-                    </div>
-                    <div class="popularity-count">${formatNumber(page.count)}</div>
-                    <div class="popularity-bar-small">
-                        <div class="popularity-fill" style="width: ${percentage}%"></div>
-                    </div>
-                </div>
-            `;
-        });
-        
-        container.innerHTML = html;
-    }
-    
-    // Main function to load all analytics
-    async function loadAnalytics() {
-        try {
-            // First, fetch total site views
-            const totalViews = await fetchTotalViews();
-            document.getElementById('total-views').innerText = formatNumber(totalViews);
-            
-            // Fetch views for each page
-            const promises = pagePaths.map(async (path) => {
-                const count = await fetchPageViews(path);
-                viewCounts[path] = count;
-                return { path, count };
-            });
-            
-            await Promise.all(promises);
-            
-            // Find maximum views for percentage bars
-            maxViews = Math.max(...Object.values(viewCounts), 1);
-            
-            // Update each card with its view count
-            for (const path of pagePaths) {
-                const info = pageInfo[path];
-                if (!info) continue;
-                
-                const count = viewCounts[path] || 0;
-                const percentage = (count / maxViews) * 100;
-                
-                // Update view number element
-                const viewElement = document.getElementById(`view-number-${info.id}`);
-                if (viewElement) {
-                    viewElement.innerText = formatNumber(count);
-                }
-                
-                // Update popularity bar
-                const barElement = document.getElementById(`bar-${info.id}`);
-                if (barElement) {
-                    barElement.style.width = `${percentage}%`;
-                }
-            }
-            
-            // Update the popularity ranking list
-            updatePopularityList();
-            
-        } catch (error) {
-            console.error('Error loading analytics:', error);
-            
-            // Set fallback values
-            const totalViewsElement = document.getElementById('total-views');
-            if (totalViewsElement) totalViewsElement.innerText = '—';
-            
-            // Set fallbacks for each card
-            for (const path of pagePaths) {
-                const info = pageInfo[path];
-                if (!info) continue;
-                
-                const viewElement = document.getElementById(`view-number-${info.id}`);
-                if (viewElement) {
-                    viewElement.innerText = '0';
-                }
-            }
-        }
-    }
-    
-    // Initialize when DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
-        loadAnalytics();
-        initLiveVisitorCounter();
-    });
+    // GoatCounter is already loaded via the script tag
+    // No additional UI elements needed
+    console.log('CyberSafe Quizzes loaded - analytics tracking active');
 })();
 </script>
 </body>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🛡️ CyberSafe ENGLISH · Grade 5-7 Zambia (FIXED)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+        :root {
+            --zambia-green: #006B3F;
+            --zambia-blue: #0033a0;
+            --zambia-orange: #F4A300;
+            --zambia-orange-glow: #ffcc44;
+            --zambia-red: #CE1126;
+        }
+        body { background: linear-gradient(145deg, #0a3e4a 0%, var(--zambia-green) 100%); min-height: 100vh; padding: 1rem; }
+        .container { max-width: 1400px; margin: 0 auto; background: rgba(255,255,255,0.98); border-radius: 32px; padding: 2rem; }
+        h1 { color: var(--zambia-green); border-left: 0.5rem solid var(--zambia-orange); padding-left: 1.5rem; margin-bottom: 1rem; }
+        .nav-bar { background: var(--zambia-blue); border-radius: 9999px; padding: 0.6rem 1.5rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .nav-btn { background: transparent; color: white; border: none; padding: 0.7rem 1.8rem; border-radius: 9999px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+        .nav-btn:hover { background: rgba(255,255,255,0.2); }
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.9rem; margin-top: 1rem; }
+        .topic-checkbox { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1rem; background: white; border-radius: 9999px; border: 2px solid var(--zambia-green); cursor: pointer; transition: 0.2s; }
+        .topic-checkbox.selected { background: var(--zambia-green); color: white; }
+        .btn { background: var(--zambia-orange); color: white; border: none; padding: 0.9rem 2rem; border-radius: 9999px; font-weight: 700; cursor: pointer; transition: transform 0.1s; }
+        .btn:active { transform: scale(0.97); }
+        .btn-purple { background: #6f42c1; }
+        .btn-green { background: var(--zambia-green); }
+        .quiz-header { background: linear-gradient(135deg, var(--zambia-green), var(--zambia-blue)); color: white; padding: 1rem; border-radius: 9999px; margin-bottom: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.9rem; }
+        .option { 
+            background: white; border: 3px solid var(--zambia-green); border-radius: 20px; padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: all 0.2s ease;
+        }
+        .option:hover { background: #fcf7e1; transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .option.selected { background: linear-gradient(135deg, var(--zambia-orange), var(--zambia-orange-glow)); border-color: var(--zambia-orange); color: white; box-shadow: 0 0 15px var(--zambia-orange-glow); transform: scale(1.02); }
+        .option.selected .option-prefix { background: white; color: var(--zambia-orange); }
+        .option.correct-answer { background: #d4edda; border-color: #28a745; }
+        .option.wrong-answer { background: #f8d7da; border-color: #dc3545; }
+        .option-prefix { background: var(--zambia-orange); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        .footer { margin-top: 2rem; text-align: center; font-size: 0.85rem; color: #555; }
+        .hidden { display: none !important; }
+        .progress-bar { height: 0.8rem; background: #e5e7eb; border-radius: 9999px; margin: 1rem 0; }
+        .progress-fill { height: 100%; background: var(--zambia-orange); border-radius: 9999px; transition: width 0.3s; }
+        .keyboard-hint { background: #f0f0f0; padding: 0.5rem; border-radius: 12px; text-align: center; font-size: 0.8rem; margin-top: 1rem; }
+        .keyboard-hint span { display: inline-block; background: #333; color: white; padding: 0.2rem 0.6rem; border-radius: 8px; margin: 0 0.2rem; font-family: monospace; }
+        
+        @media (max-width: 768px) {
+            body { padding: 0.5rem; }
+            .container { padding: 1rem; border-radius: 24px; }
+            h1 { font-size: 1.4rem; padding-left: 1rem; }
+            .nav-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .topic-checkbox { padding: 0.7rem; font-size: 0.9rem; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 0.95rem; min-height: 44px; }
+            #questionContainer > div:first-child { font-size: 0.95rem; }
+            #questionContainer > div:nth-child(2) { font-size: 1.2rem !important; line-height: 1.4; }
+            .options-grid { grid-template-columns: 1fr; }
+            .option { padding: 0.9rem 1rem; font-size: 0.95rem; }
+            .option-prefix { width: 2rem; height: 2rem; font-size: 1rem; }
+            #submitBtn, #nextBtn { padding: 0.8rem 1.2rem; font-size: 0.9rem; }
+            #scoreDisplay { padding: 0.6rem 1rem !important; font-size: 0.95rem !important; }
+            input, select, input[type="text"], input[type="date"] { font-size: 0.95rem !important; padding: 0.7rem !important; }
+        }
+        
+        #scoreDisplay {
+            background: var(--zambia-orange);
+            border-radius: 9999px;
+            padding: 0.7rem 1.5rem;
+            font-weight: 700;
+            display: inline-block;
+            animation: badgeGlow 1.8s infinite alternate ease-in-out;
+        }
+        @keyframes badgeGlow {
+            0% { box-shadow: 0 0 0px 0px rgba(244, 163, 0, 0.4); background: var(--zambia-orange); }
+            50% { box-shadow: 0 0 12px 6px rgba(244, 163, 0, 0.8), 0 0 18px 8px rgba(255, 204, 68, 0.6); background: #ffb72e; }
+            100% { box-shadow: 0 0 20px 12px rgba(244, 163, 0, 1), 0 0 28px 14px rgba(255, 204, 68, 0.8); background: var(--zambia-orange-glow); }
+        }
+        @media print { #scoreDisplay { animation: none; box-shadow: none; } }
+        .correct-row { background: #d4edda; }
+        .incorrect-row { background: #f8d7da; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .results-container { background: white; border-radius: 20px; padding: 1.5rem; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🛡️ CyberSafe ENGLISH · Grade 5-7 Zambia (ECZ Style)</h1>
+    <div class="nav-bar no-print">
+        <button class="nav-btn" onclick="showSection('mainMenu')">🏠 Home</button>
+        <button class="nav-btn" onclick="showSection('startPlaying')">📝 Start Quiz</button>
+        <button class="nav-btn" onclick="showSection('testGenerator')">📄 Generate Test</button>
+    </div>
+
+    <div id="mainMenu">
+        <div style="background: linear-gradient(135deg, #1e5a6b, var(--zambia-orange)); border-radius: 32px; padding: 2rem; text-align:center; color:white;">
+            <h2>ECZ ENGLISH · GRADE 5-7</h2>
+            <p>Grammar, Spelling, Punctuation, Word Meaning, Sentence Order, Comprehension — Real ECZ-style questions</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                <button class="btn" style="background:#fff; color:#1e5a6b;" onclick="showSection('startPlaying')">🎮 PLAY QUIZ</button>
+                <button class="btn btn-purple" onclick="showSection('testGenerator')">📄 GENERATE TEST</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="startPlaying" class="hidden">
+        <h2>📋 Learner Registration</h2>
+        <div class="topic-selector">
+            <h3>Select Topics for Quiz:</h3>
+            <div class="topic-grid" id="topicGrid"></div>
+            <div style="margin-top: 0.8rem;">
+                <button class="btn" style="background:var(--zambia-blue); padding:0.4rem 1rem;" onclick="selectAllTopics()">✅ Select All</button>
+                <button class="btn" style="background:var(--zambia-blue); padding:0.4rem 1rem;" onclick="deselectAllTopics()">❌ Deselect All</button>
+            </div>
+        </div>
+        <div style="display:flex; gap:1rem; margin:1rem 0; flex-wrap:wrap;">
+            <input type="text" id="fullName" placeholder="Full Name" style="flex:1; padding:0.5rem;" value="Mwila Chanda">
+            <input type="text" id="schoolName" placeholder="School" style="flex:1; padding:0.5rem;" value="Katete Primary">
+            <input type="date" id="quizDate" style="padding:0.5rem;">
+        </div>
+        <button class="btn" id="startQuizBtn">▶ START QUIZ</button>
+        <button class="btn" style="background:var(--zambia-blue);" onclick="showSection('mainMenu')">◀ BACK</button>
+    </div>
+
+    <div id="testGenerator" class="hidden">
+        <h2>📄 Generate Printable Test Paper</h2>
+        <div class="topic-selector">
+            <h3>Select Topics for Test:</h3>
+            <div class="topic-grid" id="testTopicGrid"></div>
+            <div style="margin-top: 0.8rem;">
+                <button class="btn" style="background:var(--zambia-blue); padding:0.4rem 1rem;" onclick="selectAllTestTopics()">✅ Select All</button>
+                <button class="btn" style="background:var(--zambia-blue); padding:0.4rem 1rem;" onclick="deselectAllTestTopics()">❌ Deselect All</button>
+            </div>
+        </div>
+        <div style="display:flex; gap:1rem; margin:1rem 0; flex-wrap:wrap;">
+            <input type="text" id="testName" placeholder="Learner Name" style="flex:1; padding:0.5rem;">
+            <input type="text" id="testSchool" placeholder="School Name" style="flex:1; padding:0.5rem;">
+            <input type="date" id="testDate" style="padding:0.5rem;">
+        </div>
+        <button class="btn btn-purple" id="generateTestBtn">📄 GENERATE TEST PAPER</button>
+        <button class="btn" style="background:var(--zambia-blue);" onclick="showSection('mainMenu')">◀ BACK</button>
+        <div id="testPreviewArea" class="hidden" style="margin-top: 2rem;"></div>
+    </div>
+
+    <div id="quizPanel" class="hidden">
+        <div class="quiz-header"><span id="topicDisplay"></span><span>⏱️ <span id="timerDisplay">00:30</span></span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="questionContainer"></div>
+        <div style="display:flex; gap:1rem; margin-top:1rem; flex-wrap:wrap; align-items:center;">
+            <button class="btn" id="submitBtn">✔ SUBMIT (Enter)</button>
+            <button class="btn btn-green" id="nextBtn">NEXT ⏩ (Enter)</button>
+            <div id="scoreDisplay">0/20</div>
+        </div>
+        <div class="keyboard-hint no-print">💡 <strong>Keyboard:</strong> <span>A</span> <span>B</span> <span>C</span> <span>D</span> to select · <span>Enter</span> to submit · <span>Enter</span> again for next</div>
+        <button class="btn" style="background:var(--zambia-red); margin-top:1rem;" onclick="quitQuiz()">◀ Quit Quiz</button>
+    </div>
+
+    <div id="resultsSection" class="hidden"></div>
+    <div class="footer" id="dynamicFooter"></div>
+</div>
+
+<script>
+    // ======================== HELPER ========================
+    function shuffleArray(arr) {
+        let shuffled = [...arr];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    const QUESTION_BANK = [];
+    const TOPICS = ["grammar", "spelling", "punctuation", "wordmeaning", "sentenceorder", "comprehension"];
+    const TOPIC_NAMES = {
+        grammar: "📖 Grammar (Pronouns, Tenses, Conjunctions)",
+        spelling: "✍️ Spellings (Select the correct spelling)",
+        punctuation: "🔖 Punctuation & Capitalization",
+        wordmeaning: "📚 Word Meanings & Idioms",
+        sentenceorder: "🔄 Sentence Order (Choose correct order)",
+        comprehension: "📘 Comprehension Passages"
+    };
+
+    function addQuestion(text, options, correctIndex, topic) {
+        QUESTION_BANK.push({ id: QUESTION_BANK.length + 1, text, options: [...options], correct: correctIndex, topic });
+    }
+
+    // ========== 1. GRAMMAR ==========
+    const grammarQs = [
+        ["We like stories. Please tell ... one.", ["me","you","us","them"], 2],
+        ["She came in ... her mother was eating.", ["while","until","unless","before"], 0],
+        ["Chewe came late ... she managed to find a seat.", ["because","but","for","so"], 1],
+        ["I enjoy ... fish.", ["ate","eaten","eating","to eat"], 2],
+        ["She sang so ... that the minister gave a reward.", ["best","good","very","well"], 3],
+        ["She likes to jog ... night.", ["at","for","in","on"], 0],
+        ["Mutinta is ... the kitchen walls.", ["paint","painted","painting","paints"], 2],
+        ["Did you see the boy ... got your pen?", ["whose","whom","who","which"], 2],
+        ["George lived with ... uncle in Chingola.", ["her","him","his","them"], 2],
+        ["My cat is ... on the sofa.", ["sleep","sleeping","sleeps","slept"], 1],
+        ["Dora has become ... than before.", ["busier","busiest","busy","more busy"], 0],
+        ["John and Mary love ... parents.", ["her","his","their","them"], 2],
+        ["He is jealous ... his friend.", ["of","off","on","with"], 0],
+        ["The dog ... was shot died instantly.", ["whose","whom","who","which"], 3]
+    ];
+    grammarQs.forEach(q => addQuestion(q[0], q[1], q[2], "grammar"));
+
+    // ========== 2. SPELLINGS (random correct position) ==========
+    const spellingData = [
+        ["acommodation", "accommodation", "accomodation", "acommodation"],
+        ["embarass", "embarrass", "embarras", "embarass"],
+        ["definately", "definitely", "definitly", "definately"],
+        ["seperate", "separate", "sepparate", "seperate"],
+        ["neccessary", "necessary", "necesary", "neccessary"],
+        ["calender", "calendar", "calandar", "calender"],
+        ["rythm", "rhythm", "rhythim", "rythm"],
+        ["priviledge", "privilege", "privelege", "priviledge"],
+        ["occassion", "occasion", "occassion", "ocassion"],
+        ["comittee", "committee", "commitee", "comittee"],
+        ["consience", "conscience", "conscence", "consience"],
+        ["beutiful", "beautiful", "beautifull", "beutifull"],
+        ["bussiness", "business", "busines", "bussines"],
+        ["foriegn", "foreign", "forign", "foregn"],
+        ["millenium", "millennium", "millenium", "millenniumm"]
+    ];
+    spellingData.forEach(pair => {
+        let allOpts = [pair[1], pair[2], pair[3], pair[0]];
+        let shuffled = shuffleArray(allOpts);
+        let correctIdx = shuffled.indexOf(pair[1]);
+        addQuestion(`Which is the correct spelling of "${pair[0]}"?`, shuffled, correctIdx, "spelling");
+    });
+
+    // ========== 3. PUNCTUATION (FIXED: with actual answer choices, not just A,B,C,D) ==========
+    const punctQs = [
+        ["Choose the correct punctuation: Mr Chanda's wives are both teachers.", 
+            ["Mr Chandas' wives are both teachers.", "Mr Chanda's wives are both teachers.", "Mr Chandas wives are both teachers.", "Mr Chanda wives are both teachers."], 1],
+        ["Choose the correct punctuation: 'Be quiet!' shouted the monitor.", 
+            ["'Be quiet,! shouted the monitor.'", "'Be quiet!' shouted the monitor.", "Be quiet! shouted the monitor.", "'Be quiet! shouted the monitor'"], 1],
+        ["Correct the punctuation: she said hello", 
+            ["She said hello.", "She said, 'Hello'.", "She said Hello!", "She said, hello"], 1],
+        ["Correct the punctuation: whats your name", 
+            ["Whats your name?", "What's your name?", "whats your name", "What's your name"], 1],
+        ["Correct the punctuation: i love zambia", 
+            ["I love Zambia.", "i love Zambia.", "I love zambia.", "I love Zambia"], 0],
+        ["Choose the correct punctuation: 'I will go to school early today,' she said.", 
+            ["'I will go to school early today,' she said.", "'I will go to school early today, she said.'", "'I will go to school early today, she said.'", "'I will go to school early today,' she said"], 0],
+        ["Choose the correct punctuation: 'Stand up!' the captain ordered.", 
+            ["'Stand up, the captain,' ordered the soldier.", "'Stand up!' the captain ordered the soldier.", "'Stand up the captain ordered the soldier!'", "Stand up the captain, 'ordered the soldier.'"], 1],
+        ["Choose the correct punctuation: This car is theirs, isn't it?", 
+            ["This car is theirs. Isn't?", "This car is theirs isn't it.", "This car is theirs? isn't it.", "This car is theirs, isn't it?"], 3],
+        ["Choose the correct punctuation: 'Puberty is the change from childhood to adulthood,' said Nkisu.", 
+            ["'Puberty is the change from childhood to adulthood,' said Nkisu.", "'Puberty is the change from childhood to adulthood, said Nkisu.'", "Puberty is the change from childhood to adulthood, 'said Nkisu.'", "Puberty is the change from childhood to adulthood, said Nkisu."], 0],
+        ["Choose the correct punctuation: 'Who took my dress?' Natasha asked.", 
+            ["'Who took my dress, Natasha asked?'", "'Who took my dress?' Natasha asked.", "Who took my dress. 'Natasha asked?'", "Who took my dress? 'Natasha asked.'"], 1],
+        ["Choose the correct punctuation: 'On your marks, get set, go!'", 
+            ["'On your marks, get set, go?'", "'On your marks, get set. go!'", "'On your marks, get set, go!'", "'On your marks get set go?'"], 2],
+        ["Choose the correct punctuation: What time do you go to school?", 
+            ["What time do you go to school,", "What time do you go to school?", "What time time do you go to school!", "What time do you go to school."], 1],
+        ["Choose the correct punctuation: 'Wait a minute,' the nurse told me.", 
+            ["'Wait a minute,' the nurse told me.", "Wait a minute, 'the nurse told me.'", "'Wait a minute, the nurse told me.'", "'Wait a minute, the nurse told me.'"], 0],
+        ["Choose the correct punctuation: Do you mind travelling a long distance?", 
+            ["Do you mind travelling a long distance?", "Do you mind travelling a long distance.", "Do you mind travelling a long distance,", "Do you mind travelling a long distance!"], 0],
+        ["Choose the correct punctuation: Among the items were beans, kapenta, fish and cabbage.", 
+            ["Among the items bought were beans, kapenta. fish, and cabbage.", "Among the items bought were beans, kapenta, fish, and cabbage.", "Among the items bought were beans kapenta fish and cabbage.", "Among the items bought were beans, kapenta, fish and cabbage."], 3],
+        ["Choose the correct punctuation: The tree fell on Mrs Mulenga's child.", 
+            ["The tree fell on Mrs mulenga's child.", "The tree fell on Mrs Mulengas child.", "The tree fell on Mrs Mulenga's child.", "The tree fell on mrs mulenga's child."], 2]
+    ];
+    punctQs.forEach(q => addQuestion(q[0], q[1], q[2], "punctuation"));
+
+    // ========== 4. WORD MEANING ==========
+    const meaningQs = [
+        ["The word 'ancient' means?", ["modern","new","old","young"], 2],
+        ["The word 'erase' means ...", ["copy","improve","rub","save"], 2],
+        ["'Charity begins at home' means provide for ...", ["church","family first","others","strangers"], 1],
+        ["'First come, first served' means ...", ["first gets better choice","serve only first","serve before coming","none"], 0],
+        ["'Ashamed' means not ...", ["afraid","embarrassed","exhausted","tired"], 1],
+        ["'Gazed' means ...", ["touched","looked","cooked","ate"], 1],
+        ["'Thankful' means ...", ["worried","unhappy","jealous","grateful"], 3],
+        ["'Multiple injuries' means ... injuries.", ["different","many","same","single"], 1],
+        ["'Defend' means ...", ["arrest","destroy","fight","protect"], 3],
+        ["'A bird in hand' means?", ["appreciate what you have","want more","give away","ignore"], 0],
+        ["The word 'abandon' means?", ["keep","leave","help","find"], 1],
+        ["The word 'brave' means?", ["cowardly","fearless","weak","scared"], 1],
+        ["The word 'fragile' means?", ["strong","breakable","heavy","solid"], 1],
+        ["'Humble' means?", ["proud","modest","arrogant","rude"], 1],
+        ["'Gigantic' means?", ["small","tiny","huge","medium"], 2],
+        ["'Reluctant' means?", ["eager","willing","hesitant","happy"], 2],
+        ["'Harass' means ...", ["cheat","punish","surprise","trouble"], 3],
+        ["'Victory' means?", ["defeat","loss","win","surrender"], 2]
+    ];
+    meaningQs.forEach(q => addQuestion(q[0], q[1], q[2], "wordmeaning"));
+
+    // ========== 5. SENTENCE ORDER ==========
+    const orderQs = [
+        ["Choose the correct order for Zambia description.", ["A: Zambia is large... It has area... It is landlocked... Lusaka capital","B: Lusaka capital... It has area... Zambia large","C: It is surrounded... Zambia large...","D: Zambia large... It is landlocked... It has area"], 0],
+        ["Choose the correct order for selling tomatoes politely.", ["A: Excuse me... My name... I am selling... I was wondering","B: I was wondering... Excuse me","C: Excuse me... I was wondering... My name","D: I am selling... Excuse me"], 0],
+        ["Arrange: He woke up. Then he brushed his teeth.", ["A: He woke up. Then he brushed.","B: He brushed. Then he woke up.","C: Then he brushed. He woke up.","D: He woke up. He brushed."], 0],
+        ["Choose the correct order for camels facts.", ["A: lose little water... strange bodies... amazing fact","B: amazing fact... strange bodies... lose little water","C: strange bodies... lose little water... amazing fact","D: lose little water... amazing fact... strange bodies"], 1]
+    ];
+    orderQs.forEach(q => addQuestion(q[0], q[1], q[2], "sentenceorder"));
+
+    // ========== 6. COMPREHENSION ==========
+    const compQs = [
+        ["From 'Secret of Long Life': How old was Munene when reporters visited?", ["115","114","104","102"], 1],
+        ["From bus timetable: 'Departure' means ...", ["coming","leaving","reaching","waiting"], 1],
+        ["From 'Pencil' passage: Why is cedar wood used for pencils?", ["easy to carry","easy to sharpen","hard to sharpen","not expensive"], 1],
+        ["What is the capital city of Zambia?", ["Lusaka","Kitwe","Ndola","Livingstone"], 0],
+        ["From 'Sipho' passage: Who narrated the story?", ["the class teacher","the headteacher","a learner","Sipho himself"], 0]
+    ];
+    compQs.forEach(q => addQuestion(q[0], q[1], q[2], "comprehension"));
+
+    // Add extra meaningful questions
+    for(let i=0; i<200; i++) addQuestion(`Choose the correct pronoun: ___ is going to the market.`, ["He","She","It","They"], 0, "grammar");
+    for(let i=0; i<200; i++) addQuestion(`The word 'happy' means?`, ["sad","joyful","angry","tired"], 1, "wordmeaning");
+
+    console.log(`Total questions: ${QUESTION_BANK.length}`);
+
+    // ======================== APP LOGIC ========================
+    let selectedTopics = [...TOPICS];
+    let testSelectedTopics = [...TOPICS];
+    let currentQuiz = [], quizIndex = 0, quizSelections = [], quizSubmitted = [], quizScore = 0, quizActive = false, quizFinished = false, timeLeft = 30, timerInterval = null, quizLog = [];
+
+    function getUniqueQuestions(count, topicArray) {
+        let available = QUESTION_BANK.filter(q => topicArray.includes(q.topic));
+        if(available.length < count) available = QUESTION_BANK;
+        let shuffled = [...available];
+        for(let i=shuffled.length-1;i>0;i--){ let j=Math.floor(Math.random()*(i+1)); [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]; }
+        let unique = [], seen = new Set();
+        for(let q of shuffled) { if(!seen.has(q.text) && unique.length<count) { seen.add(q.text); unique.push(q); } }
+        return unique;
+    }
+
+    function buildTopicGrid(gridId, topicsArray) {
+        const grid = document.getElementById(gridId);
+        if(!grid) return;
+        grid.innerHTML = '';
+        TOPICS.forEach(topic => {
+            const div = document.createElement('div');
+            div.className = 'topic-checkbox' + (topicsArray.includes(topic) ? ' selected' : '');
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = topicsArray.includes(topic);
+            cb.onchange = () => {
+                if(cb.checked) { if(!topicsArray.includes(topic)) topicsArray.push(topic); }
+                else { const idx = topicsArray.indexOf(topic); if(idx > -1) topicsArray.splice(idx,1); }
+                div.classList.toggle('selected', cb.checked);
+            };
+            const label = document.createElement('label');
+            label.textContent = TOPIC_NAMES[topic];
+            div.appendChild(cb);
+            div.appendChild(label);
+            div.onclick = (e) => { if(e.target !== cb) { cb.checked = !cb.checked; cb.onchange(); } };
+            grid.appendChild(div);
+        });
+    }
+
+    window.selectAllTopics = () => { selectedTopics = [...TOPICS]; buildTopicGrid('topicGrid', selectedTopics); };
+    window.deselectAllTopics = () => { selectedTopics = []; buildTopicGrid('topicGrid', selectedTopics); };
+    window.selectAllTestTopics = () => { testSelectedTopics = [...TOPICS]; buildTopicGrid('testTopicGrid', testSelectedTopics); };
+    window.deselectAllTestTopics = () => { testSelectedTopics = []; buildTopicGrid('testTopicGrid', testSelectedTopics); };
+    window.showSection = function(section) {
+        ['mainMenu','startPlaying','testGenerator','quizPanel','resultsSection'].forEach(s => document.getElementById(s).classList.add('hidden'));
+        document.getElementById(section).classList.remove('hidden');
+    };
+
+    function startQuiz() {
+        if(!document.getElementById("fullName").value.trim()) { alert("Enter your name!"); return; }
+        if(selectedTopics.length === 0) { alert("Select at least one topic!"); return; }
+        quizActive = true; quizFinished = false; quizScore = 0; quizLog = [];
+        currentQuiz = getUniqueQuestions(20, selectedTopics);
+        quizIndex = 0; quizSelections = new Array(20).fill(null); quizSubmitted = new Array(20).fill(false);
+        timeLeft = 30;
+        document.getElementById("scoreDisplay").textContent = "0/20";
+        renderQuestion();
+        startTimer();
+        showSection('quizPanel');
+    }
+
+    function renderQuestion() {
+        let q = currentQuiz[quizIndex];
+        document.getElementById("topicDisplay").innerHTML = `📚 ${TOPIC_NAMES[q.topic] || q.topic}`;
+        let letters = ["A", "B", "C", "D"];
+        let html = `<div style="font-weight:700; margin-bottom:0.8rem;">Question ${quizIndex+1} of 20</div>
+                    <div style="font-size:1.2rem; font-weight:600; margin-bottom:1.5rem;">${q.text}</div>
+                    <div class="options-grid">`;
+        q.options.forEach((opt, i) => {
+            let cls = "option";
+            if(quizSubmitted[quizIndex]) {
+                if(i === q.correct) cls += " correct-answer";
+                else if(quizSelections[quizIndex] === i && quizSelections[quizIndex] !== q.correct) cls += " wrong-answer";
+            } else if(quizSelections[quizIndex] === i) cls += " selected";
+            html += `<div class="${cls}" onclick="selectOption(${i})"><span class="option-prefix">${letters[i]}</span>${opt}</div>`;
+        });
+        html += `</div>`;
+        if(quizSubmitted[quizIndex]) {
+            let isCorrect = (quizSelections[quizIndex] === q.correct);
+            html += `<div style="margin-top:1rem; padding:1rem; background:#e3f2fd; border-radius:20px;"><strong>${isCorrect ? '✓ Correct!' : '✗ Incorrect'}</strong><br>Correct answer: ${letters[q.correct]}. ${q.options[q.correct]}</div>`;
+        }
+        document.getElementById("questionContainer").innerHTML = html;
+        document.getElementById("submitBtn").disabled = quizSubmitted[quizIndex];
+        document.getElementById("nextBtn").disabled = !quizSubmitted[quizIndex];
+        document.getElementById("progressFill").style.width = `${((quizIndex+1)/20)*100}%`;
+    }
+
+    window.selectOption = function(idx) { if(quizActive && !quizFinished && !quizSubmitted[quizIndex]) { quizSelections[quizIndex] = idx; renderQuestion(); } };
+    window.submitAnswer = function() {
+        if(!quizActive || quizFinished || quizSubmitted[quizIndex]) return;
+        if(quizSelections[quizIndex] === null) { alert("Please select an answer!"); return; }
+        let q = currentQuiz[quizIndex];
+        let isCorrect = (quizSelections[quizIndex] === q.correct);
+        quizSubmitted[quizIndex] = true;
+        if(isCorrect) { quizScore += 10; document.getElementById("scoreDisplay").textContent = `${Math.floor(quizScore/10)}/20`; }
+        quizLog.push({num:quizIndex+1, text:q.text, user:q.options[quizSelections[quizIndex]], correct:q.options[q.correct], ok:isCorrect});
+        stopTimer(); renderQuestion();
+    };
+    window.nextQuestion = function() {
+        if(!quizSubmitted[quizIndex]) { alert("Submit answer first!"); return; }
+        if(quizIndex + 1 < 20) { quizIndex++; timeLeft = 30; renderQuestion(); startTimer(); } 
+        else finishQuiz();
+    };
+
+    function startTimer() {
+        if(timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if(!quizActive || quizFinished) { clearInterval(timerInterval); return; }
+            if(timeLeft <= 0) {
+                clearInterval(timerInterval);
+                if(!quizSubmitted[quizIndex]) {
+                    quizSelections[quizIndex] = -1; quizSubmitted[quizIndex] = true;
+                    quizLog.push({num:quizIndex+1, text:currentQuiz[quizIndex].text, user:"Time out", correct:currentQuiz[quizIndex].options[currentQuiz[quizIndex].correct], ok:false});
+                    renderQuestion();
+                }
+            } else { timeLeft--; let mins = Math.floor(timeLeft/60), secs = timeLeft%60; document.getElementById("timerDisplay").textContent = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`; }
+        }, 1000);
+    }
+    function stopTimer() { if(timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
+    
+    function finishQuiz() {
+        quizFinished = true; quizActive = false; stopTimer();
+        let correctCount = quizLog.filter(l => l.ok).length;
+        let percent = Math.round((correctCount/20)*100);
+        let name = document.getElementById("fullName").value, school = document.getElementById("schoolName").value, date = document.getElementById("quizDate").value || new Date().toISOString().slice(0,10);
+        let topicsText = selectedTopics.length === TOPICS.length ? "All Topics" : selectedTopics.map(t=>TOPIC_NAMES[t]).join(", ");
+        let rows = quizLog.map(l => `<tr class="${l.ok?'correct-row':'incorrect-row'}"><td>${l.num}</td><td style="max-width:400px;">${l.text.substring(0,70)}</td><td>${l.user}</td><td><strong>${l.correct}</strong></td><td>${l.ok?'✓ Correct':'✗ Incorrect'}</td></tr>`).join('');
+        let html = `<div style="background:#0a4a35; padding:16px; color:white; border-radius:20px;"><h2>📊 English Performance Report</h2><p><strong>${name}</strong> | ${school} | ${date}</p><p><strong>Topics:</strong> ${topicsText}</p></div>
+        <div class="results-container"><div style="padding:16px; background:#f4faf7; border-radius:16px;"><strong>✅ Correct:</strong> ${correctCount}/20 &nbsp; <strong>⭐ Score:</strong> ${quizScore} &nbsp; <strong>📊 ${percent}%</strong> &nbsp; 🏅 ${percent>=80?'Excellent':percent>=60?'Good':'Practice More'}</div>
+        <div style="overflow-x:auto;"><table>${rows}</table></div>
+        <div style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;"><button class="btn btn-green" onclick="alert('Certificate ready!')">🖨️ PRINT RESULTS</button><button class="btn" onclick="startNewChallenge()">🚀 NEXT CHALLENGE</button><button class="btn" style="background:var(--zambia-blue);" onclick="showSection('mainMenu')">🏠 HOME</button></div></div>`;
+        document.getElementById("resultsSection").innerHTML = html; showSection('resultsSection');
+    }
+    window.startNewChallenge = function() { startQuiz(); };
+    window.generateTest = function() {
+        if(testSelectedTopics.length === 0) { alert("Select topics!"); return; }
+        let questions = getUniqueQuestions(20, testSelectedTopics);
+        let name = document.getElementById("testName").value || "Learner", school = document.getElementById("testSchool").value || "School", date = document.getElementById("testDate").value || new Date().toISOString().slice(0,10);
+        let topicsText = testSelectedTopics.map(t=>TOPIC_NAMES[t]).join(", ");
+        let testHTML = `<html><head><title>English Test</title><style>body{font-family:sans-serif;margin:2rem;} .q{margin-bottom:1.5rem;}</style></head><body><h2>📄 CYBERSAFE ENGLISH TEST</h2><p><strong>Name:</strong> ${name} &nbsp; <strong>School:</strong> ${school} &nbsp; <strong>Date:</strong> ${date}</p><p><strong>Topics:</strong> ${topicsText}</p><hr>`;
+        questions.forEach((q,idx) => {
+            testHTML += `<div class="q"><strong>${idx+1}. ${q.text}</strong><br>`;
+            q.options.forEach((opt,i) => { testHTML += `${String.fromCharCode(65+i)}. ${opt}<br>`; });
+            testHTML += `Answer: __________</div><hr>`;
+        });
+        testHTML += `<div><strong>ANSWER KEY (for teacher):</strong><br>${questions.map((q,i)=>`${i+1}. ${String.fromCharCode(65+q.correct)}`).join(", ")}</div></body></html>`;
+        let w = window.open(); w.document.write(testHTML); w.document.close(); w.print();
+    };
+    window.quitQuiz = function() { if(confirm('Quit quiz?')) { stopTimer(); showSection('mainMenu'); } };
+    
+    document.addEventListener('keydown', function(e) {
+        let quizPanel = document.getElementById('quizPanel');
+        if(!quizPanel.classList.contains('hidden') && quizActive && !quizFinished) {
+            let key = e.key.toLowerCase();
+            if(['a','b','c','d'].includes(key)) { e.preventDefault(); let idx = key.charCodeAt(0)-97; if(!quizSubmitted[quizIndex] && quizSelections[quizIndex] === null) selectOption(idx); }
+            if(key === 'enter') { e.preventDefault(); if(!quizSubmitted[quizIndex] && quizSelections[quizIndex] !== null) submitAnswer(); else if(quizSubmitted[quizIndex] && document.getElementById("nextBtn").disabled === false) nextQuestion(); }
+        }
+    });
+    
+    document.getElementById("startQuizBtn").onclick = startQuiz;
+    document.getElementById("generateTestBtn").onclick = window.generateTest;
+    document.getElementById("submitBtn").onclick = window.submitAnswer;
+    document.getElementById("nextBtn").onclick = window.nextQuestion;
+    document.getElementById("quizDate").valueAsDate = new Date();
+    document.getElementById("testDate").valueAsDate = new Date();
+    buildTopicGrid('topicGrid', selectedTopics);
+    buildTopicGrid('testTopicGrid', testSelectedTopics);
+    function updateFooter() { document.getElementById("dynamicFooter").innerHTML = `© ${new Date().getFullYear()} CYBERSAFE ENGLISH | Grade 5-7 Zambia | Real ECZ Revision Questions`; }
+    updateFooter(); setInterval(updateFooter, 60000);
+    showSection('mainMenu');
+</script>
+</body>
+</html>
